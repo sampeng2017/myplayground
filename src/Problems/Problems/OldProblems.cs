@@ -11,6 +11,15 @@ namespace Problems
     {
         public static void FlipBinaryTree(BinaryTreeNode<int> tree)
         {
+            if (tree == null || (tree.LeftChild == null && tree.RightChild == null))
+            {
+                return;
+            }
+            var tempNode = tree.LeftChild;
+            tree.LeftChild = tree.RightChild;
+            tree.RightChild = tempNode;
+            FlipBinaryTree(tree.LeftChild);
+            FlipBinaryTree(tree.RightChild);
         }
     }
 }

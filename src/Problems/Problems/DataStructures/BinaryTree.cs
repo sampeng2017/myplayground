@@ -6,10 +6,23 @@ using System.Threading.Tasks;
 
 namespace Problems.DataStructures
 {
-    public class BinaryTreeNode<T> 
+    public class BinaryTreeNode<T>
     {
         public T Value { get; set; }
         public BinaryTreeNode<T> LeftChild { get; set; }
         public BinaryTreeNode<T> RightChild { get; set; }
+
+        public bool IsLeaf => LeftChild == null && RightChild == null;
+
+        public override string ToString()
+        {
+            if (IsLeaf)
+            {
+                return $"{{{Value}(leaf)}}";
+            }
+            var left = LeftChild == null ? "NIL" : LeftChild.ToString();
+            var right = RightChild == null ? "NIL" : RightChild.ToString();
+            return $"{{{Value}; Left: {left}; Right: {right}}}";
+        }
     }
 }
