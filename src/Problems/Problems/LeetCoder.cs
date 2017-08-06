@@ -28,17 +28,17 @@ namespace Problems
                     slotCount++;
                     if (slotCount == n)
                     {
-                        return true;
+                        break;
                     }
                 }
 
                 if (i == flowerBed.Length - 1 && cntConsecutiveZero == 2)
                 {
-                    return ++slotCount == n;
+                    slotCount++;
                 }
             }
 
-            return false;
+            return slotCount == n;
         }
     }
 }
