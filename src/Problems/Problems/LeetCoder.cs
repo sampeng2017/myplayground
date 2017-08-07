@@ -8,6 +8,32 @@ namespace Problems
 {
     public static class LeetCoder
     {
+        // https://leetcode.com/problems/two-sum/description/
+        public static Tuple<int, int> TwoSum(int[] ary, int sum)
+        {
+            // value and first index
+            var tmpMap = new Dictionary<int, int>();
+
+            int i1 = 0;
+            int i2 = 0;
+            for (int i = 0; i < ary.Length; i++)
+            {
+                int element = ary[i];
+                int val;
+                if (tmpMap.TryGetValue(sum - element, out val))
+                {
+                    i1 = val;
+                    i2 = i;
+                    break;
+                }
+                if (!tmpMap.ContainsKey(element))
+                {
+                    tmpMap.Add(element, i);
+                }
+            }
+            return Tuple.Create(i1, i2);
+        }
+
         // https://leetcode.com/problems/can-place-flowers/description/
         public static bool CanPlaceFlower(int[] flowerBed, int n)
         {

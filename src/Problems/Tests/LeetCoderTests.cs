@@ -10,6 +10,32 @@ namespace Tests
     public class LeetCoderTests
     {
         [TestMethod]
+        public void TwoSum()
+        {
+            var testAry1 = new int[] { 2, 7, 11, 15};
+            var result = LeetCoder.TwoSum(testAry1, 9);
+            result.Item1.Should().Be(0);
+            result.Item2.Should().Be(1);
+
+            result = LeetCoder.TwoSum(testAry1, 22);
+            result.Item1.Should().Be(1);
+            result.Item2.Should().Be(3);
+
+            var testAry2 = new int[] { -2, 7, -11, 0, 15, 8, 7, 27, -3};
+            result = LeetCoder.TwoSum(testAry2, 15);
+            result.Item1.Should().Be(3);
+            result.Item2.Should().Be(4);
+
+            result = LeetCoder.TwoSum(testAry2, 23);
+            result.Item1.Should().Be(4);
+            result.Item2.Should().Be(5);
+
+            result = LeetCoder.TwoSum(testAry2, 4);
+            result.Item1.Should().Be(2);
+            result.Item2.Should().Be(4);
+        }
+
+        [TestMethod]
         public void CanPlaceFlower()
         {
             int[] testBed1 = new int[] { 1, 0, 0 };
