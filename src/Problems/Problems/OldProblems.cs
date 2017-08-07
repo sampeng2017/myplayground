@@ -21,5 +21,24 @@ namespace Problems
             FlipBinaryTree(tree.LeftChild);
             FlipBinaryTree(tree.RightChild);
         }
+
+        public static ListNode<T> FindMidNode<T>(ListNode<T> list)
+        {
+            if (list == null)
+                return null;
+
+            var fastPointer = list;
+            var slowPointer = list;
+            while (fastPointer != null)
+            {
+                if (fastPointer.Next == null || fastPointer.Next.Next == null)
+                {
+                    break;
+                }
+                fastPointer = fastPointer.Next.Next;
+                slowPointer = slowPointer.Next;
+            }
+            return slowPointer;
+        }
     }
 }
