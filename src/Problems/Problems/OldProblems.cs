@@ -11,7 +11,7 @@ namespace Problems
     {
         public static void FlipBinaryTree(BinaryTreeNode<int> tree)
         {
-            if (tree == null || (tree.LeftChild == null && tree.RightChild == null))
+            if (tree == null || (tree.IsLeaf))
             {
                 return;
             }
