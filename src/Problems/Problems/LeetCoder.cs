@@ -36,12 +36,12 @@ namespace Problems
         }
 
         // https://leetcode.com/problems/add-two-numbers/description/
-        public static IntLinkedListNode AddTowNumbers(IntLinkedListNode n1, IntLinkedListNode n2)
+        public static LikedListNode<int> AddTowNumbers(LikedListNode<int> n1, LikedListNode<int> n2)
         {
-            IntLinkedListNode p1 = n1;
-            IntLinkedListNode p2 = n2;
-            IntLinkedListNode result = null;
-            IntLinkedListNode resultRail = null;
+            LikedListNode<int> p1 = n1;
+            LikedListNode<int> p2 = n2;
+            LikedListNode<int> result = null;
+            LikedListNode<int> resultRail = null;
             int carray = 0;
 
             while (p1 != null || p2 != null || carray > 0)
@@ -56,7 +56,7 @@ namespace Problems
                     sum = sum - 10;
                     carray = 1;
                 }
-                var newNode = new IntLinkedListNode { Value = sum };
+                var newNode = new LikedListNode<int> { Value = sum };
                 if (result == null)
                 {
                     result = resultRail = newNode;
@@ -66,18 +66,18 @@ namespace Problems
                     resultRail.Next = newNode;
                     resultRail = newNode;
                 }
-                p1 = (IntLinkedListNode)p1?.Next;
-                p2 = (IntLinkedListNode)p2?.Next;
+                p1 = p1?.Next;
+                p2 = p2?.Next;
             }
             return result;
         }
 
         // helper for AddTowNumbers
-        public static IntLinkedListNode BuildLinkedListFromValue(int val)
+        public static LikedListNode<int> BuildLinkedListFromValue(int val)
         {
             if (val == 0)
             {
-                return new IntLinkedListNode { Value = 0 };
+                return new LikedListNode<int> { Value = 0 };
             }
 
             int numDigits = 0;
@@ -90,13 +90,13 @@ namespace Problems
 
             int tmpT = numDigits;
             int remaining = val;
-            IntLinkedListNode root = null;
+            LikedListNode<int> root = null;
             while (tmpT > 0)
             {
                 int p = (int)Math.Pow(10, tmpT - 1);
                 int nodeVal = remaining / p;
                 remaining = remaining % p;
-                var node = new IntLinkedListNode { Value = nodeVal };
+                var node = new LikedListNode<int> { Value = nodeVal };
                 if (root == null)
                 {
                     root = node;
@@ -113,15 +113,15 @@ namespace Problems
         }
 
         // helper for AddTowNumbers
-        public static int LinkedListToValue(IntLinkedListNode l)
+        public static int LinkedListToValue(LikedListNode<int> l)
         {
-            IntLinkedListNode tmp = l;
+            LikedListNode<int> tmp = l;
             int result = 0;
             int t = 0;
             while (tmp != null)
             {
                 result += (tmp.Value * (int)Math.Pow(10, t));
-                tmp = (IntLinkedListNode)tmp.Next;
+                tmp = tmp.Next;
                 t++;
             }
             return result;

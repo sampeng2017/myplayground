@@ -11,8 +11,4 @@ namespace Problems.DataStructures
         public T Value { get; set; }
         public LikedListNode<T> Next { get; set; }
     }
-
-    public class IntLinkedListNode : LikedListNode<int>
-    {
-    }
 }
