@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Problems.DataStructures
 {
-    public class LikedListNode<T>
+    public class ListNode<T>
     {
         public T Value { get; set; }
-        public LikedListNode<T> Next { get; set; }
+        public ListNode<T> Next { get; set; }
     }
 }

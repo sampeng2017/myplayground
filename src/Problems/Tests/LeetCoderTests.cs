@@ -38,13 +38,13 @@ namespace Tests
         [TestMethod]
         public void AddTowNumbers()
         {
-            LikedListNode<int> l1 = LeetCoder.BuildLinkedListFromValue(342);
+            ListNode<int> l1 = LeetCoder.BuildLinkedListFromValue(342);
             LeetCoder.LinkedListToValue(l1).Should().Be(342);
 
-            LikedListNode<int> l2 = LeetCoder.BuildLinkedListFromValue(465);
+            ListNode<int> l2 = LeetCoder.BuildLinkedListFromValue(465);
             LeetCoder.LinkedListToValue(l2).Should().Be(465);
 
-            LikedListNode<int> l = LeetCoder.AddTowNumbers(l1, l2);
+            ListNode<int> l = LeetCoder.AddTowNumbers(l1, l2);
             LeetCoder.LinkedListToValue(l).Should().Be(807);
 
             l1 = LeetCoder.BuildLinkedListFromValue(10);

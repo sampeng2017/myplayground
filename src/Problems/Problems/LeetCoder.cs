@@ -36,12 +36,12 @@ namespace Problems
         }
 
         // https://leetcode.com/problems/add-two-numbers/description/
-        public static LikedListNode<int> AddTowNumbers(LikedListNode<int> n1, LikedListNode<int> n2)
+        public static ListNode<int> AddTowNumbers(ListNode<int> n1, DataStructures.ListNode<int> n2)
         {
-            LikedListNode<int> p1 = n1;
-            LikedListNode<int> p2 = n2;
-            LikedListNode<int> result = null;
-            LikedListNode<int> resultRail = null;
+            ListNode<int> p1 = n1;
+            ListNode<int> p2 = n2;
+            ListNode<int> result = null;
+            ListNode<int> resultRail = null;
             int carray = 0;
 
             while (p1 != null || p2 != null || carray > 0)
@@ -56,7 +56,7 @@ namespace Problems
                     sum = sum - 10;
                     carray = 1;
                 }
-                var newNode = new LikedListNode<int> { Value = sum };
+                var newNode = new DataStructures.ListNode<int> { Value = sum };
                 if (result == null)
                 {
                     result = resultRail = newNode;
@@ -73,11 +73,11 @@ namespace Problems
         }
 
         // helper for AddTowNumbers
-        public static LikedListNode<int> BuildLinkedListFromValue(int val)
+        public static ListNode<int> BuildLinkedListFromValue(int val)
         {
             if (val == 0)
             {
-                return new LikedListNode<int> { Value = 0 };
+                return new ListNode<int> { Value = 0 };
             }
 
             int numDigits = 0;
@@ -90,13 +90,13 @@ namespace Problems
 
             int tmpT = numDigits;
             int remaining = val;
-            LikedListNode<int> root = null;
+            DataStructures.ListNode<int> root = null;
             while (tmpT > 0)
             {
                 int p = (int)Math.Pow(10, tmpT - 1);
                 int nodeVal = remaining / p;
                 remaining = remaining % p;
-                var node = new LikedListNode<int> { Value = nodeVal };
+                var node = new DataStructures.ListNode<int> { Value = nodeVal };
                 if (root == null)
                 {
                     root = node;
@@ -113,9 +113,9 @@ namespace Problems
         }
 
         // helper for AddTowNumbers
-        public static int LinkedListToValue(LikedListNode<int> l)
+        public static int LinkedListToValue(DataStructures.ListNode<int> l)
         {
-            LikedListNode<int> tmp = l;
+            DataStructures.ListNode<int> tmp = l;
             int result = 0;
             int t = 0;
             while (tmp != null)
