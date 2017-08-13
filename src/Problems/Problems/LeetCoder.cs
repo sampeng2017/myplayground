@@ -127,6 +127,48 @@ namespace Problems
             return result;
         }
 
+        // https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+        public static string LongestSubstrWithoutRepeatingChars(string s)
+        {
+            var tmpMap = new Dictionary<char, int>();
+            int longestStrLowIndex = 0;
+            int loggestStrLength = 0;
+            int curLowIndex = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                int tmpLoc;
+
+                if (tmpMap.TryGetValue(s[i], out tmpLoc))
+                {
+                    if ((i - curLowIndex) > loggestStrLength)
+                    {
+                        longestStrLowIndex = curLowIndex;
+                        loggestStrLength = i - curLowIndex;
+                    }
+
+                    for (int j = curLowIndex; j < tmpLoc; j++)
+                    {
+                        tmpMap.Remove(s[j]);
+                    }
+
+                    tmpMap[s[i]] = i;
+                    curLowIndex = tmpLoc + 1;
+                }
+                else
+                {
+                    tmpMap.Add(s[i], i);
+                    if ( i == s.Length - 1 && (i - curLowIndex + 1 > loggestStrLength))
+                    {
+                        longestStrLowIndex = curLowIndex;
+                        loggestStrLength = i - curLowIndex + 1;
+                    }
+                }
+            }
+
+            return s.Substring(longestStrLowIndex, loggestStrLength);
+        }
+
         // https://leetcode.com/problems/can-place-flowers/description/
         public static bool CanPlaceFlower(int[] flowerBed, int n)
         {

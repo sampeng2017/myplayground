@@ -64,6 +64,28 @@ namespace Tests
         }
 
         [TestMethod]
+        public void LongestSubstrWithoutRepeatingChars()
+        {
+            var r = LeetCoder.LongestSubstrWithoutRepeatingChars("b");
+            r.Should().Be("b");
+
+            r = LeetCoder.LongestSubstrWithoutRepeatingChars("abcde");
+            r.Should().Be("abcde");
+
+            r = LeetCoder.LongestSubstrWithoutRepeatingChars("abcabc");
+            r.Should().Be("abc");
+
+            r = LeetCoder.LongestSubstrWithoutRepeatingChars("abcada");
+            r.Should().Be("bcad");
+
+            r = LeetCoder.LongestSubstrWithoutRepeatingChars("abcada12z2dj");
+            r.Should().Be("da12z");
+
+            r = LeetCoder.LongestSubstrWithoutRepeatingChars("1123157a238jkg5392109742312ad");
+            r.Should().Be("157a238jkg");
+        }
+
+        [TestMethod]
         public void CanPlaceFlower()
         {
             int[] testBed1 = new int[] { 1, 0, 0 };
