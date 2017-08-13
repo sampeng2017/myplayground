@@ -86,6 +86,31 @@ namespace Tests
         }
 
         [TestMethod]
+        public void LongestSubstrLenWithoutRepeatingChars()
+        {
+            Func<string, int> func = LeetCoder.LongestSubstrLenWithoutRepeatingChars;
+            // Func<string, int> func = LeetCoder.LongestSubstrLenWithoutRepeatingChars_T1;
+
+            var r = func("b");
+            r.Should().Be(1);
+
+            r = func("abcde");
+            r.Should().Be(5);
+
+            r = func("abcabc");
+            r.Should().Be(3);
+
+            r = func("abcada");
+            r.Should().Be(4);
+
+            r = func("abcada12z2dj");
+            r.Should().Be(5);
+
+            r = func("1123157a238jkg5392109742312ad");
+            r.Should().Be(10);
+        }
+
+        [TestMethod]
         public void CanPlaceFlower()
         {
             int[] testBed1 = new int[] { 1, 0, 0 };
