@@ -89,7 +89,6 @@ namespace Tests
         public void LongestSubstrLenWithoutRepeatingChars()
         {
             Func<string, int> func = LeetCoder.LongestSubstrLenWithoutRepeatingChars;
-            // Func<string, int> func = LeetCoder.LongestSubstrLenWithoutRepeatingChars_T1;
 
             var r = func("b");
             r.Should().Be(1);

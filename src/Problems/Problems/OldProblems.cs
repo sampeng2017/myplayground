@@ -40,5 +40,46 @@ namespace Problems
             }
             return slowPointer;
         }
+
+        public static ListNode<T> FindMerge<T>(ListNode<T> list1, ListNode<T> list2)
+        {
+            if (list1 == null || list2 == null)
+                return null;
+            int len1 = 0;
+            int len2 = 0;
+            ListNode<T> p1 = list1;
+            ListNode<T> p2 = list2;
+
+            while (p1 != null)
+            {
+                len1++;
+                p1 = p1.Next;
+            }
+            while (p2 != null)
+            {
+                len2++;
+                p2 = p2.Next;
+            }
+            if (p1 != p2)
+                return null;
+
+            p1 = list1;
+            p2 = list2;
+            int n = Math.Abs(len1 - len2);
+            for (int i = 0; i < n; i++)
+            {
+                if (len1 > len2)
+                    p1 = p1.Next;
+                else
+                    p2 = p2.Next;
+            }
+
+            while (p1 != p2)
+            {
+                p1 = p1.Next;
+                p2 = p2.Next;
+            }
+            return p1;
+        }
     }
 }

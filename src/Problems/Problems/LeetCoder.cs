@@ -146,12 +146,12 @@ namespace Problems
                         longestStrLowIndex = curLowIndex;
                         loggestStrLength = i - curLowIndex;
                     }
-                    
+
                     curLowIndex = Math.Max(tmpLoc + 1, curLowIndex);
                 }
                 else
                 {
-                    if ( i == s.Length - 1 && (i - curLowIndex + 1 > loggestStrLength))
+                    if (i == s.Length - 1 && (i - curLowIndex + 1 > loggestStrLength))
                     {
                         longestStrLowIndex = curLowIndex;
                         loggestStrLength = i - curLowIndex + 1;
@@ -175,45 +175,17 @@ namespace Problems
 
                 if (tmpMap.TryGetValue(s[i], out tmpLoc))
                 {
-                    if ((i - curLowIndex) > max)
-                    {
-                        max = i - curLowIndex;
-                    }
-
-                    if (tmpLoc + 1 > curLowIndex)
-                        curLowIndex = tmpLoc + 1;
-                }
-                else
-                {
-                    if (i == s.Length - 1 && (i - curLowIndex + 1 > max))
-                    {
-                        max = i - curLowIndex + 1;
-                    }
+                    curLowIndex = Math.Max(tmpLoc + 1, curLowIndex);
                 }
                 tmpMap[s[i]] = i;
+                max = Math.Max(max, i - curLowIndex + 1);
             }
 
             return max;
         }
-
-        public static int LongestSubstrLenWithoutRepeatingChars_T1(string s)
-        {
-            var tmpMap = new Dictionary<char, int>();
-            int max = 0;
-            for (int i = 0, j = 0; i < s.Length; i++)
-            {
-                if (tmpMap.ContainsKey(s[i]))
-                {
-                    j = Math.Max(j, tmpMap[s[i]] + 1);
-                }
-                tmpMap[s[i]] = i;
-                max = Math.Max(max, i - j + 1);
-            }
-            return max;
-        }
-
-            // https://leetcode.com/problems/can-place-flowers/description/
-            public static bool CanPlaceFlower(int[] flowerBed, int n)
+        
+        // https://leetcode.com/problems/can-place-flowers/description/
+        public static bool CanPlaceFlower(int[] flowerBed, int n)
         {
             // set init val to 1 because the previous value of flowerBed[0] is considered as 0
             int cntConsecutiveZero = 1;
