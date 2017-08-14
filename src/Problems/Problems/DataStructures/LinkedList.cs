@@ -11,6 +11,22 @@ namespace Problems.DataStructures
         public T Value { get; set; }
         public ListNode<T> Next { get; set; }
 
+        public ListNode<T> GetNthNode(int n)
+        {
+            if (n < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            ListNode<T> tmp = this;
+            for (int i = n; i > 0; i--)
+            {
+                if (tmp == null)
+                    throw new IndexOutOfRangeException();
+                tmp = tmp.Next;
+            }
+            return tmp;
+        }
+
         public override string ToString()
         {
             string valStr = string.Empty;
@@ -22,7 +38,7 @@ namespace Problems.DataStructures
             {
                 valStr = Value.ToString();
             }
-        
+
             return $"Value: {valStr}";
         }
     }

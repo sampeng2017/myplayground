@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LeetCoderTests.cs" />
+    <Compile Include="LinkedListTests.cs" />
     <Compile Include="OldProblemsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

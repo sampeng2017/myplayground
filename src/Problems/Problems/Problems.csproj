@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basics\LinkedList.cs" />
     <Compile Include="DataStructures\LinkedList.cs" />
     <Compile Include="LeetCoder.cs" />
     <Compile Include="OldProblems.cs" />
