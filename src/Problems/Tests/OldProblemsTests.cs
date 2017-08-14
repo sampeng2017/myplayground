@@ -74,5 +74,31 @@ namespace Tests
 
             OldProblems.FindMerge(list2, node7).Should().BeNull();
         }
+
+        [TestMethod]
+        public void ReverseLinkedList()
+        {
+            var linkedList = new ListNode<int> { Value = 1 };
+            linkedList.Next = new ListNode<int> { Value = 2 };
+            linkedList.Next.Next = new ListNode<int> { Value = 3 };
+            linkedList.Next.Next.Next = new ListNode<int> { Value = 4 };
+
+            Func<ListNode<int>, ListNode<int>> func1 = OldProblems.Reverse_Recursive;
+            Func<ListNode<int>, ListNode<int>> func2 = OldProblems.Reverse_NonRecursive;
+
+            var reversed1 = func1(linkedList);
+            reversed1.Value.Should().Be(4);
+            reversed1.Next.Value.Should().Be(3);
+            reversed1.Next.Next.Value.Should().Be(2);
+            reversed1.Next.Next.Next.Value.Should().Be(1);
+            reversed1.Next.Next.Next.Next.Should().BeNull();
+
+            var reversed2 = func2(reversed1);
+            reversed2.Value.Should().Be(1);
+            reversed2.Next.Value.Should().Be(2);
+            reversed2.Next.Next.Value.Should().Be(3);
+            reversed2.Next.Next.Next.Value.Should().Be(4);
+            reversed2.Next.Next.Next.Next.Should().BeNull();
+        }
     }
 }

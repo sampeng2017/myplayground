@@ -10,5 +10,20 @@ namespace Problems.DataStructures
     {
         public T Value { get; set; }
         public ListNode<T> Next { get; set; }
+
+        public override string ToString()
+        {
+            string valStr = string.Empty;
+            if (typeof(T).IsClass && ((object)Value == null))
+            {
+                valStr = "[NULL]";
+            }
+            else
+            {
+                valStr = Value.ToString();
+            }
+        
+            return $"Value: {valStr}";
+        }
     }
 }

@@ -81,5 +81,34 @@ namespace Problems
             }
             return p1;
         }
+
+        public static ListNode<T> Reverse_Recursive<T>(ListNode<T> linkedList)
+        {
+            return Reverse_Recursive(linkedList, null);
+        }
+
+        private static ListNode<T> Reverse_Recursive<T>(ListNode<T> linkedList, ListNode<T> previous)
+        {
+            if (linkedList == null)
+                return previous;
+
+            var tmpNode = linkedList.Next;
+            linkedList.Next = previous;
+            return Reverse_Recursive(tmpNode, linkedList);
+        }
+
+        public static ListNode<T> Reverse_NonRecursive<T>(ListNode<T> linkedList)
+        {
+            ListNode<T> previous = null;
+            while (linkedList != null)
+            {
+                ListNode<T> tmp = linkedList.Next;
+                linkedList.Next = previous;
+                previous = linkedList;
+                linkedList = tmp;
+            }
+
+            return previous;
+        }
     }
 }
