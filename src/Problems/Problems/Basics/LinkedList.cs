@@ -163,5 +163,40 @@ namespace Problems.Basics
             }
             return p1;
         }
+
+        public static ListNode<int> MergeTwoSortedLinkedLis(ListNode<int> l1, ListNode<int> l2)
+        {
+            if (l1 == null && l2 == null)
+                return null;
+            if (l1 == null)
+                return l2;
+            if (l2 == null)
+                return l1;
+
+            var p1 = l1;
+            var p2 = l2;
+            var head = p1.Value < p2.Value ? p1 : p2;
+
+            var p = new ListNode<int> { Next = head, Value = int.MinValue };
+            while (p1 != null && p2 != null)
+            {
+                if (p1.Value < p2.Value)
+                {
+                    p.Next = p1;
+                    p1 = p1.Next;
+                }
+                else
+                {
+                    p.Next = p2;
+                    p2 = p2.Next;
+                }
+
+                p = p.Next;
+            }
+
+            p.Next = p1 ?? p2;
+
+            return head;
+        }
     }
 }

@@ -140,5 +140,48 @@ namespace Tests
             node7.Next = node7;
             LinkedList.FindStartingNodeOfLoop(node1).Should().BeSameAs(node7);
         }
+
+        [TestMethod]
+        public void MergeTwoSortedLinkedLis()
+        {
+            var node11 = new ListNode<int> { Value = 5 };
+            var node12 = new ListNode<int> { Value = 9 };
+            var node13 = new ListNode<int> { Value = 15 };
+            var node14 = new ListNode<int> { Value = 16 };
+            var node15 = new ListNode<int> { Value = 21 };
+            var node16 = new ListNode<int> { Value = 33 };
+            var node17 = new ListNode<int> { Value = 90 };
+            node11.Next = node12;
+            node12.Next = node13;
+            node13.Next = node14;
+            node14.Next = node15;
+            node15.Next = node16;
+            node16.Next = node17;
+
+            var node21 = new ListNode<int> { Value = 3 };
+            var node22 = new ListNode<int> { Value = 19 };
+            var node23 = new ListNode<int> { Value = 26 };
+            var node24 = new ListNode<int> { Value = 33 };
+            var node25 = new ListNode<int> { Value = 95 };
+            node21.Next = node22;
+            node22.Next = node23;
+            node23.Next = node24;
+            node24.Next = node25;
+
+            var merged = LinkedList.MergeTwoSortedLinkedLis(node11, node21);
+            merged.Value.Should().Be(3);
+            merged.Next.Value.Should().Be(5);
+            merged.Next.Next.Value.Should().Be(9);
+            merged.Next.Next.Next.Value.Should().Be(15);
+            merged.Next.Next.Next.Next.Value.Should().Be(16);
+            merged.Next.Next.Next.Next.Next.Value.Should().Be(19);
+            merged.Next.Next.Next.Next.Next.Next.Value.Should().Be(21);
+            merged.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(26);
+            merged.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(33);
+            merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(33);
+            merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(90);
+            merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(95);
+            merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
+        }
     }
 }
