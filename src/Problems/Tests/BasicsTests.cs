@@ -30,7 +30,23 @@ namespace Tests
             Array.Copy(ary, aryCopy3, 100);
             Sort.InsertionSort_Recursive(aryCopy3);
             aryCopy3.SequenceEqual(aryCopy).Should().BeTrue();
+
+            int[] aryCopy4 = new int[100];
+            Array.Copy(ary, aryCopy4, 100);
+            Sort.MergeSort_BottomUp(aryCopy4);
+            aryCopy4.SequenceEqual(aryCopy).Should().BeTrue();
         }
+
+        [TestMethod]
+        public void FindMaxSubArray()
+        {
+            int[] ary = new[] { 13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7 };
+            var result = Misc.FindMaxSubArray(ary, 0, ary.Length - 1);
+            result.Item1.Should().Be(7);
+            result.Item2.Should().Be(10);
+            result.Item3.Should().Be(43);
+        }
+
         private int[] GetRandomArray(int cnt)
         {
             var ary = new int[cnt];

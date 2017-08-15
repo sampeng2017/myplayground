@@ -98,5 +98,17 @@ namespace Problems.Basics
                 }
             }
         }
+
+        public static void MergeSort_BottomUp(int[] ary)
+        {
+            int aryLength = ary.Length;
+            for (int subArySize = 1; subArySize < aryLength; subArySize = subArySize * 2)
+            {
+                for (int subAryIndex = 0; subAryIndex < aryLength - subArySize; subAryIndex += subArySize * 2)
+                {
+                    Merge(ary, subAryIndex, subAryIndex + subArySize - 1, Math.Min(subAryIndex + subArySize * 2 - 1, aryLength - 1));
+                }
+            }
+        }
     }
 }

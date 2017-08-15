@@ -30,5 +30,24 @@ namespace Tests
             OldProblems.FlipBinaryTree(root);
             root.ToString().Should().Be("{1; Left: {3; Left: {7; Left: NIL; Right: {8(leaf)}}; Right: {6(leaf)}}; Right: {2; Left: {5(leaf)}; Right: {4(leaf)}}}");
         }
+
+        [TestMethod]
+        public void FindInSorted2DArray()
+        {
+            int[,] twoDAry = new int[,]
+            {
+                {1, 2, 4, 5, 6 },
+                {3, 7, 8, 9, 11 },
+                {13, 15, 16, 20, 28},
+                {14, 17, 18, 21, 32},
+            };
+            var result = OldProblems.FindInSorted2DArray_Zigzag(twoDAry, 9);
+            result.Should().NotBeNull();
+            result.Item1.Should().Be(1);
+            result.Item2.Should().Be(3);
+
+            result = OldProblems.FindInSorted2DArray_Zigzag(twoDAry, 27);
+            result.Should().BeNull();
+        }
     }
 }
