@@ -26,6 +26,27 @@ namespace Problems.Basics
             }
         }
 
+        public static void InsertionSort_Recursive(int[] ary)
+        {
+            InsertionSort_Recursive(ary, 0, ary.Length - 1);
+        }
+
+        private static void InsertionSort_Recursive(int[] ary, int low, int high)
+        {
+            if (low >= high)
+                return;
+            InsertionSort_Recursive(ary, low, high - 1);
+
+            int key = ary[high];
+            int j = high - 1;
+            while (j >= low && ary[j] > key)
+            {
+                ary[j + 1] = ary[j];
+                j--;
+            }
+            ary[j + 1] = key;
+        }
+
         public static void MergeSort(int[] ary)
         {
             MergeSort(ary, 0, ary.Length - 1);

@@ -23,9 +23,13 @@ namespace Tests
 
             int[] aryCopy2 = new int[100];
             Array.Copy(ary, aryCopy2, 100);
-
             Sort.MergeSort(aryCopy2);
             aryCopy2.SequenceEqual(aryCopy).Should().BeTrue();
+
+            int[] aryCopy3 = new int[100];
+            Array.Copy(ary, aryCopy3, 100);
+            Sort.InsertionSort_Recursive(aryCopy3);
+            aryCopy3.SequenceEqual(aryCopy).Should().BeTrue();
         }
         private int[] GetRandomArray(int cnt)
         {
