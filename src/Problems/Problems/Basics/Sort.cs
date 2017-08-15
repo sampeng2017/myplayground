@@ -28,6 +28,18 @@ namespace Problems.Basics
 
         public static void MergeSort(int[] ary)
         {
+            MergeSort(ary, 0, ary.Length - 1);
+        }
+
+        private static void MergeSort(int[] ary, int p, int r)
+        {
+            if (p < r)
+            {
+                int q = (p + r) / 2;
+                MergeSort(ary, p, q);
+                MergeSort(ary, q + 1, r);
+                Merge(ary, p, q, r);
+            }
         }
 
         private static void Merge(int[] ary, int p, int q, int r)
@@ -42,7 +54,7 @@ namespace Problems.Basics
 
             for (int ii = 0; ii < n1; ii++)
             {
-                left[ii] = ary[p + ii]; 
+                left[ii] = ary[p + ii];
             }
             for (int ii = 0; ii < n2; ii++)
             {
@@ -51,7 +63,7 @@ namespace Problems.Basics
 
             int i = 0;
             int j = 0;
-            for (int k = p; k < r; k++)
+            for (int k = p; k <= r; k++)
             {
                 if (left[i] <= right[j])
                 {

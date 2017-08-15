@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems.DataStructures;
 using Problems;
@@ -14,9 +15,17 @@ namespace Tests
         public void SortTest()
         {
             int[] ary = GetRandomArray(100);
-            Action<int[]> sort = Sort.InsertionSort;
-            sort(ary);
-            IsSorted(ary).Should().Be(true);
+
+            int[] aryCopy = new int[100];
+            Array.Copy(ary, aryCopy, 100);
+            Sort.InsertionSort(aryCopy);
+            IsSorted(aryCopy).Should().Be(true);
+
+            int[] aryCopy2 = new int[100];
+            Array.Copy(ary, aryCopy2, 100);
+
+            Sort.MergeSort(aryCopy2);
+            aryCopy2.SequenceEqual(aryCopy).Should().BeTrue();
         }
         private int[] GetRandomArray(int cnt)
         {
@@ -34,7 +43,7 @@ namespace Tests
             int previous = int.MinValue;
             for (int i = 0; i < ary.Length; i++)
             {
-                if (ary[i]< previous)
+                if (ary[i] < previous)
                 {
                     return false;
                 }
