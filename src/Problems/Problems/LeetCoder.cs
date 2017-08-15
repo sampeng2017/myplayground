@@ -216,5 +216,35 @@ namespace Problems
 
             return slotCount == n;
         }
+
+        // https://leetcode.com/problems/zigzag-conversion/description/
+        public static string ZigZagConversion(string s, int rows)
+        {
+            var holder = new List<char>[rows];
+            for (int i = 0; i < rows; i++)
+            {
+                holder[i] = new List<char>();
+            }
+            for (int i = 0; i < s.Length; i++)
+            {
+                int t = i % (rows + 1);
+                int rowIndex = t;
+                if (t == rows)
+                {
+                    rowIndex = rows / 2;
+                }
+                holder[rowIndex].Add(s[i]);
+            }
+
+            var builder = new StringBuilder();
+            foreach (var l in holder)
+            {
+                foreach (var c in l)
+                {
+                    builder.Append(c);
+                }
+            }
+            return builder.ToString();
+        }
     }
 }

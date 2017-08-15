@@ -110,6 +110,13 @@ namespace Tests
         }
 
         [TestMethod]
+        public void ZigZagConversion()
+        {
+            var converted = LeetCoder.ZigZagConversion("PAYPALISHIRING", 3);
+            converted.Should().Be("PAHNAPLSIIGYIR");
+        }
+
+        [TestMethod]
         public void CanPlaceFlower()
         {
             int[] testBed1 = new int[] { 1, 0, 0 };
