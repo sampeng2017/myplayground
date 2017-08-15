@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Problems.DataStructures;
-using Problems;
-using FluentAssertions;
 using Problems.Basics;
+using System;
+using System.Linq;
 
 namespace Tests
 {
@@ -45,6 +43,23 @@ namespace Tests
             result.Item1.Should().Be(7);
             result.Item2.Should().Be(10);
             result.Item3.Should().Be(43);
+
+            result = Misc.FindMaxSubArray_linear(ary, 0, ary.Length - 1);
+            result.Item1.Should().Be(7);
+            result.Item2.Should().Be(10);
+            result.Item3.Should().Be(43);
+
+            ary = new[] { -3, -25, -3, -16, -23, -7, -5, -22, -4 };
+            result = Misc.FindMaxSubArray(ary, 0, ary.Length - 1);
+            result.Item1.Should().Be(0);
+            result.Item2.Should().Be(0);
+            result.Item3.Should().Be(-3);
+
+            ary = new[] { -3, -25, -3, -16, -23, -7, -5, -22, -4 };
+            result = Misc.FindMaxSubArray_linear(ary, 0, ary.Length - 1);
+            result.Item1.Should().Be(0);
+            result.Item2.Should().Be(0);
+            result.Item3.Should().Be(-3);
         }
 
         private int[] GetRandomArray(int cnt)
