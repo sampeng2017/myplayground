@@ -183,5 +183,38 @@ namespace Tests
             merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(95);
             merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
         }
+
+        [TestMethod]
+        public void MergeSortLinkedLis()
+        {
+            var node11 = new ListNode<int> { Value = 9 };
+            var node12 = new ListNode<int> { Value = 5 };
+            var node13 = new ListNode<int> { Value = 90};
+            var node14 = new ListNode<int> { Value = 16 };
+            var node15 = new ListNode<int> { Value = 33 };
+            var node16 = new ListNode<int> { Value = 21 };
+            var node17 = new ListNode<int> { Value = 15 };
+            node11.Next = node12;
+            node12.Next = node13;
+            node13.Next = node14;
+            node14.Next = node15;
+            node15.Next = node16;
+            node16.Next = node17;
+
+            var merged = LinkedList.Sort(node11);
+            //merged.Value.Should().Be(3);
+            //merged.Next.Value.Should().Be(5);
+            //merged.Next.Next.Value.Should().Be(9);
+            //merged.Next.Next.Next.Value.Should().Be(15);
+            //merged.Next.Next.Next.Next.Value.Should().Be(16);
+            //merged.Next.Next.Next.Next.Next.Value.Should().Be(19);
+            //merged.Next.Next.Next.Next.Next.Next.Value.Should().Be(21);
+            //merged.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(26);
+            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(33);
+            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(33);
+            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(90);
+            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(95);
+            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
+        }
     }
 }

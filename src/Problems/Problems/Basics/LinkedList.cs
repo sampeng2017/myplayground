@@ -119,7 +119,7 @@ namespace Problems.Basics
         {
             if (list1 == null || list1.Next == null)
                 return null;
-            
+
             var slowP = list1.Next;
             var fastP = list1.Next.Next;
 
@@ -153,7 +153,7 @@ namespace Problems.Basics
             }
             else
             {
-                p2 = p2.GetNthNode(cnt2 -cnt);
+                p2 = p2.GetNthNode(cnt2 - cnt);
             }
 
             while (p1 != p2)
@@ -179,6 +179,67 @@ namespace Problems.Basics
 
             var p = new ListNode<int> { Next = head, Value = int.MinValue };
             while (p1 != null && p2 != null)
+            {
+                if (p1.Value < p2.Value)
+                {
+                    p.Next = p1;
+                    p1 = p1.Next;
+                }
+                else
+                {
+                    p.Next = p2;
+                    p2 = p2.Next;
+                }
+
+                p = p.Next;
+            }
+
+            p.Next = p1 ?? p2;
+
+            return head;
+        }
+
+        public static ListNode<int> Sort(ListNode<int> list)
+        {
+            if (list == null)
+                return null;
+
+            int cnt = 0;
+            var tmp = list;
+            while (tmp != null)
+            {
+                cnt++;
+                tmp = tmp.Next;
+            }
+
+            var head = list;
+            for (int k = 1; k < cnt; k = 2 * k)
+            {
+                head = MergeSorted(head, k);
+            }
+
+            return head;
+        }
+
+        private static ListNode<int> MergeSorted(ListNode<int> start, int mergeItems)
+        {
+            ListNode<int> left = start;
+            ListNode<int> right = start;
+            int n = mergeItems;
+            while (n > 0 && right != null)
+            {
+                n--;
+                right = right.Next;
+            }
+            if (right == null)
+                return start;
+
+            var head = left.Value < right.Value ? left : right;
+            var p = new ListNode<int> { Next = head, Value = int.MinValue };
+            var p1 = left;
+            var p2 = right;
+
+            while (p1 != right && p2 != null)
             {
                 if (p1.Value < p2.Value)
                 {
