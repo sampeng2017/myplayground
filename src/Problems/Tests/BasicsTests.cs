@@ -78,6 +78,28 @@ namespace Tests
             //result.Item3.Should().Be(-3);
         }
 
+        [TestMethod]
+        public void MaxHeap()
+        {
+            var heap = new MaxHeap<int>();
+            heap.Insert(8);
+            heap.Insert(3);
+            heap.Insert(27);
+            heap.Insert(1);
+            heap.Insert(101);
+
+            heap.GetMax().Should().Be(101);
+            heap.Insert(26);
+            heap.GetMax().Should().Be(27);
+            heap.GetMax().Should().Be(26);
+            heap.GetMax().Should().Be(8);
+            heap.GetMax().Should().Be(3);
+            heap.GetMax().Should().Be(1);
+
+            Action f = () => heap.GetMax();
+            f.ShouldThrow<InvalidOperationException>();
+        }
+
         private int[] GetRandomArray(int cnt)
         {
             var ary = new int[cnt];

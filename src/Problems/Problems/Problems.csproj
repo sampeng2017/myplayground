@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Basics\LinkedList.cs" />
+    <Compile Include="Basics\MaxHeap.cs" />
     <Compile Include="Basics\Misc.cs" />
     <Compile Include="Basics\Sort.cs" />
     <Compile Include="DataStructures\LinkedList.cs" />
