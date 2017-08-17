@@ -8,6 +8,40 @@ namespace Problems.Basics
 {
     public static class Misc
     {
+        public static int Fibonacci_DP1(int n)
+        {
+            var memo = new Dictionary<int, int>();
+            return Fibonacci_DP1(n, memo);
+        }
+
+        public static int Fibonacci_DP1(int n, Dictionary<int, int> memo)
+        {
+            if (n == 0) return 0;
+            if (n == 1 || n == 2) return 1;
+
+            int v;
+            if (memo.TryGetValue(n, out v))
+            {
+                return v;
+            }
+            v = Fibonacci_DP1(n - 1, memo) + Fibonacci_DP1(n - 2, memo);
+            memo.Add(n, v);
+            return v;
+        }
+        public static int Fibonacci_DP2(int n)
+        {
+            if (n == 0) return 0;
+            if (n == 1 || n == 2) return 1;
+
+            var memo = new Dictionary<int, int>() { { 1, 1 }, { 2, 1 } };
+            for (int i = 3; i <= n; i++)
+            {
+                int f = memo[i - 2] + memo[i - 1];
+                memo[i] = f;
+            }
+            return memo[n];
+        }
+
         public static Tuple<int, int, int> FindMaxSubArray(int[] ary, int low, int high)
         {
             if (low == high)

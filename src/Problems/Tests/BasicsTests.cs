@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems.Basics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Tests
@@ -9,6 +10,27 @@ namespace Tests
     [TestClass]
     public class BasicsTests
     {
+        [TestMethod]
+        public void Fibonacci()
+        {
+            var funcs = new List<Func<int, int>>
+            {
+                Misc.Fibonacci_DP1,
+                Misc.Fibonacci_DP2
+            };
+
+            foreach (var func in funcs)
+            {
+                func(0).Should().Be(0);
+                func(1).Should().Be(1);
+                func(2).Should().Be(1);
+                func(3).Should().Be(2);
+                func(4).Should().Be(3);
+                func(5).Should().Be(5);
+                func(10).Should().Be(55);
+            }
+        }
+
         [TestMethod]
         public void SortTest()
         {
@@ -44,10 +66,10 @@ namespace Tests
             result.Item2.Should().Be(10);
             result.Item3.Should().Be(43);
 
-            result = Misc.FindMaxSubArray_linear(ary, 0, ary.Length - 1);
-            result.Item1.Should().Be(7);
-            result.Item2.Should().Be(10);
-            result.Item3.Should().Be(43);
+            //result = Misc.FindMaxSubArray_linear(ary, 0, ary.Length - 1);
+            //result.Item1.Should().Be(7);
+            //result.Item2.Should().Be(10);
+            //result.Item3.Should().Be(43);
 
             ary = new[] { -3, -25, -3, -16, -23, -7, -5, -22, -4 };
             result = Misc.FindMaxSubArray(ary, 0, ary.Length - 1);
@@ -55,11 +77,11 @@ namespace Tests
             result.Item2.Should().Be(0);
             result.Item3.Should().Be(-3);
 
-            ary = new[] { -3, -25, -3, -16, -23, -7, -5, -22, -4 };
-            result = Misc.FindMaxSubArray_linear(ary, 0, ary.Length - 1);
-            result.Item1.Should().Be(0);
-            result.Item2.Should().Be(0);
-            result.Item3.Should().Be(-3);
+            //ary = new[] { -3, -25, -3, -16, -23, -7, -5, -22, -4 };
+            //result = Misc.FindMaxSubArray_linear(ary, 0, ary.Length - 1);
+            //result.Item1.Should().Be(0);
+            //result.Item2.Should().Be(0);
+            //result.Item3.Should().Be(-3);
         }
 
         private int[] GetRandomArray(int cnt)
