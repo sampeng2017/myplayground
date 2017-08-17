@@ -34,27 +34,21 @@ namespace Tests
         [TestMethod]
         public void SortTest()
         {
+            var sorts = new List<Action<int[]>>
+            {
+                Sort.InsertionSort,
+                Sort.InsertionSort_Recursive,
+                Sort.MergeSort,
+                Sort.MergeSort_BottomUp
+            };
             int[] ary = GetRandomArray(100);
-
-            int[] aryCopy = new int[100];
-            Array.Copy(ary, aryCopy, 100);
-            Sort.InsertionSort(aryCopy);
-            IsSorted(aryCopy).Should().Be(true);
-
-            int[] aryCopy2 = new int[100];
-            Array.Copy(ary, aryCopy2, 100);
-            Sort.MergeSort(aryCopy2);
-            aryCopy2.SequenceEqual(aryCopy).Should().BeTrue();
-
-            int[] aryCopy3 = new int[100];
-            Array.Copy(ary, aryCopy3, 100);
-            Sort.InsertionSort_Recursive(aryCopy3);
-            aryCopy3.SequenceEqual(aryCopy).Should().BeTrue();
-
-            int[] aryCopy4 = new int[100];
-            Array.Copy(ary, aryCopy4, 100);
-            Sort.MergeSort_BottomUp(aryCopy4);
-            aryCopy4.SequenceEqual(aryCopy).Should().BeTrue();
+            foreach (var sort in sorts)
+            {
+                int[] aryCopy = new int[100];
+                Array.Copy(ary, aryCopy, 100);
+                sort(aryCopy);
+                IsSorted(aryCopy).Should().Be(true);
+            }
         }
 
         [TestMethod]
