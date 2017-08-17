@@ -183,7 +183,24 @@ namespace Problems
 
             return max;
         }
-        
+
+        //https://leetcode.com/problems/reverse-integer/description/
+        public static int ReverseInteger(int val)
+        {
+            int reversed = 0;
+            int sign = val < 0 ? -1 : 1;
+            val = Math.Abs(val);
+            while (val > 0)
+            {
+                if (reversed != 0 && int.MaxValue / reversed < 10)
+                    return -1;
+
+                reversed = reversed * 10 + val % 10;
+                val = val / 10;
+            }
+            return reversed * sign;
+        }
+
         // https://leetcode.com/problems/can-place-flowers/description/
         public static bool CanPlaceFlower(int[] flowerBed, int n)
         {

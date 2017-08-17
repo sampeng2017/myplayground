@@ -117,6 +117,17 @@ namespace Tests
         }
 
         [TestMethod]
+        public void ReverseInteger()
+        {
+            LeetCoder.ReverseInteger(0).Should().Be(0);
+            LeetCoder.ReverseInteger(1).Should().Be(1);
+            LeetCoder.ReverseInteger(-2).Should().Be(-2);
+            LeetCoder.ReverseInteger(123).Should().Be(321);
+            LeetCoder.ReverseInteger(-12345).Should().Be(-54321);
+            LeetCoder.ReverseInteger(int.MaxValue).Should().Be(-1);
+        }
+
+        [TestMethod]
         public void CanPlaceFlower()
         {
             int[] testBed1 = new int[] { 1, 0, 0 };
