@@ -110,5 +110,23 @@ namespace Problems.Basics
                 }
             }
         }
+
+        public static void HeapSort(int[] ary)
+        {
+            //var maxHelp = new MaxHeap<int>(ary);
+            //for (int i = ary.Length - 1; i >= 0; i--)
+            //{
+            //    ary[i] = maxHelp.GetMax();
+            //}
+            var maxHelp = new MaxHeap<int>();
+            for (int i = 0; i < ary.Length; i++)
+            {
+                maxHelp.Insert(ary[i]);
+            }
+            for (int i = ary.Length - 1; i >= 0; i--)
+            {
+                ary[i] = maxHelp.GetMax();
+            }
+        }
     }
 }

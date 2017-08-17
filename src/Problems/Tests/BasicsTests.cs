@@ -39,7 +39,8 @@ namespace Tests
                 Sort.InsertionSort,
                 Sort.InsertionSort_Recursive,
                 Sort.MergeSort,
-                Sort.MergeSort_BottomUp
+                Sort.MergeSort_BottomUp,
+                Sort.HeapSort
             };
             int[] ary = GetRandomArray(100);
             foreach (var sort in sorts)
@@ -84,10 +85,14 @@ namespace Tests
             var heap = new MaxHeap<int>();
             heap.Insert(8);
             heap.Insert(3);
+            heap.Insert(201);
             heap.Insert(27);
             heap.Insert(1);
             heap.Insert(101);
+            heap.Insert(231);
 
+            heap.GetMax().Should().Be(231);
+            heap.GetMax().Should().Be(201);
             heap.GetMax().Should().Be(101);
             heap.Insert(26);
             heap.GetMax().Should().Be(27);
@@ -98,6 +103,16 @@ namespace Tests
 
             Action f = () => heap.GetMax();
             f.ShouldThrow<InvalidOperationException>();
+
+            heap = new MaxHeap<int>(new int[] { 8, 3, 201, 27, 1, 101, 26, 231 });
+            heap.GetMax().Should().Be(231);
+            heap.GetMax().Should().Be(201);
+            heap.GetMax().Should().Be(101);
+            heap.GetMax().Should().Be(27);
+            heap.GetMax().Should().Be(26);
+            heap.GetMax().Should().Be(8);
+            heap.GetMax().Should().Be(3);
+            heap.GetMax().Should().Be(1);
         }
 
         private int[] GetRandomArray(int cnt)

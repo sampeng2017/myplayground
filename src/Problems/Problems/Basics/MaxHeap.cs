@@ -8,9 +8,24 @@ namespace Problems.Basics
 {
     public class MaxHeap<T> where T : IComparable
     {
-        private readonly List<T> heap = new List<T>() { default(T) };
+        private readonly List<T> heap;
 
         public bool IsEmpty => heap.Count == 1;
+
+        public MaxHeap()
+        {
+            heap = new List<T>() { default(T) };
+        }
+
+        public MaxHeap(T[] elements)
+            : this()
+        {
+            heap.AddRange(elements);
+            for (int i = elements.Length /2; i >= 1; i--)
+            {
+                MaxHeapify(i);
+            }
+        }
 
         public void Insert(T val)
         {
@@ -32,13 +47,14 @@ namespace Problems.Basics
         private void Sink()
         {
             int parent = 1;
-            int child = parent * 2;
-            while (child < heap.Count)
+            int leftChild = parent * 2;
+            while (leftChild < heap.Count)
             {
-                int childToCompare = child;
-                if (child + 1 != heap.Count && Less(child, child + 1))
+                int childToCompare = leftChild;
+                int rightChild = leftChild + 1;
+                if (rightChild != heap.Count && Less(leftChild, rightChild))
                 {
-                    childToCompare = child + 1;
+                    childToCompare = rightChild;
                 }
 
                 if (Less(childToCompare, parent))
@@ -46,9 +62,37 @@ namespace Problems.Basics
                     break;
                 }
                 Exchange(parent, childToCompare);
-                child = childToCompare;
+                parent = childToCompare;
+                leftChild = childToCompare * 2;
             }
         }
+
+        private void MaxHeapify(int parent)
+        {
+            int leftChild = parent * 2;
+            if (leftChild >= heap.Count)
+                return;
+
+            int rightChild = leftChild + 1;
+            int largest = parent;
+
+            if (Less(parent, leftChild))
+            {
+                largest = leftChild;
+            }
+
+            if (rightChild < heap.Count && Less(largest, rightChild))
+            {
+                largest = rightChild;
+            }
+
+            if (largest != parent)
+            {
+                Exchange(largest, parent);
+                MaxHeapify(largest);
+            }
+        }
+
         private void Swim()
         {
             int child = heap.Count - 1;
