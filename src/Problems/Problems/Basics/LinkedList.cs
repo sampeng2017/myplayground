@@ -164,7 +164,7 @@ namespace Problems.Basics
             return p1;
         }
 
-        public static ListNode<int> MergeTwoSortedLinkedLis(ListNode<int> l1, ListNode<int> l2)
+        public static ListNode<int> MergeTwoSortedLinkedList(ListNode<int> l1, ListNode<int> l2)
         {
             if (l1 == null && l2 == null)
                 return null;
@@ -199,65 +199,37 @@ namespace Problems.Basics
             return head;
         }
 
-        public static ListNode<int> Sort(ListNode<int> list)
+        public static ListNode<int> MergeSort(ListNode<int> list)
+        {
+            if (list == null || list.Next == null)
+                return list;
+            var splited = SplitFromHalf(list);
+            var left = MergeSort(splited.Item1);
+            var right = MergeSort(splited.Item2);
+            return MergeTwoSortedLinkedList(left, right);
+        }
+
+        private static Tuple<ListNode<int>, ListNode<int>> SplitFromHalf(ListNode<int> list)
         {
             if (list == null)
                 return null;
+            if (list.Next == null)
+                return new Tuple<ListNode<int>, ListNode<int>>(list, null);
 
-            int cnt = 0;
-            var tmp = list;
-            while (tmp != null)
+            ListNode<int> slow = list;
+            ListNode<int> fast = list.Next;
+            while (fast != null)
             {
-                cnt++;
-                tmp = tmp.Next;
-            }
-
-            var head = list;
-            for (int k = 1; k < cnt; k = 2 * k)
-            {
-                head = MergeSorted(head, k);
-            }
-
-            return head;
-        }
-
-        private static ListNode<int> MergeSorted(ListNode<int> start, int mergeItems)
-        {
-            ListNode<int> left = start;
-            ListNode<int> right = start;
-            int n = mergeItems;
-            while (n > 0 && right != null)
-            {
-                n--;
-                right = right.Next;
-            }
-            if (right == null)
-                return start;
-
-            var head = left.Value < right.Value ? left : right;
-            var p = new ListNode<int> { Next = head, Value = int.MinValue };
-            var p1 = left;
-            var p2 = right;
-
-            while (p1 != right && p2 != null)
-            {
-                if (p1.Value < p2.Value)
+                fast = fast.Next;
+                if (fast != null)
                 {
-                    p.Next = p1;
-                    p1 = p1.Next;
+                    slow = slow.Next;
+                    fast = fast.Next;
                 }
-                else
-                {
-                    p.Next = p2;
-                    p2 = p2.Next;
-                }
-
-                p = p.Next;
             }
-
-            p.Next = p1 ?? p2;
-
-            return head;
+            var rightHead = slow.Next;
+            slow.Next = null;
+            return Tuple.Create(list, rightHead);
         }
     }
 }

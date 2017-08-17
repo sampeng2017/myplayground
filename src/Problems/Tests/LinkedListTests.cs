@@ -168,7 +168,7 @@ namespace Tests
             node23.Next = node24;
             node24.Next = node25;
 
-            var merged = LinkedList.MergeTwoSortedLinkedLis(node11, node21);
+            var merged = LinkedList.MergeTwoSortedLinkedList(node11, node21);
             merged.Value.Should().Be(3);
             merged.Next.Value.Should().Be(5);
             merged.Next.Next.Value.Should().Be(9);
@@ -201,20 +201,14 @@ namespace Tests
             node15.Next = node16;
             node16.Next = node17;
 
-            var merged = LinkedList.Sort(node11);
-            //merged.Value.Should().Be(3);
-            //merged.Next.Value.Should().Be(5);
-            //merged.Next.Next.Value.Should().Be(9);
-            //merged.Next.Next.Next.Value.Should().Be(15);
-            //merged.Next.Next.Next.Next.Value.Should().Be(16);
-            //merged.Next.Next.Next.Next.Next.Value.Should().Be(19);
-            //merged.Next.Next.Next.Next.Next.Next.Value.Should().Be(21);
-            //merged.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(26);
-            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(33);
-            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(33);
-            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(90);
-            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(95);
-            //merged.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
+            var merged = LinkedList.MergeSort(node11);
+            merged.Value.Should().Be(5);
+            merged.Next.Value.Should().Be(9);
+            merged.Next.Next.Value.Should().Be(15);
+            merged.Next.Next.Next.Value.Should().Be(16);
+            merged.Next.Next.Next.Next.Value.Should().Be(21);
+            merged.Next.Next.Next.Next.Next.Value.Should().Be(33);
+            merged.Next.Next.Next.Next.Next.Next.Value.Should().Be(90);
         }
     }
 }
