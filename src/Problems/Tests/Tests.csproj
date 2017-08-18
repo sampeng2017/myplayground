@@ -61,6 +61,7 @@
     <Compile Include="LeetCoderTests.cs" />
     <Compile Include="LinkedListTests.cs" />
     <Compile Include="OldProblemsTests.cs" />
+    <Compile Include="OthersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

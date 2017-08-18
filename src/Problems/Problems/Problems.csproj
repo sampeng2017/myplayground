@@ -49,6 +49,7 @@
     <Compile Include="LeetCoder.cs" />
     <Compile Include="OldProblems.cs" />
     <Compile Include="DataStructures\BinaryTree.cs" />
+    <Compile Include="Others.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

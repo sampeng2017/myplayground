@@ -111,13 +111,9 @@ namespace Problems.Basics
             }
         }
 
+        // TODO: re-do without using the MaxHeap class
         public static void HeapSort(int[] ary)
         {
-            //var maxHelp = new MaxHeap<int>(ary);
-            //for (int i = ary.Length - 1; i >= 0; i--)
-            //{
-            //    ary[i] = maxHelp.GetMax();
-            //}
             var maxHelp = new MaxHeap<int>();
             for (int i = 0; i < ary.Length; i++)
             {
@@ -127,6 +123,51 @@ namespace Problems.Basics
             {
                 ary[i] = maxHelp.GetMax();
             }
+        }
+
+        public static void QuickSort(int[] ary)
+        {
+            QuickSort(ary, 0, ary.Length - 1);
+        }
+
+        private static void QuickSort(int[] ary, int p, int r)
+        {
+            if (p < r)
+            {
+                int q = RandomPartition(ary, p, r);
+                QuickSort(ary, p, q - 1);
+                QuickSort(ary, q + 1, r);
+            }
+        }
+
+        private static int RandomPartition(int[] ary, int p, int r)
+        {
+            var rand = new Random(DateTime.Now.Millisecond);
+            int i = rand.Next(p, r);
+            Exchange(ary, r, i);
+            return Partition(ary, p, r);
+        }
+        private static int Partition(int[] ary, int p, int r)
+        {
+            int x = ary[r];
+            int i = p - 1;
+            for (int j = p; j < r; j++)
+            {
+                if (ary[j] < x)
+                {
+                    i++;
+                    Exchange(ary, i, j);
+                }
+            }
+            Exchange(ary, i + 1, r);
+            return i + 1;
+        }
+
+        private static void Exchange<T>(T[] ary, int i, int j)
+        {
+            T tmp = ary[i];
+            ary[i] = ary[j];
+            ary[j] = tmp;
         }
     }
 }

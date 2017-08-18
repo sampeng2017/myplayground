@@ -40,7 +40,8 @@ namespace Tests
                 Sort.InsertionSort_Recursive,
                 Sort.MergeSort,
                 Sort.MergeSort_BottomUp,
-                Sort.HeapSort
+                Sort.HeapSort,
+                Sort.QuickSort
             };
             int[] ary = GetRandomArray(100);
             foreach (var sort in sorts)
