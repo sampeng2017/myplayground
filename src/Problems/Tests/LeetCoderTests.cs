@@ -128,6 +128,50 @@ namespace Tests
         }
 
         [TestMethod]
+        public void RotateLinkedList()
+        {
+            var node11 = new ListNode<int> { Value = 1 };
+            var node12 = new ListNode<int> { Value = 2 };
+            node11.Next = node12;
+            var rotated = LeetCoder.RotateList(node11, 20);
+            rotated.Value.Should().Be(1);
+            rotated.Next.Value.Should().Be(2);
+            rotated.Next.Next.Should().BeNull();
+
+            var node13 = new ListNode<int> { Value = 3 };
+            var node14 = new ListNode<int> { Value = 4 };
+            var node15 = new ListNode<int> { Value = 5 };
+            node12.Next = node13;
+            node13.Next = node14;
+            node14.Next = node15;
+            
+            rotated = LeetCoder.RotateList(node11, 2);
+            rotated.Value.Should().Be(4);
+            rotated.Next.Value.Should().Be(5);
+            rotated.Next.Next.Value.Should().Be(1);
+            rotated.Next.Next.Next.Value.Should().Be(2);
+            rotated.Next.Next.Next.Next.Value.Should().Be(3);
+            rotated.Next.Next.Next.Next.Next.Should().BeNull();
+
+            rotated = LeetCoder.RotateList(rotated, 3);
+            rotated.Value.Should().Be(1);
+            rotated.Next.Value.Should().Be(2);
+            rotated.Next.Next.Value.Should().Be(3);
+            rotated.Next.Next.Next.Value.Should().Be(4);
+            rotated.Next.Next.Next.Next.Value.Should().Be(5);
+            rotated.Next.Next.Next.Next.Next.Should().BeNull();
+
+            rotated = LeetCoder.RotateList(rotated, 16);
+            rotated.Value.Should().Be(2);
+            rotated.Next.Value.Should().Be(3);
+            rotated.Next.Next.Value.Should().Be(4);
+            rotated.Next.Next.Next.Value.Should().Be(5);
+            rotated.Next.Next.Next.Next.Value.Should().Be(1);
+            rotated.Next.Next.Next.Next.Next.Should().BeNull();
+
+        }
+
+        [TestMethod]
         public void CanPlaceFlower()
         {
             int[] testBed1 = new int[] { 1, 0, 0 };
