@@ -127,6 +127,34 @@ namespace Problems
             return result;
         }
 
+        // TODO
+        //https://leetcode.com/problems/median-of-two-sorted-arrays/description/
+        public static int FindMediaOfTwoSortedArraies_SameSize(int[] ary1, int[] ary2)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Tuple<int, int> GetMedianIndex(int[] ary, int p, int q)
+        {
+            if (p == q)
+                return new Tuple<int, int>(p, q);
+
+            int length = p - q + 1;
+            int mediaIndex = p + length / 2;
+            if (length % 2 == 0)
+            {
+                return Tuple.Create(mediaIndex, mediaIndex);
+            }
+            else
+            {
+                return Tuple.Create(mediaIndex -1, mediaIndex);
+            }
+        }
+        private static int GetMedian(int[] ary, int i1, int i2)
+        {
+            return ary[(i1 + i2) / 2];
+        }
+
         // https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
         public static string LongestSubstrWithoutRepeatingChars(string s)
         {
