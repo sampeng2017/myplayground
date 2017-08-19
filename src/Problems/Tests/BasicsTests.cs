@@ -116,6 +116,25 @@ namespace Tests
             heap.GetMax().Should().Be(1);
         }
 
+        [TestMethod]
+        public void FindMinAndMax()
+        {
+            int[] a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11 };
+            var minAndMax = Misc.FindMinAndMax(a);
+            minAndMax.Item1.Should().Be(2);
+            minAndMax.Item2.Should().Be(45);
+
+            a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11, 7 };
+            minAndMax = Misc.FindMinAndMax(a);
+            minAndMax.Item1.Should().Be(2);
+            minAndMax.Item2.Should().Be(45);
+
+            a = new int[] { 34 };
+            minAndMax = Misc.FindMinAndMax(a);
+            minAndMax.Item1.Should().Be(34);
+            minAndMax.Item2.Should().Be(34);
+        }
+
         private int[] GetRandomArray(int cnt)
         {
             var ary = new int[cnt];

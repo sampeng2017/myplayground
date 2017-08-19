@@ -103,6 +103,53 @@ namespace Problems.Basics
             return Tuple.Create(leftIndex, rightIndex, maxSum);
         }
 
+        public static Tuple<int, int> FindMinAndMax(int[] ary)
+        {
+            if (ary.Length == 1)
+                return Tuple.Create(ary[0], ary[0]);
+
+            int min = ary[0];
+            int max = min;
+
+            bool isEven = ary.Length % 2 == 0;
+            if (isEven)
+            {
+                if (ary[0] < ary[1])
+                {
+                    max = ary[1];
+                }
+                else
+                {
+                    max = ary[0];
+                    min = ary[1];
+                }
+            }
+
+            int i = isEven ? 2 : 1;
+            for (; i < ary.Length; i = i + 2)
+            {
+                int bigger; 
+                int smaller;
+                if (ary[i] < ary[i+1])
+                {
+                    bigger = ary[i + 1];
+                    smaller = ary[i];
+                }
+                else
+                {
+                    smaller = ary[i + 1];
+                    bigger = ary[i];
+                }
+
+                if (smaller < min)
+                    min = smaller;
+                if (bigger > max)
+                    max = bigger;
+            }
+
+            return Tuple.Create(min, max);
+        }
+
         private static Tuple<int, int, int> FindMaxCrossingSubArray(int[] ary, int low, int mid, int high)
         {
             int leftSum = int.MinValue;
