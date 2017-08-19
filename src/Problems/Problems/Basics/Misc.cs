@@ -128,9 +128,9 @@ namespace Problems.Basics
             int i = isEven ? 2 : 1;
             for (; i < ary.Length; i = i + 2)
             {
-                int bigger; 
+                int bigger;
                 int smaller;
-                if (ary[i] < ary[i+1])
+                if (ary[i] < ary[i + 1])
                 {
                     bigger = ary[i + 1];
                     smaller = ary[i];
@@ -148,6 +148,23 @@ namespace Problems.Basics
             }
 
             return Tuple.Create(min, max);
+        }
+
+        // select the value of the i'th samllest element in the ary[p .. r];
+        public static int RandomSelectNth(int[] ary, int p, int r, int i)
+        {
+            if (p == r)
+                return ary[p];
+            int q = Helpers.RandomPartition(ary, p, r);
+
+            // if the pivot mathes, return
+            int k = q - p + 1;
+            if (k == i)
+                return ary[q];
+            if (i < k)
+                return RandomSelectNth(ary, p, q - 1, i);
+            else
+                return RandomSelectNth(ary, q + 1, r, i - k);
         }
 
         private static Tuple<int, int, int> FindMaxCrossingSubArray(int[] ary, int low, int mid, int high)

@@ -135,6 +135,18 @@ namespace Tests
             minAndMax.Item2.Should().Be(34);
         }
 
+        [TestMethod]
+        public void RandomSelectNth()
+        {
+            int[] a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11 };
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 3).Should().Be(8);
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 5).Should().Be(11);
+
+            a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11, 7 };
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 3).Should().Be(7);
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 5).Should().Be(9);
+        }
+
         private int[] GetRandomArray(int cnt)
         {
             var ary = new int[cnt];
