@@ -31,6 +31,26 @@ namespace Problems.Basics
             return i + 1;
         }
 
+        public static int Partition2(int[] a, int lo, int hi)
+        {
+            // Partition into a[lo..i-1], a[i], a[i+1..hi].    
+            int i = lo, j = hi + 1;
+
+            // left and right scan indices   
+            int v = a[lo];
+            while (true)
+            {
+                // Scan right, scan left, check for scan complete, and exchange.      
+                while (a[++i] < v)
+                    if (i == hi) break;
+                while (v < a[--j])
+                    if (j == lo) break;
+                if (i >= j) break;
+                Exchange(a, i, j);
+            }
+            Exchange(a, lo, j);
+            return j;
+        }
         public static void Exchange<T>(T[] ary, int i, int j)
         {
             T tmp = ary[i];
@@ -38,5 +58,21 @@ namespace Problems.Basics
             ary[j] = tmp;
         }
 
+        public static bool Less<T>(IList<T> ary, int i, int j) where T : IComparable
+        {
+            return ary[i].CompareTo(ary[j]) < 0;
+        }
+
+        public static void Shuffle(int[] ary)
+        {
+            if (ary == null || ary.Length <= 1)
+                return;
+            var rand = new Random(DateTime.Now.Millisecond);
+            for (int i = 1; i < ary.Length; i++)
+            {
+                int tmp = rand.Next(i, ary.Length - 1);
+                Exchange(ary, i - 1, tmp);
+            }
+        }
     }
 }

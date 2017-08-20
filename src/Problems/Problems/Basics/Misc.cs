@@ -167,6 +167,28 @@ namespace Problems.Basics
                 return RandomSelectNth(ary, q + 1, r, i - k);
         }
 
+        public static int RandomSelectNthNoRecurisive(int[] ary, int i)
+        {
+            // not sure why have to do this
+            i = i - 1;
+
+            Helpers.Shuffle(ary);
+            int l = 0;
+            int h = ary.Length - 1;
+            while (h > l)
+            {
+                int q = Helpers.Partition(ary, l, h);
+                
+                if (q == i)
+                    return ary[q];
+                if (q > i)
+                    h = q - 1;
+                else
+                    l = q + 1;
+            }
+            return ary[i];
+        }
+
         private static Tuple<int, int, int> FindMaxCrossingSubArray(int[] ary, int low, int mid, int high)
         {
             int leftSum = int.MinValue;

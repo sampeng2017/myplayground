@@ -52,12 +52,12 @@ namespace Problems.Basics
             {
                 int childToCompare = leftChild;
                 int rightChild = leftChild + 1;
-                if (rightChild != heap.Count && Less(leftChild, rightChild))
+                if (rightChild != heap.Count && Helpers.Less(heap, leftChild, rightChild))
                 {
                     childToCompare = rightChild;
                 }
 
-                if (Less(childToCompare, parent))
+                if (Helpers.Less(heap, childToCompare, parent))
                 {
                     break;
                 }
@@ -76,12 +76,12 @@ namespace Problems.Basics
             int rightChild = leftChild + 1;
             int largest = parent;
 
-            if (Less(parent, leftChild))
+            if (Helpers.Less(heap, parent, leftChild))
             {
                 largest = leftChild;
             }
 
-            if (rightChild < heap.Count && Less(largest, rightChild))
+            if (rightChild < heap.Count && Helpers.Less(heap, largest, rightChild))
             {
                 largest = rightChild;
             }
@@ -99,7 +99,7 @@ namespace Problems.Basics
             if (child == 0)
                 return;
             int parent = child / 2;
-            while (parent > 0 && Less(parent, child))
+            while (parent > 0 && Helpers.Less(heap,parent, child))
             {
                 Exchange(parent, child);
                 child = parent;
@@ -112,11 +112,6 @@ namespace Problems.Basics
             T tmp = heap[i];
             heap[i] = heap[j];
             heap[j] = tmp;
-        }
-
-        private bool Less(int i, int j)
-        {
-            return heap[i].CompareTo(heap[j]) < 0;
         }
     }
 }
