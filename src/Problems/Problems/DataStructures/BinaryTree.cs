@@ -31,5 +31,25 @@ namespace Problems.DataStructures
             visit(this);
             RightChild?.InOrderVisit(visit);
         }
+
+        public static void InOrderVisitNoRecursion(BinaryTreeNode<T> tree, Action<BinaryTreeNode<T>> visit)
+        {
+            BinaryTreeNode<T> current = tree;
+            var stack = new Stack<BinaryTreeNode<T>>();
+            while (stack.Count > 0 || current != null)
+            {
+                if (current != null)
+                {
+                    stack.Push(current);
+                    current = current.LeftChild;
+                }
+                else
+                {
+                    current = stack.Pop();
+                    visit(current);
+                    current = current.RightChild;
+                }
+            }
+        }
     }
 }
