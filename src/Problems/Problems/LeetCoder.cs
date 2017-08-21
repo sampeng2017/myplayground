@@ -254,7 +254,6 @@ namespace Problems
                 newComobs.Add(sideLeft);
                 if (!string.Equals(sideLeft, sideRight))
                 {
-                    newComobs.Add(sideLeft);
                     newComobs.Add(sideRight);
                 }
             }
