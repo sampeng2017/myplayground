@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Problems.Basics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,4 +53,48 @@ namespace Problems.DataStructures
             }
         }
     }
+
+    public class BinarySearchTree<T> where T : IComparable
+    {
+        private BinaryTreeNode<T> root;
+
+        public BinaryTreeNode<T> Root => root;
+        public void Insert(BinaryTreeNode<T> node)
+        {
+            if (root == null)
+            {
+                root = node;
+                return;
+            }
+            Insert(root, node);
+        }
+
+        private void Insert(BinaryTreeNode<T> root, BinaryTreeNode<T> node)
+        {
+            bool greater = node.Value.CompareTo(root.Value) >= 0;
+            if (greater)
+            {
+                if (root.RightChild == null)
+                {
+                    root.RightChild = node;
+                }
+                else
+                {
+                    Insert(root.RightChild, node);
+                }
+            }
+            else
+            {
+                if (root.LeftChild == null)
+                {
+                    root.LeftChild = node;
+                }
+                else
+                {
+                    Insert(root.LeftChild, node);
+                }
+            }
+        }
+    }
+
 }

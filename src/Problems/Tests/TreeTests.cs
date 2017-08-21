@@ -45,5 +45,23 @@ namespace Tests
             list[6].Should().BeSameAs(root.RightChild.RightChild.LeftChild);
             list[7].Should().BeSameAs(root.RightChild.RightChild);
         }
+
+        [TestMethod]
+        public void BinarySearchTreeInsert()
+        {
+            var bst = new BinarySearchTree<int>();
+            var node1 = new BinaryTreeNode<int> { Value = 40 };
+            var node2 = new BinaryTreeNode<int> { Value = 25 };
+            var node3 = new BinaryTreeNode<int> { Value = 37 };
+            var node4 = new BinaryTreeNode<int> { Value = 72 };
+            bst.Insert(node1);
+            bst.Insert(node2);
+            bst.Insert(node3);
+            bst.Insert(node4);
+
+            var tmp = new List<BinaryTreeNode<int>>();
+            bst.Root.InOrderVisit((n) => tmp.Add(n));
+            tmp.Should().BeEquivalentTo(new List<BinaryTreeNode<int>> { node2, node3, node1, node4 });
+        }
     }
 }
