@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basics\Helpers.cs" />
     <Compile Include="Basics\LinkedList.cs" />
     <Compile Include="Basics\MaxHeap.cs" />
     <Compile Include="Basics\Misc.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="LeetCoder.cs" />
     <Compile Include="OldProblems.cs" />
     <Compile Include="DataStructures\BinaryTree.cs" />
+    <Compile Include="Others.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

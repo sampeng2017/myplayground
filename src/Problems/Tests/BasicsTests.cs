@@ -40,7 +40,8 @@ namespace Tests
                 Sort.InsertionSort_Recursive,
                 Sort.MergeSort,
                 Sort.MergeSort_BottomUp,
-                Sort.HeapSort
+                Sort.HeapSort,
+                Sort.QuickSort
             };
             int[] ary = GetRandomArray(100);
             foreach (var sort in sorts)
@@ -113,6 +114,41 @@ namespace Tests
             heap.GetMax().Should().Be(8);
             heap.GetMax().Should().Be(3);
             heap.GetMax().Should().Be(1);
+        }
+
+        [TestMethod]
+        public void FindMinAndMax()
+        {
+            int[] a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11 };
+            var minAndMax = Misc.FindMinAndMax(a);
+            minAndMax.Item1.Should().Be(2);
+            minAndMax.Item2.Should().Be(45);
+
+            a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11, 7 };
+            minAndMax = Misc.FindMinAndMax(a);
+            minAndMax.Item1.Should().Be(2);
+            minAndMax.Item2.Should().Be(45);
+
+            a = new int[] { 34 };
+            minAndMax = Misc.FindMinAndMax(a);
+            minAndMax.Item1.Should().Be(34);
+            minAndMax.Item2.Should().Be(34);
+        }
+
+        [TestMethod]
+        public void RandomSelectNth()
+        {
+            int[] a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11 };
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 3).Should().Be(8);
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 5).Should().Be(11);
+            Misc.RandomSelectNthNoRecurisive(a, 3).Should().Be(8);
+            Misc.RandomSelectNthNoRecurisive(a, 5).Should().Be(11);
+
+            a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11, 7 };
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 3).Should().Be(7);
+            Misc.RandomSelectNth(a, 0, a.Length - 1, 5).Should().Be(9);
+            Misc.RandomSelectNthNoRecurisive(a, 3).Should().Be(7);
+            Misc.RandomSelectNthNoRecurisive(a, 5).Should().Be(9);
         }
 
         private int[] GetRandomArray(int cnt)

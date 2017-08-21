@@ -229,6 +229,65 @@ namespace Problems
             return reversed * sign;
         }
 
+        //https://leetcode.com/problems/rotate-list/description/
+        public static ListNode<int> RotateList(ListNode<int> list, int k)
+        {
+            if (k == 0 || list == null || list.Next == null)
+                return list;
+
+            var p = list;
+            int length = 1;
+            while (p.Next != null)
+            {
+                length++;
+                p = p.Next;
+            }
+            int actualStep = k % length;
+            if (actualStep == 0)
+                return list;
+
+            // make it a loop
+            p.Next = list;
+            p = list;
+
+            // move to length - k - 1, the new tail
+            for (int i = 0; i < length - k - 1; i++)
+            {
+                p = p.Next;
+            }
+
+            var newHead = p.Next;
+            p.Next = null;
+            return newHead;
+        }
+
+        //https://leetcode.com/problems/generate-parentheses/description/
+        public static string[] GenerateParentheses(int num)
+        {
+            if (num <= 0) return null;
+
+            const string pair = "()";
+
+            if (num == 1)
+            {
+                return new string[] { pair };
+            }
+            string[] subHolder = GenerateParentheses(num - 1);
+            var newComobs = new List<string>();
+            foreach (var subStr in subHolder)
+            {
+                newComobs.Add("(" + subStr + ")");
+                string sideLeft = pair + subStr;
+                string sideRight = subStr + pair;
+                newComobs.Add(sideLeft);
+                if (!string.Equals(sideLeft, sideRight))
+                {
+                    newComobs.Add(sideRight);
+                }
+            }
+            return newComobs.ToArray();
+        }
+
         // https://leetcode.com/problems/can-place-flowers/description/
         public static bool CanPlaceFlower(int[] flowerBed, int n)
         {

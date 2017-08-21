@@ -24,5 +24,12 @@ namespace Problems.DataStructures
             var right = RightChild == null ? "NIL" : RightChild.ToString();
             return $"{{{Value}; Left: {left}; Right: {right}}}";
         }
+
+        public void InOrderVisit(Action<BinaryTreeNode<T>> visit)
+        {
+            LeftChild?.InOrderVisit(visit);
+            visit(this);
+            RightChild?.InOrderVisit(visit);
+        }
     }
 }
