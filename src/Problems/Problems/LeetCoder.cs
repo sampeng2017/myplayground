@@ -233,6 +233,34 @@ namespace Problems
             return newHead;
         }
 
+        //https://leetcode.com/problems/generate-parentheses/description/
+        public static string[] GenerateParentheses(int num)
+        {
+            if (num <= 0) return null;
+
+            const string pair = "()";
+
+            if (num == 1)
+            {
+                return new string[] { pair };
+            }
+            string[] subHolder = GenerateParentheses(num - 1);
+            var newComobs = new List<string>();
+            foreach (var subStr in subHolder)
+            {
+                newComobs.Add("(" + subStr + ")");
+                string sideLeft = pair + subStr;
+                string sideRight = subStr + pair;
+                newComobs.Add(sideLeft);
+                if (!string.Equals(sideLeft, sideRight))
+                {
+                    newComobs.Add(sideLeft);
+                    newComobs.Add(sideRight);
+                }
+            }
+            return newComobs.ToArray();
+        }
+
         // https://leetcode.com/problems/can-place-flowers/description/
         public static bool CanPlaceFlower(int[] flowerBed, int n)
         {
