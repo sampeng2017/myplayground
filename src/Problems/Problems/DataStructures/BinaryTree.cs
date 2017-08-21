@@ -69,6 +69,31 @@ namespace Problems.DataStructures
             Insert(root, node);
         }
 
+        public BinaryTreeNode<T> Find(T key)
+        {
+            if (root == null) return null;
+            return Find(root, key);
+        }
+
+        public BinaryTreeNode<T> Find(BinaryTreeNode<T> root, T key)
+        {
+            int compare = key.CompareTo(root.Value);
+            if (compare == 0)
+                return root;
+            if (compare < 0)
+            {
+                if (root.LeftChild == null)
+                    return null;
+                return Find(root.LeftChild, key);
+            }
+            else
+            {
+                if (root.RightChild == null)
+                    return null;
+                return Find(root.RightChild, key);
+            }
+        }
+
         private void Insert(BinaryTreeNode<T> root, BinaryTreeNode<T> node)
         {
             bool greater = node.Value.CompareTo(root.Value) >= 0;

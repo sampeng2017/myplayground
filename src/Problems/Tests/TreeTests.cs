@@ -54,14 +54,20 @@ namespace Tests
             var node2 = new BinaryTreeNode<int> { Value = 25 };
             var node3 = new BinaryTreeNode<int> { Value = 37 };
             var node4 = new BinaryTreeNode<int> { Value = 72 };
+            var node5 = new BinaryTreeNode<int> { Value = 43 };
             bst.Insert(node1);
             bst.Insert(node2);
             bst.Insert(node3);
             bst.Insert(node4);
+            bst.Insert(node5);
 
             var tmp = new List<BinaryTreeNode<int>>();
             bst.Root.InOrderVisit((n) => tmp.Add(n));
-            tmp.Should().BeEquivalentTo(new List<BinaryTreeNode<int>> { node2, node3, node1, node4 });
+            tmp.Should().BeEquivalentTo(new List<BinaryTreeNode<int>> { node2, node3, node1, node5, node4 });
+
+            bst.Find(25).Should().BeSameAs(node2);
+            bst.Find(37).Should().BeSameAs(node3);
+            bst.Find(58).Should().BeNull();
         }
     }
 }
