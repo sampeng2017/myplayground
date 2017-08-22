@@ -35,6 +35,11 @@ namespace Problems.DataStructures
 
         public static void InOrderVisitNoRecursion(BinaryTreeNode<T> tree, Action<BinaryTreeNode<T>> visit)
         {
+            InOrderVisitNoRecursion(tree, (n) => { visit(n); return true; });
+        }
+
+        internal static void InOrderVisitNoRecursion(BinaryTreeNode<T> tree, Func<BinaryTreeNode<T>, bool> visit)
+        {
             BinaryTreeNode<T> current = tree;
             var stack = new Stack<BinaryTreeNode<T>>();
             while (stack.Count > 0 || current != null)
@@ -47,7 +52,8 @@ namespace Problems.DataStructures
                 else
                 {
                     current = stack.Pop();
-                    visit(current);
+                    if (!visit(current))
+                        return;
                     current = current.RightChild;
                 }
             }
@@ -75,7 +81,7 @@ namespace Problems.DataStructures
             return Find(root, key);
         }
 
-        public BinaryTreeNode<T> Find(BinaryTreeNode<T> root, T key)
+        private BinaryTreeNode<T> Find(BinaryTreeNode<T> root, T key)
         {
             int compare = key.CompareTo(root.Value);
             if (compare == 0)
@@ -119,6 +125,32 @@ namespace Problems.DataStructures
                     Insert(root.LeftChild, node);
                 }
             }
+        }
+
+        public static bool IsValidBsf(BinaryTreeNode<T> bsf)
+        {
+            if (bsf == null) return false;
+
+            T previousValue = default(T);
+            bool valueInitiated = false;
+            bool isValid = true;
+            BinaryTreeNode<T>.InOrderVisitNoRecursion(bsf,
+                (n) =>
+                {
+                    var result = true;
+                    if (valueInitiated)
+                    {
+                        if (n.Value.CompareTo(previousValue) < 0)
+                            result = isValid = false;
+                    }
+                    else
+                    {
+                        previousValue = n.Value;
+                        valueInitiated = true;
+                    }
+                    return result;
+                });
+            return isValid;
         }
     }
 

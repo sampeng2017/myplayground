@@ -47,8 +47,13 @@ namespace Tests
         }
 
         [TestMethod]
-        public void BinarySearchTreeInsert()
+        public void BinarySearchTree()
         {
+            var tmpNode1 = new BinaryTreeNode<int> { Value = 5 };
+            var tmpNode2 = new BinaryTreeNode<int> { Value = 1 };
+            tmpNode1.RightChild = tmpNode2;
+            BinarySearchTree<int>.IsValidBsf(tmpNode1).Should().BeFalse();
+
             var bst = new BinarySearchTree<int>();
             var node1 = new BinaryTreeNode<int> { Value = 40 };
             var node2 = new BinaryTreeNode<int> { Value = 25 };
@@ -60,6 +65,7 @@ namespace Tests
             bst.Insert(node3);
             bst.Insert(node4);
             bst.Insert(node5);
+            BinarySearchTree<int>.IsValidBsf(node1).Should().BeTrue();
 
             var tmp = new List<BinaryTreeNode<int>>();
             bst.Root.InOrderVisit((n) => tmp.Add(n));
