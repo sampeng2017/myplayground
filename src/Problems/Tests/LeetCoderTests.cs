@@ -173,6 +173,27 @@ namespace Tests
         }
 
         [TestMethod]
+        public void SearchForRange()
+        {
+            int[] ary = new int[] { 5, 7, 7, 8, 8, 10 };
+            var result = LeetCoder.SearchForRange(ary, 8);
+            result.Item1.Should().Be(3);
+            result.Item2.Should().Be(4);
+
+            result = LeetCoder.SearchForRange(ary, 7);
+            result.Item1.Should().Be(1);
+            result.Item2.Should().Be(2);
+
+            result = LeetCoder.SearchForRange(ary, 5);
+            result.Item1.Should().Be(0);
+            result.Item2.Should().Be(0);
+
+            result = LeetCoder.SearchForRange(ary, 11);
+            result.Item1.Should().Be(-1);
+            result.Item2.Should().Be(-1);
+        }
+
+        [TestMethod]
         public void RotateLinkedList()
         {
             var node11 = new ListNode<int> { Value = 1 };

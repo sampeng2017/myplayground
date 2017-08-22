@@ -260,6 +260,59 @@ namespace Problems
             return newComobs.ToArray();
         }
 
+        //https://leetcode.com/problems/search-for-a-range/description/
+        public static Tuple<int, int> SearchForRange(int[] sortedAry, int key)
+        {
+            int l = SearchForLeftIndex(sortedAry, key);
+            if (l == -1)
+                return Tuple.Create(-1, -1);
+            int r = SearchForRightIndex(sortedAry, key);
+            return Tuple.Create(l, r);
+        }
+
+        private static int SearchForLeftIndex(int[] sortedAry, int key)
+        {
+            int hi = sortedAry.Length - 1;
+            while (hi >= 0)
+            {
+                int s = BinarySearch(sortedAry, 0, hi, key);
+                if (s == -1 || s == 0 || sortedAry[s - 1] < key)
+                {
+                    return s;
+                }
+                hi = s - 1;
+            }
+            return -1;
+        }
+
+        private static int SearchForRightIndex(int[] sortedAry, int key)
+        {
+            int lo = 0;
+            while (lo < sortedAry.Length)
+            {
+                int s = BinarySearch(sortedAry, lo, sortedAry.Length -1, key);
+                if (s == -1 || s == sortedAry.Length - 1 || sortedAry[s + 1] > key)
+                {
+                    return s;
+                }
+                lo = s + 1;
+            }
+            return -1;
+        }
+
+        private static int BinarySearch(int[] sortedAry, int lo, int hi, int key)
+        {
+            if (lo > hi)
+                return -1;
+            int mid = lo + (hi - lo) / 2;
+            int midKey = sortedAry[mid];
+            if (midKey == key)
+                return mid;
+            if (midKey > key)
+                return BinarySearch(sortedAry, lo, mid - 1, key);
+            return BinarySearch(sortedAry, mid + 1, hi, key);
+        }
+
         // https://leetcode.com/problems/can-place-flowers/description/
         public static bool CanPlaceFlower(int[] flowerBed, int n)
         {
