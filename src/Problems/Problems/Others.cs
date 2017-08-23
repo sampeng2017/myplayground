@@ -104,13 +104,13 @@ namespace Problems
                 int cnt = 0;
                 for (int i = 0; i < stations.Count; i++)
                 {
-                    var tmp = stations[i];
-                    var withOutTmp = stations.Where(s => !ReferenceEquals(s, tmp)).ToArray();
+                    var current = stations[i];
+                    var withOutCurrent = stations.Where(s => !ReferenceEquals(s, current)).ToArray();
 
                     int tmpCnt = 0;
-                    if (AllCovered(l, withOutTmp))
+                    if (AllCovered(l, withOutCurrent))
                     {
-                        tmpCnt = 1 + GetNumberOfStationsCanBeRemoved(l, withOutTmp.ToList());
+                        tmpCnt = 1 + GetNumberOfStationsCanBeRemoved(l, withOutCurrent.ToList());
                         cnt = Math.Max(cnt, tmpCnt);
                     }
                 }

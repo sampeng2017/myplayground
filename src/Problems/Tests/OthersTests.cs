@@ -75,10 +75,11 @@ namespace Tests
             {
                 new GasStation(10, 10),
                 new GasStation(18, 10),
+                new GasStation(25, 15),
                 new GasStation(25, 15)
             };
             r = GasStationProblem.GetNumberOfStationsCanBeRemoved(40, stations);
-            r.Should().Be(1);
+            r.Should().Be(2);
         }
 
         [TestMethod]
