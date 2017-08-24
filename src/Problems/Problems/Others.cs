@@ -154,12 +154,13 @@ namespace Problems
                 }
                 return currentCoverage >= l;
             }
+
+            private static string ToSymbolString(IList<GasStation> stations)
+            {
+                return string.Join(";", stations.Select((s) => s.GetSymbolString()).ToArray());
+            }
         }
 
-        private static string ToSymbolString(IList<GasStation> stations)
-        {
-            return string.Join(";", stations.Select((s) => s.GetSymbolString()).ToArray());
-        }
         public class GasStation : IComparable<GasStation>
         {
             public GasStation(int location, int ridius)
@@ -226,5 +227,22 @@ namespace Problems
             100 5 
             50 2
          * */
-    }
+
+            //        Func f
+            //load = 0;
+            //time = 0;
+            //j = 0;
+            //while (j<n)
+
+            //    time = array[j];
+            //	if j is last;
+            //		time += t;
+            //		break;
+
+            //	time1 = 2* t + (f({rest of array
+            //    })); 
+            //	time2 = time[j + 1] + (f(rest of array));
+            //	time = min(time1, time2);
+
+}
 }
