@@ -1,0 +1,7 @@
+﻿*------------------------------------------------------------------------------------
+divide-and-conquer algorithms partition the problem into disjoint subproblems,
+solve the subproblems recursively, and then combine their solutions to solve
+the original problem. In contrast, dynamic programming applies when the subproblems
+overlap—that is, when subproblems share subsubproblems
+*------------------------------------------------------------------------------------
+
