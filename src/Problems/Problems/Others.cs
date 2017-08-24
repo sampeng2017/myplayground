@@ -103,7 +103,7 @@ namespace Problems
                 return GetNumberOfStationsCanBeRemoved(l, stations, new Dictionary<string, int>());
             }
 
-            private  static int GetNumberOfStationsCanBeRemoved(int l, List<GasStation> stations, Dictionary<string, int> solutionMemo)
+            private static int GetNumberOfStationsCanBeRemoved(int l, List<GasStation> stations, Dictionary<string, int> solutionMemo)
             {
                 int cnt;
                 string symbol = ToSymbolString(stations);
@@ -228,21 +228,44 @@ namespace Problems
             50 2
          * */
 
-            //        Func f
-            //load = 0;
-            //time = 0;
-            //j = 0;
-            //while (j<n)
+        public static int FerryQuestion_MinTime(int n, int t, IList<int> arriveAts, int ferryReadyAt = 0, List<int[]> trace = null)
+        {
+            return FerryQuestion_MinTimeImpl(n, t, arriveAts, ferryReadyAt, trace ?? new List<int[]>());
+        }
 
-            //    time = array[j];
-            //	if j is last;
-            //		time += t;
-            //		break;
+        private static int FerryQuestion_MinTimeImpl(int n, int t, IList<int> arriveAts, int ferryReadyAt, List<int[]> trace)
+        {
+            if (arriveAts.Count == 0)
+                return ferryReadyAt;
 
-            //	time1 = 2* t + (f({rest of array
-            //    })); 
-            //	time2 = time[j + 1] + (f(rest of array));
-            //	time = min(time1, time2);
+            int minTime = int.MaxValue;
+            int i = 0;
+            var arriveAtsCopy = new List<int>(arriveAts);
+            while (i < arriveAts.Count)
+            {
+                int choice = 0;
+                int innerStart = i;
+                for (int j = 0; j < n && i < arriveAts.Count; j++)
+                {
+                    int arriveAt = arriveAts[i];
 
-}
+                    // deal with the one-way case for the last arrival
+                    int ferryTime = (i == arriveAts.Count - 1) ? t : 2 * t;
+                    int tmpTime = Math.Max(arriveAt, ferryReadyAt) + ferryTime;
+
+                    arriveAtsCopy.Remove(arriveAt);
+                    tmpTime = FerryQuestion_MinTimeImpl(n, t, arriveAtsCopy, tmpTime, null);
+                    if (tmpTime < minTime)
+                    {
+                        minTime = tmpTime;
+                        choice = j;
+                    }
+                    i++;
+                }
+                int[] loadedCars = arriveAts.Skip(innerStart).Take(choice + 1).ToArray();
+                trace?.Add(loadedCars);
+            }
+            return minTime;
+        }
+    }
 }
