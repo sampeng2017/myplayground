@@ -59,6 +59,32 @@ namespace Problems.DataStructures
         private BinaryTreeNode<T> root;
 
         public BinaryTreeNode<T> Root => root;
+
+        public T MinValue
+        {
+            get
+            {
+                var tmp = root;
+                while (tmp.LeftChild != null)
+                {
+                    tmp = tmp.LeftChild;
+                }
+                return tmp.Value;
+            }
+        }
+
+        public T MaxValue
+        {
+            get
+            {
+                var tmp = root;
+                while (tmp.RightChild != null)
+                {
+                    tmp = tmp.RightChild;
+                }
+                return tmp.Value;
+            }
+        }
         public void Insert(BinaryTreeNode<T> node)
         {
             if (root == null)

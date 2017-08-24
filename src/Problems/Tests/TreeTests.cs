@@ -60,6 +60,8 @@ namespace Tests
             bst.Insert(node3);
             bst.Insert(node4);
             bst.Insert(node5);
+            bst.MaxValue.Should().Be(72);
+            bst.MinValue.Should().Be(25);
 
             var tmp = new List<BinaryTreeNode<int>>();
             bst.Root.InOrderVisit((n) => tmp.Add(n));
