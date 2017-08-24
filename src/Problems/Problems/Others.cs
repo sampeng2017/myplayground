@@ -100,9 +100,22 @@ namespace Problems
                 if (stations == null) return -1;
 
                 stations.Sort();
+                return GetNumberOfStationsCanBeRemoved(l, stations, new Dictionary<string, int>());
+            }
+
+            private  static int GetNumberOfStationsCanBeRemoved(int l, List<GasStation> stations, Dictionary<string, int> solutionMemo)
+            {
+                int cnt;
+                string symbol = ToSymbolString(stations);
+                if (solutionMemo.TryGetValue(symbol, out cnt))
+                {
+                    return cnt;
+                }
+
                 if (!AllCovered(l, stations))
                     return -1;
-                int cnt = 0;
+
+                cnt = 0;
                 for (int i = 0; i < stations.Count; i++)
                 {
                     var current = stations[i];
@@ -111,13 +124,14 @@ namespace Problems
                     int tmpCnt = 0;
                     if (AllCovered(l, withOutCurrent))
                     {
-                        tmpCnt = 1 + GetNumberOfStationsCanBeRemoved(l, withOutCurrent.ToList());
+                        tmpCnt = 1 + GetNumberOfStationsCanBeRemoved(l, withOutCurrent.ToList(), solutionMemo);
                         cnt = Math.Max(cnt, tmpCnt);
                     }
                 }
+                solutionMemo.Add(symbol, cnt);
                 return cnt;
-
             }
+
             // Assume stations sorted by RangeLow 
             public static bool AllCovered(int l, IList<GasStation> stations)
             {
@@ -142,6 +156,10 @@ namespace Problems
             }
         }
 
+        private static string ToSymbolString(IList<GasStation> stations)
+        {
+            return string.Join(";", stations.Select((s) => s.GetSymbolString()).ToArray());
+        }
         public class GasStation : IComparable<GasStation>
         {
             public GasStation(int location, int ridius)
@@ -166,6 +184,11 @@ namespace Problems
                 if (other == null) return 1;
                 // order by coverage starting location
                 return CoverageStart.CompareTo(other.CoverageStart);
+            }
+
+            public string GetSymbolString()
+            {
+                return $"{CoverageStart}-{CoverageEnd}";
             }
         }
     }
