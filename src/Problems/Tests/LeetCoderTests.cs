@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems.DataStructures;
 using Problems;
 using FluentAssertions;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -13,7 +14,7 @@ namespace Tests
         [TestMethod]
         public void TwoSum()
         {
-            var testAry1 = new int[] { 2, 7, 11, 15};
+            var testAry1 = new int[] { 2, 7, 11, 15 };
             var result = LeetCoder.TwoSum(testAry1, 9);
             result.Item1.Should().Be(0);
             result.Item2.Should().Be(1);
@@ -22,7 +23,7 @@ namespace Tests
             result.Item1.Should().Be(1);
             result.Item2.Should().Be(3);
 
-            var testAry2 = new int[] { -2, 7, -11, 0, 15, 8, 7, 27, -3};
+            var testAry2 = new int[] { -2, 7, -11, 0, 15, 8, 7, 27, -3 };
             result = LeetCoder.TwoSum(testAry2, 15);
             result.Item1.Should().Be(3);
             result.Item2.Should().Be(4);
@@ -210,7 +211,7 @@ namespace Tests
             node12.Next = node13;
             node13.Next = node14;
             node14.Next = node15;
-            
+
             rotated = LeetCoder.RotateList(node11, 2);
             rotated.Value.Should().Be(4);
             rotated.Next.Value.Should().Be(5);
@@ -271,6 +272,20 @@ namespace Tests
             LeetCoder.CanPlaceFlower(testBed7, 1).Should().BeTrue();
             LeetCoder.CanPlaceFlower(testBed7, 2).Should().BeTrue();
             LeetCoder.CanPlaceFlower(testBed7, 3).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void CombinationSum()
+        {
+            var numbers = new int[] { 2, 3, 6, 7, 9 };
+            var result = LeetCoder.CombinationSum(numbers, 7);
+            result.Should().HaveCount(2);
+            result[0].Should().BeEquivalentTo(new List<int> { 2, 2, 3 });
+            result[1].Should().BeEquivalentTo(new List<int> { 7 });
+
+            numbers = new int[] { 6, 7, 9, 12, 25, 31 };
+            result = LeetCoder.CombinationSum(numbers, 48);
+            result.Should().HaveCount(15);
         }
     }
 }

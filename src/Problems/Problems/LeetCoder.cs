@@ -147,7 +147,7 @@ namespace Problems
             }
             else
             {
-                return Tuple.Create(mediaIndex -1, mediaIndex);
+                return Tuple.Create(mediaIndex - 1, mediaIndex);
             }
         }
         private static int GetMedian(int[] ary, int i1, int i2)
@@ -318,7 +318,7 @@ namespace Problems
             int lo = 0;
             while (lo < sortedAry.Length)
             {
-                int s = BinarySearch(sortedAry, lo, sortedAry.Length -1, key);
+                int s = BinarySearch(sortedAry, lo, sortedAry.Length - 1, key);
                 if (s == -1 || s == sortedAry.Length - 1 || sortedAry[s + 1] > key)
                 {
                     return s;
@@ -402,6 +402,77 @@ namespace Problems
                 }
             }
             return builder.ToString();
+        }
+
+        // https://leetcode.com/problems/combination-sum/description/
+        public static IList<IList<int>> CombinationSum(int[] numbers, int sum)
+        {
+            var preparedNumbers = CombinationSum_PrepareNumbers(numbers, sum);
+            var comboResults = GetCombinationSum(preparedNumbers, sum);
+            return comboResults;
+        }
+
+        //TODO: can it uses memo to improve perf?
+        static IList<IList<int>> GetCombinationSum(IList<int> numbers, int sum)
+        {
+            var result = new List<IList<int>>();
+            if (numbers.Count == 0)
+                return result;
+
+            int lastTested = -1;
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                int val = numbers[i];
+                if (val != lastTested)
+                {
+                    lastTested = val;
+                }
+                else
+                {
+                    continue;
+                }
+                int remain = sum - val;
+                if (remain < 0)
+                    break;
+
+                if (remain == 0)
+                {
+                    var combo = new List<int> { val };
+                    result.Add(combo);
+                    break;
+                }
+
+                var subResult = GetCombinationSum(numbers.Skip(i + 1).ToList(), remain);
+                foreach (var r in subResult)
+                {
+                    var combo = new List<int> { val };
+                    combo.AddRange(r);
+                    result.Add(combo);
+                }
+            }
+            return result;
+        }
+
+        public static IList<int> CombinationSum_PrepareNumbers(int[] numbers, int sum)
+        {
+            var nums = new List<int>(numbers);
+            nums.Sort();
+
+            var numCopy = new List<int>(nums);
+            int idx = 0;
+            for (int i = 0; i < numCopy.Count; i++)
+            {
+                var val = numCopy[i];
+                if (val > sum)
+                {
+                    nums.RemoveRange(idx, numCopy.Count - i);
+                    break;
+                }
+                int tmp = sum / numCopy[i];
+                nums.InsertRange(idx, Enumerable.Repeat(val, tmp - 1));
+                idx += tmp;
+            }
+            return nums;
         }
     }
 }
