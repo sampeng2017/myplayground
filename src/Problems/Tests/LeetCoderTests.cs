@@ -291,13 +291,13 @@ namespace Tests
         [TestMethod]
         public void PathSum1()
         {
-//              5
-//             / \
-//            4   8
-//           /   / \
-//          11  13  4
-//         /  \      \
-//        7    2      1
+            //              5
+            //             / \
+            //            4   8
+            //           /   / \
+            //          11  13  4
+            //         /  \      \
+            //        7    2      1
             var root = new BinaryTreeNode<int> { Value = 5 };
             var node1 = new BinaryTreeNode<int> { Value = 4 };
             var node2 = new BinaryTreeNode<int> { Value = 8 };
@@ -323,5 +323,57 @@ namespace Tests
             result = LeetCoder.PathSum1(root, 22);
             result.Should().BeFalse();
         }
+
+        [TestMethod]
+        public void PathSum2()
+        {
+            //              5
+            //             / \
+            //            4   8
+            //           /   / \
+            //          11  13  4
+            //         /  \      \
+            //        7    2      1
+            var root = new BinaryTreeNode<int> { Value = 5 };
+            var node1 = new BinaryTreeNode<int> { Value = 4 };
+            var node2 = new BinaryTreeNode<int> { Value = 8 };
+            var node3 = new BinaryTreeNode<int> { Value = 11 };
+            var node4 = new BinaryTreeNode<int> { Value = 13 };
+            var node5 = new BinaryTreeNode<int> { Value = 4 };
+            var node6 = new BinaryTreeNode<int> { Value = 7 };
+            var node7 = new BinaryTreeNode<int> { Value = 2 };
+            var node8 = new BinaryTreeNode<int> { Value = 1 };
+            root.LeftChild = node1;
+            root.RightChild = node2;
+            node1.LeftChild = node3;
+            node2.LeftChild = node4;
+            node2.RightChild = node5;
+            node3.LeftChild = node6;
+            node3.RightChild = node7;
+            node5.RightChild = node8;
+
+            var result = LeetCoder.PathSum2(root, 22);
+            result.Should().HaveCount(1);
+            result[0].Should().BeEquivalentTo(new List<int> { 5, 4, 11, 2 });
+
+            node3.Value += 1;
+            result = LeetCoder.PathSum2(root, 22);
+            result.Should().BeNull();
+            node3.Value -= 1;
+
+            node5.LeftChild = new BinaryTreeNode<int> { Value = 5 };
+            //              5
+            //             / \
+            //            4   8
+            //           /   / \
+            //          11  13  4
+            //         /  \    / \
+            //        7    2  5   1
+            result = LeetCoder.PathSum2(root, 22);
+            result.Should().HaveCount(2);
+            result[0].Should().BeEquivalentTo(new List<int> { 5, 4, 11, 2 });
+            result[1].Should().BeEquivalentTo(new List<int> { 5, 8, 4, 5 });
+        }
+
     }
 }

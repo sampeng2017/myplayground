@@ -497,7 +497,53 @@ namespace Problems
         //https://leetcode.com/problems/path-sum-ii/description/
         public static IList<IList<int>> PathSum2(BinaryTreeNode<int> tree, int sum)
         {
-            throw new NotImplementedException();
+            if (tree == null)
+                return null;
+
+            if (tree.IsLeaf)
+            {
+                if (tree.Value == sum)
+                {
+                    return new List<IList<int>> { new List<int> { tree.Value } };
+                }
+                else
+                    return null;
+            }
+            else if (sum == tree.Value)
+                return null;
+
+            IList<IList<int>> subResult1 = null;
+            IList<IList<int>> subResult2 = null;
+            if (tree.LeftChild != null)
+            {
+                subResult1 = PathSum2(tree.LeftChild, sum - tree.Value);
+                if (subResult1 != null)
+                {
+                    foreach (var tmp in subResult1)
+                    {
+                        tmp.Insert(0, tree.Value);
+                    }
+                }
+            }
+            if (tree.RightChild != null)
+            {
+                subResult2 = PathSum2(tree.RightChild, sum - tree.Value);
+                if (subResult2 != null)
+                {
+                    foreach (var tmp in subResult2)
+                    {
+                        tmp.Insert(0, tree.Value);
+                    }
+                }
+            }
+
+            if (subResult1 != null && subResult2 != null)
+                return subResult1.Union(subResult2).ToList();
+            else if (subResult1 != null)
+                return subResult1;
+            else if (subResult2 != null)
+                return subResult2;
+            return null;
         }
     }
 }
