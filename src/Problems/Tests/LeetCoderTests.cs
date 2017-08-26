@@ -289,7 +289,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void PathSum()
+        public void PathSum1()
         {
 //              5
 //             / \
@@ -316,11 +316,11 @@ namespace Tests
             node3.RightChild = node7;
             node5.RightChild = node8;
 
-            var result = LeetCoder.PathSum(root, 22);
+            var result = LeetCoder.PathSum1(root, 22);
             result.Should().BeTrue();
 
             node3.Value += 1;
-            result = LeetCoder.PathSum(root, 22);
+            result = LeetCoder.PathSum1(root, 22);
             result.Should().BeFalse();
         }
     }

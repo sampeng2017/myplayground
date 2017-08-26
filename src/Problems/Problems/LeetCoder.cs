@@ -476,7 +476,7 @@ namespace Problems
         }
 
         //https://leetcode.com/problems/path-sum/description/
-        public static bool PathSum(BinaryTreeNode<int> tree, int sum)
+        public static bool PathSum1(BinaryTreeNode<int> tree, int sum)
         {
             if (tree == null)
                 return false;
@@ -488,10 +488,16 @@ namespace Problems
 
             bool subResut = false;
             if (tree.LeftChild != null)
-                subResut = PathSum(tree.LeftChild, sum - tree.Value);
+                subResut = PathSum1(tree.LeftChild, sum - tree.Value);
             if (!subResut && tree.RightChild != null)
-                subResut = PathSum(tree.RightChild, sum - tree.Value);
+                subResut = PathSum1(tree.RightChild, sum - tree.Value);
             return subResut;
+        }
+
+        //https://leetcode.com/problems/path-sum-ii/description/
+        public static IList<IList<int>> PathSum2(BinaryTreeNode<int> tree, int sum)
+        {
+            throw new NotImplementedException();
         }
     }
 }
