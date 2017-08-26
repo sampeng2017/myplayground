@@ -287,5 +287,41 @@ namespace Tests
             result = LeetCoder.CombinationSum(numbers, 48);
             result.Should().HaveCount(15);
         }
+
+        [TestMethod]
+        public void PathSum()
+        {
+//              5
+//             / \
+//            4   8
+//           /   / \
+//          11  13  4
+//         /  \      \
+//        7    2      1
+            var root = new BinaryTreeNode<int> { Value = 5 };
+            var node1 = new BinaryTreeNode<int> { Value = 4 };
+            var node2 = new BinaryTreeNode<int> { Value = 8 };
+            var node3 = new BinaryTreeNode<int> { Value = 11 };
+            var node4 = new BinaryTreeNode<int> { Value = 13 };
+            var node5 = new BinaryTreeNode<int> { Value = 4 };
+            var node6 = new BinaryTreeNode<int> { Value = 7 };
+            var node7 = new BinaryTreeNode<int> { Value = 2 };
+            var node8 = new BinaryTreeNode<int> { Value = 1 };
+            root.LeftChild = node1;
+            root.RightChild = node2;
+            node1.LeftChild = node3;
+            node2.LeftChild = node4;
+            node2.RightChild = node5;
+            node3.LeftChild = node6;
+            node3.RightChild = node7;
+            node5.RightChild = node8;
+
+            var result = LeetCoder.PathSum(root, 22);
+            result.Should().BeTrue();
+
+            node3.Value += 1;
+            result = LeetCoder.PathSum(root, 22);
+            result.Should().BeFalse();
+        }
     }
 }

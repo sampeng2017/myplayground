@@ -453,7 +453,7 @@ namespace Problems
             return result;
         }
 
-        public static IList<int> CombinationSum_PrepareNumbers(int[] numbers, int sum)
+        private static IList<int> CombinationSum_PrepareNumbers(int[] numbers, int sum)
         {
             var nums = new List<int>(numbers);
             nums.Sort();
@@ -473,6 +473,25 @@ namespace Problems
                 idx += tmp;
             }
             return nums;
+        }
+
+        //https://leetcode.com/problems/path-sum/description/
+        public static bool PathSum(BinaryTreeNode<int> tree, int sum)
+        {
+            if (tree == null)
+                return false;
+
+            if (tree.IsLeaf)
+                return tree.Value == sum;
+            else if (sum == tree.Value)
+                return false;
+
+            bool subResut = false;
+            if (tree.LeftChild != null)
+                subResut = PathSum(tree.LeftChild, sum - tree.Value);
+            if (!subResut && tree.RightChild != null)
+                subResut = PathSum(tree.RightChild, sum - tree.Value);
+            return subResut;
         }
     }
 }
