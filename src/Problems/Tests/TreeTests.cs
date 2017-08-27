@@ -179,5 +179,21 @@ namespace Tests
             path = root.SearchAndReturnPath(12);
             path.Should().BeNull();
         }
+
+        [TestMethod]
+        public void FindLowestCommonAncestor()
+        {
+            BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
+            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
+            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
+            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
+            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
+            root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+
+            var result = OldProblems.FindLowestCommonAncestor(root, 6, 8);
+            result.Should().BeSameAs(root.RightChild);
+        }
     }
 }

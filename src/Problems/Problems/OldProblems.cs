@@ -76,9 +76,27 @@ namespace Problems
             return root;
         }
 
-        //public static BinaryTreeNode<T> FindLowestCommonAncestor2<T>(BinaryTreeNode<T> root, BinaryTreeNode<T> n1, BinaryTreeNode<T> n2)
-        //{
-        //    return null;
-        //}
+        public static BinaryTreeNode<int> FindLowestCommonAncestor(BinaryTreeNode<int> root, int key1, int key2)
+        {
+            var path1 = root.SearchAndReturnPath(key1);
+            if (path1 == null)
+                return null;
+
+            var path2 = root.SearchAndReturnPath(key2);
+            if (path2 == null)
+                return null;
+
+            int j = 0;
+            while (j < path1.Count && j < path2.Count)
+            {
+                if (!ReferenceEquals(path1[j], path2[j]))
+                {
+                    j--;
+                    break;
+                }
+                j++;
+            }
+            return path1[j];
+        }
     }
 }
