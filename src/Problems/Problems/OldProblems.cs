@@ -75,5 +75,10 @@ namespace Problems
             root.RightChild = rightSubTree;
             return root;
         }
+
+        //public static BinaryTreeNode<T> FindLowestCommonAncestor2<T>(BinaryTreeNode<T> root, BinaryTreeNode<T> n1, BinaryTreeNode<T> n2)
+        //{
+        //    return null;
+        //}
     }
 }

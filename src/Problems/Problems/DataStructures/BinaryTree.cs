@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Problems.DataStructures
 {
-    public class BinaryTreeNode<T>
+    public class BinaryTreeNode<T> where T : IComparable
     {
         public T Value { get; set; }
         public BinaryTreeNode<T> LeftChild { get; set; }
@@ -81,6 +81,44 @@ namespace Problems.DataStructures
                     current = current.LeftChild;
                 }
             }
+        }
+
+        public IList<BinaryTreeNode<T>> SearchAndReturnPath(T key)
+        {
+            var pathContainer = new Stack<BinaryTreeNode<T>>();
+            if (SearchAndReturnPath(this, key, pathContainer))
+            {
+                return pathContainer.ToList();
+            }
+            return null;
+        }
+
+        private static bool SearchAndReturnPath(BinaryTreeNode<T> root, T key, Stack<BinaryTreeNode<T>> pathContainer)
+        {
+            if (root == null)
+                return false;
+
+            if (root.Value.CompareTo(key) == 0)
+            {
+                pathContainer.Push(root);
+                return true;
+            }
+            bool foundInLeft = SearchAndReturnPath(root.LeftChild, key, pathContainer);
+            if (foundInLeft)
+            {
+                pathContainer.Push(root);
+                return true;
+            }
+            else
+            {
+                bool foundInRight = SearchAndReturnPath(root.RightChild, key, pathContainer);
+                if (foundInRight)
+                {
+                    pathContainer.Push(root);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 

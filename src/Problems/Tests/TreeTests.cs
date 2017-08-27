@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems.DataStructures;
 using Problems;
@@ -153,6 +154,30 @@ namespace Tests
 
             collector1.ToArray().Should().BeEquivalentTo(preOrder);
             collector2.ToArray().Should().BeEquivalentTo(inOrder);
+        }
+
+        [TestMethod]
+        public void SearchAndReturnPath()
+        {
+            BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
+            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
+            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
+            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
+            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
+            root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+
+            var path = root.SearchAndReturnPath(6);
+            path.Should().NotBeNull();
+            path.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 1, 3, 6 });
+
+            path = root.SearchAndReturnPath(8);
+            path.Should().NotBeNull();
+            path.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 1, 3, 7, 8 });
+
+            path = root.SearchAndReturnPath(12);
+            path.Should().BeNull();
         }
     }
 }
