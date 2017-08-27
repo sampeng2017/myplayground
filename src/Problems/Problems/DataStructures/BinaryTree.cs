@@ -33,6 +33,13 @@ namespace Problems.DataStructures
             RightChild?.InOrderVisit(visit);
         }
 
+        public void PreOrderVisit(Action<BinaryTreeNode<T>> visit)
+        {
+            visit(this);
+            LeftChild?.PreOrderVisit(visit);
+            RightChild?.PreOrderVisit(visit);
+        }
+
         public static void InOrderVisitNoRecursion(BinaryTreeNode<T> tree, Action<BinaryTreeNode<T>> visit)
         {
             InOrderVisitNoRecursion(tree, (n) => { visit(n); return true; });
@@ -55,6 +62,23 @@ namespace Problems.DataStructures
                     if (!visit(current))
                         return;
                     current = current.RightChild;
+                }
+            }
+        }
+
+        public static void PreOrderVisitNoRecursion(BinaryTreeNode<T> tree, Action<BinaryTreeNode<T>> visit)
+        {
+            var stack = new Stack<BinaryTreeNode<T>>();
+            stack.Push(tree);
+            while (stack.Count > 0)
+            {
+                var current = stack.Pop();
+                if (current != null)
+                {
+                    visit(current);
+                    stack.Push(current.RightChild);
+                    stack.Push(current.LeftChild);
+                    current = current.LeftChild;
                 }
             }
         }

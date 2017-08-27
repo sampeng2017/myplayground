@@ -51,5 +51,29 @@ namespace Problems
         {
             return null;
         }
+
+        public static BinaryTreeNode<char> BuildTreeFromInOrderAndPreOrderTraverse(IList<char> preOrder, IList<char> inOrder)
+        {
+            if (preOrder == null || inOrder == null || preOrder.Count != inOrder.Count)
+                throw new InvalidOperationException();
+
+            if (preOrder.Count == 0)
+                return null;
+
+            var rootValue = preOrder[0];
+            var root = new BinaryTreeNode<char> { Value = rootValue };
+            int rootIndexInInOrder = inOrder.IndexOf(rootValue);
+
+            IList<char> leftChildrenInOrder = inOrder.Take(rootIndexInInOrder).ToList();
+            IList<char> rightChildrenInOrder = inOrder.Skip(rootIndexInInOrder + 1).ToList();
+            IList<char> leftChildrenPreOrder = preOrder.Skip(1).Take(leftChildrenInOrder.Count).ToList();
+            IList<char> rightChildrenPreOrder = inOrder.Skip(1).Skip(leftChildrenPreOrder.Count).ToList();
+
+            var leftSubTree = BuildTreeFromInOrderAndPreOrderTraverse(leftChildrenPreOrder, leftChildrenInOrder);
+            var rightSubTree = BuildTreeFromInOrderAndPreOrderTraverse(rightChildrenPreOrder, rightChildrenInOrder);
+            root.LeftChild = leftSubTree;
+            root.RightChild = rightSubTree;
+            return root;
+        }
     }
 }
