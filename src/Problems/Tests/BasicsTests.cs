@@ -16,7 +16,8 @@ namespace Tests
             var funcs = new List<Func<int, int>>
             {
                 Misc.Fibonacci_DP1,
-                Misc.Fibonacci_DP2
+                Misc.Fibonacci_DP2,
+                Misc.Fibonacci_NoRecursive
             };
 
             foreach (var func in funcs)

@@ -42,6 +42,27 @@ namespace Problems.Basics
             return memo[n];
         }
 
+        public static int Fibonacci_NoRecursive(int n)
+        {
+            if (n == 0) return 0;
+            if (n == 1 || n == 2) return 1;
+
+            int[] twoItems = new int[] { 0, 1 };
+            int cnt = 1;
+            while (true)
+            {
+                twoItems[0] = twoItems[0] + twoItems[1];
+                cnt++;
+                if (cnt == n)
+                    break;
+                twoItems[1] = twoItems[0] + twoItems[1];
+                cnt++;
+                if (cnt == n)
+                    break;
+            }
+            return twoItems[1] > twoItems[0] ? twoItems[1] : twoItems[0];
+        }
+
         public static Tuple<int, int, int> FindMaxSubArray(int[] ary, int low, int high)
         {
             if (low == high)
@@ -178,7 +199,7 @@ namespace Problems.Basics
             while (h > l)
             {
                 int q = Helpers.Partition(ary, l, h);
-                
+
                 if (q == i)
                     return ary[q];
                 if (q > i)
