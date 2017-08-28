@@ -375,5 +375,31 @@ namespace Tests
             result[1].Should().BeEquivalentTo(new List<int> { 5, 8, 4, 5 });
         }
 
+        [TestMethod]
+        public void WordBreak()
+        {
+            var dictionary = new List<string> { "leet", "code"};
+
+            var result = LeetCoder.WordBreak(dictionary, "leet");
+            result.Should().BeTrue();
+
+            result = LeetCoder.WordBreak(dictionary, "leetcode");
+            result.Should().BeTrue();
+
+            result = LeetCoder.WordBreak(dictionary, "leetcodeblar");
+            result.Should().BeFalse();
+
+            dictionary.Add("work");
+            dictionary.Add("book");
+            result = LeetCoder.WordBreak(dictionary, "codeworkbook");
+            result.Should().BeTrue();
+            result = LeetCoder.WordBreak(dictionary, "workbookcode");
+            result.Should().BeTrue();
+            result = LeetCoder.WordBreak(dictionary, "workbookcodeleet");
+            result.Should().BeTrue();
+            result = LeetCoder.WordBreak(dictionary, "workbookandcode");
+            result.Should().BeFalse();
+
+        }
     }
 }
