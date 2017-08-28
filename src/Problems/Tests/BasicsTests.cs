@@ -84,7 +84,7 @@ namespace Tests
         [TestMethod]
         public void MaxHeap()
         {
-            var heap = new MaxHeap<int>();
+            var heap = new Heap<int>();
             heap.Insert(8);
             heap.Insert(3);
             heap.Insert(201);
@@ -93,28 +93,64 @@ namespace Tests
             heap.Insert(101);
             heap.Insert(231);
 
-            heap.GetMax().Should().Be(231);
-            heap.GetMax().Should().Be(201);
-            heap.GetMax().Should().Be(101);
+            heap.GetNext().Should().Be(231);
+            heap.GetNext().Should().Be(201);
+            heap.GetNext().Should().Be(101);
             heap.Insert(26);
-            heap.GetMax().Should().Be(27);
-            heap.GetMax().Should().Be(26);
-            heap.GetMax().Should().Be(8);
-            heap.GetMax().Should().Be(3);
-            heap.GetMax().Should().Be(1);
+            heap.GetNext().Should().Be(27);
+            heap.GetNext().Should().Be(26);
+            heap.GetNext().Should().Be(8);
+            heap.GetNext().Should().Be(3);
+            heap.GetNext().Should().Be(1);
 
-            Action f = () => heap.GetMax();
+            Action f = () => heap.GetNext();
             f.ShouldThrow<InvalidOperationException>();
 
-            heap = new MaxHeap<int>(new int[] { 8, 3, 201, 27, 1, 101, 26, 231 });
-            heap.GetMax().Should().Be(231);
-            heap.GetMax().Should().Be(201);
-            heap.GetMax().Should().Be(101);
-            heap.GetMax().Should().Be(27);
-            heap.GetMax().Should().Be(26);
-            heap.GetMax().Should().Be(8);
-            heap.GetMax().Should().Be(3);
-            heap.GetMax().Should().Be(1);
+            heap = new Heap<int>(new int[] { 8, 3, 201, 27, 1, 101, 26, 231 });
+            heap.GetNext().Should().Be(231);
+            heap.GetNext().Should().Be(201);
+            heap.GetNext().Should().Be(101);
+            heap.GetNext().Should().Be(27);
+            heap.GetNext().Should().Be(26);
+            heap.GetNext().Should().Be(8);
+            heap.GetNext().Should().Be(3);
+            heap.GetNext().Should().Be(1);
+        }
+
+        [TestMethod]
+        public void MinHeap()
+        {
+            var heap = new Heap<int>(maxHeap: false);
+            heap.Insert(8);
+            heap.Insert(3);
+            heap.Insert(201);
+            heap.Insert(27);
+            heap.Insert(1);
+            heap.Insert(101);
+            heap.Insert(231);
+            heap.Insert(26);
+
+            heap.GetNext().Should().Be(1);
+            heap.GetNext().Should().Be(3);
+            heap.GetNext().Should().Be(8);
+            heap.GetNext().Should().Be(26);
+            heap.GetNext().Should().Be(27);
+            heap.GetNext().Should().Be(101);
+            heap.GetNext().Should().Be(201);
+            heap.GetNext().Should().Be(231);
+
+            Action f = () => heap.GetNext();
+            f.ShouldThrow<InvalidOperationException>();
+
+            heap = new Heap<int>(new int[] { 8, 3, 201, 27, 1, 101, 26, 231 }, maxHeap: false);
+            heap.GetNext().Should().Be(1);
+            heap.GetNext().Should().Be(3);
+            heap.GetNext().Should().Be(8);
+            heap.GetNext().Should().Be(26);
+            heap.GetNext().Should().Be(27);
+            heap.GetNext().Should().Be(101);
+            heap.GetNext().Should().Be(201);
+            heap.GetNext().Should().Be(231);
         }
 
         [TestMethod]

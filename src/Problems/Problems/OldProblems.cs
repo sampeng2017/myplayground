@@ -106,75 +106,11 @@ namespace Problems
             {
                 return new int[0];
             }
-
-            // Intentionally write heap operations in same method
-
-            // make a min heap
-            for (int i = n / 2 - 1; i >= 0; i--)
-            {
-                int key = array[i];
-                int leftChild = array[i * 2 + 1];
-                int rightChild = array[i * 2 + 2];
-                if (leftChild < rightChild)
-                {
-                    if (key > leftChild)
-                    {
-                        Helpers.Exchange(array, i, i * 2 + 1);
-                    }
-                }
-                else
-                {
-                    if (key > rightChild)
-                    {
-                        Helpers.Exchange(array, i, i * 2 + 2);
-                    }
-                }
-            }
-
+            var minHeap = new Heap<int>(array, maxHeap: false);
             var result = new List<int>();
-            int validHeapSize = array.Length;
-
-            // Take nth min value from heap
-            while (n > 0 && n <= array.Length)
+            for (int i = 0; i < n && i<array.Length; i++)
             {
-                result.Add(array[0]);
-                Helpers.Exchange(array, 0, validHeapSize - 1);
-
-                int jj = 0;
-                while (jj < validHeapSize)
-                {
-                    int key = array[jj];
-                    int leftChildIndex = jj * 2 + 1;
-                    int rightChildIndex = jj * 2 + 1;
-
-                    int leftChild = array[leftChildIndex];
-                    int rightChild = array[rightChildIndex];
-                    if (leftChild < rightChild)
-                    {
-                        if (key > leftChild)
-                        {
-                            Helpers.Exchange(array, jj, leftChildIndex);
-                            jj = leftChildIndex;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (key > rightChild)
-                        {
-                            Helpers.Exchange(array, jj, rightChildIndex);
-                            jj = rightChildIndex;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-
+                result.Add(minHeap.GetNext());
             }
             return result.ToArray();
         }

@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 
 namespace Problems.Basics
 {
-    public class MaxHeap<T> where T : IComparable
+    public class Heap<T> where T : IComparable
     {
         private readonly List<T> heap;
+        private readonly Func<List<T>, int, int, bool> compare;
 
         public bool IsEmpty => heap.Count == 1;
+        public bool IsMaxHeap { get; }
 
-        public MaxHeap()
+        public Heap(bool maxHeap = true)
         {
+            IsMaxHeap = maxHeap;
+            if (maxHeap)
+                compare = Helpers.Less;
+            else
+                compare = Helpers.More;
             heap = new List<T>() { default(T) };
         }
 
-        public MaxHeap(T[] elements)
-            : this()
+        public Heap(T[] elements, bool maxHeap = true)
+            : this(maxHeap)
         {
             heap.AddRange(elements);
             for (int i = elements.Length /2; i >= 1; i--)
@@ -33,7 +40,7 @@ namespace Problems.Basics
             Swim();
         }
 
-        public T GetMax()
+        public T GetNext()
         {
             if (IsEmpty)
                 throw new InvalidOperationException("Empty heap");
@@ -52,12 +59,12 @@ namespace Problems.Basics
             {
                 int childToCompare = leftChild;
                 int rightChild = leftChild + 1;
-                if (rightChild != heap.Count && Helpers.Less(heap, leftChild, rightChild))
+                if (rightChild != heap.Count && compare(heap, leftChild, rightChild))
                 {
                     childToCompare = rightChild;
                 }
 
-                if (Helpers.Less(heap, childToCompare, parent))
+                if (compare(heap, childToCompare, parent))
                 {
                     break;
                 }
@@ -76,12 +83,12 @@ namespace Problems.Basics
             int rightChild = leftChild + 1;
             int largest = parent;
 
-            if (Helpers.Less(heap, parent, leftChild))
+            if (compare(heap, parent, leftChild))
             {
                 largest = leftChild;
             }
 
-            if (rightChild < heap.Count && Helpers.Less(heap, largest, rightChild))
+            if (rightChild < heap.Count && compare(heap, largest, rightChild))
             {
                 largest = rightChild;
             }
@@ -99,7 +106,7 @@ namespace Problems.Basics
             if (child == 0)
                 return;
             int parent = child / 2;
-            while (parent > 0 && Helpers.Less(heap,parent, child))
+            while (parent > 0 && compare(heap,parent, child))
             {
                 Exchange(parent, child);
                 child = parent;

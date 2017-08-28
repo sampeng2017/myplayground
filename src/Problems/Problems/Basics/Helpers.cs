@@ -63,6 +63,11 @@ namespace Problems.Basics
             return ary[i].CompareTo(ary[j]) < 0;
         }
 
+        public static bool More<T>(IList<T> ary, int i, int j) where T : IComparable
+        {
+            return ary[i].CompareTo(ary[j]) > 0;
+        }
+
         public static void Shuffle(int[] ary)
         {
             if (ary == null || ary.Length <= 1)

@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Basics\Helpers.cs" />
     <Compile Include="Basics\LinkedList.cs" />
-    <Compile Include="Basics\MaxHeap.cs" />
+    <Compile Include="Basics\Heap.cs" />
     <Compile Include="Basics\Misc.cs" />
     <Compile Include="Basics\Sort.cs" />
     <Compile Include="DataStructures\LinkedList.cs" />
