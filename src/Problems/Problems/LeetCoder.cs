@@ -545,5 +545,45 @@ namespace Problems
                 return subResult2;
             return null;
         }
+
+        //https://leetcode.com/problems/word-break/description/
+        public static bool WordBreak(IList<string> dictionary, string word)
+        {
+            return WordBreak(dictionary, word, new Dictionary<string, bool>());
+        }
+
+        private static bool WordBreak(IList<string> dictionary, string word, Dictionary<string, bool> memo)
+        {
+            if (string.IsNullOrEmpty(word))
+                return false;
+
+            bool found;
+            if (memo.TryGetValue(word, out found))
+            {
+                return found;
+            }
+
+            found = false;
+            if (dictionary.Contains(word))
+            {
+                found = true;
+            }
+            else
+            {
+                for (int i = 0; i < word.Length; i++)
+                {
+                    string subStr = word.Substring(0, i + 1);
+                    string remaining = word.Substring(i + 1);
+
+                    if (dictionary.Contains(subStr))
+                    {
+                        found = WordBreak(dictionary, remaining);
+                        break;
+                    }
+                }
+            }
+            memo.Add(word, found);
+            return found;
+        }
     }
 }
