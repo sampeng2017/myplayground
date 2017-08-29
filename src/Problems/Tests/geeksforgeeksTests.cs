@@ -50,6 +50,14 @@ namespace Tests
             a = new int[] { 1, 3, 2, 4 };
             r = Geeksforgeeks.NextLargerElement(a);
             r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
+
+            a = new int[] { 1 };
+            r = Geeksforgeeks.NextLargerElement2(a);
+            r.Should().BeEquivalentTo(new int[] { -1 });
+
+            a = new int[] { 1, 3, 2, 4 };
+            r = Geeksforgeeks.NextLargerElement2(a);
+            r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
         }
     }
 }

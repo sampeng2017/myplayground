@@ -79,6 +79,38 @@ namespace Problems
             return result;
         }
 
+        public static int[] NextLargerElement2(int[] a)
+        {
+            if (a == null || a.Length == 0)
+                return a;
+
+            var result = new int[a.Length];
+
+            var stack = new Stack<Tuple<int, int>>();
+
+            int j = 1;
+            stack.Push(Tuple.Create(a[0], 0));
+            while (j < a.Length)
+            {
+                if (stack.Peek().Item1 < a[j])
+                {
+                    while (stack.Count > 0 && stack.Peek().Item1 < a[j])
+                    {
+                        var tmp = stack.Pop();
+                        result[tmp.Item2] = a[j];
+                    }
+                }
+                stack.Push(Tuple.Create(a[j], j));
+                j++;
+            }
+            while (stack.Count > 0)
+            {
+                var tmp = stack.Pop();
+                result[tmp.Item2] = -1;
+            }
+            return result;
+        }
+
         private class ParenthesisHelper
         {
             const char p1Open = '{';
