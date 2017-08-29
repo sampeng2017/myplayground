@@ -212,5 +212,13 @@ namespace Tests
             }
             return true;
         }
+
+        [TestMethod]
+        public void Gcd()
+        {
+            Misc.Gcd(21, 14).Should().Be(7);
+            Misc.Gcd(3, 0).Should().Be(3);
+            Misc.Gcd(7, 13).Should().Be(1);
+        }
     }
 }

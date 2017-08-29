@@ -240,5 +240,15 @@ namespace Problems.Basics
 
             return Tuple.Create(leftIndex, rightIndex, leftSum + rightSum);
         }
+
+        // Euclid’s algorithm
+        public static int Gcd(int n1, int n2)
+        {
+            if (n2 == 0)
+                return n1;
+            int a = n1 > n2 ? n1 : n2;
+            int b = a == n1 ? n2 : n1;
+            return Gcd(b, a % b);
+        }
     }
 }
