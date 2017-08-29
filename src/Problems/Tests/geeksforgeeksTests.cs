@@ -38,5 +38,18 @@ namespace Tests
             s = "[()]{}{[()(]()}";
             Geeksforgeeks.ParenthesisChecker(s).Should().BeFalse();
         }
+
+        [TestMethod]
+        [TestCategory("Stack and Queue")]
+        public void NextLargerElement()
+        {
+            var a = new int[] { 1 };
+            var r = Geeksforgeeks.NextLargerElement(a);
+            r.Should().BeEquivalentTo(new int[] { -1 });
+
+            a = new int[] { 1, 3, 2, 4 };
+            r = Geeksforgeeks.NextLargerElement(a);
+            r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
+        }
     }
 }

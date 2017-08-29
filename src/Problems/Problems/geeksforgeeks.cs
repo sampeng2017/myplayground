@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Problems.Basics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,6 +51,32 @@ namespace Problems
                 }
             }
             return stack.Count == 0;
+        }
+
+        // http://practice.geeksforgeeks.org/problems/next-larger-element/0
+        public static int[] NextLargerElement(int[] a)
+        {
+            if (a == null || a.Length == 0)
+                return a;
+
+            var result = new int[a.Length];
+            for (int i = 0; i < a.Length; i++)
+            {
+                int key = a[i];
+                result[i] = -1;
+
+                int j = i + 1;
+                for (; j < a.Length; j++)
+                {
+                    if (a[j] > key)
+                    {
+                        result[i] = a[j];
+                        break;
+                    }
+                }
+            }
+
+            return result;
         }
 
         private class ParenthesisHelper
