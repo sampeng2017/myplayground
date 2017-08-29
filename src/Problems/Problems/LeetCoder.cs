@@ -585,5 +585,31 @@ namespace Problems
             memo.Add(word, found);
             return found;
         }
+
+        // https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
+        public static ListNode<T> FlattenBinaryTreeToLinkedList<T>(BinaryTreeNode<T> tree) where T : IComparable
+        {
+            if (tree == null)
+                return null;
+            var listNode = new ListNode<T> { Value = tree.Value };
+            var tmp = listNode;
+            var leftNode = FlattenBinaryTreeToLinkedList(tree.LeftChild);
+            if (leftNode != null)
+            {
+                listNode.Next = leftNode;
+                tmp = leftNode;
+                while (tmp.Next != null)
+                {
+                    tmp = tmp.Next;
+                }
+            }
+
+            var rightNode = FlattenBinaryTreeToLinkedList(tree.RightChild);
+            if (rightNode != null)
+            {
+                tmp.Next = rightNode;
+            }
+            return listNode;
+        }
     }
 }

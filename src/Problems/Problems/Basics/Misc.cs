@@ -174,8 +174,8 @@ namespace Problems.Basics
         // select the value of the i'th samllest element in the ary[p .. r];
         public static int RandomSelectNth(int[] ary, int p, int r, int i)
         {
-            if (p == r)
-                return ary[p];
+            //if (p == r)
+            //    return ary[p];
             int q = Helpers.RandomPartition(ary, p, r);
 
             // if the pivot mathes, return

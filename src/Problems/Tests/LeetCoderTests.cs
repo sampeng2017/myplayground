@@ -401,5 +401,30 @@ namespace Tests
             result.Should().BeFalse();
 
         }
+
+        [TestMethod]
+        public void FlattenBinaryTreeToLinkedList()
+        {
+            //         1
+            //        / \
+            //       2   5
+            //      / \   \
+            //     3   4   6
+            var treeRoot = new BinaryTreeNode<int> { Value = 1 };
+            treeRoot.LeftChild = new BinaryTreeNode<int> { Value = 2 };
+            treeRoot.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 3 };
+            treeRoot.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 4 };
+            treeRoot.RightChild = new BinaryTreeNode<int> { Value = 5 };
+            treeRoot.RightChild.RightChild = new BinaryTreeNode<int> { Value = 6 };
+
+            ListNode<int> listHead = LeetCoder.FlattenBinaryTreeToLinkedList(treeRoot);
+            listHead.Value.Should().Be(1);
+            listHead.Next.Value.Should().Be(2);
+            listHead.Next.Next.Value.Should().Be(3);
+            listHead.Next.Next.Next.Value.Should().Be(4);
+            listHead.Next.Next.Next.Next.Value.Should().Be(5);
+            listHead.Next.Next.Next.Next.Next.Value.Should().Be(6);
+            listHead.Next.Next.Next.Next.Next.Next.Should().BeNull();
+        }
     }
 }
