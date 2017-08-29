@@ -83,47 +83,6 @@ namespace Problems.Basics
             return crossingResult;
         }
 
-        // TODO: this is wrong
-        public static Tuple<int, int, int> FindMaxSubArray_linear(int[] ary, int low, int high)
-        {
-            int maxSum = int.MinValue;
-            int maxLeft = low;
-            int maxRight = low;
-            int leftIndex = low;
-            int rightIndex = high;
-
-            int tmpSum = 0;
-            for (int i = low; i <= high; i++)
-            {
-                int key = ary[i];
-                tmpSum += key;
-                if (tmpSum > maxSum)
-                {
-                    maxSum = tmpSum;
-                    maxRight = i;
-                }
-                else
-                {
-
-                }
-                if (tmpSum == 0)
-                {
-                    leftIndex = rightIndex = i;
-                }
-                tmpSum += ary[i];
-                if (tmpSum > maxSum)
-                {
-                    maxSum = tmpSum;
-                    rightIndex = i;
-                }
-                else
-                {
-                    tmpSum = 0;
-                }
-            }
-            return Tuple.Create(leftIndex, rightIndex, maxSum);
-        }
-
         public static Tuple<int, int> FindMinAndMax(int[] ary)
         {
             if (ary.Length == 1)
