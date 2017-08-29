@@ -611,5 +611,49 @@ namespace Problems
                 tmp.RightChild = tmpRightChild;
             }
         }
+
+        // TODO: optimize
+        //https://leetcode.com/problems/find-duplicate-subtrees/description/
+        public static IList<BinaryTreeNode<int>> FindDuplicateSubTrees(BinaryTreeNode<int> tree)
+        {
+            var memo = new Dictionary<BinaryTreeNode<int>, string>();
+            GenerateNodeTokens(tree, memo);
+            Dictionary<string, bool> tokens = new Dictionary<string, bool>();
+            var result = new List<BinaryTreeNode<int>>();
+            foreach (var kvp in memo)
+            {
+                bool hasRead;
+                if (tokens.TryGetValue(kvp.Value, out hasRead))
+                {
+                    if (!hasRead)
+                    {
+                        result.Add(kvp.Key);
+                        tokens[kvp.Value] = true;
+                    }
+                }
+                else
+                {
+                    tokens.Add(kvp.Value, false);
+                }
+            }
+            return result;
+        }
+
+        private static void GenerateNodeTokens(BinaryTreeNode<int> tree, Dictionary<BinaryTreeNode<int>, string> memo)
+        {
+            tree.PostOrderVisit(n => {
+                string token = $"({n.Value}";
+                if (n.LeftChild != null)
+                {
+                    token += memo[n.LeftChild];
+                }
+                if (n.RightChild != null)
+                {
+                    token += memo[n.RightChild];
+                }
+                token += ")";
+                memo.Add(n, token);
+            });
+        }
     }
 }

@@ -438,5 +438,30 @@ namespace Tests
 
             treeRoot.RightChild.RightChild.RightChild.RightChild.RightChild.RightChild.Should().BeNull();
         }
+
+        [TestMethod]
+        public void FindDuplicateSubTrees()
+        {
+            //    1
+            //   / \
+            //  2   3
+            // /   / \
+            //4   2   4
+            //   /
+            //  4
+
+            var treeRoot = new BinaryTreeNode<int> { Value = 1 };
+            treeRoot.LeftChild = new BinaryTreeNode<int> { Value = 2 };
+            treeRoot.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
+            treeRoot.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            treeRoot.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 2 };
+            treeRoot.RightChild.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
+            treeRoot.RightChild.RightChild = new BinaryTreeNode<int> { Value = 4 };
+
+            var result = LeetCoder.FindDuplicateSubTrees(treeRoot);
+
+            BinaryTreeNode<int>.AreEquivlent(result[0], treeRoot.LeftChild.LeftChild).Should().BeTrue();
+            BinaryTreeNode<int>.AreEquivlent(result[1], treeRoot.LeftChild).Should().BeTrue();
+        }
     }
 }

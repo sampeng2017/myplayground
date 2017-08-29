@@ -40,6 +40,13 @@ namespace Problems.DataStructures
             RightChild?.PreOrderVisit(visit);
         }
 
+        public void PostOrderVisit(Action<BinaryTreeNode<T>> visit)
+        {
+            LeftChild?.PostOrderVisit(visit);
+            RightChild?.PostOrderVisit(visit);
+            visit(this);
+        }
+
         public static void InOrderVisitNoRecursion(BinaryTreeNode<T> tree, Action<BinaryTreeNode<T>> visit)
         {
             InOrderVisitNoRecursion(tree, (n) => { visit(n); return true; });
@@ -119,6 +126,18 @@ namespace Problems.DataStructures
                 }
             }
             return false;
+        }
+
+        public static bool AreEquivlent(BinaryTreeNode<T> tree1, BinaryTreeNode<T> tree2)
+        {
+            if (tree1 == null && tree2 == null)
+                return true;
+            if (tree1 == null || tree2 == null)
+                return false;
+
+            return tree1.Value.CompareTo(tree2.Value) == 0 &&
+                AreEquivlent(tree1.LeftChild, tree2.LeftChild) &&
+                AreEquivlent(tree1.RightChild, tree2.RightChild);
         }
     }
 
