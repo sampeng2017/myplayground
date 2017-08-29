@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicsTests.cs" />
-    <Compile Include="geeksforgeeksTests.cs" />
+    <Compile Include="GeeksforgeeksTests.cs" />
     <Compile Include="LeetCoderTests.cs" />
     <Compile Include="LinkedListTests.cs" />
     <Compile Include="OldProblemsTests.cs" />

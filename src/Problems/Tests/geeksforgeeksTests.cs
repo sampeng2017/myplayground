@@ -28,5 +28,15 @@ namespace Tests
             validation.Item2.Should().Be(7);
             validation.Item3.Should().Be(13);
         }
+
+        [TestMethod]
+        [TestCategory("String")]
+        public void ParenthesisChecker()
+        {
+            string s = "[()]{}{[()()]()}";
+            Geeksforgeeks.ParenthesisChecker(s).Should().BeTrue();
+            s = "[()]{}{[()(]()}";
+            Geeksforgeeks.ParenthesisChecker(s).Should().BeFalse();
+        }
     }
 }
