@@ -417,14 +417,26 @@ namespace Tests
             treeRoot.RightChild = new BinaryTreeNode<int> { Value = 5 };
             treeRoot.RightChild.RightChild = new BinaryTreeNode<int> { Value = 6 };
 
-            ListNode<int> listHead = LeetCoder.FlattenBinaryTreeToLinkedList(treeRoot);
-            listHead.Value.Should().Be(1);
-            listHead.Next.Value.Should().Be(2);
-            listHead.Next.Next.Value.Should().Be(3);
-            listHead.Next.Next.Next.Value.Should().Be(4);
-            listHead.Next.Next.Next.Next.Value.Should().Be(5);
-            listHead.Next.Next.Next.Next.Next.Value.Should().Be(6);
-            listHead.Next.Next.Next.Next.Next.Next.Should().BeNull();
+            LeetCoder.FlattenBinaryTreeToLinkedList(treeRoot);
+            treeRoot.Value.Should().Be(1);
+            treeRoot.LeftChild.Should().BeNull();
+
+            treeRoot.RightChild.Value.Should().Be(2);
+            treeRoot.RightChild.LeftChild.Should().BeNull();
+
+            treeRoot.RightChild.RightChild.Value.Should().Be(3);
+            treeRoot.RightChild.RightChild.LeftChild.Should().BeNull();
+
+            treeRoot.RightChild.RightChild.RightChild.Value.Should().Be(4);
+            treeRoot.RightChild.RightChild.RightChild.LeftChild.Should().BeNull();
+
+            treeRoot.RightChild.RightChild.RightChild.RightChild.Value.Should().Be(5);
+            treeRoot.RightChild.RightChild.RightChild.RightChild.LeftChild.Should().BeNull();
+
+            treeRoot.RightChild.RightChild.RightChild.RightChild.RightChild.Value.Should().Be(6);
+            treeRoot.RightChild.RightChild.RightChild.RightChild.RightChild.LeftChild.Should().BeNull();
+
+            treeRoot.RightChild.RightChild.RightChild.RightChild.RightChild.RightChild.Should().BeNull();
         }
     }
 }

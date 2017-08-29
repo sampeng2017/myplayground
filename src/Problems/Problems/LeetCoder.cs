@@ -587,29 +587,29 @@ namespace Problems
         }
 
         // https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
-        public static ListNode<T> FlattenBinaryTreeToLinkedList<T>(BinaryTreeNode<T> tree) where T : IComparable
+        public static void FlattenBinaryTreeToLinkedList<T>(BinaryTreeNode<T> tree) where T : IComparable
         {
             if (tree == null)
-                return null;
-            var listNode = new ListNode<T> { Value = tree.Value };
-            var tmp = listNode;
-            var leftNode = FlattenBinaryTreeToLinkedList(tree.LeftChild);
-            if (leftNode != null)
+                return;
+            var tmp = tree;
+            var tmpRightChild = tree.RightChild;
+            if (tree.LeftChild != null)
             {
-                listNode.Next = leftNode;
-                tmp = leftNode;
-                while (tmp.Next != null)
+                FlattenBinaryTreeToLinkedList(tree.LeftChild);
+                tree.RightChild = tree.LeftChild;
+                tmp = tree.LeftChild;
+                while (tmp.RightChild != null)
                 {
-                    tmp = tmp.Next;
+                    tmp = tmp.RightChild;
                 }
+                tree.LeftChild = null;
             }
 
-            var rightNode = FlattenBinaryTreeToLinkedList(tree.RightChild);
-            if (rightNode != null)
+            if (tmpRightChild != null)
             {
-                tmp.Next = rightNode;
+                FlattenBinaryTreeToLinkedList(tmpRightChild);
+                tmp.RightChild = tmpRightChild;
             }
-            return listNode;
         }
     }
 }
