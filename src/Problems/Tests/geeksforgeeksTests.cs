@@ -98,5 +98,36 @@ namespace Tests
             var result = Geeksforgeeks.FindMedianInStream(inStream).ToArray();
             result.Should().BeEquivalentTo(new int[] { 5, 10, 5, 4 });
         }
+
+        [TestMethod]
+        [TestCategory("Recursive")]
+        public void FloodFillAlgorithm()
+        {
+            int[,] screen = new int[,]
+            {
+                {1, 1, 1, 1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1, 1, 0, 0},
+                {1, 0, 0, 1, 1, 0, 1, 1},
+                {1, 2, 2, 2, 2, 0, 1, 0},
+                {1, 1, 1, 2, 2, 0, 1, 0},
+                {1, 1, 1, 2, 2, 2, 2, 0},
+                {2, 2, 1, 1, 1, 2, 1, 1},
+                {1, 2, 1, 1, 1, 2, 2, 1},
+            };
+
+            var expectedAfterFill = new int[,]
+            {
+                {1, 1, 1, 1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1, 1, 0, 0},
+                {1, 0, 0, 1, 1, 0, 1, 1},
+                {1, 3, 3, 3, 3, 0, 1, 0},
+                {1, 1, 1, 3, 3, 0, 1, 0},
+                {1, 1, 1, 3, 3, 3, 3, 0},
+                {2, 2, 1, 1, 1, 3, 1, 1},
+                {1, 2, 1, 1, 1, 3, 3, 1},
+            };
+            Geeksforgeeks.FloodFillAlgorithm(screen, 4, 4, 3);
+            screen.Should().BeEquivalentTo(expectedAfterFill);
+        }
     }
 }

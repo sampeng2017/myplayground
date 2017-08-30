@@ -181,6 +181,36 @@ namespace Problems
             }
         }
 
+        // http://practice.geeksforgeeks.org/problems/flood-fill-algorithm/0
+        public static void FloodFillAlgorithm(int[,] screen, int row, int col, int color)
+        {
+            if (row > screen.GetLength(0) - 1
+                || col > screen.GetLength(1) - 1)
+                return;
+
+            var cellColor = screen[row, col];
+            if (cellColor == color)
+                return;
+            FloodFillAlgorithm(screen, row, col, color, cellColor);
+        }
+
+        private static void FloodFillAlgorithm(int[,] screen, int row, int col, int color, int originalColor)
+        {
+            if (row > screen.GetLength(0) - 1
+                || col > screen.GetLength(1) - 1)
+                return;
+
+            var cellColor = screen[row, col];
+            if (originalColor != cellColor)
+                return;
+
+            screen[row, col] = color;
+            FloodFillAlgorithm(screen, row - 1, col, color, originalColor);
+            FloodFillAlgorithm(screen, row + 1, col, color, originalColor);
+            FloodFillAlgorithm(screen, row, col - 1, color, originalColor);
+            FloodFillAlgorithm(screen, row, col + 1, color, originalColor);
+        }
+
         private class ParenthesisHelper
         {
             const char p1Open = '{';
