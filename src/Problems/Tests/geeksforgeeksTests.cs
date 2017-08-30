@@ -145,6 +145,14 @@ namespace Tests
             a = new int[] { 15, -3, 1, 2, 13, 2, -7, -10, 5, -3 };
             result = Geeksforgeeks.LargestSubarrayLenWithZeroSum(a);
             result.Should().Be(9);
+
+            a = new int[] { -1, 1, -1, 1 };
+            result = Geeksforgeeks.LargestSubarrayLenWithZeroSum(a);
+            result.Should().Be(4);
+
+            a = new int[] { -1, 1, -1, 1, 5 };
+            result = Geeksforgeeks.LargestSubarrayLenWithZeroSum(a);
+            result.Should().Be(4);
         }
     }
 }

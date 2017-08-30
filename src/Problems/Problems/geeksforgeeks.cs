@@ -216,6 +216,7 @@ namespace Problems
         {
             var memo = new Dictionary<int, List<int>>();
             int sum = 0;
+            memo.Add(0, new List<int> { -1 });
             for (int i = 0; i < a.Length; i++)
             {
                 sum += a[i];
@@ -228,6 +229,7 @@ namespace Problems
                     memo.Add(sum, new List<int>() { i });
                 }
             }
+
             var subStringInfo = memo.Values
                 .Where(l => l.Count > 1)
                 .OrderByDescending(l => l.Last() - l.First()).FirstOrDefault();
