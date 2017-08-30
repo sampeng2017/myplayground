@@ -211,6 +211,33 @@ namespace Problems
             FloodFillAlgorithm(screen, row, col + 1, color, originalColor);
         }
 
+        // http://practice.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1
+        public static int LargestSubarrayLenWithZeroSum(int[] a)
+        {
+            var memo = new Dictionary<int, List<int>>();
+            int sum = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                sum += a[i];
+                if (memo.ContainsKey(sum))
+                {
+                    memo[sum].Add(i);
+                }
+                else
+                {
+                    memo.Add(sum, new List<int>() { i });
+                }
+            }
+            var subStringInfo = memo.Values
+                .Where(l => l.Count > 1)
+                .OrderByDescending(l => l.Last() - l.First()).FirstOrDefault();
+            if (subStringInfo == null)
+            {
+                return 0;
+            }
+            return subStringInfo.Last() - subStringInfo.First();
+        }
+
         private class ParenthesisHelper
         {
             const char p1Open = '{';
