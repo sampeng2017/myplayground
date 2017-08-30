@@ -1,4 +1,5 @@
 ﻿using Problems.Basics;
+using Problems.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,6 +109,27 @@ namespace Problems
                 var tmp = stack.Pop();
                 result[tmp.Item2] = -1;
             }
+            return result;
+        }
+
+        // http://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
+        public static IList<BinaryTreeNode<int>> LeftViewOfBinaryTree(BinaryTreeNode<int> root)
+        {
+            if (root == null)
+                return null;
+
+            var result = new List<BinaryTreeNode<int>> { root };
+            if (root.LeftChild != null)
+            {
+                var leftNodes = LeftViewOfBinaryTree(root.LeftChild);
+                result.AddRange(leftNodes);
+            }
+            else if (root.RightChild != null)
+            {
+                var rightNodes = LeftViewOfBinaryTree(root.RightChild);
+                result.AddRange(rightNodes);
+            }
+
             return result;
         }
 

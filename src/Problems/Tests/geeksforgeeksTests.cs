@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems;
 using Problems.Basics;
+using Problems.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,35 @@ namespace Tests
             a = new int[] { 1, 3, 2, 4 };
             r = Geeksforgeeks.NextLargerElement_O_N(a);
             r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
+        }
+
+        [TestMethod]
+        [TestCategory("Tree")]
+        public void LeftViewOfBinaryTree()
+        {
+
+            //       1
+            //    /     \
+            //   2        3
+            // /   \    /    \
+            //4     5   6    7
+            // \
+            //   8
+            BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
+            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
+            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
+            root.LeftChild.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 8 };
+            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
+            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
+
+            var result = Geeksforgeeks.LeftViewOfBinaryTree(root);
+            result.Should().HaveCount(4);
+            result[0].Should().Be(root);
+            result[1].Should().Be(root.LeftChild);
+            result[2].Should().Be(root.LeftChild.LeftChild);
+            result[3].Should().Be(root.LeftChild.LeftChild.RightChild);
         }
     }
 }
