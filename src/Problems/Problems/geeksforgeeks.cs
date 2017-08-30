@@ -54,7 +54,7 @@ namespace Problems
         }
 
         // http://practice.geeksforgeeks.org/problems/next-larger-element/0
-        public static int[] NextLargerElement(int[] a)
+        public static int[] NextLargerElement_O_NSquare(int[] a)
         {
             if (a == null || a.Length == 0)
                 return a;
@@ -79,7 +79,7 @@ namespace Problems
             return result;
         }
 
-        public static int[] NextLargerElement2(int[] a)
+        public static int[] NextLargerElement_O_N(int[] a)
         {
             if (a == null || a.Length == 0)
                 return a;

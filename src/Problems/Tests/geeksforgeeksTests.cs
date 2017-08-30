@@ -44,19 +44,19 @@ namespace Tests
         public void NextLargerElement()
         {
             var a = new int[] { 1 };
-            var r = Geeksforgeeks.NextLargerElement(a);
+            var r = Geeksforgeeks.NextLargerElement_O_NSquare(a);
             r.Should().BeEquivalentTo(new int[] { -1 });
 
             a = new int[] { 1, 3, 2, 4 };
-            r = Geeksforgeeks.NextLargerElement(a);
+            r = Geeksforgeeks.NextLargerElement_O_NSquare(a);
             r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
 
             a = new int[] { 1 };
-            r = Geeksforgeeks.NextLargerElement2(a);
+            r = Geeksforgeeks.NextLargerElement_O_N(a);
             r.Should().BeEquivalentTo(new int[] { -1 });
 
             a = new int[] { 1, 3, 2, 4 };
-            r = Geeksforgeeks.NextLargerElement2(a);
+            r = Geeksforgeeks.NextLargerElement_O_N(a);
             r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
         }
     }
