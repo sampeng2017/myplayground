@@ -240,6 +240,22 @@ namespace Problems
             return subStringInfo.Last() - subStringInfo.First();
         }
 
+        // http://practice.geeksforgeeks.org/problems/activity-selection/0
+        public static int ActivitySelection(IList<Tuple<int, int>> activities)
+        {
+            var orderedActivities = activities.OrderBy(a => a.Item2).ToList();
+            return ActivitySelection(orderedActivities, 0);
+        }
+
+        private static int ActivitySelection(IList<Tuple<int, int>> orderedActivities, int startTime)
+        {
+            var nextActivity = orderedActivities.FirstOrDefault(a => a.Item1 >= startTime);
+            if (nextActivity == null)
+                return 0;
+            orderedActivities.Remove(nextActivity);
+            return 1 + ActivitySelection(orderedActivities, nextActivity.Item2);
+        }
+
         private class ParenthesisHelper
         {
             const char p1Open = '{';

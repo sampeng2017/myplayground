@@ -154,5 +154,23 @@ namespace Tests
             result = Geeksforgeeks.LargestSubarrayLenWithZeroSum(a);
             result.Should().Be(4);
         }
+
+        [TestMethod]
+        [TestCategory("Greedy")]
+        public void ActivitySelection()
+        {
+            var activities = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(1, 2),
+                new Tuple<int, int>(3, 4),
+                new Tuple<int, int>(0, 6),
+                new Tuple<int, int>(5, 7),
+                new Tuple<int, int>(8, 9),
+                new Tuple<int, int>(5, 9),
+            };
+
+            var result = Geeksforgeeks.ActivitySelection(activities);
+            result.Should().Be(4);
+        }
     }
 }
