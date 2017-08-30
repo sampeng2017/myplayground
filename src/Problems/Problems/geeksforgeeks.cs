@@ -133,6 +133,54 @@ namespace Problems
             return result;
         }
 
+        // http://practice.geeksforgeeks.org/problems/find-median-in-a-stream/0
+        public static IEnumerable<int> FindMedianInStream(IEnumerable<int> streamIn)
+        {
+            var heapSmall = new Heap<int>(maxHeap: true);
+            var heapBig = new Heap<int>(maxHeap: false);
+            foreach (int val in streamIn)
+            {
+                if (heapSmall.IsEmpty)
+                {
+                    heapSmall.Insert(val);
+                    yield return val;
+                }
+                else
+                {
+                    if (val > heapSmall.PeekNext())
+                    {
+                        heapBig.Insert(val);
+                    }
+                    else
+                    {
+                        heapSmall.Insert(val);
+                    }
+                    //balance the heaps
+                    if (heapSmall.Count - heapBig.Count > 1)
+                    {
+                        heapBig.Insert(heapSmall.GetNext());
+                    }
+                    else if (heapBig.Count - heapSmall.Count > 1)
+                    {
+                        heapSmall.Insert(heapBig.GetNext());
+                    }
+
+                    if (heapBig.Count == heapSmall.Count)
+                    {
+                        yield return (heapBig.PeekNext() + heapSmall.PeekNext()) / 2;
+                    }
+                    else if (heapBig.Count == heapSmall.Count + 1)
+                    {
+                        yield return heapBig.PeekNext();
+                    }
+                    else
+                    {
+                        yield return heapSmall.PeekNext();
+                    }
+                }
+            }
+        }
+
         private class ParenthesisHelper
         {
             const char p1Open = '{';

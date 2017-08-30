@@ -89,5 +89,14 @@ namespace Tests
             result[2].Should().Be(root.LeftChild.LeftChild);
             result[3].Should().Be(root.LeftChild.LeftChild.RightChild);
         }
+
+        [TestMethod]
+        [TestCategory("Heap")]
+        public void FindMedianInStream()
+        {
+            var inStream = new int[] { 5, 15, 1, 3 };
+            var result = Geeksforgeeks.FindMedianInStream(inStream).ToArray();
+            result.Should().BeEquivalentTo(new int[] { 5, 10, 5, 4 });
+        }
     }
 }

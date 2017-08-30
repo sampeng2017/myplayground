@@ -11,6 +11,7 @@ namespace Problems.Basics
         private readonly List<T> heap;
         private readonly Func<List<T>, int, int, bool> compare;
 
+        public int Count => heap.Count;
         public bool IsEmpty => heap.Count == 1;
         public bool IsMaxHeap { get; }
 
@@ -49,6 +50,13 @@ namespace Problems.Basics
             heap.RemoveAt(heap.Count - 1);
             Sink();
             return result;
+        }
+
+        public T PeekNext()
+        {
+            if (IsEmpty)
+                throw new InvalidOperationException("Empty heap");
+            return heap[1];
         }
 
         private void Sink()
