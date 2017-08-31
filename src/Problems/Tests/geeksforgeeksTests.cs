@@ -232,17 +232,29 @@ namespace Tests
         public void NQueenProblem()
         {
             var q3 = Geeksforgeeks.NQueenProblem(3);
-            q3.Should().BeNull();
+            q3.Should().HaveCount(0);
 
             var q4 = Geeksforgeeks.NQueenProblem(4);
-            var expected = new int[,]
+            var expected1 = new int[,]
             {
                 { 0, 0, 1, 0 },
                 { 1, 0, 0, 0 },
                 { 0, 0, 0, 1 },
                 { 0, 1, 0, 0 }
             };
-            q4.Should().BeEquivalentTo(expected);
+            var expected2 = new int[,]
+            {
+                { 0,1,0,0 },
+                { 0,0,0,1 },
+                { 1,0,0,0 },
+                { 0,0,1,0 }
+            };
+            q4.Should().HaveCount(2);
+            q4[0].Should().BeEquivalentTo(expected1);
+            q4[1].Should().BeEquivalentTo(expected2);
+
+            var q5 = Geeksforgeeks.NQueenProblem(5);
+            q5.Should().HaveCount(5);
         }
     }
 }

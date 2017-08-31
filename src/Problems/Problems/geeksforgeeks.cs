@@ -351,32 +351,44 @@ namespace Problems
         }
 
         // http://practice.geeksforgeeks.org/problems/n-queen-problem/0
-        public static int[,] NQueenProblem(int n)
+        public static IList<int[,]> NQueenProblem(int n)
         {
-            var result = new int[n,n];
+            var result = new List<int[,]>();
 
-            if (PlaceQueens(result, 0, n))
+            int startRow = 0;
+            while (startRow < n)
             {
-                return result;
+                var board = new int[n, n];
+                int row;
+                bool done = PlaceQueens(board, 0, n, startRow, out row);
+                if (!done)
+                {
+                    break;
+                }
+                result.Add(board);
+                startRow = row + 1;
             }
-            return null;
+            return result;
         }
 
-        private static bool PlaceQueens(int[,] board, int queen, int n)
+        private static bool PlaceQueens(int[,] board, int queen, int n, int startRow, out int placedRow)
         {
+            placedRow = -1;
             // will place the Queens one at a time, for column wise
             if (queen == n)
                 //if we are here that means we have solved the problem
                 return true;
-            for (int row = 0; row < n; row++)
+            for (int row = startRow; row < n; row++)
             {
                 // check if queen can be placed row,col
                 if (CanPlace(board, row, queen))
                 {
                     board[row, queen] = 1;
 
-                    if (PlaceQueens(board, queen + 1, n))
+                    int tmp;
+                    if (PlaceQueens(board, queen + 1, n, 0, out tmp))
                     {
+                        placedRow = row;
                         return true;
                     }
 
