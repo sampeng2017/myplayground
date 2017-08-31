@@ -92,15 +92,51 @@ namespace Problems
                 string firstChar = s.Substring(0, 1);
                 foreach (var item in PermutationsOfString(s.Substring(1)))
                 {
+                    var b = new StringBuilder(item);
                     for (int i = 0; i < item.Length; i++)
                     {
-                        result.Add(item.Insert(i, firstChar));
+                        b.Insert(i, s[0]);
+                        result.Add(b.ToString());
+                        b.Remove(i, 1);
                     }
 
-                    result.Add(item + firstChar);
+                    result.Add(b.Append(firstChar).ToString());
                 }
             }
             return result;
+        }
+
+        public static IEnumerable<string> PermutationsOfString2(string s)
+        {
+            var result = new List<string>();
+            PermutationsOfString2(s, 0, s.Length - 1, result);
+            return result;
+        }
+
+        private static void PermutationsOfString2(string s, int l, int r, List<string> results)
+        {
+            if (l == r)
+            {
+                results.Add(s);
+            }
+            else
+            {
+                for (int i = l; i <= r; i++)
+                {
+                    string str = SwapCharInString(s, l, i);
+                    PermutationsOfString2(str, l + 1, r, results);
+                    SwapCharInString(str, l, i); //backtrack
+                }
+            }
+        }
+
+        private static string SwapCharInString(string s, int p1, int p2)
+        {
+            var a = s.ToCharArray();
+            char tmp = a[p1];
+            a[p1] = a[p2];
+            a[p2] = tmp;
+            return new string(a);
         }
 
         // http://practice.geeksforgeeks.org/problems/next-larger-element/0

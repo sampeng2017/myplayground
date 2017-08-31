@@ -88,6 +88,9 @@ namespace Tests
             result = Geeksforgeeks.PermutationsOfString(s).ToArray();
             result.Should().HaveCount(24);
             result.Should().BeEquivalentTo(new string[] { "abcd", "bacd", "bcad", "bcda", "acbd", "cabd", "cbad", "cbda", "acdb", "cadb", "cdab", "cdba", "abdc", "badc", "bdac", "bdca", "adbc", "dabc", "dbac", "dbca", "adcb", "dacb", "dcab", "dcba" });
+            result = Geeksforgeeks.PermutationsOfString2(s).ToArray();
+            result.Should().HaveCount(24);
+            result.Should().BeEquivalentTo(new string[] { "abcd", "bacd", "bcad", "bcda", "acbd", "cabd", "cbad", "cbda", "acdb", "cadb", "cdab", "cdba", "abdc", "badc", "bdac", "bdca", "adbc", "dabc", "dbac", "dbca", "adcb", "dacb", "dcab", "dcba" });
         }
 
         [TestMethod]
