@@ -256,6 +256,101 @@ namespace Problems
             return 1 + ActivitySelection(orderedActivities, nextActivity.Item2);
         }
 
+
+        // TODO: understand and re-write this
+        //http://practice.geeksforgeeks.org/problems/longest-increasing-subsequence/0
+        public static int LongestIncreasingSubsequence(int[] a)
+        {
+            int max = 1;
+            LongestIncreasingSubsequence(a, a.Length, ref max);
+            return max;
+        }
+
+        private static int LongestIncreasingSubsequence(int[] a, int n, ref int maxRef)
+        {
+            if (n == 1)
+                return 1;
+
+            // 'max_ending_here' is length of LIS ending with arr[n-1]
+            int res, max_ending_here = 1;
+
+            /* Recursively get all LIS ending with arr[0], arr[1] ...
+               arr[n-2]. If   arr[i-1] is smaller than arr[n-1], and
+               max ending with arr[n-1] needs to be updated, then
+               update it */
+            for (int i = 1; i < n; i++)
+            {
+                res = LongestIncreasingSubsequence(a, i, ref maxRef);
+                if (a[i - 1] < a[n - 1] && res + 1 > max_ending_here)
+                    max_ending_here = res + 1;
+            }
+
+            // Compare max_ending_here with the overall max. And
+            // update the overall max if needed
+            if (maxRef < max_ending_here)
+                maxRef = max_ending_here;
+
+            // Return length of LIS ending with arr[n-1]
+            return max_ending_here;
+        }
+
+        //http://practice.geeksforgeeks.org/problems/find-the-element-that-appears-once-in-sorted-array/0
+        public static int FindElementAppearsOnceInSortedArray_Xor(int[] a)
+        {
+            int result = a[0];
+            for (int i = 1; i < a.Length; i++)
+            {
+                result = result ^ a[i];
+            }
+            return result;
+        }
+
+        public static int FindElementAppearsOnceInSortedArray_Scan(int[] a)
+        {
+            int i = 1;
+            for (; i < a.Length - 1; i = i + 2)
+            {
+                if (a[i] != a[i - 1])
+                    break;
+            }
+            return a[i - 1];
+        }
+
+        public static int FindElementAppearsOnceInSortedArray_BS(int[] a, int p, int q)
+        {
+            if (q == p)
+                return a[q];
+
+            int m = p + (q - p) / 2;
+            if (a[m] != a[m - 1] && a[m] != a[m + 1])
+                return a[m];
+
+            bool subTreeIsEven = m % 2 == 0;
+            if (subTreeIsEven)
+            {
+                if (a[m] == a[m - 1])
+                {
+                    return FindElementAppearsOnceInSortedArray_BS(a, p, m);
+                }
+                else
+                {
+                    return FindElementAppearsOnceInSortedArray_BS(a, m, q);
+                }
+            }
+            else
+            {
+                if (a[m] != a[m - 1])
+                {
+                    return FindElementAppearsOnceInSortedArray_BS(a, p, m - 1);
+                }
+                else
+                {
+                    return FindElementAppearsOnceInSortedArray_BS(a, m + 1, q);
+                }
+            }
+        }
+
+
         private class ParenthesisHelper
         {
             const char p1Open = '{';

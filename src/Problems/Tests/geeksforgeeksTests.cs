@@ -172,5 +172,59 @@ namespace Tests
             var result = Geeksforgeeks.ActivitySelection(activities);
             result.Should().Be(4);
         }
+
+        [TestMethod]
+        [TestCategory("Dynamic Programming")]
+        public void LongestIncreasingSubsequence()
+        {
+            var a = new int[] { 10 };
+            var result = Geeksforgeeks.LongestIncreasingSubsequence(a);
+            result.Should().Be(1);
+
+            a = new int[] { 10, 9 };
+            result = Geeksforgeeks.LongestIncreasingSubsequence(a);
+            result.Should().Be(1);
+
+            a = new int[] { 9, 10 };
+            result = Geeksforgeeks.LongestIncreasingSubsequence(a);
+            result.Should().Be(2);
+
+            a = new int[] { 12, 9, 10 };
+            result = Geeksforgeeks.LongestIncreasingSubsequence(a);
+            result.Should().Be(2);
+
+            a = new int[] { 10, 22, 9, 33, 21, 50, 41, 60, 80 };
+            result = Geeksforgeeks.LongestIncreasingSubsequence(a);
+            result.Should().Be(6);
+        }
+
+        [TestMethod]
+        [TestCategory("Divide and Conquer")]
+        public void FindElementAppearsOnceInSortedArray()
+        {
+            var a = new int[] { 1, 1, 2, 2, 3, 3, 4, 50, 50, 65, 65 };
+            var result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Xor(a);
+            result.Should().Be(4);
+
+            a = new int[] { 1, 5, 5, 3, 3, 50, 50, 65, 65 };
+            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Xor(a);
+            result.Should().Be(1);
+
+            a = new int[] { 1, 1, 2, 2, 3, 3, 4, 50, 50, 65, 65 };
+            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Scan(a);
+            result.Should().Be(4);
+
+            a = new int[] { 1, 5, 5, 3, 3, 50, 50, 65, 65 };
+            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Scan(a);
+            result.Should().Be(1);
+
+            a = new int[] { 1, 1, 2, 2, 3, 3, 4, 50, 50, 65, 65 };
+            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_BS(a, 0, a.Length - 1);
+            result.Should().Be(4);
+
+            a = new int[] { 1, 5, 5, 3, 3, 50, 50, 65, 65 };
+            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_BS(a, 0, a.Length - 1);
+            result.Should().Be(1);
+        }
     }
 }
