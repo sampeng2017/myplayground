@@ -350,6 +350,81 @@ namespace Problems
             }
         }
 
+        // http://practice.geeksforgeeks.org/problems/n-queen-problem/0
+        public static int[,] NQueenProblem(int n)
+        {
+            var result = new int[n,n];
+
+            if (PlaceQueens(result, 0, n))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        private static bool PlaceQueens(int[,] board, int queen, int n)
+        {
+            // will place the Queens one at a time, for column wise
+            if (queen == n)
+                //if we are here that means we have solved the problem
+                return true;
+            for (int row = 0; row < n; row++)
+            {
+                // check if queen can be placed row,col
+                if (CanPlace(board, row, queen))
+                {
+                    board[row, queen] = 1;
+
+                    if (PlaceQueens(board, queen + 1, n))
+                    {
+                        return true;
+                    }
+
+                    //if we are here that means above placement didn't work
+                    //BACKTRACK
+                    board[row, queen] = 0;
+                }
+            }
+            return false;
+        }
+
+
+        private static bool CanPlace(int[,] matrix, int row, int column)
+        {
+            // since we are filling one column at a time,
+            // we will check if no queen is placed in that particular row
+            for (int i = 0; i < column; i++)
+            {
+                if (matrix[row,i] == 1)
+                {
+                    return false;
+                }
+            }
+
+            // we are filling one column at a time,so we need to check the upper and
+            // diagonal as well
+            // check upper diagonal
+            for (int i = row, j = column; i >= 0 && j >= 0; i--, j--)
+            {
+                if (matrix[i,j] == 1)
+                {
+                    return false;
+                }
+            }
+
+            // check lower diagonal
+            for (int i = row, j = column; i < matrix.GetLength(0) && j >= 0; i++, j--)
+            {
+                if (matrix[i,j] == 1)
+                {
+                    return false;
+                }
+            }
+
+            // if we are here that means we are safe to place Queen at row,column
+            return true;
+
+        }
 
         private class ParenthesisHelper
         {

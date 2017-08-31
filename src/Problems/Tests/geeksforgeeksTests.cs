@@ -226,5 +226,23 @@ namespace Tests
             result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_BS(a, 0, a.Length - 1);
             result.Should().Be(1);
         }
+
+        [TestMethod]
+        [TestCategory("Backtracking")]
+        public void NQueenProblem()
+        {
+            var q3 = Geeksforgeeks.NQueenProblem(3);
+            q3.Should().BeNull();
+
+            var q4 = Geeksforgeeks.NQueenProblem(4);
+            var expected = new int[,]
+            {
+                { 0, 0, 1, 0 },
+                { 1, 0, 0, 0 },
+                { 0, 0, 0, 1 },
+                { 0, 1, 0, 0 }
+            };
+            q4.Should().BeEquivalentTo(expected);
+        }
     }
 }
