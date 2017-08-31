@@ -94,6 +94,51 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
+        public void ReverseLinkedListInGroupsOfGivenSize()
+        {
+            var list = new ListNode<int> { Value = 1 };
+            list.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next.Next = new ListNode<int> { Value = 4 };
+            list.Next.Next.Next.Next = new ListNode<int> { Value = 5 };
+            list.Next.Next.Next.Next.Next = new ListNode<int> { Value = 6 };
+            list.Next.Next.Next.Next.Next.Next = new ListNode<int> { Value = 7 };
+            list.Next.Next.Next.Next.Next.Next.Next = new ListNode<int> { Value = 8 };
+
+            var result = Geeksforgeeks.ReverseLinkedListInGroupsOfGivenSize(list, 4);
+            result.Value.Should().Be(4);
+            result.Next.Value.Should().Be(2);
+            result.Next.Next.Value.Should().Be(2);
+            result.Next.Next.Next.Value.Should().Be(1);
+            result.Next.Next.Next.Next.Value.Should().Be(8);
+            result.Next.Next.Next.Next.Next.Value.Should().Be(7);
+            result.Next.Next.Next.Next.Next.Next.Value.Should().Be(6);
+            result.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(5);
+            result.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
+
+            list = new ListNode<int> { Value = 1 };
+            list.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next.Next = new ListNode<int> { Value = 4 };
+            list.Next.Next.Next.Next = new ListNode<int> { Value = 5 };
+            list.Next.Next.Next.Next.Next = new ListNode<int> { Value = 6 };
+            list.Next.Next.Next.Next.Next.Next = new ListNode<int> { Value = 7 };
+            list.Next.Next.Next.Next.Next.Next.Next = new ListNode<int> { Value = 8 };
+
+            result = Geeksforgeeks.ReverseLinkedListInGroupsOfGivenSize(list, 3);
+            result.Value.Should().Be(2);
+            result.Next.Value.Should().Be(2);
+            result.Next.Next.Value.Should().Be(1);
+            result.Next.Next.Next.Value.Should().Be(6);
+            result.Next.Next.Next.Next.Value.Should().Be(5);
+            result.Next.Next.Next.Next.Next.Value.Should().Be(4);
+            result.Next.Next.Next.Next.Next.Next.Value.Should().Be(8);
+            result.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(7);
+            result.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
+        }
+
+        [TestMethod]
         [TestCategory("Stack and Queue")]
         public void NextLargerElement()
         {

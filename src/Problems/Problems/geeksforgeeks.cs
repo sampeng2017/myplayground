@@ -165,6 +165,27 @@ namespace Problems
             return result;
         }
 
+        // http://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+        public static ListNode<T> ReverseLinkedListInGroupsOfGivenSize<T>(ListNode<T> head, int group)
+        {
+            if (head == null)
+                return null;
+
+            var tmp = head;
+            for (int i = 1; i < group && tmp.Next != null; i++)
+            {
+                tmp = tmp.Next;
+            }
+
+            var remamining = tmp.Next;
+            tmp.Next = null;
+            var newHead = LinkedList.Reverse_NonRecursive(head);
+            // head is already the tail of reversed group
+            head.Next = ReverseLinkedListInGroupsOfGivenSize(remamining, group);
+
+            return newHead;
+        }
+
         public static int[] NextLargerElement_O_N(int[] a)
         {
             if (a == null || a.Length == 0)
