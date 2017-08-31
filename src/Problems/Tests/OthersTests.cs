@@ -129,8 +129,6 @@ namespace Tests
         [TestMethod]
         public void FerryQuestion_MinTime()
         {
-            int n = 2;
-            int t = 10;
             int[] arriveAts = new int[] { 10 };
             List<int[]> trace = new List<int[]>();
             int minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, 0, trace);

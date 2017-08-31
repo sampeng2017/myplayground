@@ -77,6 +77,32 @@ namespace Problems
             return stack.Count == 0;
         }
 
+        // http://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0
+        public static IEnumerable<string> PermutationsOfString(string s)
+        {
+            if (s == null || s.Length == 0) return Enumerable.Empty<string>();
+
+            var result = new List<string>();
+            if (s.Length == 1)
+            {
+                result.Add(s);
+            }
+            else
+            {
+                string firstChar = s.Substring(0, 1);
+                foreach (var item in PermutationsOfString(s.Substring(1)))
+                {
+                    for (int i = 0; i < item.Length; i++)
+                    {
+                        result.Add(item.Insert(i, firstChar));
+                    }
+
+                    result.Add(item + firstChar);
+                }
+            }
+            return result;
+        }
+
         // http://practice.geeksforgeeks.org/problems/next-larger-element/0
         public static int[] NextLargerElement_O_NSquare(int[] a)
         {

@@ -66,6 +66,31 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("String")]
+        public void PermutationsOfString()
+        {
+            string s = "a";
+            var result = Geeksforgeeks.PermutationsOfString(s).ToArray();
+            result.Should().HaveCount(1);
+            result.Should().BeEquivalentTo(new string[] { "a" });
+
+            s = "ab";
+            result = Geeksforgeeks.PermutationsOfString(s).ToArray();
+            result.Should().HaveCount(2);
+            result.Should().BeEquivalentTo(new string[] { "ab", "ba" });
+
+            s = "abc";
+            result = Geeksforgeeks.PermutationsOfString(s).ToArray();
+            result.Should().HaveCount(6);
+            result.Should().BeEquivalentTo(new string[] { "abc", "bac", "bca", "acb", "cab", "cba" });
+
+            s = "abcd";
+            result = Geeksforgeeks.PermutationsOfString(s).ToArray();
+            result.Should().HaveCount(24);
+            result.Should().BeEquivalentTo(new string[] { "abcd", "bacd", "bcad", "bcda", "acbd", "cabd", "cbad", "cbda", "acdb", "cadb", "cdab", "cdba", "abdc", "badc", "bdac", "bdca", "adbc", "dabc", "dbac", "dbca", "adcb", "dacb", "dcab", "dcba" });
+        }
+
+        [TestMethod]
         [TestCategory("Stack and Queue")]
         public void NextLargerElement()
         {
