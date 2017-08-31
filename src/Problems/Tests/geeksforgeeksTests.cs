@@ -31,6 +31,31 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Array")]
+        public void SubArrayWithGivenSum()
+        {
+            var a = new int[] { 1, 2, 3, 7, 5 };
+            var result = Geeksforgeeks.SubArrayWithGivenSum(a, 12);
+            result.Item1.Should().Be(1);
+            result.Item2.Should().Be(3);
+
+            a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            result = Geeksforgeeks.SubArrayWithGivenSum(a, 15);
+            result.Item1.Should().Be(0);
+            result.Item2.Should().Be(4);
+
+            a = new int[] { 5, 3, 7, 11, 1, 4, 12, 18 };
+            result = Geeksforgeeks.SubArrayWithGivenSum(a, 16);
+            result.Item1.Should().Be(3);
+            result.Item2.Should().Be(5);
+
+            a = new int[] { 5, 3, 7, 11, 1, 0, 4, 12, 18 };
+            result = Geeksforgeeks.SubArrayWithGivenSum(a, 16);
+            result.Item1.Should().Be(3);
+            result.Item2.Should().Be(6);
+        }
+
+        [TestMethod]
         [TestCategory("String")]
         public void ParenthesisChecker()
         {

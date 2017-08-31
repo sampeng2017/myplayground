@@ -30,6 +30,29 @@ namespace Problems
             return maxSoFar;
         }
 
+        // http://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
+        public static Tuple<int, int> SubArrayWithGivenSum(int[] a, int sum)
+        {
+            var memo = new Dictionary<int, int>() { { 0, -1 } };
+            var list = new List<Tuple<int, int>> { new Tuple<int, int>(0, -1) };
+            int s = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                s += a[i];
+                memo[s] = i;
+                list.Add(Tuple.Create(s, i));
+            }
+            foreach (var tuple in list)
+            {
+                var lookUp = tuple.Item1 + sum;
+                if (memo.ContainsKey(lookUp))
+                {
+                    return Tuple.Create(tuple.Item2 + 1, memo[lookUp]);
+                }
+            }
+            return null;
+        }
+
         // http://practice.geeksforgeeks.org/problems/parenthesis-checker/0
         public static bool ParenthesisChecker(string s)
         {
