@@ -256,5 +256,14 @@ namespace Tests
             var q5 = Geeksforgeeks.NQueenProblem(5);
             q5.Should().HaveCount(5);
         }
+
+        [TestMethod]
+        [TestCategory("Bits")]
+        public void FindFirstSetBit()
+        {
+            Geeksforgeeks.FindFirstSetBit(5).Should().Be(1);
+            Geeksforgeeks.FindFirstSetBit(12).Should().Be(3);
+            Geeksforgeeks.FindFirstSetBit(18).Should().Be(2);
+        }
     }
 }

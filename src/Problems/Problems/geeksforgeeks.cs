@@ -400,14 +400,13 @@ namespace Problems
             return false;
         }
 
-
         private static bool CanPlace(int[,] matrix, int row, int column)
         {
             // since we are filling one column at a time,
             // we will check if no queen is placed in that particular row
             for (int i = 0; i < column; i++)
             {
-                if (matrix[row,i] == 1)
+                if (matrix[row, i] == 1)
                 {
                     return false;
                 }
@@ -418,7 +417,7 @@ namespace Problems
             // check upper diagonal
             for (int i = row, j = column; i >= 0 && j >= 0; i--, j--)
             {
-                if (matrix[i,j] == 1)
+                if (matrix[i, j] == 1)
                 {
                     return false;
                 }
@@ -427,7 +426,7 @@ namespace Problems
             // check lower diagonal
             for (int i = row, j = column; i < matrix.GetLength(0) && j >= 0; i++, j--)
             {
-                if (matrix[i,j] == 1)
+                if (matrix[i, j] == 1)
                 {
                     return false;
                 }
@@ -436,6 +435,19 @@ namespace Problems
             // if we are here that means we are safe to place Queen at row,column
             return true;
 
+        }
+
+        // http://practice.geeksforgeeks.org/problems/find-first-set-bit/0
+        public static int FindFirstSetBit(int n)
+        {
+            int tmp = n;
+            int cnt = 1;
+            while (tmp % 2 == 0)
+            {
+                tmp = tmp / 2;
+                cnt++;
+            }
+            return cnt;
         }
 
         private class ParenthesisHelper
