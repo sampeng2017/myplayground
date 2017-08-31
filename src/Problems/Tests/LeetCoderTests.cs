@@ -195,6 +195,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
         public void RotateLinkedList()
         {
             var node11 = new ListNode<int> { Value = 1 };

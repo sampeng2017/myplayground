@@ -54,6 +54,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
         public void ReverseLinkedList()
         {
             var linkedList = new ListNode<int> { Value = 1 };
