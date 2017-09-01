@@ -362,6 +362,30 @@ namespace Problems
             return 1 + ActivitySelection(orderedActivities, nextActivity.Item2);
         }
 
+        //http://practice.geeksforgeeks.org/problems/n-meetings-in-one-room/0
+        public static int[] NMeetingsInOneRoom(IList<Tuple<int, int>> meetings)
+        {
+            var selections = new List<Tuple<int, int>>();
+            var orderedMeetings = meetings.OrderBy(m => m.Item2).ToList();
+            NMeetingsInOneRoom(orderedMeetings, 0, selections);
+            var indexes = new List<int>();
+            foreach (var m in selections)
+            {
+                indexes.Add(meetings.IndexOf(m));
+            }
+            return indexes.ToArray();
+        }
+
+        private static void NMeetingsInOneRoom(IList<Tuple<int, int>> orderedMeetings, int startTime, IList<Tuple<int, int>> selections)
+        {
+            var nextMeeting = orderedMeetings.FirstOrDefault(a => a.Item1 >= startTime);
+            
+            if (nextMeeting == null)
+                return;
+            selections.Add(nextMeeting);
+            orderedMeetings.Remove(nextMeeting);
+            NMeetingsInOneRoom(orderedMeetings, nextMeeting.Item2, selections);
+        }
 
         // TODO: understand and re-write this
         //http://practice.geeksforgeeks.org/problems/longest-increasing-subsequence/0

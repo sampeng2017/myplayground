@@ -296,8 +296,8 @@ namespace Tests
         [TestCategory("Hashing")]
         public void SwappingPairMakeSumEqual()
         {
-            var a1 = new int[] { 4, 1, 2, 1, 1, 2};
-            var a2 = new int[] { 3, 6, 3, 3};
+            var a1 = new int[] { 4, 1, 2, 1, 1, 2 };
+            var a2 = new int[] { 3, 6, 3, 3 };
             var result = Geeksforgeeks.SwappingPairMakeSumEqual(a1, a2);
             result.Item1.Should().Be(1);
             result.Item2.Should().Be(3);
@@ -306,8 +306,8 @@ namespace Tests
             result.Item1.Should().Be(6);
             result.Item2.Should().Be(4);
 
-            a1 = new int[] { 5,7,4,6};
-            a2 = new int[] { 1,2,3,8 };
+            a1 = new int[] { 5, 7, 4, 6 };
+            a2 = new int[] { 1, 2, 3, 8 };
             result = Geeksforgeeks.SwappingPairMakeSumEqual(a1, a2);
             result.Item1.Should().Be(5);
             result.Item2.Should().Be(1);
@@ -333,6 +333,39 @@ namespace Tests
 
             var result = Geeksforgeeks.ActivitySelection(activities);
             result.Should().Be(4);
+        }
+
+        [TestMethod]
+        [TestCategory("Greedy")]
+        public void NMeetingsInOneRoom()
+        {
+            var meetings = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(1, 2),
+                new Tuple<int, int>(3, 4),
+                new Tuple<int, int>(0, 6),
+                new Tuple<int, int>(5, 7),
+                new Tuple<int, int>(8, 9),
+                new Tuple<int, int>(5, 9),
+            };
+
+            var result = Geeksforgeeks.NMeetingsInOneRoom(meetings);
+            result.Should().BeEquivalentTo(new int[] { 0, 1, 3, 4 });
+
+            meetings = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(75250, 112960),
+                new Tuple<int, int>(50074, 114515),
+                new Tuple<int, int>(43659, 81825),
+                new Tuple<int, int>(8931, 93424),
+                new Tuple<int, int>(11273, 54316),
+                new Tuple<int, int>(27545, 35533),
+                new Tuple<int, int>(50879, 73383),
+                new Tuple<int, int>(77924, 160252)
+            };
+
+            result = Geeksforgeeks.NMeetingsInOneRoom(meetings);
+            result.Should().BeEquivalentTo(new int[] { 5, 6, 0 });
         }
 
         [TestMethod]
