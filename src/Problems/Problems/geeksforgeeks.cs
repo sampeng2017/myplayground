@@ -459,14 +459,13 @@ namespace Problems
         // http://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
         public static IList<BinaryTreeNode<int>> BottomViewOfBinaryTree(BinaryTreeNode<int> root)
         {
-            var visitedNodes = new Dictionary<int, Tuple<BinaryTreeNode<int>, int>>();
+            var visitedNodes = new SortedDictionary<int, Tuple<BinaryTreeNode<int>, int>>();
             StampTreeNodeDistanceAndHeight(root, 0, 0, visitedNodes);
 
-
-            return visitedNodes.OrderBy(t => t.Key).Select(t => t.Value.Item1).ToList();
+            return visitedNodes.Select(t => t.Value.Item1).ToList();
         }
 
-        private static void StampTreeNodeDistanceAndHeight(BinaryTreeNode<int> tree, int distance, int height, Dictionary<int, Tuple<BinaryTreeNode<int>, int>> container)
+        private static void StampTreeNodeDistanceAndHeight(BinaryTreeNode<int> tree, int distance, int height, IDictionary<int, Tuple<BinaryTreeNode<int>, int>> container)
         {
             if (tree == null)
                 return;
@@ -474,8 +473,34 @@ namespace Problems
             StampTreeNodeDistanceAndHeight(tree.LeftChild, distance - 1, height + 1, container);
             StampTreeNodeDistanceAndHeight(tree.RightChild, distance + 1, height + 1, container);
             if (!container.ContainsKey(distance) || container[distance].Item2 <= height)
-                container[distance] = Tuple.Create(tree, height); 
+                container[distance] = Tuple.Create(tree, height);
         }
+
+        public static IList<BinaryTreeNode<int>> BottomViewOfBinaryTree2(BinaryTreeNode<int> root)
+        {
+            if (root == null)
+                return null;
+            var container = new SortedDictionary<int, BinaryTreeNode<int>>();
+            var queue = new Queue<Tuple<BinaryTreeNode<int>, int>>();
+            queue.Enqueue(Tuple.Create(root, 0));
+            while (queue.Count > 0)
+            {
+                var tuple = queue.Dequeue();
+                var node = tuple.Item1;
+                var distance = tuple.Item2;
+                container[distance] = node;
+                if (node.LeftChild != null)
+                {
+                    queue.Enqueue(Tuple.Create(node.LeftChild, distance - 1));
+                }
+                if (node.RightChild != null)
+                {
+                    queue.Enqueue(Tuple.Create(node.RightChild, distance + 1));
+                }
+            }
+            return container.Select(t => t.Value).ToList();
+        }
+
 
         // http://practice.geeksforgeeks.org/problems/n-queen-problem/0
         public static IList<int[,]> NQueenProblem(int n)

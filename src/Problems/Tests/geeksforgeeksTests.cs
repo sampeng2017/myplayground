@@ -210,6 +210,8 @@ namespace Tests
 
             var result = Geeksforgeeks.BottomViewOfBinaryTree(root);
             result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 3, 14, 25 });
+            result = Geeksforgeeks.BottomViewOfBinaryTree2(root);
+            result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 3, 14, 25 });
 
             //        20
             //      /    \
@@ -221,7 +223,8 @@ namespace Tests
             root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
             result = Geeksforgeeks.BottomViewOfBinaryTree(root);
             result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 4, 14, 25 });
-
+            result = Geeksforgeeks.BottomViewOfBinaryTree2(root);
+            result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 4, 14, 25 });
         }
 
         [TestMethod]
