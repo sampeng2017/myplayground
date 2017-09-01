@@ -602,7 +602,6 @@ namespace Problems
             return cnt;
         }
 
-        // TODO
         // http://practice.geeksforgeeks.org/problems/rearrange-characters/0
         public static string ReArrangeChars(string s)
         {
@@ -646,6 +645,28 @@ namespace Problems
             if (prev.Frquency > 0)
                 return null;
             return strBuilder.ToString();
+        }
+
+        // http://www.geeksforgeeks.org/find-a-pair-swapping-which-makes-sum-of-two-arrays-same/
+        public static Tuple<int, int> SwappingPairMakeSumEqual(int[] a1, int[] a2)
+        {
+            int sum1 = a1.Sum();
+            int sum2 = a2.Sum();
+            if ((sum1 - sum2) % 2 != 0)
+                return null;
+
+            int delta = (sum1 - sum2) / 2;
+            var hashSet = new HashSet<int>(a1.Distinct());
+            foreach (int i in a2)
+            {
+                int key = i + delta;
+
+                if (hashSet.Contains(key))
+                {
+                    return Tuple.Create(key, i);
+                }
+            }
+            return null;
         }
 
         private class CharWithFrquency : IComparable

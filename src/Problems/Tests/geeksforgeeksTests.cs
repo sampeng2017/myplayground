@@ -293,6 +293,31 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Hashing")]
+        public void SwappingPairMakeSumEqual()
+        {
+            var a1 = new int[] { 4, 1, 2, 1, 1, 2};
+            var a2 = new int[] { 3, 6, 3, 3};
+            var result = Geeksforgeeks.SwappingPairMakeSumEqual(a1, a2);
+            result.Item1.Should().Be(1);
+            result.Item2.Should().Be(3);
+
+            result = Geeksforgeeks.SwappingPairMakeSumEqual(a2, a1);
+            result.Item1.Should().Be(6);
+            result.Item2.Should().Be(4);
+
+            a1 = new int[] { 5,7,4,6};
+            a2 = new int[] { 1,2,3,8 };
+            result = Geeksforgeeks.SwappingPairMakeSumEqual(a1, a2);
+            result.Item1.Should().Be(5);
+            result.Item2.Should().Be(1);
+
+            result = Geeksforgeeks.SwappingPairMakeSumEqual(a2, a1);
+            result.Item1.Should().Be(1);
+            result.Item2.Should().Be(5);
+        }
+
+        [TestMethod]
         [TestCategory("Greedy")]
         public void ActivitySelection()
         {
