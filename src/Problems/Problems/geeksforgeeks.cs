@@ -602,6 +602,64 @@ namespace Problems
             return cnt;
         }
 
+        // TODO
+        // http://practice.geeksforgeeks.org/problems/rearrange-characters/0
+        public static string ReArrangeChars(string s)
+        {
+            var maxHeap = new Heap<CharWithFrquency>();
+            var a = s.ToCharArray();
+            var countMap = new Dictionary<char, int>();
+
+            bool hasDuplicate = false;
+            foreach (var c in a)
+            {
+                if (!countMap.ContainsKey(c))
+                    countMap.Add(c, 1);
+                else
+                {
+                    countMap[c]++;
+                    hasDuplicate = true;
+                }
+            }
+            if (!hasDuplicate)
+                return s;
+
+            foreach (var kvp in countMap)
+            {
+                maxHeap.Insert(new CharWithFrquency { Char = kvp.Key, Frquency = kvp.Value });
+            }
+
+            var strBuilder = new StringBuilder();
+            var prev = new CharWithFrquency { Char = '$', Frquency = -1 };
+            while (!maxHeap.IsEmpty)
+            {
+                var next = maxHeap.GetNext();
+
+                strBuilder.Append(next.Char);
+                next.Frquency--;
+                if (prev.Frquency > 0)
+                {
+                    maxHeap.Insert(prev);
+                }
+                prev = next;
+            }
+            if (prev.Frquency > 0)
+                return null;
+            return strBuilder.ToString();
+        }
+
+        private class CharWithFrquency : IComparable
+        {
+            public char Char { get; set; }
+            public int Frquency { get; set; }
+
+            public int CompareTo(object obj)
+            {
+                var casted = obj as CharWithFrquency;
+                if (casted == null) return -1;
+                return this.Frquency.CompareTo(casted.Frquency);
+            }
+        }
         private class ParenthesisHelper
         {
             const char p1Open = '{';

@@ -10,6 +10,7 @@ namespace Tests
     public class LinkedListTests
     {
         [TestMethod]
+        [TestCategory("Linked List")]
         public void FindMidNode()
         {
             var linkedList = new ListNode<int> { Value = 1 };
@@ -28,6 +29,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
         public void FindMerge()
         {
             var node1 = new ListNode<int> { Value = 1 };
@@ -81,6 +83,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
         public void AlternateLists()
         {
             var linkedList1 = new ListNode<int> { Value = 1 };
@@ -105,6 +108,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
         public void FindStartingNodeOfLoop()
         {
             var node1 = new ListNode<int> { Value = 1 };
@@ -143,6 +147,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
         public void MergeTwoSortedLinkedLis()
         {
             var node11 = new ListNode<int> { Value = 5 };
@@ -186,7 +191,8 @@ namespace Tests
         }
 
         [TestMethod]
-        public void MergeSortLinkedLis()
+        [TestCategory("Linked List")]
+        public void MergeSortLinkedList()
         {
             var node11 = new ListNode<int> { Value = 9 };
             var node12 = new ListNode<int> { Value = 5 };

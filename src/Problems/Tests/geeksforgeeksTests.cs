@@ -402,5 +402,24 @@ namespace Tests
             Geeksforgeeks.FindFirstSetBit(12).Should().Be(3);
             Geeksforgeeks.FindFirstSetBit(18).Should().Be(2);
         }
+
+        [TestMethod]
+        [TestCategory("Heap")]
+        public void ReArrangeChars()
+        {
+            string s = "geeksforgeeks";
+            var result = Geeksforgeeks.ReArrangeChars(s);
+            result.Length.Should().Be(s.Length);
+            result.Should().Be("egeskeroskefg");
+
+            s = "aaabc";
+            result = Geeksforgeeks.ReArrangeChars(s);
+            result.Length.Should().Be(s.Length);
+            result.Should().Be("abaca");
+
+            s = "aaaabc";
+            result = Geeksforgeeks.ReArrangeChars(s);
+            result.Should().BeNull();
+        }
     }
 }

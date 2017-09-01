@@ -11,8 +11,8 @@ namespace Problems.Basics
         private readonly List<T> heap;
         private readonly Func<List<T>, int, int, bool> compare;
 
-        public int Count => heap.Count;
-        public bool IsEmpty => heap.Count == 1;
+        public int Count => heap.Count - 1;
+        public bool IsEmpty => Count == 0;
         public bool IsMaxHeap { get; }
 
         public Heap(bool maxHeap = true)
