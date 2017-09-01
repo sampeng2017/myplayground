@@ -459,29 +459,22 @@ namespace Problems
         // http://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
         public static IList<BinaryTreeNode<int>> BottomViewOfBinaryTree(BinaryTreeNode<int> root)
         {
-            var visitedNodes = new List<Tuple<int, int, BinaryTreeNode<int>>>();
+            var visitedNodes = new Dictionary<int, Tuple<BinaryTreeNode<int>, int>>();
             StampTreeNodeDistanceAndHeight(root, 0, 0, visitedNodes);
 
 
-            return visitedNodes.OrderBy(t => t.Item1).Select(t => t.Item3).ToList();
+            return visitedNodes.OrderBy(t => t.Key).Select(t => t.Value.Item1).ToList();
         }
 
-        private static void StampTreeNodeDistanceAndHeight(BinaryTreeNode<int> tree, int distance, int height, List<Tuple<int, int, BinaryTreeNode<int>>> container)
+        private static void StampTreeNodeDistanceAndHeight(BinaryTreeNode<int> tree, int distance, int height, Dictionary<int, Tuple<BinaryTreeNode<int>, int>> container)
         {
             if (tree == null)
                 return;
+
             StampTreeNodeDistanceAndHeight(tree.LeftChild, distance - 1, height + 1, container);
             StampTreeNodeDistanceAndHeight(tree.RightChild, distance + 1, height + 1, container);
-
-            //var sameDistanceUpperLayer = container.Where(t => t.Item1 == distance && t.Item2 < height).ToArray();
-            //foreach (var toRemove in sameDistanceUpperLayer)
-            //{
-            //    container.Remove(toRemove);
-            //}
-            if (!container.Any(t => t.Item1 == distance))
-            {
-                container.Add(Tuple.Create(distance, height, tree));
-            }
+            if (!container.ContainsKey(distance) || container[distance].Item2 <= height)
+                container[distance] = Tuple.Create(tree, height); 
         }
 
         // http://practice.geeksforgeeks.org/problems/n-queen-problem/0

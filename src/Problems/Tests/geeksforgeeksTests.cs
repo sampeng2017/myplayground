@@ -209,6 +209,19 @@ namespace Tests
             root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 25 };
 
             var result = Geeksforgeeks.BottomViewOfBinaryTree(root);
+            result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 3, 14, 25 });
+
+            //        20
+            //      /    \
+            //    8       22
+            //  /   \    /   \
+            //5      3  4    25
+            //      /  \      
+            //    10   14
+            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
+            result = Geeksforgeeks.BottomViewOfBinaryTree(root);
+            result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 4, 14, 25 });
+
         }
 
         [TestMethod]
