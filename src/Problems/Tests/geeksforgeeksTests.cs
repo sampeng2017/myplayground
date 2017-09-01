@@ -189,6 +189,29 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
+        public void BottomViewOfBinaryTree()
+        {
+            //        20
+            //      /    \
+            //    8       22
+            //  /   \        \
+            //5      3       25
+            //      /   \      
+            //    10    14
+            var root = new BinaryTreeNode<int> { Value = 20 };
+            root.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 5 };
+            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            root.LeftChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 10 };
+            root.LeftChild.RightChild.RightChild = new BinaryTreeNode<int> { Value = 14 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 22 };
+            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 25 };
+
+            var result = Geeksforgeeks.BottomViewOfBinaryTree(root);
+        }
+
+        [TestMethod]
         [TestCategory("Heap")]
         public void FindMedianInStream()
         {
