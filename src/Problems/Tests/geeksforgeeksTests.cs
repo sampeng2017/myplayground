@@ -497,5 +497,42 @@ namespace Tests
             //not much to validate
             result.Should().NotBeNull();
         }
+
+        [TestMethod]
+        [TestCategory("Tree")]
+        public void CheckBinaryTreeSubTreeOfAnother()
+        {
+            //  10
+            // /  \
+            //1    2
+            // \
+            //  3
+            var tree1 = new BinaryTreeNode<int> { Value = 10 };
+            tree1.LeftChild = new BinaryTreeNode<int> { Value = 1 };
+            tree1.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            tree1.RightChild = new BinaryTreeNode<int> { Value = 2 };
+
+
+            //     15
+            //    /   \  
+            //  10     4
+            // /  \     \
+            //1    2     6 
+            // \
+            //  3
+            var tree2 = new BinaryTreeNode<int> { Value = 15 };
+            tree2.LeftChild = new BinaryTreeNode<int> { Value = 10 };
+            tree2.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 1 };
+            tree2.LeftChild.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            tree2.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 2 };
+            tree2.RightChild = new BinaryTreeNode<int> { Value = 4 };
+            tree2.RightChild.RightChild = new BinaryTreeNode<int> { Value = 6 };
+            var result = Geeksforgeeks.CheckBinaryTreeSubTreeOfAnother(tree1, tree2);
+            result.Should().BeTrue();
+
+            tree1.Value = 100;
+            result = Geeksforgeeks.CheckBinaryTreeSubTreeOfAnother(tree1, tree2);
+            result.Should().BeFalse();
+        }
     }
 }

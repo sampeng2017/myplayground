@@ -639,7 +639,7 @@ namespace Problems
             return result;
         }
 
-        private static void GenerateNodeTokens(BinaryTreeNode<int> tree, Dictionary<BinaryTreeNode<int>, string> memo)
+        internal static void GenerateNodeTokens(BinaryTreeNode<int> tree, Dictionary<BinaryTreeNode<int>, string> memo)
         {
             tree.PostOrderVisit(n => {
                 string token = $"({n.Value}";

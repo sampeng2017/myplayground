@@ -12,6 +12,7 @@ namespace Tests
     public class TreeTests
     {
         [TestMethod]
+        [TestCategory("Tree")]
         public void InOrderVisit()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
@@ -48,6 +49,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void PreOrderVisit()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
@@ -84,6 +86,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void BinarySearchTree()
         {
             var tmpNode1 = new BinaryTreeNode<int> { Value = 5 };
@@ -116,6 +119,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void BuildTreeFromInOrderAndPreOrderTraverse()
         {
             char[] preOrder = new char[] { 'A', 'B', 'D', 'H', 'E', 'C', 'F', 'G' };
@@ -157,6 +161,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void SearchAndReturnPath()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
@@ -181,6 +186,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void FindLowestCommonAncestor()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };

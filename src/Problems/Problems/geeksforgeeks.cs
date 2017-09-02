@@ -716,6 +716,25 @@ namespace Problems
             return selection;
         }
 
+        // http://www.geeksforgeeks.org/check-binary-tree-subtree-another-binary-tree-set-2/
+        // reference LeetCoder.FindDuplicateSubTrees
+        // TODO: use in-order + preOrder sequence to implement
+        public static bool CheckBinaryTreeSubTreeOfAnother(BinaryTreeNode<int> t1, BinaryTreeNode<int> t2)
+        {
+            if (t1 == null || t2 == null)
+                return false;
+            var map1 = new Dictionary<BinaryTreeNode<int>, string>();
+            var map2 = new Dictionary<BinaryTreeNode<int>, string>();
+
+            LeetCoder.GenerateNodeTokens(t1, map1);
+            LeetCoder.GenerateNodeTokens(t2, map2);
+
+            var hashSet1 = new HashSet<string>(map1.Values);
+            var hashSet2 = new HashSet<string>(map2.Values);
+            return hashSet1.Contains(map2[t2]) ||
+                hashSet2.Contains(map1[t1]);
+        }
+
         private class CharWithFrquency : IComparable
         {
             public char Char { get; set; }
