@@ -267,5 +267,46 @@ namespace Problems
             }
             return minTime;
         }
+
+        // http://www.geeksforgeeks.org/reservoir-sampling/
+        public static int[] ReservoirSampling_SelectNumberofRandomItems(IEnumerable<int> stream, int k)
+        {
+            // reservoir[] is the output array. Initialize it with
+            // first k elements from stream[]
+            var reservoir = new int[k];
+
+            int i = 0;
+            var enumerator = stream.GetEnumerator();
+            bool streaming = false;
+            while (streaming = enumerator.MoveNext())
+            {
+                if (i == k)
+                    break;
+                reservoir[i] = enumerator.Current;
+                i++;
+            }
+
+            //if input stream has less than K items...
+            if (!streaming)
+            {
+                return reservoir;
+            }
+
+            var rand = new Random();
+
+            // i == k when code is here
+            // Iterate from the (k+1)th element to nth element
+            while (enumerator.MoveNext())
+            {
+                int j = rand.Next(i + 1);
+                // If the randomly  picked index is smaller than k,
+                // then replace the element present at the index
+                // with new element from stream
+                if (j < k)
+                    reservoir[j] = enumerator.Current;
+                i++;
+            }
+            return reservoir;
+        }
     }
 }

@@ -693,6 +693,29 @@ namespace Problems
             return null;
         }
 
+        // http://www.geeksforgeeks.org/select-a-random-node-from-a-singly-linked-list/
+        // Reservoir Sampling
+        public static ListNode<int> SelectARandomNodeFromLinkedList(ListNode<int> head)
+        {
+            if (head == null) return null;
+
+            var selection = head;
+            var rand = new Random();
+            int i = 1;
+            var tmp = head;
+            while (tmp != null)
+            {
+                int j = rand.Next(1 + i);
+                if (j == 0)
+                {
+                    selection = tmp;
+                }
+                tmp = tmp.Next;
+                i++;
+            }
+            return selection;
+        }
+
         private class CharWithFrquency : IComparable
         {
             public char Char { get; set; }

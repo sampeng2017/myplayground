@@ -479,5 +479,23 @@ namespace Tests
             result = Geeksforgeeks.ReArrangeChars(s);
             result.Should().BeNull();
         }
+
+        [TestMethod]
+        public void SelectARandomNodeFromLinkedList()
+        {
+            var list = new ListNode<int> { Value = 0 };
+            var tmp = list;
+            int i = 1;
+            while (i < 100)
+            {
+                tmp.Next = new ListNode<int> { Value = i };
+                i++;
+                tmp = tmp.Next;
+            }
+
+            var result = Geeksforgeeks.SelectARandomNodeFromLinkedList(list);
+            //not much to validate
+            result.Should().NotBeNull();
+        }
     }
 }

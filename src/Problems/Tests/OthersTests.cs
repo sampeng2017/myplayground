@@ -29,6 +29,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Dynamic Programming")]
         public void GetNumberOfStationsCanBeRemoved()
         {
             var stations = new List<GasStation>
@@ -153,6 +154,19 @@ namespace Tests
             trace.Clear();
             minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, 0, trace);
             minTime.Should().Be(85);
+        }
+
+        [TestMethod]
+        public void ReservoirSampling_SelectNumberofRandomItems()
+        {
+            var largeInput = new List<int>();
+            for (int i = 0; i < 1000; i++)
+            {
+                largeInput.Add(i);
+            }
+            var result = Others.ReservoirSampling_SelectNumberofRandomItems(largeInput, 10);
+            //not much to validate
+            result.Should().HaveCount(10);
         }
     }
 }
