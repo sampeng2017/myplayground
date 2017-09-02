@@ -110,7 +110,7 @@ namespace Problems
             var result = new List<int>();
             for (int i = 0; i < n && i<array.Length; i++)
             {
-                result.Add(minHeap.GetNext());
+                result.Add(minHeap.TakeNext());
             }
             return result.ToArray();
         }

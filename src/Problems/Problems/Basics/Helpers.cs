@@ -10,7 +10,7 @@ namespace Problems.Basics
     {
         public static int RandomPartition(int[] ary, int p, int r)
         {
-            var rand = new Random(DateTime.Now.Millisecond);
+            var rand = new Random();
             int i = rand.Next(p, r);
             Exchange(ary, r, i);
             return Partition(ary, p, r);

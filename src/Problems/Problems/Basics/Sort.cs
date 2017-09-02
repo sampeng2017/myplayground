@@ -121,7 +121,7 @@ namespace Problems.Basics
             }
             for (int i = ary.Length - 1; i >= 0; i--)
             {
-                ary[i] = maxHelp.GetNext();
+                ary[i] = maxHelp.TakeNext();
             }
         }
 

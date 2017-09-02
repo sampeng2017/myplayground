@@ -22,6 +22,8 @@ namespace Problems.Basics
                 compare = Helpers.Less;
             else
                 compare = Helpers.More;
+            // add a dummy item to index 0
+            // this makes calcuating parent/child index eaiser
             heap = new List<T>() { default(T) };
         }
 
@@ -41,7 +43,7 @@ namespace Problems.Basics
             Swim();
         }
 
-        public T GetNext()
+        public T TakeNext()
         {
             if (IsEmpty)
                 throw new InvalidOperationException("Empty heap");
@@ -89,30 +91,28 @@ namespace Problems.Basics
                 return;
 
             int rightChild = leftChild + 1;
-            int largest = parent;
+            int swimmer = parent;
 
             if (compare(heap, parent, leftChild))
             {
-                largest = leftChild;
+                swimmer = leftChild;
             }
 
-            if (rightChild < heap.Count && compare(heap, largest, rightChild))
+            if (rightChild < heap.Count && compare(heap, swimmer, rightChild))
             {
-                largest = rightChild;
+                swimmer = rightChild;
             }
 
-            if (largest != parent)
+            if (swimmer != parent)
             {
-                Exchange(largest, parent);
-                MaxHeapify(largest);
+                Exchange(swimmer, parent);
+                MaxHeapify(swimmer);
             }
         }
 
         private void Swim()
         {
             int child = heap.Count - 1;
-            if (child == 0)
-                return;
             int parent = child / 2;
             while (parent > 0 && compare(heap,parent, child))
             {

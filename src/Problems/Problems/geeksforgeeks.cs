@@ -264,11 +264,11 @@ namespace Problems
                     //balance the heaps
                     if (heapSmall.Count - heapBig.Count > 1)
                     {
-                        heapBig.Insert(heapSmall.GetNext());
+                        heapBig.Insert(heapSmall.TakeNext());
                     }
                     else if (heapBig.Count - heapSmall.Count > 1)
                     {
-                        heapSmall.Insert(heapBig.GetNext());
+                        heapSmall.Insert(heapBig.TakeNext());
                     }
 
                     if (heapBig.Count == heapSmall.Count)
@@ -656,7 +656,7 @@ namespace Problems
             var prev = new CharWithFrquency { Char = '$', Frquency = -1 };
             while (!maxHeap.IsEmpty)
             {
-                var next = maxHeap.GetNext();
+                var next = maxHeap.TakeNext();
 
                 strBuilder.Append(next.Char);
                 next.Frquency--;

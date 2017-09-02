@@ -94,28 +94,28 @@ namespace Tests
             heap.Insert(101);
             heap.Insert(231);
 
-            heap.GetNext().Should().Be(231);
-            heap.GetNext().Should().Be(201);
-            heap.GetNext().Should().Be(101);
+            heap.TakeNext().Should().Be(231);
+            heap.TakeNext().Should().Be(201);
+            heap.TakeNext().Should().Be(101);
             heap.Insert(26);
-            heap.GetNext().Should().Be(27);
-            heap.GetNext().Should().Be(26);
-            heap.GetNext().Should().Be(8);
-            heap.GetNext().Should().Be(3);
-            heap.GetNext().Should().Be(1);
+            heap.TakeNext().Should().Be(27);
+            heap.TakeNext().Should().Be(26);
+            heap.TakeNext().Should().Be(8);
+            heap.TakeNext().Should().Be(3);
+            heap.TakeNext().Should().Be(1);
 
-            Action f = () => heap.GetNext();
+            Action f = () => heap.TakeNext();
             f.ShouldThrow<InvalidOperationException>();
 
             heap = new Heap<int>(new int[] { 8, 3, 201, 27, 1, 101, 26, 231 });
-            heap.GetNext().Should().Be(231);
-            heap.GetNext().Should().Be(201);
-            heap.GetNext().Should().Be(101);
-            heap.GetNext().Should().Be(27);
-            heap.GetNext().Should().Be(26);
-            heap.GetNext().Should().Be(8);
-            heap.GetNext().Should().Be(3);
-            heap.GetNext().Should().Be(1);
+            heap.TakeNext().Should().Be(231);
+            heap.TakeNext().Should().Be(201);
+            heap.TakeNext().Should().Be(101);
+            heap.TakeNext().Should().Be(27);
+            heap.TakeNext().Should().Be(26);
+            heap.TakeNext().Should().Be(8);
+            heap.TakeNext().Should().Be(3);
+            heap.TakeNext().Should().Be(1);
         }
 
         [TestMethod]
@@ -132,27 +132,27 @@ namespace Tests
             heap.Insert(231);
             heap.Insert(26);
 
-            heap.GetNext().Should().Be(1);
-            heap.GetNext().Should().Be(3);
-            heap.GetNext().Should().Be(8);
-            heap.GetNext().Should().Be(26);
-            heap.GetNext().Should().Be(27);
-            heap.GetNext().Should().Be(101);
-            heap.GetNext().Should().Be(201);
-            heap.GetNext().Should().Be(231);
+            heap.TakeNext().Should().Be(1);
+            heap.TakeNext().Should().Be(3);
+            heap.TakeNext().Should().Be(8);
+            heap.TakeNext().Should().Be(26);
+            heap.TakeNext().Should().Be(27);
+            heap.TakeNext().Should().Be(101);
+            heap.TakeNext().Should().Be(201);
+            heap.TakeNext().Should().Be(231);
 
-            Action f = () => heap.GetNext();
+            Action f = () => heap.TakeNext();
             f.ShouldThrow<InvalidOperationException>();
 
             heap = new Heap<int>(new int[] { 8, 3, 201, 27, 1, 101, 26, 231 }, maxHeap: false);
-            heap.GetNext().Should().Be(1);
-            heap.GetNext().Should().Be(3);
-            heap.GetNext().Should().Be(8);
-            heap.GetNext().Should().Be(26);
-            heap.GetNext().Should().Be(27);
-            heap.GetNext().Should().Be(101);
-            heap.GetNext().Should().Be(201);
-            heap.GetNext().Should().Be(231);
+            heap.TakeNext().Should().Be(1);
+            heap.TakeNext().Should().Be(3);
+            heap.TakeNext().Should().Be(8);
+            heap.TakeNext().Should().Be(26);
+            heap.TakeNext().Should().Be(27);
+            heap.TakeNext().Should().Be(101);
+            heap.TakeNext().Should().Be(201);
+            heap.TakeNext().Should().Be(231);
         }
 
         [TestMethod]
