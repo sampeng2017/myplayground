@@ -82,6 +82,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Heap")]
         public void MaxHeap()
         {
             var heap = new Heap<int>();
@@ -118,6 +119,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Heap")]
         public void MinHeap()
         {
             var heap = new Heap<int>(maxHeap: false);

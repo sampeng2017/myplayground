@@ -12,6 +12,7 @@ namespace Tests
     public class LeetCoderTests
     {
         [TestMethod]
+        [TestCategory("Array")]
         public void TwoSum()
         {
             var testAry1 = new int[] { 2, 7, 11, 15 };
@@ -290,6 +291,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void PathSum1()
         {
             //              5
@@ -326,6 +328,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void PathSum2()
         {
             //              5
@@ -377,6 +380,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Dynamic Programming")]
         public void WordBreak()
         {
             var dictionary = new List<string> { "leet", "code"};
@@ -404,6 +408,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void FlattenBinaryTreeToLinkedList()
         {
             //         1
@@ -441,6 +446,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Tree")]
         public void FindDuplicateSubTrees()
         {
             //    1
