@@ -53,6 +53,7 @@
     <Compile Include="OldProblems.cs" />
     <Compile Include="DataStructures\BinaryTree.cs" />
     <Compile Include="Others.cs" />
+    <Compile Include="ProblemFromBooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

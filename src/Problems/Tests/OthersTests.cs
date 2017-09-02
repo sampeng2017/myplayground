@@ -168,5 +168,22 @@ namespace Tests
             //not much to validate
             result.Should().HaveCount(10);
         }
+
+        [TestMethod]
+        [TestCategory("Array")]
+        public void AlternateArrayItems()
+        {
+            var a = new int[] { 1, 2, 11, 12 };
+            ProblemFromBooks.AlternateArrayItems(a);
+            a.Should().BeEquivalentTo(new int[] { 1, 11, 2, 12 });
+
+            a = new int[] { 1, 2, 3, 4, 11, 12, 13, 14 };
+            ProblemFromBooks.AlternateArrayItems(a);
+            a.Should().BeEquivalentTo(new int[] { 1, 11, 2, 12, 3, 13, 4, 14 });
+
+            a = new int[] { 1, 11 };
+            ProblemFromBooks.AlternateArrayItems(a);
+            a.Should().BeEquivalentTo(new int[] { 1, 11 });
+        }
     }
 }
