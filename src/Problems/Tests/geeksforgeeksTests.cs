@@ -570,5 +570,14 @@ namespace Tests
             result.Should().Be(2);
 
         }
+
+        [TestMethod]
+        [TestCategory("Heap")]
+        public void KthLargestElementInStream()
+        {
+            var stream = new int[] { 10, 20, 11, 70, 50, 40, 100, 5 };
+            var result = Geeksforgeeks.KthLargestElementInStream(stream, 3);
+            result.ToArray().Should().BeEquivalentTo(new int[] { -1, -1, 10, 11, 20, 40, 50, 50 });
+        }
     }
 }

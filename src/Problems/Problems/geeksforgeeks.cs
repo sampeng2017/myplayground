@@ -287,6 +287,43 @@ namespace Problems
             }
         }
 
+        // http://practice.geeksforgeeks.org/problems/kth-largest-element-in-a-stream/0
+        public static IEnumerable<int> KthLargestElementInStream(IEnumerable<int> stream, int k)
+        {
+            var minHeap = new Heap<int>(maxHeap: false);
+            var result = new List<int>();
+            int i = 0;
+            var enumerator = stream.GetEnumerator();
+            while (i < k && enumerator.MoveNext())
+            {
+                if (i < k - 1)
+                {
+                    result.Add(-1);
+                }
+                var val = enumerator.Current;
+                minHeap.Insert(enumerator.Current);
+                i++;
+            }
+
+            while (enumerator.MoveNext())
+            {
+                var tmp = minHeap.PeekNext();
+                result.Add(tmp);
+                var val = enumerator.Current;
+                
+                if (val > tmp)
+                {
+                    minHeap.TakeNext();
+                    minHeap.Insert(val);
+                }
+            }
+            while (minHeap.Count > k - 1)
+            {
+                result.Add(minHeap.TakeNext());
+            }
+            return result;
+        }
+
         // http://practice.geeksforgeeks.org/problems/flood-fill-algorithm/0
         public static void FloodFillAlgorithm(int[,] screen, int row, int col, int color)
         {
