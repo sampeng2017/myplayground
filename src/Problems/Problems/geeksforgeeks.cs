@@ -738,48 +738,45 @@ namespace Problems
         // http://practice.geeksforgeeks.org/problems/edit-distance/0
         public static int EditDistance(string s1, string s2)
         {
-            var memo = new Dictionary<string, int>();
-            return EditDistance(s1, s2, memo);
+            var memo = new int[s1.Length + 1,s2.Length+ 1];
+            return EditDistance(s1, s2, s1.Length -1, s2.Length -1, memo);
         }
 
-        private static int EditDistance(string s1, string s2, Dictionary<string, int> memo)
+        private static int EditDistance(string s1, string s2, int m, int n, int[,] memo)
         {
             int result;
-            string memoKey = EditDistance_MakeKeys(s1, s2);
-            if (memo.TryGetValue(memoKey, out result))
+            if (memo[m, n] > 0)
             {
-                return result;
+                return memo[m, n];
             }
 
-            if (string.IsNullOrEmpty(s1))
+            if (m == 0)
             {
-                return string.IsNullOrEmpty(s2) ? 0 : s2.Length;
+                return n;
             }
-            if (string.IsNullOrEmpty(s2))
+            if (n == 0)
             {
-                return string.IsNullOrEmpty(s1) ? 0 : s1.Length;
+                return m;
             }
 
-            char c1 = s1[s1.Length - 1];
-            char c2 = s2[s2.Length - 1];
-            string s1Short = s1.Substring(0, s1.Length - 1);
-            string s2Short = s2.Substring(0, s2.Length - 1);
+            char c1 = s1[m];
+            char c2 = s2[n];
 
             if (c1 == c2)
             {
-                result = EditDistance(s1Short, s2Short);
+                result = EditDistance(s1, s2, m -1, n -1, memo);
             }
             else
             {
                 // insert c1
-                int cnt1 = EditDistance(s1, s2Short, memo);
+                int cnt1 = EditDistance(s1, s2, m, n -1, memo);
                 // remove c1
-                int cnt2 = EditDistance(s1Short, s2, memo);
+                int cnt2 = EditDistance(s1, s2, m -1, n, memo);
                 // replace
-                int cnt3 = EditDistance(s1Short, s2Short, memo);
+                int cnt3 = EditDistance(s1, s2, m-1, n -1, memo);
                 result = 1 + Math.Min(cnt1, Math.Min(cnt2, cnt3));
             }
-            memo.Add(memoKey, result);
+            memo[m, n]= result;
             return result;
         }
 
