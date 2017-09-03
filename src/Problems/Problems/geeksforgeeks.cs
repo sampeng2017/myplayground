@@ -738,8 +738,8 @@ namespace Problems
         // http://practice.geeksforgeeks.org/problems/edit-distance/0
         public static int EditDistance(string s1, string s2)
         {
-            var memo = new int[s1.Length + 1,s2.Length+ 1];
-            return EditDistance(s1, s2, s1.Length -1, s2.Length -1, memo);
+            var memo = new int[s1.Length + 1, s2.Length + 1];
+            return EditDistance(s1, s2, s1.Length, s2.Length, memo);
         }
 
         private static int EditDistance(string s1, string s2, int m, int n, int[,] memo)
@@ -759,24 +759,24 @@ namespace Problems
                 return m;
             }
 
-            char c1 = s1[m];
-            char c2 = s2[n];
+            char c1 = s1[m - 1];
+            char c2 = s2[n - 1];
 
             if (c1 == c2)
             {
-                result = EditDistance(s1, s2, m -1, n -1, memo);
+                result = EditDistance(s1, s2, m - 1, n - 1, memo);
             }
             else
             {
                 // insert c1
-                int cnt1 = EditDistance(s1, s2, m, n -1, memo);
+                int cnt1 = EditDistance(s1, s2, m, n - 1, memo);
                 // remove c1
-                int cnt2 = EditDistance(s1, s2, m -1, n, memo);
+                int cnt2 = EditDistance(s1, s2, m - 1, n, memo);
                 // replace
-                int cnt3 = EditDistance(s1, s2, m-1, n -1, memo);
+                int cnt3 = EditDistance(s1, s2, m - 1, n - 1, memo);
                 result = 1 + Math.Min(cnt1, Math.Min(cnt2, cnt3));
             }
-            memo[m, n]= result;
+            memo[m, n] = result;
             return result;
         }
 
