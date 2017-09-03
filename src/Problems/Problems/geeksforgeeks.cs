@@ -99,6 +99,38 @@ namespace Problems
             }
         }
 
+        // http://practice.geeksforgeeks.org/problems/equilibrium-point/0
+        // return the index of Equilibrium Point of array
+        public static int EquilibriumPoint(int[] a)
+        {
+            int l = 0;
+            int h = a.Length - 1;
+            int sumLow = 0;
+            int sumHigh = 0;
+            while (l < h)
+            {
+                if (sumLow == sumHigh)
+                {
+                    sumLow += a[l];
+                    sumHigh += a[h];
+                    l++;
+                    h--;
+                }
+                else if (sumLow > sumHigh)
+                {
+                    sumHigh += a[h];
+                    h--;
+                }
+                else
+                {
+                    sumLow += a[l];
+                    l++;
+                }
+            }
+
+            return sumHigh == sumLow && l == h ? l : -1;
+        }
+
         // http://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0
         public static IEnumerable<string> PermutationsOfString(string s)
         {

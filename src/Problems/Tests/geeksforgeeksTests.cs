@@ -65,7 +65,40 @@ namespace Tests
 
             a = new int[] { 0, 1, 0 };
             Geeksforgeeks.SortArrayWithOnlyZeroOneAndTwo(a);
-            a.Should().BeEquivalentTo(new int[] { 0, 0, 1});
+            a.Should().BeEquivalentTo(new int[] { 0, 0, 1 });
+        }
+
+        [TestMethod]
+        [TestCategory("Array")]
+        public void EquilibriumPoint()
+        {
+            var a = new int[] { 1, 3, 5, 2, 2 };
+            Geeksforgeeks.EquilibriumPoint(a)
+                .Should().Be(2); //index 2 -> 5
+
+            a = new int[] { 1, 3, 2, 5, 4, 2 };
+            Geeksforgeeks.EquilibriumPoint(a)
+                .Should().Be(3);
+
+            a = new int[] { 1, 3, 2, 5, 2, 4, 2 };
+            Geeksforgeeks.EquilibriumPoint(a)
+                .Should().Be(-1);
+
+            a = new int[] { 1 };
+            Geeksforgeeks.EquilibriumPoint(a)
+                .Should().Be(0);
+
+            a = new int[] { 1, 1 };
+            Geeksforgeeks.EquilibriumPoint(a)
+                .Should().Be(-1);
+
+            a = new int[] { 1, 2, 1 };
+            Geeksforgeeks.EquilibriumPoint(a)
+                .Should().Be(1);
+
+            a = new int[] { 1, -1, 3, -1, 2, 5, 2, 4, -2 };
+            Geeksforgeeks.EquilibriumPoint(a)
+                .Should().Be(5);
         }
 
         [TestMethod]
