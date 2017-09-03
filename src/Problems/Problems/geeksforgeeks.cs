@@ -310,7 +310,7 @@ namespace Problems
                 var tmp = minHeap.PeekNext();
                 result.Add(tmp);
                 var val = enumerator.Current;
-                
+
                 if (val > tmp)
                 {
                     minHeap.TakeNext();
@@ -821,6 +821,126 @@ namespace Problems
         {
             // assuming ~ not in text, otherwise find a non print-able char
             return $"{s1}~{s2}";
+        }
+
+        //http://practice.geeksforgeeks.org/problems/solve-the-sudoku/0
+        public static int[,] SolveSudoku(int[,] sudoku)
+        {
+            var s = new Sudoku(sudoku);
+            if (s.Solve())
+                return s.Numbers;
+            return null;
+        }
+
+        private class Sudoku
+        {
+            private int[,] sudoku;
+            private int[,] solved;
+            public Sudoku(int[,] sudoku)
+            {
+                if (sudoku == null || sudoku.GetLength(0) != 9 || sudoku.GetLength(1) != 9)
+                    throw new ArgumentException();
+                // todo: validate values in the matrix
+
+                this.sudoku = sudoku;
+                this.solved = new int[9, 9];
+                Array.Copy(sudoku, solved, sudoku.Length);
+            }
+
+            public int[,] Numbers => solved;
+
+            public bool Solve()
+            {
+                return Solve(this.solved);
+            }
+
+            private static bool Solve(int[,] sudoku)
+            {
+                for (int row = 0; row < 9; row++)
+                {
+                    for (int col = 0; col < 9; col++)
+                    {
+                        if (sudoku[row, col] == 0)
+                        {
+                            var candidates = FindSolutionCandidates(sudoku, row, col);
+                            foreach (var c in candidates)
+                            {
+                                sudoku[row, col] = c;
+                                if (!Solve(sudoku))
+                                    sudoku[row, col] = 0;
+                                else
+                                    break;
+                            }
+
+                            if (sudoku[row, col] == 0)
+                                return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            private static IList<int> FindSolutionCandidates(int[,] sudoku, int row, int col)
+            {
+                var candidates = new int[10];
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[row, i] != 0)
+                        candidates[sudoku[row, i]] = 1;
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[i, col] != 0)
+                        candidates[sudoku[i, col]] = 1;
+                }
+
+                int smallSqureRow = (row / 3) * 3;
+                int smallSqureCol = (col / 3) * 3;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (sudoku[smallSqureRow + i, smallSqureCol + j] != 0)
+                            candidates[sudoku[smallSqureRow + i, smallSqureCol + j]] = 1;
+                    }
+                }
+
+                var result = new List<int>();
+                for (int i = 1; i < 10; i++)
+                {
+                    if (candidates[i] == 0)
+                    {
+                        result.Add(i);
+                    }
+                }
+                return result;
+            }
+
+            private static bool CanSetValue(int[,] sudoku, int row, int col, int val)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[row, i] == val)
+                        return false;
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[i, col] == val)
+                        return false;
+                }
+                int smallSqureRow = (row / 3) * 3;
+                int smallSqureCol = (col / 3) * 3;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (sudoku[smallSqureRow + i, smallSqureCol + j] == val)
+                            return false;
+                    }
+                }
+
+                return true;
+            }
         }
 
         private class CharWithFrquency : IComparable
