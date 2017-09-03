@@ -462,6 +462,16 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Bits")]
+        public void RightmostDifferentBit()
+        {
+            Geeksforgeeks.RightmostDifferentBit(9, 11)
+                .Should().Be(2);
+            Geeksforgeeks.RightmostDifferentBit(52, 4)
+                .Should().Be(5);
+        }
+
+        [TestMethod]
         [TestCategory("Heap")]
         public void ReArrangeChars()
         {

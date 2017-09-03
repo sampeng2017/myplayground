@@ -663,6 +663,28 @@ namespace Problems
             return cnt;
         }
 
+        //http://practice.geeksforgeeks.org/problems/rightmost-different-bit/0
+        public static int RightmostDifferentBit(int i1, int i2)
+        {
+            int t1 = i1;
+            int t2 = i2;
+            int cnt = 1;
+
+            // if one of t1 or t2 is 0, we should continue the loop
+            // until the first non-zero is hit for the bigger number
+            while (t1 > 0 || t2 > 0)
+            {
+                if (t1 %2 != t2 %2)
+                {
+                    break;
+                }
+                t1 = t1 / 2;
+                t2 = t2 / 2;
+                cnt++;
+            }
+            return cnt;
+        }
+         
         // http://practice.geeksforgeeks.org/problems/rearrange-characters/0
         public static string ReArrangeChars(string s)
         {
