@@ -379,7 +379,7 @@ namespace Problems
         private static void NMeetingsInOneRoom(IList<Tuple<int, int>> orderedMeetings, int startTime, IList<Tuple<int, int>> selections)
         {
             var nextMeeting = orderedMeetings.FirstOrDefault(a => a.Item1 >= startTime);
-            
+
             if (nextMeeting == null)
                 return;
             selections.Add(nextMeeting);
@@ -733,6 +733,60 @@ namespace Problems
             var hashSet2 = new HashSet<string>(map2.Values);
             return hashSet1.Contains(map2[t2]) ||
                 hashSet2.Contains(map1[t1]);
+        }
+
+        // http://practice.geeksforgeeks.org/problems/edit-distance/0
+        public static int EditDistance(string s1, string s2)
+        {
+            var memo = new Dictionary<string, int>();
+            return EditDistance(s1, s2, memo);
+        }
+
+        private static int EditDistance(string s1, string s2, Dictionary<string, int> memo)
+        {
+            int result;
+            string memoKey = EditDistance_MakeKeys(s1, s2);
+            if (memo.TryGetValue(memoKey, out result))
+            {
+                return result;
+            }
+
+            if (string.IsNullOrEmpty(s1))
+            {
+                return string.IsNullOrEmpty(s2) ? 0 : s2.Length;
+            }
+            if (string.IsNullOrEmpty(s2))
+            {
+                return string.IsNullOrEmpty(s1) ? 0 : s1.Length;
+            }
+
+            char c1 = s1[s1.Length - 1];
+            char c2 = s2[s2.Length - 1];
+            string s1Short = s1.Substring(0, s1.Length - 1);
+            string s2Short = s2.Substring(0, s2.Length - 1);
+
+            if (c1 == c2)
+            {
+                result = EditDistance(s1Short, s2Short);
+            }
+            else
+            {
+                // insert c1
+                int cnt1 = EditDistance(s1, s2Short, memo);
+                // remove c1
+                int cnt2 = EditDistance(s1Short, s2, memo);
+                // replace
+                int cnt3 = EditDistance(s1Short, s2Short, memo);
+                result = 1 + Math.Min(cnt1, Math.Min(cnt2, cnt3));
+            }
+            memo.Add(memoKey, result);
+            return result;
+        }
+
+        private static string EditDistance_MakeKeys(string s1, string s2)
+        {
+            // assuming ~ not in text, otherwise find a non print-able char
+            return $"{s1}~{s2}";
         }
 
         private class CharWithFrquency : IComparable

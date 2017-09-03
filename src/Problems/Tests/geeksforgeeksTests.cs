@@ -534,5 +534,41 @@ namespace Tests
             result = Geeksforgeeks.CheckBinaryTreeSubTreeOfAnother(tree1, tree2);
             result.Should().BeFalse();
         }
+
+        [TestMethod]
+        [TestCategory("Dynamic Programming")]
+        public void EditDistance()
+        {
+            string s1 = "str1";
+            string s2 = "str2";
+            int result = Geeksforgeeks.EditDistance(s1, s2);
+            result.Should().Be(1);
+
+            s1 = "geek";
+            s2 = "gesek";
+            result = Geeksforgeeks.EditDistance(s1, s2);
+            result.Should().Be(1);
+
+            s1 = "gesek";
+            s2 = "geek";
+            result = Geeksforgeeks.EditDistance(s1, s2);
+            result.Should().Be(1);
+
+            s1 = "sunday";
+            s2 = "saturday";
+            result = Geeksforgeeks.EditDistance(s1, s2);
+            result.Should().Be(3);
+
+            s1 = "saturday";
+            s2 = "sunday";
+            result = Geeksforgeeks.EditDistance(s1, s2);
+            result.Should().Be(3);
+
+            s1 = "a";
+            s2 = "bc";
+            result = Geeksforgeeks.EditDistance(s1, s2);
+            result.Should().Be(2);
+
+        }
     }
 }
