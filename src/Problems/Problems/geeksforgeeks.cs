@@ -77,6 +77,28 @@ namespace Problems
             return stack.Count == 0;
         }
 
+        // http://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/0
+        public static void SortArrayWithOnlyZeroOneAndTwo(int[] a)
+        {
+            // use count sort
+            int[] cntAry = new int[3];
+            foreach (var v in a)
+            {
+                cntAry[v]++;
+            }
+
+            int cpyStart = 0;
+            for (int i = 0; i < cntAry.Length; i++)
+            {
+                int cnt = cntAry[i];
+                for (int j = cpyStart; j < cpyStart + cnt; j++)
+                {
+                    a[j] = i;
+                }
+                cpyStart += cnt;
+            }
+        }
+
         // http://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0
         public static IEnumerable<string> PermutationsOfString(string s)
         {
@@ -674,7 +696,7 @@ namespace Problems
             // until the first non-zero is hit for the bigger number
             while (t1 > 0 || t2 > 0)
             {
-                if (t1 %2 != t2 %2)
+                if (t1 % 2 != t2 % 2)
                 {
                     break;
                 }
@@ -684,7 +706,7 @@ namespace Problems
             }
             return cnt;
         }
-         
+
         // http://practice.geeksforgeeks.org/problems/rearrange-characters/0
         public static string ReArrangeChars(string s)
         {

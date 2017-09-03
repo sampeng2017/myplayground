@@ -56,6 +56,19 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Array")]
+        public void SortArrayWithOnlyZeroOneAndTwo()
+        {
+            int[] a = new int[] { 0, 2, 1, 2, 0 };
+            Geeksforgeeks.SortArrayWithOnlyZeroOneAndTwo(a);
+            a.Should().BeEquivalentTo(new int[] { 0, 0, 1, 2, 2 });
+
+            a = new int[] { 0, 1, 0 };
+            Geeksforgeeks.SortArrayWithOnlyZeroOneAndTwo(a);
+            a.Should().BeEquivalentTo(new int[] { 0, 0, 1});
+        }
+
+        [TestMethod]
         [TestCategory("String")]
         public void ParenthesisChecker()
         {
