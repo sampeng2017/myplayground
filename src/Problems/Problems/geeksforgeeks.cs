@@ -77,6 +77,60 @@ namespace Problems
             return stack.Count == 0;
         }
 
+        // http://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/0
+        public static void SortArrayWithOnlyZeroOneAndTwo(int[] a)
+        {
+            // use count sort
+            int[] cntAry = new int[3];
+            foreach (var v in a)
+            {
+                cntAry[v]++;
+            }
+
+            int cpyStart = 0;
+            for (int i = 0; i < cntAry.Length; i++)
+            {
+                int cnt = cntAry[i];
+                for (int j = cpyStart; j < cpyStart + cnt; j++)
+                {
+                    a[j] = i;
+                }
+                cpyStart += cnt;
+            }
+        }
+
+        // http://practice.geeksforgeeks.org/problems/equilibrium-point/0
+        // return the index of Equilibrium Point of array
+        public static int EquilibriumPoint(int[] a)
+        {
+            int l = 0;
+            int h = a.Length - 1;
+            int sumLow = 0;
+            int sumHigh = 0;
+            while (l < h)
+            {
+                if (sumLow == sumHigh)
+                {
+                    sumLow += a[l];
+                    sumHigh += a[h];
+                    l++;
+                    h--;
+                }
+                else if (sumLow > sumHigh)
+                {
+                    sumHigh += a[h];
+                    h--;
+                }
+                else
+                {
+                    sumLow += a[l];
+                    l++;
+                }
+            }
+
+            return sumHigh == sumLow && l == h ? l : -1;
+        }
+
         // http://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0
         public static IEnumerable<string> PermutationsOfString(string s)
         {
@@ -137,6 +191,38 @@ namespace Problems
             a[p1] = a[p2];
             a[p2] = tmp;
             return new string(a);
+        }
+
+        // http://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string/0
+        public static string LongestPalindromeSubString(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return null;
+
+
+            return null;
+        }
+
+        private static bool IsPalindromeString(string s, Dictionary<string, bool> memo)
+        {
+            bool yesNo;
+            if (memo.TryGetValue(s, out yesNo))
+            {
+                return yesNo;
+            }
+
+            if (s.Length <= 1)
+                return true;
+            if (s[0] == s[s.Length - 1])
+            {
+                yesNo = IsPalindromeString(s.Substring(1, s.Length - 2), memo);
+            }
+            else
+            {
+                yesNo = false;
+            }
+            memo.Add(s, yesNo);
+            return yesNo;
         }
 
         // http://practice.geeksforgeeks.org/problems/next-larger-element/0
@@ -311,7 +397,7 @@ namespace Problems
                 var tmp = minHeap.PeekNext();
                 result.Add(tmp);
                 var val = enumerator.Current;
-                
+
                 if (val > tmp)
                 {
                     minHeap.TakeNext();
@@ -664,6 +750,28 @@ namespace Problems
             return cnt;
         }
 
+        //http://practice.geeksforgeeks.org/problems/rightmost-different-bit/0
+        public static int RightmostDifferentBit(int i1, int i2)
+        {
+            int t1 = i1;
+            int t2 = i2;
+            int cnt = 1;
+
+            // if one of t1 or t2 is 0, we should continue the loop
+            // until the first non-zero is hit for the bigger number
+            while (t1 > 0 || t2 > 0)
+            {
+                if (t1 % 2 != t2 % 2)
+                {
+                    break;
+                }
+                t1 = t1 / 2;
+                t2 = t2 / 2;
+                cnt++;
+            }
+            return cnt;
+        }
+
         // http://practice.geeksforgeeks.org/problems/rearrange-characters/0
         public static string ReArrangeChars(string s)
         {
@@ -822,6 +930,126 @@ namespace Problems
         {
             // assuming ~ not in text, otherwise find a non print-able char
             return $"{s1}~{s2}";
+        }
+
+        //http://practice.geeksforgeeks.org/problems/solve-the-sudoku/0
+        public static int[,] SolveSudoku(int[,] sudoku)
+        {
+            var s = new Sudoku(sudoku);
+            if (s.Solve())
+                return s.Numbers;
+            return null;
+        }
+
+        private class Sudoku
+        {
+            private int[,] sudoku;
+            private int[,] solved;
+            public Sudoku(int[,] sudoku)
+            {
+                if (sudoku == null || sudoku.GetLength(0) != 9 || sudoku.GetLength(1) != 9)
+                    throw new ArgumentException();
+                // todo: validate values in the matrix
+
+                this.sudoku = sudoku;
+                this.solved = new int[9, 9];
+                Array.Copy(sudoku, solved, sudoku.Length);
+            }
+
+            public int[,] Numbers => solved;
+
+            public bool Solve()
+            {
+                return Solve(this.solved);
+            }
+
+            private static bool Solve(int[,] sudoku)
+            {
+                for (int row = 0; row < 9; row++)
+                {
+                    for (int col = 0; col < 9; col++)
+                    {
+                        if (sudoku[row, col] == 0)
+                        {
+                            var candidates = FindSolutionCandidates(sudoku, row, col);
+                            foreach (var c in candidates)
+                            {
+                                sudoku[row, col] = c;
+                                if (!Solve(sudoku))
+                                    sudoku[row, col] = 0;
+                                else
+                                    break;
+                            }
+
+                            if (sudoku[row, col] == 0)
+                                return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            private static IList<int> FindSolutionCandidates(int[,] sudoku, int row, int col)
+            {
+                var candidates = new int[10];
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[row, i] != 0)
+                        candidates[sudoku[row, i]] = 1;
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[i, col] != 0)
+                        candidates[sudoku[i, col]] = 1;
+                }
+
+                int smallSqureRow = (row / 3) * 3;
+                int smallSqureCol = (col / 3) * 3;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (sudoku[smallSqureRow + i, smallSqureCol + j] != 0)
+                            candidates[sudoku[smallSqureRow + i, smallSqureCol + j]] = 1;
+                    }
+                }
+
+                var result = new List<int>();
+                for (int i = 1; i < 10; i++)
+                {
+                    if (candidates[i] == 0)
+                    {
+                        result.Add(i);
+                    }
+                }
+                return result;
+            }
+
+            private static bool CanSetValue(int[,] sudoku, int row, int col, int val)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[row, i] == val)
+                        return false;
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    if (sudoku[i, col] == val)
+                        return false;
+                }
+                int smallSqureRow = (row / 3) * 3;
+                int smallSqureCol = (col / 3) * 3;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (sudoku[smallSqureRow + i, smallSqureCol + j] == val)
+                            return false;
+                    }
+                }
+
+                return true;
+            }
         }
 
         private class CharWithFrquency : IComparable

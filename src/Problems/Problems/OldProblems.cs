@@ -100,19 +100,31 @@ namespace Problems
             return path1[j];
         }
 
-        public static int[] FindNthSmallestInArray(int[] array, int n)
+        public static int FindNthSmallestInArray(int[] array, int n)
         {
             if (n <= 0)
             {
-                return new int[0];
+                throw new ArgumentException();
             }
-            var minHeap = new Heap<int>(array, maxHeap: false);
-            var result = new List<int>();
-            for (int i = 0; i < n && i<array.Length; i++)
+
+            var maxHeap = new Heap<int>(maxHeap: true);
+            int i = 0;
+            for (; i < n && i < array.Length; i++)
             {
-                result.Add(minHeap.TakeNext());
+                maxHeap.Insert(array[i]);
             }
-            return result.ToArray();
+
+            if (i < n)
+                return -1;
+            for (; i < array.Length; i++)
+            {
+                if (array[i] < maxHeap.PeekNext())
+                {
+                    maxHeap.TakeNext();
+                    maxHeap.Insert(array[i]);
+                }
+            }  
+            return maxHeap.PeekNext();
         }
     }
 }

@@ -51,11 +51,16 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Heap")]
         public void FindNthSmallestInArray()
         {
             int[] ary = new int[] { 201, 45, 55, 9, 43, 22, 76, 103, 201, 2, 101, 212, 400, 59, 432, 212, 78, 561, 277, 53 };
             var result = OldProblems.FindNthSmallestInArray(ary, 5);
-            result.Should().BeEquivalentTo(new int[] { 2, 9, 22, 43, 45 });
+            result.Should().Be(45);
+
+            ary = new int[] { 201, 45};
+            result = OldProblems.FindNthSmallestInArray(ary, 4);
+            result.Should().Be(-1);
         }
     }
 }
