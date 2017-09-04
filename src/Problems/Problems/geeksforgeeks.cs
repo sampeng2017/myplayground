@@ -193,6 +193,38 @@ namespace Problems
             return new string(a);
         }
 
+        // http://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string/0
+        public static string LongestPalindromeSubString(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return null;
+
+
+            return null;
+        }
+
+        private static bool IsPalindromeString(string s, Dictionary<string, bool> memo)
+        {
+            bool yesNo;
+            if (memo.TryGetValue(s, out yesNo))
+            {
+                return yesNo;
+            }
+
+            if (s.Length <= 1)
+                return true;
+            if (s[0] == s[s.Length - 1])
+            {
+                yesNo = IsPalindromeString(s.Substring(1, s.Length - 2), memo);
+            }
+            else
+            {
+                yesNo = false;
+            }
+            memo.Add(s, yesNo);
+            return yesNo;
+        }
+
         // http://practice.geeksforgeeks.org/problems/next-larger-element/0
         public static int[] NextLargerElement_O_NSquare(int[] a)
         {
