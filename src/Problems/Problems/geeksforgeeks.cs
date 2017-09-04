@@ -198,21 +198,30 @@ namespace Problems
         {
             if (string.IsNullOrEmpty(s))
                 return null;
+            var memo = new Dictionary<string, bool>();
+            return LongestPalindromeSubString(s, memo);
+        }
 
-
-            return null;
+        private static string LongestPalindromeSubString(string s, Dictionary<string, bool> memo)
+        {
+            if (IsPalindromeString(s, memo))
+                return s;
+            var s1 = LongestPalindromeSubString(s.Substring(1), memo);
+            var s2 = LongestPalindromeSubString(s.Substring(0, s.Length - 1), memo);
+            return s1.Length > s2.Length ? s1 : s2;
         }
 
         private static bool IsPalindromeString(string s, Dictionary<string, bool> memo)
         {
+            if (s.Length <= 1)
+                return true;
+
             bool yesNo;
             if (memo.TryGetValue(s, out yesNo))
             {
                 return yesNo;
             }
 
-            if (s.Length <= 1)
-                return true;
             if (s[0] == s[s.Length - 1])
             {
                 yesNo = IsPalindromeString(s.Substring(1, s.Length - 2), memo);

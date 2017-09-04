@@ -443,29 +443,26 @@ namespace Tests
         [TestCategory("Divide and Conquer")]
         public void FindElementAppearsOnceInSortedArray()
         {
+            var funcs = new List<Func<int[], int>>
+            {
+                Geeksforgeeks.FindElementAppearsOnceInSortedArray_Xor,
+                Geeksforgeeks.FindElementAppearsOnceInSortedArray_Scan,
+                (ary) => Geeksforgeeks.FindElementAppearsOnceInSortedArray_BS(ary, 0, ary.Length -1)
+            };
+
             var a = new int[] { 1, 1, 2, 2, 3, 3, 4, 50, 50, 65, 65 };
-            var result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Xor(a);
-            result.Should().Be(4);
-
+            int result;
+            foreach (var func in funcs)
+            {
+                result = func(a);
+                result.Should().Be(4);
+            }
             a = new int[] { 1, 5, 5, 3, 3, 50, 50, 65, 65 };
-            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Xor(a);
-            result.Should().Be(1);
-
-            a = new int[] { 1, 1, 2, 2, 3, 3, 4, 50, 50, 65, 65 };
-            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Scan(a);
-            result.Should().Be(4);
-
-            a = new int[] { 1, 5, 5, 3, 3, 50, 50, 65, 65 };
-            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_Scan(a);
-            result.Should().Be(1);
-
-            a = new int[] { 1, 1, 2, 2, 3, 3, 4, 50, 50, 65, 65 };
-            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_BS(a, 0, a.Length - 1);
-            result.Should().Be(4);
-
-            a = new int[] { 1, 5, 5, 3, 3, 50, 50, 65, 65 };
-            result = Geeksforgeeks.FindElementAppearsOnceInSortedArray_BS(a, 0, a.Length - 1);
-            result.Should().Be(1);
+            foreach (var func in funcs)
+            {
+                result = func(a);
+                result.Should().Be(1);
+            }
         }
 
         [TestMethod]

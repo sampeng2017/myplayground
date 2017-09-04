@@ -408,6 +408,27 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Dynamic Programming")]
+        public void LongestPalindromeSubString()
+        {
+            string s = "aaaabbaa";
+            var result =  Geeksforgeeks.LongestPalindromeSubString(s);
+            result.Should().Be("aabbaa");
+
+            s = "a";
+            result = Geeksforgeeks.LongestPalindromeSubString(s);
+            result.Should().Be("a");
+
+            s = "ab";
+            result = Geeksforgeeks.LongestPalindromeSubString(s);
+            result.Should().Be("a");
+
+            s = "defabcbagfraa";
+            result = Geeksforgeeks.LongestPalindromeSubString(s);
+            result.Should().Be("abcba");
+        }
+
+        [TestMethod]
         [TestCategory("Tree")]
         public void FlattenBinaryTreeToLinkedList()
         {

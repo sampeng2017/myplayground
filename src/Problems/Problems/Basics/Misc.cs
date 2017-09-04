@@ -171,10 +171,10 @@ namespace Problems.Basics
         {
             int leftSum = int.MinValue;
             int rightSum = int.MinValue;
-            int tmpSum = 0;
             int leftIndex = low;
             int rightIndex = high;
 
+            int tmpSum = 0;
             for (int i = mid; i >= low; i--)
             {
                 tmpSum += ary[i];
@@ -184,6 +184,7 @@ namespace Problems.Basics
                     leftIndex = i;
                 }
             }
+
             tmpSum = 0;
             for (int i = mid + 1; i <= high; i++)
             {

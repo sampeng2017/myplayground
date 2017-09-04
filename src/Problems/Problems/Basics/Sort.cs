@@ -71,16 +71,10 @@ namespace Problems.Basics
             left[n1] = int.MaxValue; // sentinel
 
             int[] right = new int[n2 + 1];
-            right[n2] = int.MaxValue;
+            right[n2] = int.MaxValue;// sentinel
 
-            for (int ii = 0; ii < n1; ii++)
-            {
-                left[ii] = ary[p + ii];
-            }
-            for (int ii = 0; ii < n2; ii++)
-            {
-                right[ii] = ary[q + ii + 1];
-            }
+            Array.Copy(ary, 0, left, 0, n1);
+            Array.Copy(ary, q + 1, right, 0, n2);
 
             int i = 0;
             int j = 0;
@@ -104,9 +98,9 @@ namespace Problems.Basics
             int aryLength = ary.Length;
             for (int subArySize = 1; subArySize < aryLength; subArySize = subArySize * 2)
             {
-                for (int subAryIndex = 0; subAryIndex < aryLength - subArySize; subAryIndex += subArySize * 2)
+                for (int i = 0; i < aryLength - subArySize; i += subArySize * 2)
                 {
-                    Merge(ary, subAryIndex, subAryIndex + subArySize - 1, Math.Min(subAryIndex + subArySize * 2 - 1, aryLength - 1));
+                    Merge(ary, i, i + subArySize - 1, Math.Min(i + subArySize * 2 - 1, aryLength - 1));
                 }
             }
         }
