@@ -950,6 +950,39 @@ namespace Problems
             return null;
         }
 
+        // http://practice.geeksforgeeks.org/problems/special-keyboard/0
+        public static long SpecialKeyboard(int keyCount)
+        {
+            return CharCountWithSpecialKeyboard(keyCount, 0, 0, new Dictionary<Tuple<int, int, int>, long>());
+        }
+
+        private static long CharCountWithSpecialKeyboard(int keyCount, 
+            int charOnScreen, 
+            int charInBuffer,
+            Dictionary<Tuple<int, int, int>, long> memo)
+        {
+            if (keyCount == 0)
+                return charOnScreen;
+
+            var key = Tuple.Create(keyCount, charOnScreen, charInBuffer);
+            long result;
+            if (memo.TryGetValue(key, out result))
+                return result;
+
+            // type A
+            long cnt1 = charInBuffer > 0 ? 0: CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + 1, charInBuffer, memo);
+
+            // ctrl A + C
+            long cnt2 = keyCount > 2 ?
+                CharCountWithSpecialKeyboard(keyCount - 2, charOnScreen, charOnScreen, memo) :
+                0;
+            // ctrl V
+            long cnt3 = CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + charInBuffer, charInBuffer, memo);
+            result = Math.Max(cnt3, Math.Max(cnt2, cnt1));
+            memo.Add(key, result);
+            return result;
+        }
+
         private class Sudoku
         {
             private int[,] sudoku;

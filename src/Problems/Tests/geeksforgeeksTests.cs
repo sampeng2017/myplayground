@@ -356,6 +356,19 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Recursive")]
+        public void SpecialKeyboard()
+        {
+            Geeksforgeeks.SpecialKeyboard(3).Should().Be(3);
+            Geeksforgeeks.SpecialKeyboard(6).Should().Be(6);
+            Geeksforgeeks.SpecialKeyboard(7).Should().Be(9);
+            Geeksforgeeks.SpecialKeyboard(8).Should().Be(12);
+            Geeksforgeeks.SpecialKeyboard(9).Should().Be(16);
+            Geeksforgeeks.SpecialKeyboard(10).Should().Be(20);
+            Geeksforgeeks.SpecialKeyboard(76).Should().Be(1811939328);
+        }
+
+        [TestMethod]
         [TestCategory("Hashing")]
         public void LargestSubarrayLenWithZeroSum()
         {
