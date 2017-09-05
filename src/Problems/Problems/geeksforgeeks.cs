@@ -956,8 +956,8 @@ namespace Problems
             return CharCountWithSpecialKeyboard(keyCount, 0, 0, new Dictionary<Tuple<int, int, int>, long>());
         }
 
-        private static long CharCountWithSpecialKeyboard(int keyCount, 
-            int charOnScreen, 
+        private static long CharCountWithSpecialKeyboard(int keyCount,
+            int charOnScreen,
             int charInBuffer,
             Dictionary<Tuple<int, int, int>, long> memo)
         {
@@ -970,14 +970,19 @@ namespace Problems
                 return result;
 
             // type A
-            long cnt1 = charInBuffer > 0 ? 0: CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + 1, charInBuffer, memo);
+            long cnt1 = charInBuffer > 0 ?
+                0 :
+                CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + 1, charInBuffer, memo);
 
             // ctrl A + C
-            long cnt2 = keyCount > 2 ?
-                CharCountWithSpecialKeyboard(keyCount - 2, charOnScreen, charOnScreen, memo) :
+            long cnt2 = keyCount > 3 && charOnScreen > 0 ?
+                CharCountWithSpecialKeyboard(keyCount - 3, charOnScreen * 2, charOnScreen, memo) :
                 0;
             // ctrl V
-            long cnt3 = CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + charInBuffer, charInBuffer, memo);
+            long cnt3 = charInBuffer > 0 ?
+                CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + charInBuffer, charInBuffer, memo)
+                : 0;
+
             result = Math.Max(cnt3, Math.Max(cnt2, cnt1));
             memo.Add(key, result);
             return result;
