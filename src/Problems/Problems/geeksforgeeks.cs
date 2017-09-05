@@ -479,6 +479,33 @@ namespace Problems
             return subStringInfo.Last() - subStringInfo.First();
         }
 
+        // http://practice.geeksforgeeks.org/problems/array-subset-of-another-array/0
+        // assume elements in both array are unique
+        // this is acctually not the original question
+        public static bool ArrayIsSubSequenceOfAnother(int[] ary, int[] another)
+        {
+            if (ary == null || another == null || ary.Length > another.Length)
+                return false;
+            int subLen = ary.Length;
+            int subSum = ary.Sum();
+            int i = 0;
+            int j = subLen;
+            int tmpSum = 0;
+            while (i + subLen < another.Length)
+            {
+                if (i == 0)
+                    tmpSum = another.Skip(i).Take(subLen).Sum();
+                else
+                {
+                    tmpSum = tmpSum + another[i + subLen - 1] - another[i - 1];
+                }
+                if (tmpSum == subSum)
+                    return true;
+                i++;
+            }
+            return false;
+        }
+
         // http://practice.geeksforgeeks.org/problems/activity-selection/0
         public static int ActivitySelection(IList<Tuple<int, int>> activities)
         {

@@ -420,6 +420,21 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Hashing")]
+        public void ArrayIsSubSequenceOfAnother()
+        {
+            var a = new int[] { 11, 3, 7, 1 };
+            var another = new int[] { 11, 1, 13, 21, 3, 7 };
+            bool result = Geeksforgeeks.ArrayIsSubSequenceOfAnother(a, another);
+            result.Should().BeFalse();
+
+            a = new int[] { 1, 13, 21 };
+            another = new int[] { 11, 1, 13, 21, 3, 7 };
+            result = Geeksforgeeks.ArrayIsSubSequenceOfAnother(a, another);
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
         [TestCategory("Greedy")]
         public void ActivitySelection()
         {
