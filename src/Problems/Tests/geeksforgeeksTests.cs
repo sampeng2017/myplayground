@@ -182,6 +182,26 @@ namespace Tests
             result.Next.Next.Next.Next.Next.Next.Value.Should().Be(8);
             result.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(7);
             result.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
+
+            list = new ListNode<int> { Value = 1 };
+            list.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next.Next = new ListNode<int> { Value = 4 };
+            list.Next.Next.Next.Next = new ListNode<int> { Value = 5 };
+            list.Next.Next.Next.Next.Next = new ListNode<int> { Value = 6 };
+            list.Next.Next.Next.Next.Next.Next = new ListNode<int> { Value = 7 };
+            list.Next.Next.Next.Next.Next.Next.Next = new ListNode<int> { Value = 8 };
+
+            result = Geeksforgeeks.ReverseLinkedListInGroupsOfGivenSize(list, 2);
+            result.Value.Should().Be(2);
+            result.Next.Value.Should().Be(1);
+            result.Next.Next.Value.Should().Be(4);
+            result.Next.Next.Next.Value.Should().Be(2);
+            result.Next.Next.Next.Next.Value.Should().Be(6);
+            result.Next.Next.Next.Next.Next.Value.Should().Be(5);
+            result.Next.Next.Next.Next.Next.Next.Value.Should().Be(8);
+            result.Next.Next.Next.Next.Next.Next.Next.Value.Should().Be(7);
+            result.Next.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
         }
 
         [TestMethod]
@@ -273,6 +293,28 @@ namespace Tests
             result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 4, 14, 25 });
         }
 
+        [TestMethod]
+        [TestCategory("Tree")]
+        public void GetLeafCount()
+        {
+            //        20
+            //      /    \
+            //    8       22
+            //  /   \        \
+            //5      3       25
+            //      /   \      
+            //    10    14
+            var root = new BinaryTreeNode<int> { Value = 20 };
+            root.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 5 };
+            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
+            root.LeftChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 10 };
+            root.LeftChild.RightChild.RightChild = new BinaryTreeNode<int> { Value = 14 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 22 };
+            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 25 };
+
+            root.GetLeafCount().Should().Be(4);
+        }
         [TestMethod]
         [TestCategory("Heap")]
         public void FindMedianInStream()

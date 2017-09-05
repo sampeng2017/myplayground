@@ -275,7 +275,7 @@ namespace Problems
             var remamining = tmp.Next;
             tmp.Next = null;
             var newHead = LinkedList.Reverse_NonRecursive(head);
-            // head is already the tail of reversed group
+            // head is now the tail of reversed group
             head.Next = ReverseLinkedListInGroupsOfGivenSize(remamining, group);
 
             return newHead;
