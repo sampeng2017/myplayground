@@ -260,6 +260,14 @@ namespace Problems
             return result;
         }
 
+        // http://practice.geeksforgeeks.org/problems/circular-tour/1
+        // pumps: item1 = gas volumn, item2 = distance to next pump, in unit of gas
+        public static int CircularTour(Tuple<int, int> pumps)
+        {
+            // TODO
+            throw new NotImplementedException();
+        }
+
         // http://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
         public static ListNode<T> ReverseLinkedListInGroupsOfGivenSize<T>(ListNode<T> head, int group)
         {
