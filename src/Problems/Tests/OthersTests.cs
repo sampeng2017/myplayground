@@ -6,6 +6,7 @@ using Problems.DataStructures;
 using Problems;
 using static Problems.Others;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests
 {
@@ -184,6 +185,14 @@ namespace Tests
             a = new int[] { 1, 11 };
             ProblemFromBooks.AlternateArrayItems(a);
             a.Should().BeEquivalentTo(new int[] { 1, 11 });
+        }
+
+        [TestMethod]
+        public void RandomSampling()
+        {
+            var result = Others.RandomSampling(100, 5);
+            result.Distinct().ToArray().Should().HaveCount(5);
+            result.Any(r => r > 100).Should().BeFalse();
         }
     }
 }

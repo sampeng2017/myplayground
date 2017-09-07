@@ -308,5 +308,29 @@ namespace Problems
             }
             return reservoir;
         }
+
+        // returns a random m-subset S of {1, 2, 3, ...m},
+        // in which each m-subset is equally likely, while making only m calls to RANDOM
+        public static IEnumerable<int> RandomSampling(int n, int m, Random rand = null, List<int> container = null)
+        {
+            if (m == 0)
+                return Enumerable.Empty<int>();
+            if (rand == null)
+                rand = new Random();
+            if (container == null)
+                container = new List<int>();
+
+            RandomSampling(n - 1, m - 1, rand, container);
+            int i = rand.Next(1, n + 1); // Max is exclusive, so use n+1 to include n
+            if (container.Contains(i))
+            {
+                container.Add(n);
+            }
+            else
+            {
+                container.Add(i);
+            }
+            return container;
+        }
     }
 }
