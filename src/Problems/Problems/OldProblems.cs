@@ -123,8 +123,42 @@ namespace Problems
                     maxHeap.TakeNext();
                     maxHeap.Insert(array[i]);
                 }
-            }  
+            }
             return maxHeap.PeekNext();
+        }
+
+        /*
+        The rotation can be performed in layers, where you perform a cyclic swap on the edges on each layer. 
+        In the first for loop, we rotate the first layer (outermost edges). 
+        We rotate the edges by doing a four-way swap first on the corners, then on the element clockwise from the edges, 
+        then on the element three steps away.
+        * */
+        public static void RotateMatrix(int[,] m)
+        {
+            if (m == null || m.GetLength(0) != m.GetLength(1))
+                throw new ArgumentException();
+            int n = m.GetLength(0);
+            for (int layer = 0; layer < n / 2; ++layer)
+            {
+                int first = layer;
+                int last = n - 1 - layer;
+                for (int i = first; i < last; ++i)
+                {
+                    int offset = i - first;
+                    int top = m[first, i]; // save top
+                    // left -> top
+                    m[first, i] = m[last - offset, first];
+
+                    // bottom -> left
+                    m[last - offset, first] = m[last, last - offset];
+
+                    // right -> bottom
+                    m[last, last - offset] = m[i, last];
+
+                    // top -> right
+                    m[i, last] = top; // right <- saved top
+                }
+            }
         }
     }
 }

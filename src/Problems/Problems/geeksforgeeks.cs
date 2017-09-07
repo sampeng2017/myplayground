@@ -283,7 +283,7 @@ namespace Problems
             var remamining = tmp.Next;
             tmp.Next = null;
             var newHead = LinkedList.Reverse_NonRecursive(head);
-            // head is already the tail of reversed group
+            // head is now the tail of reversed group
             head.Next = ReverseLinkedListInGroupsOfGivenSize(remamining, group);
 
             return newHead;
@@ -485,6 +485,33 @@ namespace Problems
                 return 0;
             }
             return subStringInfo.Last() - subStringInfo.First();
+        }
+
+        // http://practice.geeksforgeeks.org/problems/array-subset-of-another-array/0
+        // assume elements in both array are unique
+        // this is acctually not the original question
+        public static bool ArrayIsSubSequenceOfAnother(int[] ary, int[] another)
+        {
+            if (ary == null || another == null || ary.Length > another.Length)
+                return false;
+            int subLen = ary.Length;
+            int subSum = ary.Sum();
+            int i = 0;
+            int j = subLen;
+            int tmpSum = 0;
+            while (i + subLen < another.Length)
+            {
+                if (i == 0)
+                    tmpSum = another.Skip(i).Take(subLen).Sum();
+                else
+                {
+                    tmpSum = tmpSum + another[i + subLen - 1] - another[i - 1];
+                }
+                if (tmpSum == subSum)
+                    return true;
+                i++;
+            }
+            return false;
         }
 
         // http://practice.geeksforgeeks.org/problems/activity-selection/0
@@ -956,6 +983,44 @@ namespace Problems
             if (s.Solve())
                 return s.Numbers;
             return null;
+        }
+
+        // http://practice.geeksforgeeks.org/problems/special-keyboard/0
+        public static long SpecialKeyboard(int keyCount)
+        {
+            return CharCountWithSpecialKeyboard(keyCount, 0, 0, new Dictionary<Tuple<int, int, int>, long>());
+        }
+
+        private static long CharCountWithSpecialKeyboard(int keyCount,
+            int charOnScreen,
+            int charInBuffer,
+            Dictionary<Tuple<int, int, int>, long> memo)
+        {
+            if (keyCount == 0)
+                return charOnScreen;
+
+            var key = Tuple.Create(keyCount, charOnScreen, charInBuffer);
+            long result;
+            if (memo.TryGetValue(key, out result))
+                return result;
+
+            // type A
+            long cnt1 = charInBuffer > 0 ?
+                0 :
+                CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + 1, charInBuffer, memo);
+
+            // ctrl A + C
+            long cnt2 = keyCount > 3 && charOnScreen > 0 ?
+                CharCountWithSpecialKeyboard(keyCount - 3, charOnScreen * 2, charOnScreen, memo) :
+                0;
+            // ctrl V
+            long cnt3 = charInBuffer > 0 ?
+                CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + charInBuffer, charInBuffer, memo)
+                : 0;
+
+            result = Math.Max(cnt3, Math.Max(cnt2, cnt1));
+            memo.Add(key, result);
+            return result;
         }
 
         private class Sudoku

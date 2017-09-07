@@ -26,6 +26,18 @@ namespace Problems.DataStructures
             return $"{{{Value}; Left: {left}; Right: {right}}}";
         }
 
+        public int GetLeafCount()
+        {
+            if (IsLeaf)
+                return 1;
+            int leafCount = 0;
+            if (LeftChild != null)
+                leafCount += LeftChild.GetLeafCount();
+            if (RightChild != null)
+                leafCount += RightChild.GetLeafCount();
+            return leafCount;
+        }
+
         public void InOrderVisit(Action<BinaryTreeNode<T>> visit)
         {
             LeftChild?.InOrderVisit(visit);
