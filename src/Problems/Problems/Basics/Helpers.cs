@@ -79,5 +79,19 @@ namespace Problems.Basics
                 Exchange(ary, i - 1, tmp);
             }
         }
+
+        public static bool IsSorted(int[] ary)
+        {
+            int previous = int.MinValue;
+            for (int i = 0; i < ary.Length; i++)
+            {
+                if (ary[i] < previous)
+                {
+                    return false;
+                }
+                previous = ary[i];
+            }
+            return true;
+        }
     }
 }

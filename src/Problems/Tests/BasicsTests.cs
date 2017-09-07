@@ -50,7 +50,7 @@ namespace Tests
                 int[] aryCopy = new int[100];
                 Array.Copy(ary, aryCopy, 100);
                 sort(aryCopy);
-                IsSorted(aryCopy).Should().Be(true);
+                Helpers.IsSorted(aryCopy).Should().Be(true);
             }
         }
 
@@ -189,20 +189,6 @@ namespace Tests
                 ary[i] = rand.Next();
             }
             return ary;
-        }
-
-        private bool IsSorted(int[] ary)
-        {
-            int previous = int.MinValue;
-            for (int i = 0; i < ary.Length; i++)
-            {
-                if (ary[i] < previous)
-                {
-                    return false;
-                }
-                previous = ary[i];
-            }
-            return true;
         }
 
         [TestMethod]
