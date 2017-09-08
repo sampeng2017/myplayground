@@ -194,5 +194,21 @@ namespace Tests
             result.Distinct().ToArray().Should().HaveCount(5);
             result.Any(r => r > 100).Should().BeFalse();
         }
+
+        [TestMethod]
+        public void StackWithMin()
+        {
+            var stackWithMin = new StackWithMin();
+            stackWithMin.Push(20);
+            stackWithMin.GetMin().Should().Be(20);
+
+            stackWithMin.Push(30);
+            stackWithMin.Push(15);
+            stackWithMin.GetMin().Should().Be(15);
+
+            stackWithMin.Pop();
+            stackWithMin.GetMin().Should().Be(20);
+        }
+
     }
 }

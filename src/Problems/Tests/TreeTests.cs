@@ -201,5 +201,31 @@ namespace Tests
             var result = OldProblems.FindLowestCommonAncestor(root, 6, 8);
             result.Should().BeSameAs(root.RightChild);
         }
+
+        [TestMethod]
+        [TestCategory("Tree")]
+        public void BuildFromSortedArray()
+        {
+            var ary = new int[] { 1 };
+            var result = BinarySearchTree<int>.BuildFromSortedArray(ary, 0, ary.Length - 1);
+            result.IsLeaf.Should().BeTrue();
+
+            ary = new int[] { 1, 2, 3, 4 };
+            result = BinarySearchTree<int>.BuildFromSortedArray(ary, 0, ary.Length - 1);
+            result.Value.Should().Be(2);
+            result.LeftChild.Value.Should().Be(1);
+            result.RightChild.Value.Should().Be(3);
+            result.RightChild.RightChild.Value.Should().Be(4);
+
+            ary = new int[] { 1, 2, 3, 4, 5 };
+            result = BinarySearchTree<int>.BuildFromSortedArray(ary, 0, ary.Length - 1);
+            result.Value.Should().Be(3);
+            result.LeftChild.Value.Should().Be(1);
+            result.LeftChild.RightChild.Value.Should().Be(2);
+            result.RightChild.Value.Should().Be(4);
+            result.RightChild.RightChild.Value.Should().Be(5);
+
+
+        }
     }
 }

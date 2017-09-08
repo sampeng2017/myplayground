@@ -39,6 +39,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Linked List")]
         public void AddTowNumbers()
         {
             ListNode<int> l1 = LeetCoder.BuildLinkedListFromValue(342);

@@ -209,4 +209,49 @@ namespace Problems.Basics
             return Gcd(b, a % b);
         }
     }
+
+    // this works only with numbers.
+    // for non-number valued stack, use a separate stack to track min value
+    public class StackWithMin
+    {
+        private int minVal;
+        private Stack<int> stack = new Stack<int>();
+        public void Push(int val)
+        {
+            var valToPush = val;
+            if (stack.Count == 0)
+            {
+                minVal = val;
+            }
+            else
+            {
+                if (minVal > val)
+                {
+                    // valToPush will be for sure less than minVal:
+                    // minVal > val
+                    // 2* minVal > 2*val
+                    // minVal > 2* val - minVal
+                    valToPush = 2 * val - minVal;
+                    minVal = val;
+                }
+            }
+            stack.Push(valToPush);
+        }
+
+        public int Pop()
+        {
+            var result = stack.Pop();
+            if (result >= minVal)
+            {
+                return result;
+            }
+            minVal = 2 * minVal - result;
+            return minVal;
+        }
+
+        public int GetMin()
+        {
+            return minVal;
+        }
+    }
 }
