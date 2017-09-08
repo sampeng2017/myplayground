@@ -210,6 +210,8 @@ namespace Problems.Basics
         }
     }
 
+    // this works only with numbers.
+    // for non-number valued stack, use a separate stack to track min value
     public class StackWithMin
     {
         private int minVal;
@@ -225,6 +227,10 @@ namespace Problems.Basics
             {
                 if (minVal > val)
                 {
+                    // valToPush will be for sure less than minVal:
+                    // minVal > val
+                    // 2* minVal > 2*val
+                    // minVal > 2* val - minVal
                     valToPush = 2 * val - minVal;
                     minVal = val;
                 }

@@ -271,6 +271,25 @@ namespace Problems.DataStructures
                 });
             return isValid;
         }
+
+        public static BinaryTreeNode<T> BuildFromSortedArray(T[] sortedArray, int p, int q)
+        {
+            if (sortedArray == null || sortedArray.Length == 0 || p > q)
+                return null;
+            int mid = p + (q - p) / 2;
+            var node = new BinaryTreeNode<T> { Value = sortedArray[mid] };
+            if (p < mid)
+            {
+                node.LeftChild = BuildFromSortedArray(sortedArray, p, mid - 1);
+            }
+            if (q > mid)
+            {
+                node.RightChild = BuildFromSortedArray(sortedArray, mid + 1, q);
+            }
+
+            return node;
+
+        }
     }
 
 }
