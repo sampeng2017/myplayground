@@ -127,11 +127,52 @@ namespace Problems
             return result;
         }
 
-        // TODO
         //https://leetcode.com/problems/median-of-two-sorted-arrays/description/
-        public static int FindMediaOfTwoSortedArraies_SameSize(int[] ary1, int[] ary2)
+        // Given two sorted arrays containing a total of n elements, give an algorithm to find the
+        // median of the n elements in O(lg n) time on one processor.
+
+        // The basic idea is that if you are given two arrays A and B and know
+        // the length of each, you can check whether an element A[i] is the median in constant
+        // time.Suppose that the median is A[i]. Since the array is sorted, it is greater than
+        // exactly i − 1 values in array A. Then if it is the median, it is also greater than exactly
+        // j = [∨n/2] − (i − 1) elements in B. It requires constant time to check if B[j]
+        // <= A[i] <= B[j + 1]. If A[i] is not the median, then depending on whether A[i] is greater
+        // or less than B[j] and B[j + 1], you know that A[i] is either greater than or less than
+        // the median.Thus you can binary search for A[i] in O(lg n) worst-case time.
+        public static int FindMediaOfTwoSortedArraies(int[] a, int[] b)
         {
-            throw new NotImplementedException();
+            int n = a.Length + b.Length;
+
+            if (a.Length > b.Length)
+            {
+                return FindMediaOfTwoSortedArraies(b, a, b.Length - 1, n / 2 + 1);
+            }
+            return FindMediaOfTwoSortedArraies(a, b, a.Length - 1, n / 2 + 1);
+        }
+        private static int FindMediaOfTwoSortedArraies(int[] a, int[] b, int left, int right)
+        {
+            int l = a.Length - 1;
+            int m = b.Length - 1;
+            int n = a.Length + b.Length;
+
+            int i = (left + right) / 2 - 1;
+            int j = n / 2 - i;
+
+            if ((j == 1 || a[i] > b[j]) && (j == m || a[i] <= b[j - 1]))
+            {
+                return a[i];
+            }
+            else if ((j == 1 || a[i] > b[j]) && (j != m  && a[i] > b[j - 1]))
+            {
+                //median <a[i]
+                return FindMediaOfTwoSortedArraies(a, b, left, i - 1);
+            }
+            else
+            {
+                //median >a[i]
+                return FindMediaOfTwoSortedArraies(a, b, i + 1, right);
+            }
+
         }
 
         private static Tuple<int, int> GetMedianIndex(int[] ary, int p, int q)
@@ -641,7 +682,8 @@ namespace Problems
 
         internal static void GenerateNodeTokens(BinaryTreeNode<int> tree, Dictionary<BinaryTreeNode<int>, string> memo)
         {
-            tree.PostOrderVisit(n => {
+            tree.PostOrderVisit(n =>
+            {
                 string token = $"({n.Value}";
                 if (n.LeftChild != null)
                 {

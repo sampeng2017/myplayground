@@ -492,5 +492,24 @@ namespace Tests
             BinaryTreeNode<int>.AreEquivlent(result[0], treeRoot.LeftChild.LeftChild).Should().BeTrue();
             BinaryTreeNode<int>.AreEquivlent(result[1], treeRoot.LeftChild).Should().BeTrue();
         }
+
+        [TestMethod]
+        public void FindMediaOfTwoSortedArraies()
+        {
+            var a = new int[] { 1, 3 };
+            var b = new int[] { 2 };
+            var result = LeetCoder.FindMediaOfTwoSortedArraies(a, b);
+            result.Should().Be(2);
+
+            a = new int[] { 1, 2 };
+            b = new int[] { 3, 4 };
+            result = LeetCoder.FindMediaOfTwoSortedArraies(a, b);
+            result.Should().Be(2);
+
+            a = new int[] { 1, 2, 3 };
+            b = new int[] { 4, 5 };
+            result = LeetCoder.FindMediaOfTwoSortedArraies(a, b);
+            result.Should().Be(3);
+        }
     }
 }
