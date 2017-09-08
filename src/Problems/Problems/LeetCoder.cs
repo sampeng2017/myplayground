@@ -56,7 +56,7 @@ namespace Problems
                     sum = sum - 10;
                     carray = 1;
                 }
-                var newNode = new DataStructures.ListNode<int> { Value = sum };
+                var newNode = new ListNode<int> { Value = sum };
                 if (result == null)
                 {
                     result = resultRail = newNode;

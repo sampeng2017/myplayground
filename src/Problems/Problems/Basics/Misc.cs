@@ -209,4 +209,43 @@ namespace Problems.Basics
             return Gcd(b, a % b);
         }
     }
+
+    public class StackWithMin
+    {
+        private int minVal;
+        private Stack<int> stack = new Stack<int>();
+        public void Push(int val)
+        {
+            var valToPush = val;
+            if (stack.Count == 0)
+            {
+                minVal = val;
+            }
+            else
+            {
+                if (minVal > val)
+                {
+                    valToPush = 2 * val - minVal;
+                    minVal = val;
+                }
+            }
+            stack.Push(valToPush);
+        }
+
+        public int Pop()
+        {
+            var result = stack.Pop();
+            if (result >= minVal)
+            {
+                return result;
+            }
+            minVal = 2 * minVal - result;
+            return minVal;
+        }
+
+        public int GetMin()
+        {
+            return minVal;
+        }
+    }
 }
