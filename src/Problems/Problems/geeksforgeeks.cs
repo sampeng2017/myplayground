@@ -1031,7 +1031,6 @@ namespace Problems
             {
                 if (sudoku == null || sudoku.GetLength(0) != 9 || sudoku.GetLength(1) != 9)
                     throw new ArgumentException();
-                // todo: validate values in the matrix
 
                 this.sudoku = sudoku;
                 this.solved = new int[9, 9];

@@ -13,7 +13,7 @@ namespace Problems.Basics
             var rand = new Random();
             int i = rand.Next(p, r);
             Exchange(ary, r, i);
-            return Partition(ary, p, r);
+            return Partition2(ary, p, r);
         }
         public static int Partition(int[] ary, int p, int r)
         {

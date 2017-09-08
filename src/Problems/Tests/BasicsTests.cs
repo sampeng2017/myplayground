@@ -42,7 +42,8 @@ namespace Tests
                 Sort.MergeSort,
                 Sort.MergeSort_BottomUp,
                 Sort.HeapSort,
-                Sort.QuickSort
+                Sort.QuickSort,
+                (a) => Sort.TailRecursiveQuickSort(a, 0, a.Length - 1)
             };
             int[] ary = GetRandomArray(100);
             foreach (var sort in sorts)

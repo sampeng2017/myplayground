@@ -133,5 +133,15 @@ namespace Problems.Basics
                 QuickSort(ary, q + 1, r);
             }
         }
+
+        public static void TailRecursiveQuickSort(int[] ary, int p, int r)
+        {
+            while (p < r)
+            {
+                int q = Helpers.RandomPartition(ary, p, r);
+                TailRecursiveQuickSort(ary, p, q - 1);
+                p = q + 1;
+            }
+        }
     }
 }
