@@ -160,5 +160,27 @@ namespace Problems
                 }
             }
         }
+
+        // find the nth to last element of a singly linked list
+        public static ListNode<T> FindNthToLastNode<T>(ListNode<T> head, int n)
+        {
+            if (head == null || n < 1)
+                return null;
+
+            var p1 = head;
+            var p2 = head;
+            for (int i = 0; i < n -1 ; i++)
+            {
+                if (p2 == null)
+                    return null;
+                p2 = p2.Next;
+            }
+            while (p2.Next != null)
+            {
+                p1 = p1.Next;
+                p2 = p2.Next;
+            }
+            return p1;
+        }
     }
 }

@@ -62,5 +62,21 @@ namespace Tests
             result = OldProblems.FindNthSmallestInArray(ary, 4);
             result.Should().Be(-1);
         }
+
+        [TestMethod]
+        [TestCategory("Linked List")]
+        public void FindNthToLastNode()
+        {
+            var list = new ListNode<int> { Value = 0 };
+            list.Next = new ListNode<int> { Value = 1 };
+            list.Next.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next.Next = new ListNode<int> { Value = 3 };
+            list.Next.Next.Next.Next = new ListNode<int> { Value = 4 };
+            list.Next.Next.Next.Next.Next = new ListNode<int> { Value = 5 };
+
+            var result = OldProblems.FindNthToLastNode(list, 3);
+            result.Should().BeSameAs(list.Next.Next.Next);
+
+        }
     }
 }
