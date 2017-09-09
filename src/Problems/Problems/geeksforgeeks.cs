@@ -1024,28 +1024,64 @@ namespace Problems
         }
 
         // http://www.geeksforgeeks.org/dynamic-programming-subset-sum-problem/
-        public static bool IsSubsetSum(int[] a, int n, int sum, Dictionary<Tuple<int, int>, bool> memo = null)
+        public static bool IsSubsetSum(int[] a, int n, int sum)
         {
             if (n > 0 && sum == 0)
                 return true;
             if (n == 0)
                 return false;
 
-            if (memo == null)
-                memo = new Dictionary<Tuple<int, int>, bool>();
-
             var key = Tuple.Create(n, sum);
             bool result;
-            if (memo.TryGetValue(key, out result))
-                return result;
 
-            result = IsSubsetSum(a, n - 1, sum, memo);
-            memo.Add(Tuple.Create(n - 1, sum), result);
+            result = IsSubsetSum(a, n - 1, sum);
             if (!result)
             {
-                result = IsSubsetSum(a, n - 1, sum - a[n - 1], memo);
+                result = IsSubsetSum(a, n - 1, sum - a[n - 1]);
             }
             return result;
+        }
+
+        // TODO: understand this
+        //http://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/
+        public static int[] SlidingWindowMaxOfAllSubArraysWithSizeK(int[] a, int k)
+        {
+            if (a == null || k <= 0 || a.Length < k)
+                throw new ArgumentException();
+
+            var dequeue = new LinkedList<int>();
+            var result = new List<int>();
+
+            int i = 0;
+            for (; i < k; i++)
+            {
+                while (dequeue.Count > 0 && a[i] > a[dequeue.Last.Value])
+                {
+                    dequeue.RemoveLast();
+                }
+                dequeue.AddLast(i);
+            }
+
+            // Process rest of the elements, i.e., from arr[k] to arr[n-1]
+            for (; i < a.Length; i++)
+            {
+                // The element at the front of the queue is the largest element of
+                // previous window
+                result.Add(a[dequeue.First.Value]);
+
+                // Remove the elements which are out of this window
+                while ((dequeue.Count > 0) && dequeue.First.Value <= i - k)
+                    dequeue.RemoveFirst();
+
+                // Remove all elements smaller than the currently
+                // being added element (remove useless elements)
+                while ((dequeue.Count > 0) && a[i] >= a[dequeue.Last.Value])
+                    dequeue.RemoveLast();
+
+                dequeue.AddLast(i);
+            }
+            result.Add(a[dequeue.First.Value]);
+            return result.ToArray();
         }
 
         private class Sudoku

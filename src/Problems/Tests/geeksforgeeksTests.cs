@@ -784,5 +784,22 @@ namespace Tests
             result = Geeksforgeeks.SolveSudoku(test1);
             result.Should().BeEquivalentTo(solved);
         }
+
+        [TestMethod]
+        [TestCategory("Array")]
+        public void SlidingWindowMaxOfAllSubArraysWithSizeK()
+        {
+            var a = new int[] { 1, 2, 3, 1, 4, 5, 2, 3, 6 };
+            var result = Geeksforgeeks.SlidingWindowMaxOfAllSubArraysWithSizeK(a, 3);
+            result.Should().BeEquivalentTo(new int[] { 3, 3, 4, 5, 5, 5, 6 });
+
+            a = new int[] { 8, 5, 10, 7, 9, 4, 15, 12, 90, 13 };
+            result = Geeksforgeeks.SlidingWindowMaxOfAllSubArraysWithSizeK(a, 4);
+            result.Should().BeEquivalentTo(new int[] { 10, 10, 10, 15, 15, 90, 90 });
+
+            a = new int[] { 3, 2, 1, 1, 1, 5, 2, 3, 6 };
+            result = Geeksforgeeks.SlidingWindowMaxOfAllSubArraysWithSizeK(a, 3);
+            result.Should().BeEquivalentTo(new int[] { 3, 2, 1, 5, 5, 5, 6 });
+        }
     }
 }
