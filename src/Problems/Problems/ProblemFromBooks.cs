@@ -60,5 +60,35 @@ namespace Problems
             AlternateArrayItems(a, p, p + len / 2 - 1);
             AlternateArrayItems(a, p + len / 2, q);
         }
+
+        public static IList<IList<int>> GenerateSubsets(IList<int> s)
+        {
+            Helpers.Ensure(s);
+
+            var result = new List<IList<int>>();
+            if (s.Count == 0)
+            {
+                return result;
+            }
+            result.Add(new List<int> { s[0] });
+
+            if (s.Count > 1)
+            {
+                var tmpList = new List<int>(s);
+                tmpList.RemoveAt(0);
+
+                var subResults = GenerateSubsets(tmpList);
+                result.AddRange(subResults);
+                foreach (var r in subResults)
+                {
+                    var newR = new List<int>();
+                    newR.Add(s[0]);
+                    newR.AddRange(r);
+                    result.Add(newR);
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -143,13 +143,13 @@ namespace Problems
             }
             else
             {
-                string firstChar = s.Substring(0, 1);
+                char firstChar = s[0];
                 foreach (var item in PermutationsOfString(s.Substring(1)))
                 {
                     var b = new StringBuilder(item);
                     for (int i = 0; i < item.Length; i++)
                     {
-                        b.Insert(i, s[0]);
+                        b.Insert(i, firstChar);
                         result.Add(b.ToString());
                         b.Remove(i, 1);
                     }

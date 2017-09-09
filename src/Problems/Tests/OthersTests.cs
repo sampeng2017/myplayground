@@ -214,5 +214,31 @@ namespace Tests
             stackWithMin.GetMin().Should().Be(20);
         }
 
+        [TestMethod]
+        public void GenerateSubsets()
+        {
+            int[] s = new int[] { 1 };
+            var result = ProblemFromBooks.GenerateSubsets(s);
+            result.Should().HaveCount(1);
+
+            s = new int[] { 1, 2 };
+            result = ProblemFromBooks.GenerateSubsets(s);
+            result.Should().HaveCount(3);
+
+            s = new int[] { 1, 2, 3 };
+            result = ProblemFromBooks.GenerateSubsets(s);
+            result.Should().HaveCount(7);
+            result[0].Should().BeEquivalentTo(new int[] { 1 });
+            result[1].Should().BeEquivalentTo(new int[] { 2 });
+            result[2].Should().BeEquivalentTo(new int[] { 3 });
+            result[3].Should().BeEquivalentTo(new int[] { 2, 3 });
+            result[4].Should().BeEquivalentTo(new int[] { 1, 2 });
+            result[5].Should().BeEquivalentTo(new int[] { 1, 3 });
+            result[6].Should().BeEquivalentTo(new int[] { 1, 2, 3 });
+
+            s = new int[] { 1, 2, 3, 4 };
+            result = ProblemFromBooks.GenerateSubsets(s);
+            result.Should().HaveCount(15);
+        }
     }
 }

@@ -93,5 +93,11 @@ namespace Problems.Basics
             }
             return true;
         }
+
+        public static void Ensure(object o)
+        {
+            if (o == null)
+                throw new ArgumentException();
+        }
     }
 }
