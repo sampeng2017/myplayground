@@ -15,9 +15,31 @@ namespace Problems
         {
             if (a == null || a.Length == 0 || a.Length % 2 != 0)
                 throw new InvalidOperationException();
-            AlternateArrayItems(a, 0, a.Length - 1);
+            if (a.Length == 2)
+                return;
+
+            if ((a.Length / 2) % 2 != 0)
+            {
+                // move a[n -1] to a[2n - 2]:
+                // 1) a1, a2, a3, b1, b2, b3
+                // 2) a1, a2, b1, b2, a3, b3
+                // 3) then call AlternateArrayItems(a, 0, a.Length - 3)
+                int i = a.Length / 2 - 1;
+                while (i < a.Length - 1)
+                {
+                    Helpers.Exchange(a, i, ++i);
+                }
+                AlternateArrayItems(a, 0, a.Length - 3);
+            }
+            else
+            {
+                AlternateArrayItems(a, 0, a.Length - 1);
+            }
         }
 
+        // a1, a2, a3, a4, b1, b2, b3, b4
+        // a1, a2, b1, b2, a3, a4, b3, b4
+        // then recursive call two sub sets
         private static void AlternateArrayItems(int[] a, int p, int q)
         {
             if (q - p <= 1)
