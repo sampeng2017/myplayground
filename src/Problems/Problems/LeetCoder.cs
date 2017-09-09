@@ -145,17 +145,16 @@ namespace Problems
 
             if (a.Length > b.Length)
             {
-                return FindMediaOfTwoSortedArraies(b, a, b.Length - 1, n / 2 + 1);
+                return FindMediaOfTwoSortedArraies(b, a, b.Length - 1, n / 2);
             }
-            return FindMediaOfTwoSortedArraies(a, b, a.Length - 1, n / 2 + 1);
+            return FindMediaOfTwoSortedArraies(a, b, a.Length - 1, n / 2);
         }
         private static int FindMediaOfTwoSortedArraies(int[] a, int[] b, int left, int right)
         {
-            int l = a.Length - 1;
             int m = b.Length - 1;
             int n = a.Length + b.Length;
 
-            int i = (left + right) / 2 - 1;
+            int i = (left + right) / 2;
             int j = n / 2 - i;
 
             if ((j == 1 || a[i] > b[j]) && (j == m || a[i] <= b[j - 1]))

@@ -23,7 +23,7 @@ namespace Problems
             FlipBinaryTree(tree.RightChild);
         }
 
-        public static Tuple<int, int> FindInSorted2DArray_Zigzag(int[,] ary, int val)
+        public static Tuple<int, int> FindInSorted2DArray(int[,] ary, int val)
         {
             int h = ary.GetLength(0);
             int w = ary.GetLength(1);
@@ -44,12 +44,6 @@ namespace Problems
                     j++;
                 }
             }
-            return null;
-        }
-
-        // TODO
-        public static Tuple<int, int> FindInSorted2DArray_Binary(int[,] ary, int val)
-        {
             return null;
         }
 
@@ -169,7 +163,7 @@ namespace Problems
 
             var p1 = head;
             var p2 = head;
-            for (int i = 0; i < n -1 ; i++)
+            for (int i = 0; i < n - 1; i++)
             {
                 if (p2 == null)
                     return null;

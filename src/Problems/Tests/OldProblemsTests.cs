@@ -32,6 +32,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Array")]
         public void FindInSorted2DArray()
         {
             int[,] twoDAry = new int[,]
@@ -41,12 +42,12 @@ namespace Tests
                 {13, 15, 16, 20, 28},
                 {14, 17, 18, 21, 32},
             };
-            var result = OldProblems.FindInSorted2DArray_Zigzag(twoDAry, 9);
+            var result = OldProblems.FindInSorted2DArray(twoDAry, 9);
             result.Should().NotBeNull();
             result.Item1.Should().Be(1);
             result.Item2.Should().Be(3);
 
-            result = OldProblems.FindInSorted2DArray_Zigzag(twoDAry, 27);
+            result = OldProblems.FindInSorted2DArray(twoDAry, 27);
             result.Should().BeNull();
         }
 
@@ -58,7 +59,7 @@ namespace Tests
             var result = OldProblems.FindNthSmallestInArray(ary, 5);
             result.Should().Be(45);
 
-            ary = new int[] { 201, 45};
+            ary = new int[] { 201, 45 };
             result = OldProblems.FindNthSmallestInArray(ary, 4);
             result.Should().Be(-1);
         }
