@@ -132,6 +132,77 @@ namespace Problems
                 return cnt;
             }
 
+            // 1) remove one with the most new coverage from list; check coverage.
+            // 2) if not covered, loop to 1); or return the original count - the count in the list.
+            // 2) select next station that has the most effect coverage, which should exclude those already covered
+            public static int GetNumberOfStationsCanBeRemoved_Greedy(int l, List<GasStation> stations)
+            {
+                if (stations == null) return -1;
+
+                var sCopy = new List<GasStation>(stations);
+
+                bool[] coverageIndicator = new bool[l];
+
+                int j = 0;
+                int cnt = stations.Count;
+                while (j < cnt)
+                {
+                    j++;
+                    var next = FindNextStationWithMostNewCoverage(sCopy, coverageIndicator);
+                    if (next == null)
+                        break;
+                    SetFlag(next, coverageIndicator);
+                    sCopy.Remove(next);
+                    if (coverageIndicator.All(i => i))
+                        return sCopy.Count;
+                }
+                return -1;
+            }
+
+            private static GasStation FindNextStationWithMostNewCoverage(List<GasStation> stations, bool[] indicatior)
+            {
+                if (stations?.Count == 0)
+                    return null;
+
+                var result = stations[0];
+                int cnt1 = CheckNewCoverage(result, indicatior);
+                for (int i = 1; i < stations.Count; i++)
+                {
+                    int c = CheckNewCoverage(stations[i], indicatior);
+                    if (c > cnt1)
+                    {
+                        cnt1 = c;
+                        result = stations[i];
+                    }
+                }
+                return result;
+            }
+
+            private static void SetFlag(GasStation s, bool[] indicator)
+            {
+                int i = s.CoverageStart;
+                int j = s.CoverageStart + s.GetEffectiveCoverage(indicator.Length);
+                while (i < j)
+                {
+                    indicator[i] = true;
+                    i++;
+                }
+            }
+
+            private static int CheckNewCoverage(GasStation s, bool[] indicator)
+            {
+                int i = s.CoverageStart;
+                int j = s.CoverageStart + s.GetEffectiveCoverage(indicator.Length);
+                int cnt = 0;
+                while (i < j)
+                {
+                    if (!indicator[i])
+                        cnt++;
+                    i++;
+                }
+                return cnt;
+            }
+
             // Assume stations sorted by RangeLow 
             public static bool AllCovered(int l, IList<GasStation> stations)
             {
@@ -190,6 +261,20 @@ namespace Problems
             public string GetSymbolString()
             {
                 return $"{CoverageStart}-{CoverageEnd}";
+            }
+
+            public int GetEffectiveCoverage(int roadLength)
+            {
+                return Math.Min(CoverageEnd, roadLength) - CoverageStart;
+            }
+
+            public static Comparison<GasStation> GetCoverageBasedComparision(int l)
+            {
+                return new Comparison<GasStation>(
+                    (gs1, gs2) =>
+                    {
+                        return gs1.GetEffectiveCoverage(l).CompareTo(gs2.GetEffectiveCoverage(l));
+                    });
             }
         }
 

@@ -85,6 +85,61 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Greedy")]
+        public void GetNumberOfStationsCanBeRemoved_Greedy()
+        {
+            var stations = new List<GasStation>
+            {
+                new GasStation(5, 5),
+                new GasStation(20, 10),
+                new GasStation(40, 10)
+            };
+            int r = GasStationProblem.GetNumberOfStationsCanBeRemoved_Greedy(40, stations);
+            r.Should().Be(0);
+
+            stations = new List<GasStation>
+            {
+                new GasStation(5, 5),
+                new GasStation(11, 8),
+                new GasStation(20, 10),
+                new GasStation(40, 10),
+                new GasStation(30, 3),
+            };
+            r = GasStationProblem.GetNumberOfStationsCanBeRemoved_Greedy(40, stations);
+            r.Should().Be(2);
+
+            stations = new List<GasStation>
+            {
+                new GasStation(0, 10),
+                new GasStation(10, 10),
+                new GasStation(20, 10),
+                new GasStation(30, 10),
+                new GasStation(40, 10),
+            };
+            r = GasStationProblem.GetNumberOfStationsCanBeRemoved_Greedy(40, stations);
+            r.Should().Be(3);
+
+            stations = new List<GasStation>
+            {
+                new GasStation(10, 10),
+                new GasStation(18, 10),
+                new GasStation(25, 10)
+            };
+            r = GasStationProblem.GetNumberOfStationsCanBeRemoved_Greedy(40, stations);
+            r.Should().Be(-1);
+
+            stations = new List<GasStation>
+            {
+                new GasStation(10, 10),
+                new GasStation(18, 10),
+                new GasStation(25, 15),
+                new GasStation(25, 15)
+            };
+            r = GasStationProblem.GetNumberOfStationsCanBeRemoved_Greedy(40, stations);
+            r.Should().Be(2);
+        }
+
+        [TestMethod]
         public void GasStation_AllConvered()
         {
             var stations = new GasStation[]
