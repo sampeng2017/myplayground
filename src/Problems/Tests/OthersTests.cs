@@ -240,5 +240,15 @@ namespace Tests
             result = ProblemFromBooks.GenerateSubsets(s);
             result.Should().HaveCount(15);
         }
+
+        [TestMethod]
+        public void IsNumberPowerOfTwo()
+        {
+            ProblemFromBooks.IsNumberPowerOfTwo(2).Should().BeTrue();
+            ProblemFromBooks.IsNumberPowerOfTwo(4).Should().BeTrue();
+            ProblemFromBooks.IsNumberPowerOfTwo(8).Should().BeTrue();
+            ProblemFromBooks.IsNumberPowerOfTwo(256).Should().BeTrue();
+            ProblemFromBooks.IsNumberPowerOfTwo(12).Should().BeFalse();
+        }
     }
 }

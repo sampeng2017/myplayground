@@ -90,5 +90,16 @@ namespace Problems
 
             return result;
         }
+
+        // Imagine what happens when you subtract 1 from a string of bits.You read from left to right,
+        // turning each 0 to a 1 until you hit a 1, at which point that bit is flipped:
+        // 1000100100 -> (subtract 1) -> 1000100011
+        // Thus, every bit, up through the first 1, is flipped.If there’s exactly one 1 in the number, then
+        // every bit(other than the leading zeros) will be flipped.Thus, n & (n-1) == 0 if there’s exactly
+        // one 1. If there’s exactly one 1, then it must be a power of two.
+        public static bool IsNumberPowerOfTwo(int n)
+        {
+            return (n & (n - 1)) == 0;
+        }
     }
 }
