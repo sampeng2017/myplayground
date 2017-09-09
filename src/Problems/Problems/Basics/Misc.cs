@@ -83,6 +83,61 @@ namespace Problems.Basics
             return crossingResult;
         }
 
+        // doesn't work with all negative case
+        public static Tuple<int, int, int> FindMaxSubArray_Liner(int[] a)
+        {
+            int maxsum = int.MinValue;
+            int sum = 0;
+            int maxStart = 0;
+            int maxEnd = 0;
+            int currentStart = 0;
+            int currentEnd = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                sum += a[i];
+                if (maxsum < sum)
+                {
+                    maxsum = sum;
+                    currentEnd = i;
+                    maxStart = currentStart;
+                    maxEnd = currentEnd;
+                }
+                else if (sum < 0)
+                {
+                    currentStart = i + 1;
+                    currentEnd = i + 1;
+                    sum = 0;
+                }
+            }
+            if (maxsum == sum)
+            {
+                maxStart = currentStart;
+                maxEnd = currentEnd;
+            }
+
+            return Tuple.Create(maxStart, maxEnd, maxsum);
+        }
+
+        public static int FindMaxSubArray_Liner2(int[] a)
+        {
+            int maxsum = 0;
+            int sum = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                sum += a[i];
+                if (maxsum < sum)
+                {
+                    maxsum = sum;
+                }
+                else if (sum < 0)
+                {
+                    sum = 0;
+                }
+            }
+
+            return maxsum;
+        }
+
         public static Tuple<int, int> FindMinAndMax(int[] ary)
         {
             if (ary.Length == 1)
