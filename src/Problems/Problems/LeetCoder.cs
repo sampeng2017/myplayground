@@ -652,6 +652,50 @@ namespace Problems
             }
         }
 
+        // https://leetcode.com/problems/product-of-array-except-self/description/
+        public static int[] ProductOfArrayExceptSelf(int[] a)
+        {
+            int n = a.Length;
+            var result = new int[a.Length];
+            result[0] = 1;
+
+            for (int i = 1; i < n; i++)
+            {
+                result[i] = result[i - 1] * a[i - 1];
+            }
+            int right = 1;
+            for (int i = n - 1; i >= 0; i--)
+            {
+                result[i] = right * result[i];
+                right = a[i] * right;
+            }
+            return result;
+        }
+
+        public static int[] ProductOfArrayExceptSelf2(int[] a)
+        {
+            int n = a.Length;
+            var r1 = new int[n];
+
+            r1[0] = 1;
+            for (int i = 1; i < n; i++)
+            {
+                r1[i] = r1[i - 1] * a[i - 1];
+            }
+
+            var r2 = new int[n];
+            r2[n - 1] = 1;
+            for (int i = n - 2; i >= 0; i--)
+            {
+                r2[i] = r2[i + 1] * a[i + 1];
+            }
+            for (int i = 0; i < n; i++)
+            {
+                r1[i] *= r2[i];
+            }
+            return r1;
+        }
+
         // TODO: optimize
         //https://leetcode.com/problems/find-duplicate-subtrees/description/
         public static IList<BinaryTreeNode<int>> FindDuplicateSubTrees(BinaryTreeNode<int> tree)

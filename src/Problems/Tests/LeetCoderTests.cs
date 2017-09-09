@@ -384,7 +384,7 @@ namespace Tests
         [TestCategory("Dynamic Programming")]
         public void WordBreak()
         {
-            var dictionary = new List<string> { "leet", "code"};
+            var dictionary = new List<string> { "leet", "code" };
 
             var result = LeetCoder.WordBreak(dictionary, "leet");
             result.Should().BeTrue();
@@ -413,7 +413,7 @@ namespace Tests
         public void LongestPalindromeSubString()
         {
             string s = "aaaabbaa";
-            var result =  Geeksforgeeks.LongestPalindromeSubString(s);
+            var result = Geeksforgeeks.LongestPalindromeSubString(s);
             result.Should().Be("aabbaa");
 
             s = "a";
@@ -512,6 +512,17 @@ namespace Tests
             b = new int[] { 4, 5 };
             result = LeetCoder.FindMediaOfTwoSortedArraies(a, b);
             result.Should().Be(3);
+        }
+
+        [TestMethod]
+        [TestCategory("Array")]
+        public void ProductOfArrayExceptSelf()
+        {
+            var a = new int[] { 1, 2, 3, 4 };
+            var result = LeetCoder.ProductOfArrayExceptSelf(a);
+            result.Should().BeEquivalentTo(new int[] { 24, 12, 8, 6 });
+            result = LeetCoder.ProductOfArrayExceptSelf2(a);
+            result.Should().BeEquivalentTo(new int[] { 24, 12, 8, 6 });
         }
     }
 }
