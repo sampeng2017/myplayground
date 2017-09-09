@@ -1023,6 +1023,31 @@ namespace Problems
             return result;
         }
 
+        // http://www.geeksforgeeks.org/dynamic-programming-subset-sum-problem/
+        public static bool IsSubsetSum(int[] a, int n, int sum, Dictionary<Tuple<int, int>, bool> memo = null)
+        {
+            if (n > 0 && sum == 0)
+                return true;
+            if (n == 0)
+                return false;
+
+            if (memo == null)
+                memo = new Dictionary<Tuple<int, int>, bool>();
+
+            var key = Tuple.Create(n, sum);
+            bool result;
+            if (memo.TryGetValue(key, out result))
+                return result;
+
+            result = IsSubsetSum(a, n - 1, sum, memo);
+            memo.Add(Tuple.Create(n - 1, sum), result);
+            if (!result)
+            {
+                result = IsSubsetSum(a, n - 1, sum - a[n - 1], memo);
+            }
+            return result;
+        }
+
         private class Sudoku
         {
             private int[,] sudoku;

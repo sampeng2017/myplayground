@@ -511,6 +511,22 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Dynamic Programming")]
+        public void IsSubsetSum()
+        {
+            var set = new int[] { 3, 34, 4, 12, 5, 2 };
+            bool result = Geeksforgeeks.IsSubsetSum(set, set.Length, 9);
+            result.Should().BeTrue();
+
+            result = Geeksforgeeks.IsSubsetSum(set, set.Length, 10);
+            result.Should().BeFalse();
+
+            result = Geeksforgeeks.IsSubsetSum(set, set.Length, 19);
+            result.Should().BeTrue();
+
+        }
+
+        [TestMethod]
         [TestCategory("Divide and Conquer")]
         public void FindElementAppearsOnceInSortedArray()
         {
