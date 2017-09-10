@@ -417,5 +417,27 @@ namespace Problems
             }
             return container;
         }
+
+        public static int CountAllNegativeNumbersInSorted2DArray(int[,] a)
+        {
+            // start from top-right corner. 
+            // if negative, increase count, move down a row; if positive, move left a col.
+            int j = a.GetLength(1) - 1;
+            int i = 0;
+            int cnt = 0;
+            while (j >= 0 && i < a.GetLength(0))
+            {
+                if (a[i, j] < 0)
+                {
+                    cnt += j + 1;
+                    i++;
+                }
+                else
+                {
+                    j--;
+                }
+            }
+            return cnt;
+        }
     }
 }

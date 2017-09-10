@@ -305,5 +305,17 @@ namespace Tests
             ProblemFromBooks.IsNumberPowerOfTwo(256).Should().BeTrue();
             ProblemFromBooks.IsNumberPowerOfTwo(12).Should().BeFalse();
         }
+
+        [TestMethod]
+        public void CountAllNegativeNumbersInSorted2DArray()
+        {
+            var a = new int[,]
+            {
+                {-3,-2,-1, 1 },
+                {-2, 2, 3, 4 },
+                { 4, 5, 7, 8 }
+            };
+            Others.CountAllNegativeNumbersInSorted2DArray(a).Should().Be(4);
+        }
     }
 }
