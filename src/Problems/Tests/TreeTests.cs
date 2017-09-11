@@ -16,36 +16,36 @@ namespace Tests
         public void InOrderVisit()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
+            root.Left = new BinaryTreeNode<int> { Value = 2 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 5 };
 
-            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
-            root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+            root.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 6 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 7 };
+            root.Right.Right.Left = new BinaryTreeNode<int> { Value = 8 };
 
             var list = new List<BinaryTreeNode<int>>();
             root.InOrderVisit(n => list.Add(n));
-            list[0].Should().BeSameAs(root.LeftChild.LeftChild);
-            list[1].Should().BeSameAs(root.LeftChild);
-            list[2].Should().BeSameAs(root.LeftChild.RightChild);
+            list[0].Should().BeSameAs(root.Left.Left);
+            list[1].Should().BeSameAs(root.Left);
+            list[2].Should().BeSameAs(root.Left.Right);
             list[3].Should().BeSameAs(root);
-            list[4].Should().BeSameAs(root.RightChild.LeftChild);
-            list[5].Should().BeSameAs(root.RightChild);
-            list[6].Should().BeSameAs(root.RightChild.RightChild.LeftChild);
-            list[7].Should().BeSameAs(root.RightChild.RightChild);
+            list[4].Should().BeSameAs(root.Right.Left);
+            list[5].Should().BeSameAs(root.Right);
+            list[6].Should().BeSameAs(root.Right.Right.Left);
+            list[7].Should().BeSameAs(root.Right.Right);
 
             list.Clear();
             BinaryTreeNode<int>.InOrderVisitNoRecursion(root, n => list.Add(n));
-            list[0].Should().BeSameAs(root.LeftChild.LeftChild);
-            list[1].Should().BeSameAs(root.LeftChild);
-            list[2].Should().BeSameAs(root.LeftChild.RightChild);
+            list[0].Should().BeSameAs(root.Left.Left);
+            list[1].Should().BeSameAs(root.Left);
+            list[2].Should().BeSameAs(root.Left.Right);
             list[3].Should().BeSameAs(root);
-            list[4].Should().BeSameAs(root.RightChild.LeftChild);
-            list[5].Should().BeSameAs(root.RightChild);
-            list[6].Should().BeSameAs(root.RightChild.RightChild.LeftChild);
-            list[7].Should().BeSameAs(root.RightChild.RightChild);
+            list[4].Should().BeSameAs(root.Right.Left);
+            list[5].Should().BeSameAs(root.Right);
+            list[6].Should().BeSameAs(root.Right.Right.Left);
+            list[7].Should().BeSameAs(root.Right.Right);
         }
 
         [TestMethod]
@@ -53,14 +53,14 @@ namespace Tests
         public void PreOrderVisit()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
+            root.Left = new BinaryTreeNode<int> { Value = 2 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 5 };
 
-            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
-            root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+            root.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 6 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 7 };
+            root.Right.Right.Left = new BinaryTreeNode<int> { Value = 8 };
 
             var list = new List<int>();
             root.PreOrderVisit(n => list.Add(n.Value));
@@ -91,7 +91,7 @@ namespace Tests
         {
             var tmpNode1 = new BinaryTreeNode<int> { Value = 5 };
             var tmpNode2 = new BinaryTreeNode<int> { Value = 1 };
-            tmpNode1.RightChild = tmpNode2;
+            tmpNode1.Right = tmpNode2;
             BinarySearchTree<int>.IsValidBsf(tmpNode1).Should().BeFalse();
 
             var bst = new BinarySearchTree<int>();
@@ -165,13 +165,13 @@ namespace Tests
         public void SearchAndReturnPath()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
-            root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+            root.Left = new BinaryTreeNode<int> { Value = 2 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 5 };
+            root.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 6 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 7 };
+            root.Right.Right.Left = new BinaryTreeNode<int> { Value = 8 };
 
             var path = root.SearchAndReturnPath(6);
             path.Should().NotBeNull();
@@ -190,16 +190,16 @@ namespace Tests
         public void FindLowestCommonAncestor()
         {
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
-            root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+            root.Left = new BinaryTreeNode<int> { Value = 2 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 5 };
+            root.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 6 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 7 };
+            root.Right.Right.Left = new BinaryTreeNode<int> { Value = 8 };
 
             var result = OldProblems.FindLowestCommonAncestor(root, 6, 8);
-            result.Should().BeSameAs(root.RightChild);
+            result.Should().BeSameAs(root.Right);
         }
 
         [TestMethod]
@@ -213,17 +213,17 @@ namespace Tests
             ary = new int[] { 1, 2, 3, 4 };
             result = BinarySearchTree<int>.BuildFromSortedArray(ary, 0, ary.Length - 1);
             result.Value.Should().Be(2);
-            result.LeftChild.Value.Should().Be(1);
-            result.RightChild.Value.Should().Be(3);
-            result.RightChild.RightChild.Value.Should().Be(4);
+            result.Left.Value.Should().Be(1);
+            result.Right.Value.Should().Be(3);
+            result.Right.Right.Value.Should().Be(4);
 
             ary = new int[] { 1, 2, 3, 4, 5 };
             result = BinarySearchTree<int>.BuildFromSortedArray(ary, 0, ary.Length - 1);
             result.Value.Should().Be(3);
-            result.LeftChild.Value.Should().Be(1);
-            result.LeftChild.RightChild.Value.Should().Be(2);
-            result.RightChild.Value.Should().Be(4);
-            result.RightChild.RightChild.Value.Should().Be(5);
+            result.Left.Value.Should().Be(1);
+            result.Left.Right.Value.Should().Be(2);
+            result.Right.Value.Should().Be(4);
+            result.Right.Right.Value.Should().Be(5);
 
 
         }

@@ -311,14 +311,14 @@ namespace Tests
             var node6 = new BinaryTreeNode<int> { Value = 7 };
             var node7 = new BinaryTreeNode<int> { Value = 2 };
             var node8 = new BinaryTreeNode<int> { Value = 1 };
-            root.LeftChild = node1;
-            root.RightChild = node2;
-            node1.LeftChild = node3;
-            node2.LeftChild = node4;
-            node2.RightChild = node5;
-            node3.LeftChild = node6;
-            node3.RightChild = node7;
-            node5.RightChild = node8;
+            root.Left = node1;
+            root.Right = node2;
+            node1.Left = node3;
+            node2.Left = node4;
+            node2.Right = node5;
+            node3.Left = node6;
+            node3.Right = node7;
+            node5.Right = node8;
 
             var result = LeetCoder.PathSum1(root, 22);
             result.Should().BeTrue();
@@ -348,14 +348,14 @@ namespace Tests
             var node6 = new BinaryTreeNode<int> { Value = 7 };
             var node7 = new BinaryTreeNode<int> { Value = 2 };
             var node8 = new BinaryTreeNode<int> { Value = 1 };
-            root.LeftChild = node1;
-            root.RightChild = node2;
-            node1.LeftChild = node3;
-            node2.LeftChild = node4;
-            node2.RightChild = node5;
-            node3.LeftChild = node6;
-            node3.RightChild = node7;
-            node5.RightChild = node8;
+            root.Left = node1;
+            root.Right = node2;
+            node1.Left = node3;
+            node2.Left = node4;
+            node2.Right = node5;
+            node3.Left = node6;
+            node3.Right = node7;
+            node5.Right = node8;
 
             var result = LeetCoder.PathSum2(root, 22);
             result.Should().HaveCount(1);
@@ -366,7 +366,7 @@ namespace Tests
             result.Should().BeNull();
             node3.Value -= 1;
 
-            node5.LeftChild = new BinaryTreeNode<int> { Value = 5 };
+            node5.Left = new BinaryTreeNode<int> { Value = 5 };
             //              5
             //             / \
             //            4   8
@@ -439,32 +439,32 @@ namespace Tests
             //      / \   \
             //     3   4   6
             var treeRoot = new BinaryTreeNode<int> { Value = 1 };
-            treeRoot.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            treeRoot.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 3 };
-            treeRoot.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 4 };
-            treeRoot.RightChild = new BinaryTreeNode<int> { Value = 5 };
-            treeRoot.RightChild.RightChild = new BinaryTreeNode<int> { Value = 6 };
+            treeRoot.Left = new BinaryTreeNode<int> { Value = 2 };
+            treeRoot.Left.Left = new BinaryTreeNode<int> { Value = 3 };
+            treeRoot.Left.Right = new BinaryTreeNode<int> { Value = 4 };
+            treeRoot.Right = new BinaryTreeNode<int> { Value = 5 };
+            treeRoot.Right.Right = new BinaryTreeNode<int> { Value = 6 };
 
             LeetCoder.FlattenBinaryTreeToLinkedList(treeRoot);
             treeRoot.Value.Should().Be(1);
-            treeRoot.LeftChild.Should().BeNull();
+            treeRoot.Left.Should().BeNull();
 
-            treeRoot.RightChild.Value.Should().Be(2);
-            treeRoot.RightChild.LeftChild.Should().BeNull();
+            treeRoot.Right.Value.Should().Be(2);
+            treeRoot.Right.Left.Should().BeNull();
 
-            treeRoot.RightChild.RightChild.Value.Should().Be(3);
-            treeRoot.RightChild.RightChild.LeftChild.Should().BeNull();
+            treeRoot.Right.Right.Value.Should().Be(3);
+            treeRoot.Right.Right.Left.Should().BeNull();
 
-            treeRoot.RightChild.RightChild.RightChild.Value.Should().Be(4);
-            treeRoot.RightChild.RightChild.RightChild.LeftChild.Should().BeNull();
+            treeRoot.Right.Right.Right.Value.Should().Be(4);
+            treeRoot.Right.Right.Right.Left.Should().BeNull();
 
-            treeRoot.RightChild.RightChild.RightChild.RightChild.Value.Should().Be(5);
-            treeRoot.RightChild.RightChild.RightChild.RightChild.LeftChild.Should().BeNull();
+            treeRoot.Right.Right.Right.Right.Value.Should().Be(5);
+            treeRoot.Right.Right.Right.Right.Left.Should().BeNull();
 
-            treeRoot.RightChild.RightChild.RightChild.RightChild.RightChild.Value.Should().Be(6);
-            treeRoot.RightChild.RightChild.RightChild.RightChild.RightChild.LeftChild.Should().BeNull();
+            treeRoot.Right.Right.Right.Right.Right.Value.Should().Be(6);
+            treeRoot.Right.Right.Right.Right.Right.Left.Should().BeNull();
 
-            treeRoot.RightChild.RightChild.RightChild.RightChild.RightChild.RightChild.Should().BeNull();
+            treeRoot.Right.Right.Right.Right.Right.Right.Should().BeNull();
         }
 
         [TestMethod]
@@ -480,17 +480,17 @@ namespace Tests
             //  4
 
             var treeRoot = new BinaryTreeNode<int> { Value = 1 };
-            treeRoot.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            treeRoot.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            treeRoot.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            treeRoot.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            treeRoot.RightChild.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            treeRoot.RightChild.RightChild = new BinaryTreeNode<int> { Value = 4 };
+            treeRoot.Left = new BinaryTreeNode<int> { Value = 2 };
+            treeRoot.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            treeRoot.Right = new BinaryTreeNode<int> { Value = 3 };
+            treeRoot.Right.Left = new BinaryTreeNode<int> { Value = 2 };
+            treeRoot.Right.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            treeRoot.Right.Right = new BinaryTreeNode<int> { Value = 4 };
 
             var result = LeetCoder.FindDuplicateSubTrees(treeRoot);
 
-            BinaryTreeNode<int>.AreEquivlent(result[0], treeRoot.LeftChild.LeftChild).Should().BeTrue();
-            BinaryTreeNode<int>.AreEquivlent(result[1], treeRoot.LeftChild).Should().BeTrue();
+            BinaryTreeNode<int>.AreEquivlent(result[0], treeRoot.Left.Left).Should().BeTrue();
+            BinaryTreeNode<int>.AreEquivlent(result[1], treeRoot.Left).Should().BeTrue();
         }
 
         // This is not correct implementation

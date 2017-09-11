@@ -10,10 +10,10 @@ namespace Problems.DataStructures
     public class BinaryTreeNode<T> where T : IComparable
     {
         public T Value { get; set; }
-        public BinaryTreeNode<T> LeftChild { get; set; }
-        public BinaryTreeNode<T> RightChild { get; set; }
+        public BinaryTreeNode<T> Left { get; set; }
+        public BinaryTreeNode<T> Right { get; set; }
 
-        public bool IsLeaf => LeftChild == null && RightChild == null;
+        public bool IsLeaf => Left == null && Right == null;
 
         public override string ToString()
         {
@@ -26,8 +26,8 @@ namespace Problems.DataStructures
             {
                 return $"{{{Value}(leaf)}}";
             }
-            var left = LeftChild == null ? "NIL" : LeftChild.GetStringRepresentation();
-            var right = RightChild == null ? "NIL" : RightChild.GetStringRepresentation();
+            var left = Left == null ? "NIL" : Left.GetStringRepresentation();
+            var right = Right == null ? "NIL" : Right.GetStringRepresentation();
             return $"{{{Value}; Left: {left}; Right: {right}}}";
         }
 
@@ -36,31 +36,31 @@ namespace Problems.DataStructures
             if (IsLeaf)
                 return 1;
             int leafCount = 0;
-            if (LeftChild != null)
-                leafCount += LeftChild.GetLeafCount();
-            if (RightChild != null)
-                leafCount += RightChild.GetLeafCount();
+            if (Left != null)
+                leafCount += Left.GetLeafCount();
+            if (Right != null)
+                leafCount += Right.GetLeafCount();
             return leafCount;
         }
 
         public void InOrderVisit(Action<BinaryTreeNode<T>> visit)
         {
-            LeftChild?.InOrderVisit(visit);
+            Left?.InOrderVisit(visit);
             visit(this);
-            RightChild?.InOrderVisit(visit);
+            Right?.InOrderVisit(visit);
         }
 
         public void PreOrderVisit(Action<BinaryTreeNode<T>> visit)
         {
             visit(this);
-            LeftChild?.PreOrderVisit(visit);
-            RightChild?.PreOrderVisit(visit);
+            Left?.PreOrderVisit(visit);
+            Right?.PreOrderVisit(visit);
         }
 
         public void PostOrderVisit(Action<BinaryTreeNode<T>> visit)
         {
-            LeftChild?.PostOrderVisit(visit);
-            RightChild?.PostOrderVisit(visit);
+            Left?.PostOrderVisit(visit);
+            Right?.PostOrderVisit(visit);
             visit(this);
         }
 
@@ -78,14 +78,14 @@ namespace Problems.DataStructures
                 if (current != null)
                 {
                     stack.Push(current);
-                    current = current.LeftChild;
+                    current = current.Left;
                 }
                 else
                 {
                     current = stack.Pop();
                     if (!visit(current))
                         return;
-                    current = current.RightChild;
+                    current = current.Right;
                 }
             }
         }
@@ -100,9 +100,9 @@ namespace Problems.DataStructures
                 if (current != null)
                 {
                     visit(current);
-                    stack.Push(current.RightChild);
-                    stack.Push(current.LeftChild);
-                    current = current.LeftChild;
+                    stack.Push(current.Right);
+                    stack.Push(current.Left);
+                    current = current.Left;
                 }
             }
         }
@@ -123,13 +123,13 @@ namespace Problems.DataStructures
                 stack.Push(root);
                 return stack;
             }
-            var leftStack = SearchAndReturnPath(root.LeftChild, key);
+            var leftStack = SearchAndReturnPath(root.Left, key);
             if (leftStack != null)
             {
                 leftStack.Push(root);
                 return leftStack;
             }
-            var rightStack = SearchAndReturnPath(root.RightChild, key);
+            var rightStack = SearchAndReturnPath(root.Right, key);
             if (rightStack != null)
             {
                 rightStack.Push(root);
@@ -146,8 +146,8 @@ namespace Problems.DataStructures
                 return false;
 
             return tree1.Value.CompareTo(tree2.Value) == 0 &&
-                AreEquivlent(tree1.LeftChild, tree2.LeftChild) &&
-                AreEquivlent(tree1.RightChild, tree2.RightChild);
+                AreEquivlent(tree1.Left, tree2.Left) &&
+                AreEquivlent(tree1.Right, tree2.Right);
         }
     }
 
@@ -162,9 +162,9 @@ namespace Problems.DataStructures
             get
             {
                 var tmp = root;
-                while (tmp.LeftChild != null)
+                while (tmp.Left != null)
                 {
-                    tmp = tmp.LeftChild;
+                    tmp = tmp.Left;
                 }
                 return tmp.Value;
             }
@@ -175,9 +175,9 @@ namespace Problems.DataStructures
             get
             {
                 var tmp = root;
-                while (tmp.RightChild != null)
+                while (tmp.Right != null)
                 {
-                    tmp = tmp.RightChild;
+                    tmp = tmp.Right;
                 }
                 return tmp.Value;
             }
@@ -205,15 +205,15 @@ namespace Problems.DataStructures
                 return root;
             if (compare < 0)
             {
-                if (root.LeftChild == null)
+                if (root.Left == null)
                     return null;
-                return Find(root.LeftChild, key);
+                return Find(root.Left, key);
             }
             else
             {
-                if (root.RightChild == null)
+                if (root.Right == null)
                     return null;
-                return Find(root.RightChild, key);
+                return Find(root.Right, key);
             }
         }
 
@@ -222,24 +222,24 @@ namespace Problems.DataStructures
             bool greater = node.Value.CompareTo(root.Value) >= 0;
             if (greater)
             {
-                if (root.RightChild == null)
+                if (root.Right == null)
                 {
-                    root.RightChild = node;
+                    root.Right = node;
                 }
                 else
                 {
-                    Insert(root.RightChild, node);
+                    Insert(root.Right, node);
                 }
             }
             else
             {
-                if (root.LeftChild == null)
+                if (root.Left == null)
                 {
-                    root.LeftChild = node;
+                    root.Left = node;
                 }
                 else
                 {
-                    Insert(root.LeftChild, node);
+                    Insert(root.Left, node);
                 }
             }
         }
@@ -278,11 +278,11 @@ namespace Problems.DataStructures
             var node = new BinaryTreeNode<T> { Value = sortedArray[mid] };
             if (p < mid)
             {
-                node.LeftChild = BuildFromSortedArray(sortedArray, p, mid - 1);
+                node.Left = BuildFromSortedArray(sortedArray, p, mid - 1);
             }
             if (q > mid)
             {
-                node.RightChild = BuildFromSortedArray(sortedArray, mid + 1, q);
+                node.Right = BuildFromSortedArray(sortedArray, mid + 1, q);
             }
 
             return node;
@@ -290,4 +290,11 @@ namespace Problems.DataStructures
         }
     }
 
+    public class BinaryTreeNodeWithNextRightPointer<T>
+    {
+        public T Value { get; set; }
+        public BinaryTreeNodeWithNextRightPointer<T> Left { get; set; }
+        public BinaryTreeNodeWithNextRightPointer<T> Right { get; set; }
+        public BinaryTreeNodeWithNextRightPointer<T> NextRight { get; set; }
+    }
 }

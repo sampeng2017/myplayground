@@ -17,14 +17,14 @@ namespace Tests
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
             OldProblems.FlipBinaryTree(root);
 
-            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
+            root.Left = new BinaryTreeNode<int> { Value = 2 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 5 };
 
-            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
-            root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
+            root.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 6 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 7 };
+            root.Right.Right.Left = new BinaryTreeNode<int> { Value = 8 };
 
             root.GetStringRepresentation().Should().Be("{1; Left: {2; Left: {4(leaf)}; Right: {5(leaf)}}; Right: {3; Left: {6(leaf)}; Right: {7; Left: {8(leaf)}; Right: NIL}}}");
             OldProblems.FlipBinaryTree(root);

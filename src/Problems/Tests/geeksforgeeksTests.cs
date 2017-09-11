@@ -238,20 +238,20 @@ namespace Tests
             // \
             //   8
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 1 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 2 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
-            root.LeftChild.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 8 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 5 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 6 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
+            root.Left = new BinaryTreeNode<int> { Value = 2 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 4 };
+            root.Left.Left.Right = new BinaryTreeNode<int> { Value = 8 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 5 };
+            root.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 6 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 7 };
 
             var result = Geeksforgeeks.LeftViewOfBinaryTree(root);
             result.Should().HaveCount(4);
             result[0].Should().Be(root);
-            result[1].Should().Be(root.LeftChild);
-            result[2].Should().Be(root.LeftChild.LeftChild);
-            result[3].Should().Be(root.LeftChild.LeftChild.RightChild);
+            result[1].Should().Be(root.Left);
+            result[2].Should().Be(root.Left.Left);
+            result[3].Should().Be(root.Left.Left.Right);
         }
 
         [TestMethod]
@@ -266,13 +266,13 @@ namespace Tests
             //      /   \      
             //    10    14
             var root = new BinaryTreeNode<int> { Value = 20 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 8 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 5 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.LeftChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 10 };
-            root.LeftChild.RightChild.RightChild = new BinaryTreeNode<int> { Value = 14 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 22 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 25 };
+            root.Left = new BinaryTreeNode<int> { Value = 8 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 5 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Left.Right.Left = new BinaryTreeNode<int> { Value = 10 };
+            root.Left.Right.Right = new BinaryTreeNode<int> { Value = 14 };
+            root.Right = new BinaryTreeNode<int> { Value = 22 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 25 };
 
             var result = Geeksforgeeks.BottomViewOfBinaryTree(root);
             result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 3, 14, 25 });
@@ -286,7 +286,7 @@ namespace Tests
             //5      3  4    25
             //      /  \      
             //    10   14
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 4 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 4 };
             result = Geeksforgeeks.BottomViewOfBinaryTree(root);
             result.Select(n => n.Value).ToArray().Should().BeEquivalentTo(new int[] { 5, 10, 4, 14, 25 });
             result = Geeksforgeeks.BottomViewOfBinaryTree2(root);
@@ -305,16 +305,49 @@ namespace Tests
             //      /   \      
             //    10    14
             var root = new BinaryTreeNode<int> { Value = 20 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 8 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 5 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            root.LeftChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 10 };
-            root.LeftChild.RightChild.RightChild = new BinaryTreeNode<int> { Value = 14 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 22 };
-            root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 25 };
+            root.Left = new BinaryTreeNode<int> { Value = 8 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 5 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 3 };
+            root.Left.Right.Left = new BinaryTreeNode<int> { Value = 10 };
+            root.Left.Right.Right = new BinaryTreeNode<int> { Value = 14 };
+            root.Right = new BinaryTreeNode<int> { Value = 22 };
+            root.Right.Right = new BinaryTreeNode<int> { Value = 25 };
 
             root.GetLeafCount().Should().Be(4);
         }
+
+        [TestMethod]
+        [TestCategory("Tree")]
+        public void ConnectNodesAtSameLevel()
+        {
+            //     A
+            //   / \
+            //  B    C
+            // / \    \
+            //D   E    F
+
+            var nodeA = new BinaryTreeNodeWithNextRightPointer<string> { Value = "A" };
+            var nodeB = new BinaryTreeNodeWithNextRightPointer<string> { Value = "B" };
+            var nodeC = new BinaryTreeNodeWithNextRightPointer<string> { Value = "C" };
+            var nodeD = new BinaryTreeNodeWithNextRightPointer<string> { Value = "D" };
+            var nodeE = new BinaryTreeNodeWithNextRightPointer<string> { Value = "E" };
+            var nodeF = new BinaryTreeNodeWithNextRightPointer<string> { Value = "F" };
+
+            nodeA.Left = nodeB;
+            nodeA.Left.Left = nodeD;
+            nodeA.Left.Right = nodeE;
+            nodeA.Right = nodeC;
+            nodeA.Right.Right = nodeF;
+
+            Geeksforgeeks.ConnectNodesAtSameLevel(nodeA);
+            nodeA.NextRight.Should().BeNull();
+            nodeB.NextRight.Should().Be(nodeC);
+            nodeC.NextRight.Should().BeNull();
+            nodeD.NextRight.Should().Be(nodeE);
+            nodeE.NextRight.Should().Be(nodeF);
+            nodeF.NextRight.Should().BeNull();
+        }
+
         [TestMethod]
         [TestCategory("Heap")]
         public void FindMedianInStream()
@@ -648,9 +681,9 @@ namespace Tests
             // \
             //  3
             var tree1 = new BinaryTreeNode<int> { Value = 10 };
-            tree1.LeftChild = new BinaryTreeNode<int> { Value = 1 };
-            tree1.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            tree1.RightChild = new BinaryTreeNode<int> { Value = 2 };
+            tree1.Left = new BinaryTreeNode<int> { Value = 1 };
+            tree1.Left.Right = new BinaryTreeNode<int> { Value = 3 };
+            tree1.Right = new BinaryTreeNode<int> { Value = 2 };
 
 
             //     15
@@ -661,12 +694,12 @@ namespace Tests
             // \
             //  3
             var tree2 = new BinaryTreeNode<int> { Value = 15 };
-            tree2.LeftChild = new BinaryTreeNode<int> { Value = 10 };
-            tree2.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 1 };
-            tree2.LeftChild.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 3 };
-            tree2.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 2 };
-            tree2.RightChild = new BinaryTreeNode<int> { Value = 4 };
-            tree2.RightChild.RightChild = new BinaryTreeNode<int> { Value = 6 };
+            tree2.Left = new BinaryTreeNode<int> { Value = 10 };
+            tree2.Left.Left = new BinaryTreeNode<int> { Value = 1 };
+            tree2.Left.Left.Right = new BinaryTreeNode<int> { Value = 3 };
+            tree2.Left.Right = new BinaryTreeNode<int> { Value = 2 };
+            tree2.Right = new BinaryTreeNode<int> { Value = 4 };
+            tree2.Right.Right = new BinaryTreeNode<int> { Value = 6 };
             var result = Geeksforgeeks.CheckBinaryTreeSubTreeOfAnother(tree1, tree2);
             result.Should().BeTrue();
 
@@ -808,26 +841,26 @@ namespace Tests
         {
             // -------------
             BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 10 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 12 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 15 };
+            root.Left = new BinaryTreeNode<int> { Value = 12 };
+            root.Right = new BinaryTreeNode<int> { Value = 15 };
 
             var tuple = Geeksforgeeks.ConvertBinaryTreeToDoublyLinkedList(root);
             ValidateConvertedDoublyLinkedListFromBinaryTree(tuple.Item1, tuple.Item2, new int[] { 12, 10, 15 });
 
             // -------------
             root = new BinaryTreeNode<int> { Value = 10 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 15 };
+            root.Right = new BinaryTreeNode<int> { Value = 15 };
 
             tuple = Geeksforgeeks.ConvertBinaryTreeToDoublyLinkedList(root);
             ValidateConvertedDoublyLinkedListFromBinaryTree(tuple.Item1, tuple.Item2, new int[] { 10, 15 });
 
             // -------------
             root = new BinaryTreeNode<int> { Value = 10 };
-            root.LeftChild = new BinaryTreeNode<int> { Value = 12 };
-            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 25 };
-            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 30 };
-            root.RightChild = new BinaryTreeNode<int> { Value = 15 };
-            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 36 };
+            root.Left = new BinaryTreeNode<int> { Value = 12 };
+            root.Left.Left = new BinaryTreeNode<int> { Value = 25 };
+            root.Left.Right = new BinaryTreeNode<int> { Value = 30 };
+            root.Right = new BinaryTreeNode<int> { Value = 15 };
+            root.Right.Left = new BinaryTreeNode<int> { Value = 36 };
 
             tuple = Geeksforgeeks.ConvertBinaryTreeToDoublyLinkedList(root);
             ValidateConvertedDoublyLinkedListFromBinaryTree(tuple.Item1, tuple.Item2, new int[] { 25, 12, 30, 10, 36, 15 });
@@ -843,7 +876,7 @@ namespace Tests
             while (p != null)
             {
                 tmpCollector.Add(p.Value);
-                p = p.LeftChild;
+                p = p.Left;
             }
             tmpCollector.ToArray().Should().BeEquivalentTo(expectedLeftToRightSeq);
 
@@ -852,7 +885,7 @@ namespace Tests
             while (p != null)
             {
                 tmpCollector.Add(p.Value);
-                p = p.RightChild;
+                p = p.Right;
             }
             tmpCollector.ToArray().Should().BeEquivalentTo(expectedLeftToRightSeq.OrderByDescending(i => i).ToArray());
         }

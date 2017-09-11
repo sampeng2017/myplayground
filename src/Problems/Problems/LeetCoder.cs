@@ -527,10 +527,10 @@ namespace Problems
                 return false;
 
             bool subResut = false;
-            if (tree.LeftChild != null)
-                subResut = PathSum1(tree.LeftChild, sum - tree.Value);
-            if (!subResut && tree.RightChild != null)
-                subResut = PathSum1(tree.RightChild, sum - tree.Value);
+            if (tree.Left != null)
+                subResut = PathSum1(tree.Left, sum - tree.Value);
+            if (!subResut && tree.Right != null)
+                subResut = PathSum1(tree.Right, sum - tree.Value);
             return subResut;
         }
 
@@ -554,9 +554,9 @@ namespace Problems
 
             IList<IList<int>> subResult1 = null;
             IList<IList<int>> subResult2 = null;
-            if (tree.LeftChild != null)
+            if (tree.Left != null)
             {
-                subResult1 = PathSum2(tree.LeftChild, sum - tree.Value);
+                subResult1 = PathSum2(tree.Left, sum - tree.Value);
                 if (subResult1 != null)
                 {
                     foreach (var tmp in subResult1)
@@ -565,9 +565,9 @@ namespace Problems
                     }
                 }
             }
-            if (tree.RightChild != null)
+            if (tree.Right != null)
             {
-                subResult2 = PathSum2(tree.RightChild, sum - tree.Value);
+                subResult2 = PathSum2(tree.Right, sum - tree.Value);
                 if (subResult2 != null)
                 {
                     foreach (var tmp in subResult2)
@@ -632,23 +632,23 @@ namespace Problems
             if (tree == null)
                 return;
             var tmp = tree;
-            var tmpRightChild = tree.RightChild;
-            if (tree.LeftChild != null)
+            var tmpRightChild = tree.Right;
+            if (tree.Left != null)
             {
-                FlattenBinaryTreeToLinkedList(tree.LeftChild);
-                tree.RightChild = tree.LeftChild;
-                tmp = tree.LeftChild;
-                while (tmp.RightChild != null)
+                FlattenBinaryTreeToLinkedList(tree.Left);
+                tree.Right = tree.Left;
+                tmp = tree.Left;
+                while (tmp.Right != null)
                 {
-                    tmp = tmp.RightChild;
+                    tmp = tmp.Right;
                 }
-                tree.LeftChild = null;
+                tree.Left = null;
             }
 
             if (tmpRightChild != null)
             {
                 FlattenBinaryTreeToLinkedList(tmpRightChild);
-                tmp.RightChild = tmpRightChild;
+                tmp.Right = tmpRightChild;
             }
         }
 
@@ -728,13 +728,13 @@ namespace Problems
             tree.PostOrderVisit(n =>
             {
                 string token = $"({n.Value}";
-                if (n.LeftChild != null)
+                if (n.Left != null)
                 {
-                    token += memo[n.LeftChild];
+                    token += memo[n.Left];
                 }
-                if (n.RightChild != null)
+                if (n.Right != null)
                 {
-                    token += memo[n.RightChild];
+                    token += memo[n.Right];
                 }
                 token += ")";
                 memo.Add(n, token);

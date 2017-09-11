@@ -268,6 +268,36 @@ namespace Problems
             throw new NotImplementedException();
         }
 
+        // http://www.geeksforgeeks.org/connect-nodes-at-same-level/
+        public static void ConnectNodesAtSameLevel(BinaryTreeNodeWithNextRightPointer<string> tree)
+        {
+            if (tree == null)
+                return;
+            var queue = new Queue<Tuple<BinaryTreeNodeWithNextRightPointer<string>, int>>();
+            queue.Enqueue(Tuple.Create(tree, 0));
+
+            BinaryTreeNodeWithNextRightPointer<string> lastVisitedNode = null;
+            int lastVisitedLevel = 0;
+            while (queue.Count > 0)
+            {
+                var tuple = queue.Dequeue();
+                var node = tuple.Item1;
+                var l = tuple.Item2;
+
+                if (lastVisitedNode != null && lastVisitedLevel == l)
+                {
+                    lastVisitedNode.NextRight = node;
+                }
+
+                if (node.Left != null)
+                    queue.Enqueue(Tuple.Create(node.Left, l + 1));
+                if (node.Right != null)
+                    queue.Enqueue(Tuple.Create(node.Right, l + 1));
+                lastVisitedNode = node;
+                lastVisitedLevel = l;
+            }
+        }
+
         // http://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
         public static ListNode<T> ReverseLinkedListInGroupsOfGivenSize<T>(ListNode<T> head, int group)
         {
@@ -328,14 +358,14 @@ namespace Problems
                 return null;
 
             var result = new List<BinaryTreeNode<int>> { root };
-            if (root.LeftChild != null)
+            if (root.Left != null)
             {
-                var leftNodes = LeftViewOfBinaryTree(root.LeftChild);
+                var leftNodes = LeftViewOfBinaryTree(root.Left);
                 result.AddRange(leftNodes);
             }
-            else if (root.RightChild != null)
+            else if (root.Right != null)
             {
-                var rightNodes = LeftViewOfBinaryTree(root.RightChild);
+                var rightNodes = LeftViewOfBinaryTree(root.Right);
                 result.AddRange(rightNodes);
             }
 
@@ -662,8 +692,8 @@ namespace Problems
             if (tree == null)
                 return;
 
-            StampTreeNodeDistanceAndHeight(tree.LeftChild, distance - 1, height + 1, container);
-            StampTreeNodeDistanceAndHeight(tree.RightChild, distance + 1, height + 1, container);
+            StampTreeNodeDistanceAndHeight(tree.Left, distance - 1, height + 1, container);
+            StampTreeNodeDistanceAndHeight(tree.Right, distance + 1, height + 1, container);
             if (!container.ContainsKey(distance) || container[distance].Item2 <= height)
                 container[distance] = Tuple.Create(tree, height);
         }
@@ -681,13 +711,13 @@ namespace Problems
                 var node = tuple.Item1;
                 var distance = tuple.Item2;
                 container[distance] = node;
-                if (node.LeftChild != null)
+                if (node.Left != null)
                 {
-                    queue.Enqueue(Tuple.Create(node.LeftChild, distance - 1));
+                    queue.Enqueue(Tuple.Create(node.Left, distance - 1));
                 }
-                if (node.RightChild != null)
+                if (node.Right != null)
                 {
-                    queue.Enqueue(Tuple.Create(node.RightChild, distance + 1));
+                    queue.Enqueue(Tuple.Create(node.Right, distance + 1));
                 }
             }
             return container.Select(t => t.Value).ToList();
@@ -1091,30 +1121,30 @@ namespace Problems
                 return Tuple.Create(treeNode, treeNode);
 
             Tuple<BinaryTreeNode<T>, BinaryTreeNode<T>> leftResult = null;
-            if (treeNode.LeftChild != null)
+            if (treeNode.Left != null)
             {
-                leftResult = ConvertBinaryTreeToDoublyLinkedList(treeNode.LeftChild);
+                leftResult = ConvertBinaryTreeToDoublyLinkedList(treeNode.Left);
             }
 
             Tuple<BinaryTreeNode<T>, BinaryTreeNode<T>> rightResult = null;
-            if (treeNode.RightChild != null)
+            if (treeNode.Right != null)
             {
-                rightResult = ConvertBinaryTreeToDoublyLinkedList(treeNode.RightChild);
+                rightResult = ConvertBinaryTreeToDoublyLinkedList(treeNode.Right);
             }
             BinaryTreeNode<T> head = treeNode;
             BinaryTreeNode<T> tail = treeNode;
 
-            treeNode.RightChild = leftResult?.Item2;
+            treeNode.Right = leftResult?.Item2;
             if (leftResult != null)
             {
-                leftResult.Item2.LeftChild = treeNode;
+                leftResult.Item2.Left = treeNode;
                 head = leftResult.Item1;
             }
 
-            treeNode.LeftChild = rightResult?.Item1;
+            treeNode.Left = rightResult?.Item1;
             if (rightResult != null)
             {
-                rightResult.Item1.RightChild = treeNode;
+                rightResult.Item1.Right = treeNode;
                 tail = rightResult.Item2;
             }
 

@@ -16,11 +16,11 @@ namespace Problems
             {
                 return;
             }
-            var tempNode = tree.LeftChild;
-            tree.LeftChild = tree.RightChild;
-            tree.RightChild = tempNode;
-            FlipBinaryTree(tree.LeftChild);
-            FlipBinaryTree(tree.RightChild);
+            var tempNode = tree.Left;
+            tree.Left = tree.Right;
+            tree.Right = tempNode;
+            FlipBinaryTree(tree.Left);
+            FlipBinaryTree(tree.Right);
         }
 
         public static Tuple<int, int> FindInSorted2DArray(int[,] ary, int val)
@@ -66,8 +66,8 @@ namespace Problems
 
             var leftSubTree = BuildTreeFromInOrderAndPreOrderTraverse(leftChildrenPreOrder, leftChildrenInOrder);
             var rightSubTree = BuildTreeFromInOrderAndPreOrderTraverse(rightChildrenPreOrder, rightChildrenInOrder);
-            root.LeftChild = leftSubTree;
-            root.RightChild = rightSubTree;
+            root.Left = leftSubTree;
+            root.Right = rightSubTree;
             return root;
         }
 
