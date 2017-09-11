@@ -26,9 +26,9 @@ namespace Tests
             root.RightChild.RightChild = new BinaryTreeNode<int> { Value = 7 };
             root.RightChild.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 8 };
 
-            root.ToString().Should().Be("{1; Left: {2; Left: {4(leaf)}; Right: {5(leaf)}}; Right: {3; Left: {6(leaf)}; Right: {7; Left: {8(leaf)}; Right: NIL}}}");
+            root.GetStringRepresentation().Should().Be("{1; Left: {2; Left: {4(leaf)}; Right: {5(leaf)}}; Right: {3; Left: {6(leaf)}; Right: {7; Left: {8(leaf)}; Right: NIL}}}");
             OldProblems.FlipBinaryTree(root);
-            root.ToString().Should().Be("{1; Left: {3; Left: {7; Left: NIL; Right: {8(leaf)}}; Right: {6(leaf)}}; Right: {2; Left: {5(leaf)}; Right: {4(leaf)}}}");
+            root.GetStringRepresentation().Should().Be("{1; Left: {3; Left: {7; Left: NIL; Right: {8(leaf)}}; Right: {6(leaf)}}; Right: {2; Left: {5(leaf)}; Right: {4(leaf)}}}");
         }
 
         [TestMethod]

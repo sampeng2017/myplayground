@@ -17,12 +17,17 @@ namespace Problems.DataStructures
 
         public override string ToString()
         {
+            return Value?.ToString();
+        }
+
+        public string GetStringRepresentation()
+        {
             if (IsLeaf)
             {
                 return $"{{{Value}(leaf)}}";
             }
-            var left = LeftChild == null ? "NIL" : LeftChild.ToString();
-            var right = RightChild == null ? "NIL" : RightChild.ToString();
+            var left = LeftChild == null ? "NIL" : LeftChild.GetStringRepresentation();
+            var right = RightChild == null ? "NIL" : RightChild.GetStringRepresentation();
             return $"{{{Value}; Left: {left}; Right: {right}}}";
         }
 

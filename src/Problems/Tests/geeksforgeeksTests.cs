@@ -801,5 +801,60 @@ namespace Tests
             result = Geeksforgeeks.SlidingWindowMaxOfAllSubArraysWithSizeK(a, 3);
             result.Should().BeEquivalentTo(new int[] { 3, 2, 1, 5, 5, 5, 6 });
         }
+
+        [TestMethod]
+        [TestCategory("Tree")]
+        public void ConvertBinaryTreeToDoublyLinkedList()
+        {
+            // -------------
+            BinaryTreeNode<int> root = new BinaryTreeNode<int> { Value = 10 };
+            root.LeftChild = new BinaryTreeNode<int> { Value = 12 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 15 };
+
+            var tuple = Geeksforgeeks.ConvertBinaryTreeToDoublyLinkedList(root);
+            ValidateConvertedDoublyLinkedListFromBinaryTree(tuple.Item1, tuple.Item2, new int[] { 12, 10, 15 });
+
+            // -------------
+            root = new BinaryTreeNode<int> { Value = 10 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 15 };
+
+            tuple = Geeksforgeeks.ConvertBinaryTreeToDoublyLinkedList(root);
+            ValidateConvertedDoublyLinkedListFromBinaryTree(tuple.Item1, tuple.Item2, new int[] { 10, 15 });
+
+            // -------------
+            root = new BinaryTreeNode<int> { Value = 10 };
+            root.LeftChild = new BinaryTreeNode<int> { Value = 12 };
+            root.LeftChild.LeftChild = new BinaryTreeNode<int> { Value = 25 };
+            root.LeftChild.RightChild = new BinaryTreeNode<int> { Value = 30 };
+            root.RightChild = new BinaryTreeNode<int> { Value = 15 };
+            root.RightChild.LeftChild = new BinaryTreeNode<int> { Value = 36 };
+
+            tuple = Geeksforgeeks.ConvertBinaryTreeToDoublyLinkedList(root);
+            ValidateConvertedDoublyLinkedListFromBinaryTree(tuple.Item1, tuple.Item2, new int[] { 25, 12, 30, 10, 36, 15 });
+        }
+
+        private void ValidateConvertedDoublyLinkedListFromBinaryTree(
+            BinaryTreeNode<int> head,
+            BinaryTreeNode<int> tail,
+            int[] expectedLeftToRightSeq)
+        {
+            var tmpCollector = new List<int>();
+            var p = head;
+            while (p != null)
+            {
+                tmpCollector.Add(p.Value);
+                p = p.LeftChild;
+            }
+            tmpCollector.ToArray().Should().BeEquivalentTo(expectedLeftToRightSeq);
+
+            tmpCollector.Clear();
+            p = tail;
+            while (p != null)
+            {
+                tmpCollector.Add(p.Value);
+                p = p.RightChild;
+            }
+            tmpCollector.ToArray().Should().BeEquivalentTo(expectedLeftToRightSeq.OrderByDescending(i => i).ToArray());
+        }
     }
 }
