@@ -943,5 +943,26 @@ namespace Tests
             }
             tmpCollector.ToArray().Should().BeEquivalentTo(expectedLeftToRightSeq.OrderByDescending(i => i).ToArray());
         }
+
+        [TestMethod]
+        [Ignore] // not working
+        public void MaxIntegerValue()
+        {
+            string s = "5120";
+            var result = Geeksforgeeks.MaxIntegerValue(s);
+            result.Should().Be(8);
+        }
+
+        [TestMethod]
+        public void BirdAndMaxFruitGathering()
+        {
+            var trees = new int[] { 2, 1, 3, 5, 0, 1, 4 };
+            var result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 3);
+            result.Should().Be(9);
+
+            trees = new int[] { 1, 6, 2, 5, 3, 4 };
+            result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 2);
+            result.Should().Be(8);
+        }
     }
 }

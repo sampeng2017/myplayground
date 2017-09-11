@@ -271,7 +271,7 @@ namespace Problems
 
             int currentGas = 0;
 
-            while (sourceQueue.Count > 0 )
+            while (sourceQueue.Count > 0)
             {
                 var p = sourceQueue.Dequeue();
                 calQueue.Enqueue(p);
@@ -1214,6 +1214,95 @@ namespace Problems
 
             return Tuple.Create(head, tail);
         }
+
+        #region facebook
+        // http://practice.geeksforgeeks.org/problems/maximum-integer-value/0
+        public static long MaxIntegerValue(string s)
+        {
+            int[] digitArray = new int[s.Length];
+            for (int i = 0; i < s.Length; i++)
+            {
+                digitArray[i] = int.Parse(s[i].ToString());
+            }
+
+            return MaxIntegerValue(digitArray, 0, digitArray.Length - 1);
+        }
+
+        private static long MaxIntegerValue(int[] a, int p, int q)
+        {
+            if (p > q)
+                throw new InvalidOperationException();
+
+            if (p == q)
+                return a[p];
+
+            long resultWithPlus = a[q] + MaxIntegerValue(a, p, q - 1);
+            long resultWithMultiply = a[q] * MaxIntegerValue(a, p, q - 1);
+
+            return Math.Max(resultWithPlus, resultWithMultiply);
+        }
+
+        // http://practice.geeksforgeeks.org/problems/bird-and-maximum-fruit-gathering/0
+        public static int BirdAndMaxFruitGathering(int[] trees, int time)
+        {
+            if (trees == null || trees.Length == 0 || time == 0)
+                return 0;
+
+            // build a linked list loop
+            var head = new ListNode<int> { Value = trees[0] };
+            var previous = head;
+            for (int i = 1; i < trees.Length; i++)
+            {
+                previous.Next = new ListNode<int> { Value = trees[i] };
+                previous = previous.Next;
+            }
+            previous.Next = head;
+
+            //collect fruits from first node
+            var resultFromFristTree = BirdAndMaxFruitGathering_Collect(head, time);
+
+            // single tree scenario
+            if (resultFromFristTree.Item2 == head)
+                return resultFromFristTree.Item1;
+
+            int max = resultFromFristTree.Item1;
+            int previousResult = resultFromFristTree.Item1;
+            var previousHead = head;
+            var previousTail = resultFromFristTree.Item2;
+            var nextHead = head.Next;
+            while (nextHead != head)
+            {
+                int tmpResult = previousResult - previousHead.Value + previousTail.Next.Value;
+                max = Math.Max(max, tmpResult);
+                previousResult = tmpResult;
+
+                previousHead = nextHead;
+                nextHead = nextHead.Next;
+                previousTail = previousTail.Next;
+            }
+            return max;
+        }
+
+        // pick each tree until time is running out or looped back to head, return total fruits and 
+        // the last tree visited.
+        private static Tuple<int, ListNode<int>> BirdAndMaxFruitGathering_Collect(ListNode<int> head, int time)
+        {
+            var p = head;
+            int total = 0;
+            // time to pick the head
+            while (true)
+            {
+                total += p.Value;
+                time -= 1;
+                if (p.Next == head || time == 0)
+                    break;
+                p = p.Next;
+            }
+
+            return Tuple.Create(total, p);
+        }
+
+        #endregion
         private class Sudoku
         {
             private int[,] sudoku;
