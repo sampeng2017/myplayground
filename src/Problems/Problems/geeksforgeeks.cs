@@ -1084,6 +1084,48 @@ namespace Problems
             return result.ToArray();
         }
 
+        // http://www.geeksforgeeks.org/convert-a-given-binary-tree-to-doubly-linked-list-set-4/
+        public static Tuple<BinaryTreeNode<T>, BinaryTreeNode<T>> ConvertBinaryTreeToDoublyLinkedList<T>(BinaryTreeNode<T> treeNode, BinaryTreeNode<T> previous = null, BinaryTreeNode<T> next = null) where T : IComparable
+        {
+            if (treeNode.IsLeaf)
+                return Tuple.Create(treeNode, treeNode);
+
+            Tuple<BinaryTreeNode<T>, BinaryTreeNode<T>> leftResult = null;
+            if (treeNode.LeftChild != null)
+            {
+                leftResult = ConvertBinaryTreeToDoublyLinkedList(treeNode.LeftChild, previous, treeNode);
+            }
+
+            Tuple<BinaryTreeNode<T>, BinaryTreeNode<T>> rightResult = null;
+            if (treeNode.RightChild != null)
+            {
+                rightResult = ConvertBinaryTreeToDoublyLinkedList(treeNode.RightChild, treeNode, next);
+            }
+
+            if (leftResult == null)
+            {
+                if (previous != null)
+                    previous.RightChild = treeNode;
+            }
+            else
+            {
+                leftResult.Item2.RightChild = treeNode;
+            }
+
+            if (rightResult == null)
+            {
+                if (next != null)
+                    treeNode.RightChild = next;
+            }
+            else
+            {
+                treeNode.RightChild = rightResult.Item1;
+            }
+
+            BinaryTreeNode<T> head = leftResult == null ? treeNode : leftResult.Item1;
+            BinaryTreeNode<T> tail = rightResult == null ? treeNode : rightResult.Item2;
+            return Tuple.Create(head, tail);
+        }
         private class Sudoku
         {
             private int[,] sudoku;
