@@ -317,5 +317,21 @@ namespace Tests
             };
             Others.CountAllNegativeNumbersInSorted2DArray(a).Should().Be(4);
         }
+
+        [TestMethod]
+        [TestCategory("Dynamic Programming")]
+        public void LongestCommonSequenceCount()
+        {
+            var a = "BATD";
+            var b = "ABACD";
+            int result = Others.LongestCommonSequenceCount(a, b);
+            result.Should().Be(3);
+
+            a = "BATD";
+            b = "IOPM";
+            result = Others.LongestCommonSequenceCount(a, b);
+            result.Should().Be(0);
+
+        }
     }
 }

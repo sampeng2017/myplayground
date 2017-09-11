@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Problems.Basics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -438,6 +439,48 @@ namespace Problems
                 }
             }
             return cnt;
+        }
+
+        public static int LongestCommonSequenceCount(string a, string b, int[,] memo = null)
+        {
+            Helpers.Ensure(a);
+            Helpers.Ensure(b);
+
+            int al = a.Length;
+            int bl = b.Length;
+            if (al == 0 || bl == 0)
+                return 0;
+
+            if (memo == null)
+            {
+                memo = new int[al, bl];
+                for (int i = 0; i < al; i++)
+                {
+                    for (int j = 0; j < bl; j++)
+                    {
+                        memo[i, j] = int.MinValue;
+                    }
+                }
+            }
+            if (memo[al - 1, bl - 1] >= 0)
+                return memo[al - 1, bl - 1];
+
+            string nextAStr = a.Substring(0, al - 1);
+            string nextBStr = b.Substring(0, bl - 1);
+
+            int result = 0;
+            if (a.Last() == b.Last())
+            {
+                result = 1 + LongestCommonSequenceCount(nextAStr, nextBStr);
+            }
+            else
+            {
+                int r1 = LongestCommonSequenceCount(a, nextBStr);
+                int r2 = LongestCommonSequenceCount(nextAStr, b);
+                result = Math.Max(r1, r2);
+            }
+            memo[al - 1, bl - 1] = result;
+            return result;
         }
     }
 }
