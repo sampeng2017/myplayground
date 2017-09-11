@@ -81,17 +81,18 @@ namespace Problems
             if (path2 == null)
                 return null;
 
-            int j = 0;
-            while (j < path1.Count && j < path2.Count)
+            BinaryTreeNode<int> result = null; 
+            while (path1.Count > 0 && path2.Count > 0)
             {
-                if (!ReferenceEquals(path1[j], path2[j]))
+                var p1 = path1.Pop();
+                var p2 = path2.Pop();
+                if (!ReferenceEquals(p1, p2))
                 {
-                    j--;
-                    break;
+                    break ;
                 }
-                j++;
+                result = p1;
             }
-            return path1[j];
+            return result;
         }
 
         public static int FindNthSmallestInArray(int[] array, int n)

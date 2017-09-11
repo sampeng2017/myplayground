@@ -107,42 +107,35 @@ namespace Problems.DataStructures
             }
         }
 
-        public IList<BinaryTreeNode<T>> SearchAndReturnPath(T key)
+        public Stack<BinaryTreeNode<T>> SearchAndReturnPath(T key)
         {
-            var pathContainer = new Stack<BinaryTreeNode<T>>();
-            if (SearchAndReturnPath(this, key, pathContainer))
-            {
-                return pathContainer.ToList();
-            }
-            return null;
+            return SearchAndReturnPath(this, key);
         }
 
-        private static bool SearchAndReturnPath(BinaryTreeNode<T> root, T key, Stack<BinaryTreeNode<T>> pathContainer)
+        private static Stack<BinaryTreeNode<T>> SearchAndReturnPath(BinaryTreeNode<T> root, T key)
         {
             if (root == null)
-                return false;
+                return null;
 
             if (root.Value.CompareTo(key) == 0)
             {
-                pathContainer.Push(root);
-                return true;
+                var stack = new Stack<BinaryTreeNode<T>>();
+                stack.Push(root);
+                return stack;
             }
-            bool foundInLeft = SearchAndReturnPath(root.LeftChild, key, pathContainer);
-            if (foundInLeft)
+            var leftStack = SearchAndReturnPath(root.LeftChild, key);
+            if (leftStack != null)
             {
-                pathContainer.Push(root);
-                return true;
+                leftStack.Push(root);
+                return leftStack;
             }
-            else
+            var rightStack = SearchAndReturnPath(root.RightChild, key);
+            if (rightStack != null)
             {
-                bool foundInRight = SearchAndReturnPath(root.RightChild, key, pathContainer);
-                if (foundInRight)
-                {
-                    pathContainer.Push(root);
-                    return true;
-                }
+                rightStack.Push(root);
+                return rightStack;
             }
-            return false;
+            return null;
         }
 
         public static bool AreEquivlent(BinaryTreeNode<T> tree1, BinaryTreeNode<T> tree2)
