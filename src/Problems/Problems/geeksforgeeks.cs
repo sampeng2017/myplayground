@@ -262,10 +262,41 @@ namespace Problems
 
         // http://practice.geeksforgeeks.org/problems/circular-tour/1
         // pumps: item1 = gas volumn, item2 = distance to next pump, in unit of gas
-        public static int CircularTour(Tuple<int, int> pumps)
+        public static int CircularTour(Tuple<int, int>[] pumps)
         {
-            // TODO
-            throw new NotImplementedException();
+            // gasDiff: a list of tuples where Item1 = (gas - distance) and Item2 = original index in array
+            var gasDiff = pumps.Select((t, i) => Tuple.Create(t.Item1 - t.Item2, i)).ToArray();
+            var sourceQueue = new Queue<Tuple<int, int>>(gasDiff);
+            var calQueue = new Queue<Tuple<int, int>>();
+
+            int currentGas = 0;
+
+            while (sourceQueue.Count > 0 )
+            {
+                var p = sourceQueue.Dequeue();
+                calQueue.Enqueue(p);
+                currentGas += p.Item1;
+
+                if (currentGas < 0)
+                {
+                    while (calQueue.Count > 0)
+                    {
+                        var d = calQueue.Dequeue();
+                        sourceQueue.Enqueue(d);
+
+                        currentGas = currentGas - d.Item1;
+                        if (currentGas >= 0)
+                            break;
+                    }
+                    if (calQueue.Count == 0)
+                    {
+                        currentGas = 0;
+                        if (sourceQueue.Peek() == gasDiff[0])
+                            return -1;
+                    }
+                }
+            }
+            return calQueue.Dequeue().Item2;
         }
 
         // http://www.geeksforgeeks.org/connect-nodes-at-same-level/
@@ -295,6 +326,39 @@ namespace Problems
                     queue.Enqueue(Tuple.Create(node.Right, l + 1));
                 lastVisitedNode = node;
                 lastVisitedLevel = l;
+            }
+        }
+
+        public static void ConnectNodesAtSameLevel2(BinaryTreeNodeWithNextRightPointer<string> tree)
+        {
+            var q = new Queue<BinaryTreeNodeWithNextRightPointer<string>>();
+            q.Enqueue(tree);
+
+            // null marker to represent end of current level
+            q.Enqueue(null);
+
+            // Do Level order of tree using NULL markers
+            while (q.Count > 0)
+            {
+                var p = q.Dequeue();
+                if (p != null)
+                {
+                    // next element in queue represents next 
+                    // node at current Level 
+                    p.NextRight = q.Peek();
+
+                    // push left and right children of current
+                    // node
+                    if (p.Left != null)
+                        q.Enqueue(p.Left);
+                    if (p.Right != null)
+                        q.Enqueue(p.Right);
+                }
+
+                // if queue is not empty, push NULL to mark 
+                // nodes at this level are visited
+                else if (q.Count > 0)
+                    q.Enqueue(null);
             }
         }
 

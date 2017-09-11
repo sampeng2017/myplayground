@@ -320,7 +320,7 @@ namespace Tests
         [TestCategory("Tree")]
         public void ConnectNodesAtSameLevel()
         {
-            //     A
+            //    A
             //   / \
             //  B    C
             // / \    \
@@ -346,6 +346,60 @@ namespace Tests
             nodeD.NextRight.Should().Be(nodeE);
             nodeE.NextRight.Should().Be(nodeF);
             nodeF.NextRight.Should().BeNull();
+
+            //ConnectNodesAtSameLevel2
+            nodeA.NextRight = nodeB.NextRight = nodeC.NextRight = nodeD.NextRight = nodeE.NextRight = nodeF.NextRight = null;
+            Geeksforgeeks.ConnectNodesAtSameLevel2(nodeA);
+            nodeA.NextRight.Should().BeNull();
+            nodeB.NextRight.Should().Be(nodeC);
+            nodeC.NextRight.Should().BeNull();
+            nodeD.NextRight.Should().Be(nodeE);
+            nodeE.NextRight.Should().Be(nodeF);
+            nodeF.NextRight.Should().BeNull();
+        }
+
+        [TestMethod]
+        [TestCategory("Stack and Queue")]
+        public void CircularTour()
+        {
+            var pumps = new Tuple<int, int>[]
+            {
+                Tuple.Create(4, 6),
+                Tuple.Create(6, 5),
+                Tuple.Create(7, 3),
+                Tuple.Create(4, 5),
+            };
+            var result = Geeksforgeeks.CircularTour(pumps);
+            result.Should().Be(1);
+
+            pumps = new Tuple<int, int>[]
+            {
+                Tuple.Create(4, 6),
+                Tuple.Create(6, 6),
+                Tuple.Create(3, 5),
+                Tuple.Create(9, 2),
+                Tuple.Create(5, 3),
+            };
+            result = Geeksforgeeks.CircularTour(pumps);
+            result.Should().Be(3);
+
+            pumps = new Tuple<int, int>[]
+            {
+                Tuple.Create(4, 4),
+            };
+            result = Geeksforgeeks.CircularTour(pumps);
+            result.Should().Be(0);
+
+            // no solution
+            pumps = new Tuple<int, int>[]
+           {
+                Tuple.Create(4, 4),
+                Tuple.Create(5, 4),
+                Tuple.Create(4, 5),
+                Tuple.Create(3, 5),
+           };
+            result = Geeksforgeeks.CircularTour(pumps);
+            result.Should().Be(-1);
         }
 
         [TestMethod]
