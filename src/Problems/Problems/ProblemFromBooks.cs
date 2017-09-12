@@ -61,6 +61,22 @@ namespace Problems
             AlternateArrayItems(a, p + len / 2, q);
         }
 
+        public static void ALternateArrayItems2(string[] a)
+        {
+            if (a == null || a.Length % 2 != 0)
+                throw new ArgumentException();
+
+            var a1 = new string[a.Length / 2];
+            var a2 = new string[a.Length / 2];
+            Array.Copy(a, 0, a1, 0, a.Length / 2);
+            Array.Copy(a, a.Length / 2, a2, 0, a.Length / 2);
+
+            for (int i = 0; i < a1.Length; i++)
+            {
+                a[2 * i] = a1[i];
+                a[2 * i + 1] = a2[i];
+            }
+        }
         public static IList<IList<int>> GenerateSubsets(IList<int> s)
         {
             Helpers.Ensure(s);

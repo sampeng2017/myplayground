@@ -523,15 +523,9 @@ namespace Problems
 
             if (tree.IsLeaf)
                 return tree.Value == sum;
-            else if (sum == tree.Value)
-                return false;
 
-            bool subResut = false;
-            if (tree.Left != null)
-                subResut = PathSum1(tree.Left, sum - tree.Value);
-            if (!subResut && tree.Right != null)
-                subResut = PathSum1(tree.Right, sum - tree.Value);
-            return subResut;
+            return PathSum1(tree.Left, sum - tree.Value) ||
+                PathSum1(tree.Right, sum - tree.Value);
         }
 
         //https://leetcode.com/problems/path-sum-ii/description/

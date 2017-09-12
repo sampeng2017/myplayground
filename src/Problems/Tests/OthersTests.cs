@@ -244,6 +244,10 @@ namespace Tests
             a = new int[] { 1, 2, 3, 4, 5, 11, 12, 13, 14, 15 };
             ProblemFromBooks.AlternateArrayItems(a);
             a.Should().BeEquivalentTo(new int[] { 1, 11, 2, 12, 3, 13, 4, 14, 5, 15 });
+
+            var tmp = new string[] { "a1", "a2", "b1", "b2" };
+            ProblemFromBooks.ALternateArrayItems2(tmp);
+            tmp.Should().BeEquivalentTo(new string[] { "a1", "b1", "a2", "b2" });
         }
 
         [TestMethod]

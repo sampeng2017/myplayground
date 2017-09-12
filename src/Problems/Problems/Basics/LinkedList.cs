@@ -115,6 +115,24 @@ namespace Problems.Basics
             }
         }
 
+        public static ListNode<T> AlternateLists_Recursive<T>(ListNode<T> l1, ListNode<T> l2)
+        {
+            if (l1 == null && l2 == null)
+                return null;
+            if (l1 == null)
+                return l2;
+            if (l2 == null)
+                return l1;
+
+            var tmp1 = l1.Next;
+            var tmp2 = l2.Next;
+
+            l1.Next = l2;
+            l2.Next = AlternateLists_Recursive(tmp1, tmp2);
+
+            return l1;
+        }
+
         public static ListNode<T> FindStartingNodeOfLoop<T>(ListNode<T> list1)
         {
             if (list1 == null || list1.Next == null)

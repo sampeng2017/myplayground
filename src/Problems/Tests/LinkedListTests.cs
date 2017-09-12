@@ -105,6 +105,27 @@ namespace Tests
             linkedList1.Next.Next.Next.Next.Next.Value.Should().Be(103);
             linkedList1.Next.Next.Next.Next.Next.Next.Value.Should().Be(104);
             linkedList1.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
+
+            //
+            linkedList1 = new ListNode<int> { Value = 1 };
+            linkedList1.Next = new ListNode<int> { Value = 2 };
+            linkedList1.Next.Next = new ListNode<int> { Value = 3 };
+
+            linkedList2 = new ListNode<int> { Value = 101 };
+            linkedList2.Next = new ListNode<int> { Value = 102 };
+            linkedList2.Next.Next = new ListNode<int> { Value = 103 };
+            linkedList2.Next.Next.Next = new ListNode<int> { Value = 104 };
+
+            LinkedList.AlternateLists_Recursive(linkedList1, linkedList2);
+
+            linkedList1.Value.Should().Be(1);
+            linkedList1.Next.Value.Should().Be(101);
+            linkedList1.Next.Next.Value.Should().Be(2);
+            linkedList1.Next.Next.Next.Value.Should().Be(102);
+            linkedList1.Next.Next.Next.Next.Value.Should().Be(3);
+            linkedList1.Next.Next.Next.Next.Next.Value.Should().Be(103);
+            linkedList1.Next.Next.Next.Next.Next.Next.Value.Should().Be(104);
+            linkedList1.Next.Next.Next.Next.Next.Next.Next.Should().BeNull();
         }
 
         [TestMethod]
