@@ -981,5 +981,17 @@ namespace Tests
             result = Geeksforgeeks.RearrangeString(s);
             result.Should().Be("AABCCDEW6");
         }
+
+        [TestMethod]
+        public void LargestSumSubArrayOfSizeAtLeastK()
+        {
+            var a = new int[] { -4, -2, 1, -3 };
+            var result =  Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 2);
+            result.Should().Be(-1);
+
+            a = new int[] { 1, 1, 1, 1, 1, 1 };
+            result = Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 2);
+            result.Should().Be(6);
+        }
     }
 }

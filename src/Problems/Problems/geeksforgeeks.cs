@@ -1331,6 +1331,26 @@ namespace Problems
             strBuilder.Append(sum.ToString());
             return strBuilder.ToString();
         }
+
+        //http://practice.geeksforgeeks.org/problems/largest-sum-subarray-of-size-at-least-k/0
+        public static int LargestSumSubArrayOfSizeAtLeastK(IList<int> a, int k)
+        {
+            if (a == null || k == 0)
+                throw new ArgumentException();
+
+            if (a.Count < k || k == 1)
+            {
+                return a.Max();
+            }
+
+            //if (k == 1)
+            //    return a.Max();
+
+            int r1 = a[0] + LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k - 1);
+            int r2 = LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k);
+            return Math.Max(r1, r2);
+        }
+
         #endregion
         private class Sudoku
         {
