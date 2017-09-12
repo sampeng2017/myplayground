@@ -1406,6 +1406,7 @@ namespace Problems
         // http://practice.geeksforgeeks.org/problems/convert-ternary-expression-to-binary-tree/1
         public static BinaryTreeNode<char> ConvertTernaryExpressionToBinaryTree(string ternaryExpr)
         {
+            // TODO not working. need to use operator precendence
             if (string.IsNullOrEmpty(ternaryExpr))
                 return null;
 

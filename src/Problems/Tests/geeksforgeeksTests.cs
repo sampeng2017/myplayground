@@ -1030,6 +1030,14 @@ namespace Tests
             tree.Left.Right.Value.Should().Be('d');
             tree.Right.Value.Should().Be('e');
 
+            expr = "a?b:c?d:e";
+            tree = Geeksforgeeks.ConvertTernaryExpressionToBinaryTree(expr);
+            tree.Value.Should().Be('a');
+            tree.Left.Value.Should().Be('b');
+            tree.Left.Left.Value.Should().Be('c');
+            tree.Left.Right.Value.Should().Be('d');
+            tree.Right.Value.Should().Be('e');
+
             expr = "1?a?b?c:d:e";
             tree = Geeksforgeeks.ConvertTernaryExpressionToBinaryTree(expr);
             var tmpCollector = new List<char>();
