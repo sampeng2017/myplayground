@@ -1373,32 +1373,34 @@ namespace Problems
                 result = Math.Max(result, sum + maxSum[i - k]);
             }
             return result;
-
-
-            //if (a.Count < k || k == 1)
-            //{
-            //    var t = Misc.FindMaxSubArray_Liner(a.ToArray());
-            //    return t.Item3;
-            //}
-
-            //int r1 = a[0] + LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k - 1);
-            //int r2 = LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k);
-            //return Math.Max(r1, r2);
         }
 
-        private static int MaxSumSubArrayStartFromBeginning(IList<int> a)
+        // http://practice.geeksforgeeks.org/problems/string-palindromic-ignoring-spaces/0
+        public static bool IsStringPalindromicIgnoreSpaces(string s)
         {
-            int maxSum = 0;
-            int currentSum = 0;
-            for (int i = 0; i < a.Count; i++)
+            if (string.IsNullOrWhiteSpace(s))
+                return true;
+            int i = 0;
+            int j = s.Length - 1;
+            while (i < j)
             {
-                currentSum += a[i];
-                if (maxSum < currentSum)
+                if (char.IsWhiteSpace(s[i]))
                 {
-                    maxSum = currentSum;
+                    i++;
+                }
+                else if (char.IsWhiteSpace(s[j]))
+                {
+                    j--;
+                }
+                else
+                {
+                    if (s[i] != s[j])
+                        return false;
+                    i++;
+                    j--;
                 }
             }
-            return maxSum;
+            return true;
         }
 
         #endregion

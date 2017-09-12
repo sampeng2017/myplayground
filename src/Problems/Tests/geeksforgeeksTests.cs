@@ -983,7 +983,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Dynamic Programming")]
+        [TestCategory("Array")]
         public void LargestSumSubArrayOfSizeAtLeastK()
         {
             var a = new int[] { -4, -2, 1, -3 };
@@ -1001,6 +1001,15 @@ namespace Tests
             a = new int[] { 5, 7, -9, 3, -4, 2, 1, -8, 9, 10 };
             result = Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 5);
             result.Should().Be(16);
+        }
+
+        [TestMethod]
+        [TestCategory("String")]
+        public void IsStringPalindromicIgnoreSpaces()
+        {
+            Geeksforgeeks.IsStringPalindromicIgnoreSpaces("race car").Should().BeTrue();
+            Geeksforgeeks.IsStringPalindromicIgnoreSpaces("a bc cba").Should().BeTrue();
+            Geeksforgeeks.IsStringPalindromicIgnoreSpaces("abcaa").Should().BeFalse();
         }
     }
 }
