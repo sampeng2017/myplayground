@@ -1011,5 +1011,30 @@ namespace Tests
             Geeksforgeeks.IsStringPalindromicIgnoreSpaces("a bc cba").Should().BeTrue();
             Geeksforgeeks.IsStringPalindromicIgnoreSpaces("abcaa").Should().BeFalse();
         }
+
+        [TestMethod]
+        [TestCategory("Stack and Queue")]
+        public void ConvertTernaryExpressionToBinaryTree()
+        {
+            var expr = "a ? b : c";
+            var tree = Geeksforgeeks.ConvertTernaryExpressionToBinaryTree(expr);
+            tree.Value.Should().Be('a');
+            tree.Left.Value.Should().Be('b');
+            tree.Right.Value.Should().Be('c');
+
+            expr = "a?b?c:d:e";
+            tree = Geeksforgeeks.ConvertTernaryExpressionToBinaryTree(expr);
+            tree.Value.Should().Be('a');
+            tree.Left.Value.Should().Be('b');
+            tree.Left.Left.Value.Should().Be('c');
+            tree.Left.Right.Value.Should().Be('d');
+            tree.Right.Value.Should().Be('e');
+
+            expr = "1?a?b?c:d:e";
+            tree = Geeksforgeeks.ConvertTernaryExpressionToBinaryTree(expr);
+            var tmpCollector = new List<char>();
+            tree.PreOrderVisit(c => tmpCollector.Add(c.Value));
+            tmpCollector.ToArray().Should().BeEquivalentTo(new char[] { '1', 'a', 'b', 'c', 'd', 'e'});
+        }
     }
 }

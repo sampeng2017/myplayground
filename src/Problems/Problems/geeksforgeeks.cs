@@ -1403,6 +1403,52 @@ namespace Problems
             return true;
         }
 
+        // http://practice.geeksforgeeks.org/problems/convert-ternary-expression-to-binary-tree/1
+        public static BinaryTreeNode<char> ConvertTernaryExpressionToBinaryTree(string ternaryExpr)
+        {
+            if (string.IsNullOrEmpty(ternaryExpr))
+                return null;
+
+            var operatorStack = new Stack<char>();
+            var operandStack = new Stack<BinaryTreeNode<char>>();
+
+            BinaryTreeNode<char> root = null;
+            foreach (char c in ternaryExpr.Where(v => !char.IsWhiteSpace(v)))
+            {
+                if (c == '?' || c == ':')
+                {
+                    operatorStack.Push(c);
+                }
+                else
+                {
+                    var node = new BinaryTreeNode<char> { Value = c };
+                    if (operatorStack.Count == 0)
+                    {
+                        operandStack.Push(node);
+                    }
+                    else
+                    {
+                        if (operatorStack.Peek() == '?')
+                        {
+                            operandStack.Push(node);
+                        }
+                        else
+                        {
+                            var tmpOp = operatorStack.Pop();
+                            var leftNode = operandStack.Pop();
+                            tmpOp = operatorStack.Pop();
+                            root = operandStack.Pop();
+                            root.Left = leftNode;
+                            root.Right = node;
+                            operandStack.Push(root);
+                        }
+                    }
+                }
+            }
+
+            return root;
+        }
+
         #endregion
         private class Sudoku
         {
