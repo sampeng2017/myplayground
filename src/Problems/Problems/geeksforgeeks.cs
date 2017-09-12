@@ -1333,22 +1333,72 @@ namespace Problems
         }
 
         //http://practice.geeksforgeeks.org/problems/largest-sum-subarray-of-size-at-least-k/0
-        public static int LargestSumSubArrayOfSizeAtLeastK(IList<int> a, int k)
+        public static int LargestSumSubArrayOfSizeAtLeastK(int[] a, int k)
         {
-            if (a == null || k == 0)
-                throw new ArgumentException();
+            // maxSum[i] is going to store maximum sum
+            // till index i such that a[i] is part of the
+            // sum.
+            int n = a.Length;
+            var maxSum = new int[n];
+            maxSum[0] = a[0];
 
-            if (a.Count < k || k == 1)
+            // We use Kadane's algorithm to fill maxSum[]
+            // Below code is taken from method 3 of
+            // http://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+            int curr_max = a[0];
+            for (int i = 1; i < n; i++)
             {
-                return a.Max();
+                curr_max = Math.Max(a[i], curr_max + a[i]);
+                maxSum[i] = curr_max;
             }
 
-            //if (k == 1)
-            //    return a.Max();
+            // Sum of first k elements
+            int sum = 0;
+            for (int i = 0; i < k; i++)
+                sum += a[i];
 
-            int r1 = a[0] + LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k - 1);
-            int r2 = LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k);
-            return Math.Max(r1, r2);
+            // Use the concept of sliding window
+            int result = sum;
+            for (int i = k; i < n; i++)
+            {
+                // Compute sum of k elements ending
+                // with a[i].
+                sum = sum + a[i] - a[i - k];
+
+                // Update result if required
+                result = Math.Max(result, sum);
+
+                // Include maximum sum till [i-k] also
+                // if it increases overall max.
+                result = Math.Max(result, sum + maxSum[i - k]);
+            }
+            return result;
+
+
+            //if (a.Count < k || k == 1)
+            //{
+            //    var t = Misc.FindMaxSubArray_Liner(a.ToArray());
+            //    return t.Item3;
+            //}
+
+            //int r1 = a[0] + LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k - 1);
+            //int r2 = LargestSumSubArrayOfSizeAtLeastK(a.Skip(1).ToList(), k);
+            //return Math.Max(r1, r2);
+        }
+
+        private static int MaxSumSubArrayStartFromBeginning(IList<int> a)
+        {
+            int maxSum = 0;
+            int currentSum = 0;
+            for (int i = 0; i < a.Count; i++)
+            {
+                currentSum += a[i];
+                if (maxSum < currentSum)
+                {
+                    maxSum = currentSum;
+                }
+            }
+            return maxSum;
         }
 
         #endregion

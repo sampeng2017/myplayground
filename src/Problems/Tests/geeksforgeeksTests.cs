@@ -983,15 +983,24 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Dynamic Programming")]
         public void LargestSumSubArrayOfSizeAtLeastK()
         {
             var a = new int[] { -4, -2, 1, -3 };
             var result =  Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 2);
             result.Should().Be(-1);
 
+            a = new int[] { -4, -2, 1, -3 };
+            result = Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 3);
+            result.Should().Be(-4);
+
             a = new int[] { 1, 1, 1, 1, 1, 1 };
             result = Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 2);
             result.Should().Be(6);
+
+            a = new int[] { 5, 7, -9, 3, -4, 2, 1, -8, 9, 10 };
+            result = Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 5);
+            result.Should().Be(16);
         }
     }
 }
