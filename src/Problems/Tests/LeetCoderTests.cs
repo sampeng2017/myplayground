@@ -359,7 +359,7 @@ namespace Tests
 
             var result = LeetCoder.PathSum2(root, 22);
             result.Should().HaveCount(1);
-            result[0].Should().BeEquivalentTo(new List<int> { 5, 4, 11, 2 });
+            result[0].Select(n => n.Value).ToArray().Should().BeEquivalentTo(new List<int> { 5, 4, 11, 2 });
 
             node3.Value += 1;
             result = LeetCoder.PathSum2(root, 22);
@@ -376,8 +376,8 @@ namespace Tests
             //        7    2  5   1
             result = LeetCoder.PathSum2(root, 22);
             result.Should().HaveCount(2);
-            result[0].Should().BeEquivalentTo(new List<int> { 5, 4, 11, 2 });
-            result[1].Should().BeEquivalentTo(new List<int> { 5, 8, 4, 5 });
+            result[0].Select(n => n.Value).ToArray().Should().BeEquivalentTo(new List<int> { 5, 4, 11, 2 });
+            result[1].Select(n => n.Value).ToArray().Should().BeEquivalentTo(new List<int> { 5, 8, 4, 5 });
         }
 
         [TestMethod]

@@ -161,7 +161,7 @@ namespace Problems
             {
                 return a[i];
             }
-            else if ((j == 1 || a[i] > b[j]) && (j != m  && a[i] > b[j - 1]))
+            else if ((j == 1 || a[i] > b[j]) && (j != m && a[i] > b[j - 1]))
             {
                 //median <a[i]
                 return FindMediaOfTwoSortedArraies(a, b, left, i - 1);
@@ -529,55 +529,42 @@ namespace Problems
         }
 
         //https://leetcode.com/problems/path-sum-ii/description/
-        public static IList<IList<int>> PathSum2(BinaryTreeNode<int> tree, int sum)
+        public static IList<Stack<BinaryTreeNode<int>>> PathSum2(BinaryTreeNode<int> tree, int sum)
         {
             if (tree == null)
                 return null;
 
-            if (tree.IsLeaf)
+            IList<Stack<BinaryTreeNode<int>>> stacks;
+            if (tree.IsLeaf && tree.Value == sum)
             {
-                if (tree.Value == sum)
-                {
-                    return new List<IList<int>> { new List<int> { tree.Value } };
-                }
-                else
-                    return null;
+                stacks = new List<Stack<BinaryTreeNode<int>>>();
+                stacks.Add(new Stack<BinaryTreeNode<int>>());
+                stacks[0].Push(tree);
+                return stacks;
             }
-            else if (sum == tree.Value)
-                return null;
 
-            IList<IList<int>> subResult1 = null;
-            IList<IList<int>> subResult2 = null;
-            if (tree.Left != null)
+            var stacks1 = PathSum2(tree.Left, sum - tree.Value);
+            var stacks2 = PathSum2(tree.Right, sum - tree.Value);
+
+            IList<Stack<BinaryTreeNode<int>>> result = null;
+            if (stacks1 != null)
             {
-                subResult1 = PathSum2(tree.Left, sum - tree.Value);
-                if (subResult1 != null)
-                {
-                    foreach (var tmp in subResult1)
-                    {
-                        tmp.Insert(0, tree.Value);
-                    }
-                }
+                result = stacks1;
             }
-            if (tree.Right != null)
+            if (stacks2 != null)
             {
-                subResult2 = PathSum2(tree.Right, sum - tree.Value);
-                if (subResult2 != null)
+                result = result == null ? stacks2 : result.Union(stacks2).ToList();
+            }
+
+            if (result != null)
+            {
+                foreach (var s in result)
                 {
-                    foreach (var tmp in subResult2)
-                    {
-                        tmp.Insert(0, tree.Value);
-                    }
+                    s.Push(tree);
                 }
             }
 
-            if (subResult1 != null && subResult2 != null)
-                return subResult1.Union(subResult2).ToList();
-            else if (subResult1 != null)
-                return subResult1;
-            else if (subResult2 != null)
-                return subResult2;
-            return null;
+            return result;
         }
 
         //https://leetcode.com/problems/word-break/description/

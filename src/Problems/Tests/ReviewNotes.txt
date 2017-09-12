@@ -1,3 +1,11 @@
 ﻿AlternateArrayItems
+	1) Use extra arrays;
+	2) Swap iner half, then recursive all each half. Special handling for odd numbers (2n, whwre n is odd)
 AlternateLists
+	1) recursive;
+	2) non recursive - be careful the case when list1 hit end but list2 is still valid
 PathSum1
+	1) recursive...
+PathSum2
+	2) recusive, each time returns a stack instead of a boolean. In case it asks for all the paths, return a list of stacks and don't stop right side call if left side returns.
+
