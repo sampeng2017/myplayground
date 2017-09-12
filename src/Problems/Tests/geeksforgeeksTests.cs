@@ -963,6 +963,10 @@ namespace Tests
             trees = new int[] { 1, 6, 2, 5, 3, 4 };
             result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 2);
             result.Should().Be(8);
+
+            trees = new int[] { 1 };
+            result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 2);
+            result.Should().Be(1);
         }
     }
 }

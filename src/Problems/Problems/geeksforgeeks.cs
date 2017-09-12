@@ -1248,7 +1248,7 @@ namespace Problems
             if (trees == null || trees.Length == 0 || time == 0)
                 return 0;
 
-            // build a linked list loop
+            // build a loop linked list (tail -> head)
             var head = new ListNode<int> { Value = trees[0] };
             var previous = head;
             for (int i = 1; i < trees.Length; i++)
@@ -1259,25 +1259,24 @@ namespace Problems
             previous.Next = head;
 
             //collect fruits from first node
-            var resultFromFristTree = BirdAndMaxFruitGathering_Collect(head, time);
+            var resultFromFirst = BirdAndMaxFruitGathering_Collect(head, time);
 
             // single tree scenario
-            if (resultFromFristTree.Item2 == head)
-                return resultFromFristTree.Item1;
+            if (resultFromFirst.Item2 == head)
+                return resultFromFirst.Item1;
 
-            int max = resultFromFristTree.Item1;
-            int previousResult = resultFromFristTree.Item1;
+            int max = resultFromFirst.Item1;
+            int previousResult = resultFromFirst.Item1;
             var previousHead = head;
-            var previousTail = resultFromFristTree.Item2;
-            var nextHead = head.Next;
-            while (nextHead != head)
+            var previousTail = resultFromFirst.Item2;
+
+            while (previousHead.Next != head)
             {
                 int tmpResult = previousResult - previousHead.Value + previousTail.Next.Value;
                 max = Math.Max(max, tmpResult);
                 previousResult = tmpResult;
 
-                previousHead = nextHead;
-                nextHead = nextHead.Next;
+                previousHead = previousHead.Next;
                 previousTail = previousTail.Next;
             }
             return max;
@@ -1288,17 +1287,15 @@ namespace Problems
         private static Tuple<int, ListNode<int>> BirdAndMaxFruitGathering_Collect(ListNode<int> head, int time)
         {
             var p = head;
-            int total = 0;
-            // time to pick the head
-            while (true)
+
+            int total = p.Value;
+            time = time - 1;
+            while (p.Next != head && time > 0)
             {
+                p = p.Next;
                 total += p.Value;
                 time -= 1;
-                if (p.Next == head || time == 0)
-                    break;
-                p = p.Next;
             }
-
             return Tuple.Create(total, p);
         }
 
