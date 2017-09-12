@@ -968,5 +968,18 @@ namespace Tests
             result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 2);
             result.Should().Be(1);
         }
+
+        [TestMethod]
+        [TestCategory("String")]
+        public void RearrangeString()
+        {
+            string s = "AC2BEW3";
+            var result = Geeksforgeeks.RearrangeString(s);
+            result.Should().Be("ABCEW5");
+
+            s = "ACCBA10D2EW30";
+            result = Geeksforgeeks.RearrangeString(s);
+            result.Should().Be("AABCCDEW6");
+        }
     }
 }

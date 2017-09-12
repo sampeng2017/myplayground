@@ -1299,6 +1299,38 @@ namespace Problems
             return Tuple.Create(total, p);
         }
 
+        // http://practice.geeksforgeeks.org/problems/rearrange-a-string/0
+        public static string RearrangeString(string s)
+        {
+            int sum = 0;
+            var charCounter = new int['Z' - 'A' + 1];
+
+            // Count sort
+            foreach (char c in s)
+            {
+                if (char.IsDigit(c))
+                {
+                    sum += int.Parse(new string(c, 1));
+                }
+                else
+                {
+                    charCounter[c - 'A']++;
+                }
+            }
+
+            var strBuilder = new StringBuilder();
+            for (int i = 0; i < charCounter.Length; i++)
+            {
+                int cnt = charCounter[i];
+                if (cnt > 0)
+                {
+                    var c = (char)(i + 'A');
+                    strBuilder.Append(c, cnt);
+                }
+            }
+            strBuilder.Append(sum.ToString());
+            return strBuilder.ToString();
+        }
         #endregion
         private class Sudoku
         {
