@@ -1222,7 +1222,7 @@ namespace Problems
             int[] digitArray = new int[s.Length];
             for (int i = 0; i < s.Length; i++)
             {
-                digitArray[i] = int.Parse(s[i].ToString());
+                digitArray[i] = s[i] - '0';
             }
 
             return MaxIntegerValue(digitArray, 0, digitArray.Length - 1);
@@ -1310,7 +1310,7 @@ namespace Problems
             {
                 if (char.IsDigit(c))
                 {
-                    sum += int.Parse(new string(c, 1));
+                    sum += c - '0';
                 }
                 else
                 {
@@ -1448,6 +1448,63 @@ namespace Problems
             }
 
             return root;
+        }
+
+        // http://practice.geeksforgeeks.org/problems/multiply-two-strings/1
+        public static string MultiplyTwoStrings(string s1, string s2)
+        {
+
+            //convert result to string
+            return null;
+        }
+
+        public static int[] MultiplyTwoNumbers(byte[] num1, byte[] num2)
+        {
+            int[] result = new int[num1.Length + num2.Length];
+
+            // Below two indexes are used to find positions
+            // in result. 
+            int i1 = 0;
+            int i2 = 0;
+
+            // Go from right to left in num1
+            for (int i = num1.Length - 1; i >= 0; i--)
+            {
+                int carry = 0;
+                int n1 = num1[i];
+
+                // To shift position to left after every
+                // multiplication of a digit in num2
+                i2 = 0;
+
+                // Go from right to left in num2             
+                for (int j = num2.Length - 1; j >= 0; j--)
+                {
+                    // Take current digit of second number
+                    int n2 = num2[j];
+
+                    // Multiply with current digit of first number
+                    // and add result to previously stored result
+                    // at current position. 
+                    int sum = n1 * n2 + result[i1 + i2] + carry;
+
+                    // Carry for next iteration
+                    carry = sum / 10;
+
+                    // Store result
+                    result[i1 + i2] = sum % 10;
+
+                    i2++;
+                }
+                // store carry in next cell
+                if (carry > 0)
+                    result[i1 + i2] += carry;
+
+                // To shift position to left after every
+                // multiplication of a digit in num1.
+                i1++;
+            }
+            return result;
         }
 
         #endregion

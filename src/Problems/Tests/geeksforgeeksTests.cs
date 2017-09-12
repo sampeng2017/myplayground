@@ -1044,5 +1044,16 @@ namespace Tests
             tree.PreOrderVisit(c => tmpCollector.Add(c.Value));
             tmpCollector.ToArray().Should().BeEquivalentTo(new char[] { '1', 'a', 'b', 'c', 'd', 'e'});
         }
+
+        [TestMethod]
+        public void MultiplyTwoStrings()
+        {
+            var m = Geeksforgeeks.MultiplyTwoNumbers(new byte[] { 3, 2, 6 }, new byte[] { 2, 3 });
+
+            string s1 = "33";
+            string s2 = "2";
+            var result = Geeksforgeeks.MultiplyTwoStrings(s1, s2);
+            result.Should().Be("66");    
+        }
     }
 }
