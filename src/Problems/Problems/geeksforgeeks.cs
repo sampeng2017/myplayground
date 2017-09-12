@@ -1453,9 +1453,21 @@ namespace Problems
         // http://practice.geeksforgeeks.org/problems/multiply-two-strings/1
         public static string MultiplyTwoStrings(string s1, string s2)
         {
+            var num1 = s1.Select(c => (byte)(c - '0')).ToArray();
+            var num2 = s2.Select(c => (byte)(c - '0')).ToArray();
 
-            //convert result to string
-            return null;
+            var result = MultiplyTwoNumbers(num1, num2);
+
+            var builder = new StringBuilder();
+
+            for (int i = result.Length - 1; i >= 0; i--)
+            {
+                var n = result[i];
+                if (i == result.Length - 1 && n == 0)
+                    continue;
+                builder.Append(n);
+            }
+            return builder.ToString();
         }
 
         public static int[] MultiplyTwoNumbers(byte[] num1, byte[] num2)

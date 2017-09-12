@@ -1048,12 +1048,15 @@ namespace Tests
         [TestMethod]
         public void MultiplyTwoStrings()
         {
-            var m = Geeksforgeeks.MultiplyTwoNumbers(new byte[] { 3, 2, 6 }, new byte[] { 2, 3 });
-
-            string s1 = "33";
+            string s1 = "32";
             string s2 = "2";
             var result = Geeksforgeeks.MultiplyTwoStrings(s1, s2);
-            result.Should().Be("66");    
+            result.Should().Be("64");
+
+            s1 = "3214";
+            s2 = "25678";
+            result = Geeksforgeeks.MultiplyTwoStrings(s1, s2);
+            result.Should().Be("82529092");
         }
     }
 }
