@@ -79,5 +79,15 @@ namespace Tests
             result.Should().BeSameAs(list.Next.Next.Next);
 
         }
+
+        [TestMethod]
+        [TestCategory("Array")]
+        [TestCategory("Divide and Conquer")]
+        public void BinarySearch()
+        {
+            var a1 = new int[] { 11, 1, 13, 21, 3, 7 };
+            OldProblems.BinarySearch(21, a1, 0, a1.Length - 1).Should().Be(3);
+            OldProblems.BinarySearch(23, a1, 0, a1.Length - 1).Should().Be(-1);
+        }
     }
 }

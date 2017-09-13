@@ -93,6 +93,7 @@ namespace Tests
             var tmpNode2 = new BinaryTreeNode<int> { Value = 1 };
             tmpNode1.Right = tmpNode2;
             BinarySearchTree<int>.IsValidBsf(tmpNode1).Should().BeFalse();
+            BinarySearchTree<int>.IsValidBsf2(tmpNode1, int.MinValue, int.MinValue).Should().BeFalse();
 
             var bst = new BinarySearchTree<int>();
             var node1 = new BinaryTreeNode<int> { Value = 40 };
@@ -106,6 +107,8 @@ namespace Tests
             bst.Insert(node4);
             bst.Insert(node5);
             BinarySearchTree<int>.IsValidBsf(node1).Should().BeTrue();
+            BinarySearchTree<int>.IsValidBsf2(node1, int.MinValue, int.MinValue).Should().BeTrue();
+
             bst.MaxValue.Should().Be(72);
             bst.MinValue.Should().Be(25);
 

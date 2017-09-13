@@ -227,6 +227,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Array")]
+        [TestCategory("Divide and Conquer")]
         public void AlternateArrayItems()
         {
             var a = new int[] { 1, 2, 11, 12 };

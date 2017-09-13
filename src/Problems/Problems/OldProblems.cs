@@ -177,5 +177,22 @@ namespace Problems
             }
             return p1;
         }
+
+        public static int BinarySearch(int v, int[] a, int p, int q)
+        {
+            if (q < p)
+                return -1;
+            if (p == q)
+                return p;
+
+            int mid = p + (q - p + 1) / 2;
+
+            if (a[mid] == v)
+                return mid;
+            else if (v < a[mid])
+                return BinarySearch(v, a, p, mid - 1);
+            else
+                return BinarySearch(v, a, mid + 1, q);
+        }
     }
 }

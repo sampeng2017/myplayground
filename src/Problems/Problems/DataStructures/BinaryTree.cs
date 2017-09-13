@@ -75,11 +75,13 @@ namespace Problems.DataStructures
             var stack = new Stack<BinaryTreeNode<T>>();
             while (stack.Count > 0 || current != null)
             {
+                // move down the left branch
                 if (current != null)
                 {
                     stack.Push(current);
                     current = current.Left;
                 }
+                // hit left most
                 else
                 {
                     current = stack.Pop();
@@ -268,6 +270,28 @@ namespace Problems.DataStructures
                     return result;
                 });
             return isValid;
+        }
+
+        public static bool IsValidBsf2<T1>(BinaryTreeNode<T1> root, T1 minExclusive, T1 maxExclusive) where T1: IComparable
+        {
+            if (root == null)
+                return false;
+
+            if (root.IsLeaf)
+                return root.Value.CompareTo(minExclusive) > 0  && root.Value.CompareTo(maxExclusive) < 0;
+
+            bool result = true;
+            if (root.Left != null)
+            {
+                result = IsValidBsf2(root.Left, minExclusive, root.Value);
+            }
+
+            if (root.Right != null)
+            {
+                result = result && IsValidBsf2(root.Right, root.Value, maxExclusive);
+            }
+
+            return result;
         }
 
         public static BinaryTreeNode<T> BuildFromSortedArray(T[] sortedArray, int p, int q)

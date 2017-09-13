@@ -531,6 +531,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Greedy")]
+        [TestCategory("Recursive")]
         public void ActivitySelection()
         {
             var activities = new List<Tuple<int, int>>

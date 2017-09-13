@@ -84,6 +84,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Linked List")]
+        [TestCategory("Recursive")]
         public void AlternateLists()
         {
             var linkedList1 = new ListNode<int> { Value = 1 };

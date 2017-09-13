@@ -1,16 +1,38 @@
-﻿AlternateArrayItems
+﻿ActivitySelection
+	1) Greedy - sort by end time, then select first based on the current time.
+	2) Either recursive or a loop.
+
+AddTowNumbers
+	1) just travese both linked list. caculate digit sum and carry. 
+	2) need to deal with case that two list are not same in length
+	3) be sure to continue look even if both pointers are null but carry is 1
+
+AlternateArrayItems
 	1) Use extra arrays;
-	2) Swap iner half, then recursive all each half. Special handling for odd numbers (2n, whwre n is odd)
+	2) Swap inner half, then recursive all each half. Special handling for odd numbers (2n, whwre n is odd)
+
 AlternateLists
 	1) recursive;
 	2) non recursive - be careful the case when list1 hit end but list2 is still valid
+
+ArrayIsSubSequenceOfAnother:
+	1) Hasing 
+	2) use BinarySearch if not allowed for extra space 
+BinarySearch
+	1) Trivial
+
+BinarySearchTree:
+	1) Check valid BSF: a) use min-max range check recurisively; b) In-order traverse, previous must be less than current
+
 PathSum1
 	1) recursive...
+
 PathSum2
 	2) recusive, each time returns a stack instead of a boolean. In case it asks for all the paths, return a list of stacks and don't stop right side call if left side returns.
 ReverseInteger
 	1) can use a stack to store reversed digits; can without stack, code is a little tricky
 	3) need to deal with overflow
+
 ParenthesisChecker
 	1) Stack, of course
 NextLargerElement

@@ -36,12 +36,13 @@ namespace Problems
         }
 
         // https://leetcode.com/problems/add-two-numbers/description/
-        public static ListNode<int> AddTowNumbers(ListNode<int> n1, DataStructures.ListNode<int> n2)
+        public static ListNode<int> AddTowNumbers(ListNode<int> n1, ListNode<int> n2)
         {
             ListNode<int> p1 = n1;
             ListNode<int> p2 = n2;
-            ListNode<int> result = null;
-            ListNode<int> resultRail = null;
+
+            ListNode<int> head = null;
+            ListNode<int> current = null;
             int carray = 0;
 
             while (p1 != null || p2 != null || carray > 0)
@@ -57,19 +58,19 @@ namespace Problems
                     carray = 1;
                 }
                 var newNode = new ListNode<int> { Value = sum };
-                if (result == null)
+                if (head == null)
                 {
-                    result = resultRail = newNode;
+                    head = current = newNode;
                 }
                 else
                 {
-                    resultRail.Next = newNode;
-                    resultRail = newNode;
+                    current.Next = newNode;
+                    current = newNode;
                 }
                 p1 = p1?.Next;
                 p2 = p2?.Next;
             }
-            return result;
+            return head;
         }
 
         // helper for AddTowNumbers
