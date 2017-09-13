@@ -24,6 +24,9 @@ BinarySearch
 BinarySearchTree:
 	1) Check valid BSF: a) use min-max range check recurisively; b) In-order traverse, previous must be less than current
 
+BirdAndMaxFruitGathering
+	1) most efficient solution just use the "moving window" on the original array. Use modulo operator for "over flow" items scenario
+
 PathSum1
 	1) recursive...
 

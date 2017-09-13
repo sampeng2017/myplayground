@@ -963,17 +963,24 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Array")]
         public void BirdAndMaxFruitGathering()
         {
             var trees = new int[] { 2, 1, 3, 5, 0, 1, 4 };
-            var result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 3);
+            var result = Geeksforgeeks.BirdAndMaxFruitGathering_LinkedList(trees, 3);
+            result.Should().Be(9);
+            result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 3);
             result.Should().Be(9);
 
             trees = new int[] { 1, 6, 2, 5, 3, 4 };
+            result = Geeksforgeeks.BirdAndMaxFruitGathering_LinkedList(trees, 2);
+            result.Should().Be(8);
             result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 2);
             result.Should().Be(8);
 
             trees = new int[] { 1 };
+            result = Geeksforgeeks.BirdAndMaxFruitGathering_LinkedList(trees, 2);
+            result.Should().Be(1);
             result = Geeksforgeeks.BirdAndMaxFruitGathering(trees, 2);
             result.Should().Be(1);
         }

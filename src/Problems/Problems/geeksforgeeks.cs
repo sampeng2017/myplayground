@@ -1250,6 +1250,35 @@ namespace Problems
         // http://practice.geeksforgeeks.org/problems/bird-and-maximum-fruit-gathering/0
         public static int BirdAndMaxFruitGathering(int[] trees, int time)
         {
+            if (trees.Length < time)
+                return trees.Sum();
+
+            int maxSum = 0;
+            int sum = 0;
+
+            for (int i = 0; i < time; i++)
+            {
+                sum += trees[i];
+            }
+
+            maxSum = sum;
+            for (int j = time; j < trees.Length + time; j++)
+            {
+                // this is imporatnat
+                int newItemIndex = j % trees.Length;
+                int takeAwayItemIndex = j - time;
+
+                sum = sum + trees[newItemIndex] - trees[takeAwayItemIndex];
+                if (sum > maxSum)
+                {
+                    maxSum = sum;
+                }
+            }
+            return maxSum;
+        }
+
+        public static int BirdAndMaxFruitGathering_LinkedList(int[] trees, int time)
+        {
             if (trees == null || trees.Length == 0 || time == 0)
                 return 0;
 
