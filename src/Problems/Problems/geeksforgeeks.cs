@@ -246,8 +246,7 @@ namespace Problems
                 int key = a[i];
                 result[i] = -1;
 
-                int j = i + 1;
-                for (; j < a.Length; j++)
+                for (int j = i + 1; j < a.Length; j++)
                 {
                     if (a[j] > key)
                     {
@@ -267,68 +266,35 @@ namespace Problems
 
             var result = new int[a.Length];
 
-            var stack = new Stack<Tuple<int, int>>();
+            var stack = new Stack<ItemInfo>();
 
             int j = 1;
-            stack.Push(Tuple.Create(a[0], 0));
+            stack.Push(new ItemInfo { Value = a[0], Index = 0 });
             while (j < a.Length)
             {
-                if (stack.Peek().Item1 < a[j])
+                if (stack.Peek().Value < a[j])
                 {
-                    while (stack.Count > 0 && stack.Peek().Item1 < a[j])
+                    while (stack.Count > 0 && stack.Peek().Value < a[j])
                     {
                         var tmp = stack.Pop();
-                        result[tmp.Item2] = a[j];
+                        result[tmp.Index] = a[j];
                     }
                 }
-                stack.Push(Tuple.Create(a[j], j));
+                stack.Push(new ItemInfo { Value = a[j], Index = j });
                 j++;
             }
             while (stack.Count > 0)
             {
                 var tmp = stack.Pop();
-                result[tmp.Item2] = -1;
+                result[tmp.Index] = -1;
             }
             return result;
         }
 
-        static int[] NextLargerElement_2(int[] a)
+        private struct ItemInfo
         {
-            if (a == null || a.Length == 0)
-                return null;
-
-            var result = new int[a.Length];
-            int j = a.Length - 1;
-
-            int previous = -1;
-            int previousMax = -1;
-            while (j >= 0)
-            {
-                if (previous == -1)
-                {
-                    result[j] = -1;
-                    previousMax = a[j];
-                }
-                else
-                {
-                    result[j] = previousMax;
-                    if (a[j] > previousMax)
-                    {
-                        previousMax = a[j];
-                    }
-                    else
-                    {
-                        if (a[j] < previous)
-                        {
-                            previousMax = previous;
-                        }
-                    }
-                    result[j] = previousMax;
-                }
-                previous = a[j];
-                j--;
-            }
-            return result;
+            public int Value { get; set; }
+            public int Index { get; set; }
         }
 
         // http://practice.geeksforgeeks.org/problems/circular-tour/1

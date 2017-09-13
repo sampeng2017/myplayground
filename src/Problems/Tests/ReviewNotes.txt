@@ -13,4 +13,10 @@ ReverseInteger
 	3) need to deal with overflow
 ParenthesisChecker
 	1) Stack, of course
-
+NextLargerElement
+	1) O(N square) is simple;
+	2) So called O(N), use a stack to store items (value and index) of desending sequence, once it
+	   hits a greater one, all smaller items are poped, their coresponding location in result array
+	   are updated with the greater value. 
+EquilibriumPoint
+	1) sum up from both directions, increase smaller, until left index greater than right. if both sums are same and l == h, return l.
