@@ -8,4 +8,9 @@ PathSum1
 	1) recursive...
 PathSum2
 	2) recusive, each time returns a stack instead of a boolean. In case it asks for all the paths, return a list of stacks and don't stop right side call if left side returns.
+ReverseInteger
+	1) can use a stack to store reversed digits; can without stack, code is a little tricky
+	3) need to deal with overflow
+ParenthesisChecker
+	1) Stack, of course
 

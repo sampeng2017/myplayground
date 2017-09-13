@@ -216,6 +216,10 @@ namespace Tests
             r = Geeksforgeeks.NextLargerElement_O_NSquare(a);
             r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
 
+            a = new int[] { 1, 4, 2, 1, 3, 5 };
+            r = Geeksforgeeks.NextLargerElement_O_NSquare(a);
+            r.Should().BeEquivalentTo(new int[] { 4, 5, 3, 3, 5, -1 });
+
             a = new int[] { 1 };
             r = Geeksforgeeks.NextLargerElement_O_N(a);
             r.Should().BeEquivalentTo(new int[] { -1 });
@@ -223,6 +227,10 @@ namespace Tests
             a = new int[] { 1, 3, 2, 4 };
             r = Geeksforgeeks.NextLargerElement_O_N(a);
             r.Should().BeEquivalentTo(new int[] { 3, 4, 4, -1 });
+
+            a = new int[] { 1, 4, 2, 1, 3, 5 };
+            r = Geeksforgeeks.NextLargerElement_O_N(a);
+            r.Should().BeEquivalentTo(new int[] { 4, 5, 3, 3, 5, -1 });
         }
 
         [TestMethod]
@@ -987,7 +995,7 @@ namespace Tests
         public void LargestSumSubArrayOfSizeAtLeastK()
         {
             var a = new int[] { -4, -2, 1, -3 };
-            var result =  Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 2);
+            var result = Geeksforgeeks.LargestSumSubArrayOfSizeAtLeastK(a, 2);
             result.Should().Be(-1);
 
             a = new int[] { -4, -2, 1, -3 };
@@ -1042,7 +1050,7 @@ namespace Tests
             tree = Geeksforgeeks.ConvertTernaryExpressionToBinaryTree(expr);
             var tmpCollector = new List<char>();
             tree.PreOrderVisit(c => tmpCollector.Add(c.Value));
-            tmpCollector.ToArray().Should().BeEquivalentTo(new char[] { '1', 'a', 'b', 'c', 'd', 'e'});
+            tmpCollector.ToArray().Should().BeEquivalentTo(new char[] { '1', 'a', 'b', 'c', 'd', 'e' });
         }
 
         [TestMethod]

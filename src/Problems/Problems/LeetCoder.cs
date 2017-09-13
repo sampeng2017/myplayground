@@ -255,19 +255,57 @@ namespace Problems
         //https://leetcode.com/problems/reverse-integer/description/
         public static int ReverseInteger(int val)
         {
-            int reversed = 0;
+            int result = 0;
             int sign = val < 0 ? -1 : 1;
             val = Math.Abs(val);
             while (val > 0)
             {
-                if (reversed != 0 && int.MaxValue / reversed < 10)
+                if (result != 0 && int.MaxValue / result < 10)
                     return -1;
 
-                reversed = reversed * 10 + val % 10;
+                int d = val % 10;
+                result = result * 10 + d;
                 val = val / 10;
             }
-            return reversed * sign;
+            return result * sign;
         }
+
+        // use stack
+        public static int ReverseInteger2(int n)
+        {
+            if (n == int.MinValue)
+                return -1;
+
+            if (n == 0)
+                return n;
+
+            bool isNegative = n < 0;
+
+            int tmp = Math.Abs(n);
+            var stack = new Stack<int>();
+
+            while (tmp > 0)
+            {
+                int d = tmp % 10;
+                stack.Push(d);
+                tmp = tmp / 10;
+            }
+
+            int p = 1;
+            int result = 0;
+            while (stack.Count > 0)
+            {
+                if (result != 0 && int.MaxValue / result < 10)
+                    return -1;
+
+                result += stack.Pop() * p;
+                p *= 10;
+            }
+
+
+            return isNegative ? -1 * result : result;
+        }
+
 
         //https://leetcode.com/problems/rotate-list/description/
         public static ListNode<int> RotateList(ListNode<int> list, int k)
