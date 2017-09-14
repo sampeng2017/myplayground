@@ -30,6 +30,12 @@ BirdAndMaxFruitGathering
 BottomViewOfBinaryTree
 	1) better use BFS, queued items carry Node and its distance to root. With BFS there is no need to track depth.
 
+BuildFromSortedArray:
+	1) Start from mid, then recurisvely build left and right
+
+BuildTreeFromInOrderAndPreOrderTraverse
+	1) use List is a lot simpler
+
 PathSum1
 	1) recursive...
 

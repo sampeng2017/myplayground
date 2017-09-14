@@ -123,6 +123,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Tree")]
+        [TestCategory("Recursive")]
         public void BuildTreeFromInOrderAndPreOrderTraverse()
         {
             char[] preOrder = new char[] { 'A', 'B', 'D', 'H', 'E', 'C', 'F', 'G' };
