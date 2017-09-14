@@ -27,6 +27,9 @@ BinarySearchTree:
 BirdAndMaxFruitGathering
 	1) most efficient solution just use the "moving window" on the original array. Use modulo operator for "over flow" items scenario
 
+BottomViewOfBinaryTree
+	1) better use BFS, queued items carry Node and its distance to root. With BFS there is no need to track depth.
+
 PathSum1
 	1) recursive...
 
