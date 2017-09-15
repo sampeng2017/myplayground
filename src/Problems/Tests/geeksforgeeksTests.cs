@@ -460,6 +460,8 @@ namespace Tests
             Geeksforgeeks.SpecialKeyboard(8).Should().Be(12);
             Geeksforgeeks.SpecialKeyboard(9).Should().Be(16);
             Geeksforgeeks.SpecialKeyboard(10).Should().Be(20);
+            Geeksforgeeks.SpecialKeyboard(20).Should().Be(324);
+            //Geeksforgeeks.SpecialKeyboard(50).Should().Be(1327104);
             // too slow
             // Geeksforgeeks.SpecialKeyboard(76).Should().Be(1811939328);
         }

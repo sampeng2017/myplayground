@@ -55,6 +55,8 @@ NextLargerElement
 EquilibriumPoint
 	1) sum up from both directions, increase smaller, until left index greater than right. if both sums are same and l == h, return l.
 
+SpecialKeyboard:
+	1) Dynamic programming - can use memorization, speical case optimization
 SolveSudoku
 	1) No need to start loops for solving, only need loops to find next 0 in the matrix - if not found, it's solved.
 

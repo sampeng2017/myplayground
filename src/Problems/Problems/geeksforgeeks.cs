@@ -1109,12 +1109,12 @@ namespace Problems
             if (memo.TryGetValue(key, out result))
                 return result;
 
-            // type A
+            // type A only if nothing in buffer
             long cnt1 = charInBuffer > 0 ?
                 0 :
                 CharCountWithSpecialKeyboard(keyCount - 1, charOnScreen + 1, charInBuffer, memo);
 
-            // ctrl A + C
+            // ctrl A + C + V
             long cnt2 = keyCount > 3 && charOnScreen > 0 ?
                 CharCountWithSpecialKeyboard(keyCount - 3, charOnScreen * 2, charOnScreen, memo) :
                 0;
