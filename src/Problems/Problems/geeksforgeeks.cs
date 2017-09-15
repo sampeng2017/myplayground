@@ -31,24 +31,26 @@ namespace Problems
         }
 
         // http://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
-        public static Tuple<int, int> SubArrayWithGivenSum(int[] a, int sum)
+        public static Tuple<int, int> SubArrayWithGivenSum(int[] a, int s)
         {
-            var memo = new Dictionary<int, int>() { { 0, -1 } };
-            var list = new List<Tuple<int, int>> { new Tuple<int, int>(0, -1) };
-            int s = 0;
+            var map = new Dictionary<int, int>();
+            int sum = 0;
             for (int i = 0; i < a.Length; i++)
             {
-                s += a[i];
-                memo[s] = i;
-                list.Add(Tuple.Create(s, i));
+                sum += a[i];
+                map[sum] = i;
             }
-            foreach (var tuple in list)
+
+            sum = 0;
+            for (int i = 0; i < a.Length; i++)
             {
-                var lookUp = tuple.Item1 + sum;
-                if (memo.ContainsKey(lookUp))
+                int d = s + sum;
+
+                if (map.ContainsKey(d))
                 {
-                    return Tuple.Create(tuple.Item2 + 1, memo[lookUp]);
+                    return Tuple.Create(i, map[d]);
                 }
+                sum += a[i];
             }
             return null;
         }

@@ -55,6 +55,11 @@ NextLargerElement
 EquilibriumPoint
 	1) sum up from both directions, increase smaller, until left index greater than right. if both sums are same and l == h, return l.
 
+SubArrayWithGivenSum
+	1) build up a dictionary with the "current sum" as key, then iterate through the arry, accumulate a sum,
+	  and look up "currentSum + targetSum" in the dictionary
+	2) be careful with the starting index.
+
 SwappingPairMakeSumEqual:
 	1) there should be no solution if the sum difference is an odd number;
 	2) one solution is to sort both array, and start moving two points from left to right for matching.
