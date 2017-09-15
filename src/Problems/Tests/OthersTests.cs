@@ -312,6 +312,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Array")]
         public void CountAllNegativeNumbersInSorted2DArray()
         {
             var a = new int[,]

@@ -118,6 +118,17 @@ namespace Tests
         {
             var converted = LeetCoder.ZigZagConversion("PAYPALISHIRING", 3);
             converted.Should().Be("PAHNAPLSIIGYIR");
+            converted = LeetCoder.ZigZagConversion("PAYPALISHIRING", 4);
+            converted.Should().Be("PLRAIIYASINPHG");
+            converted = LeetCoder.ZigZagConversion("PAYPALISHIRING", 5);
+            converted.Should().Be("PINASGYLHIPIAR");
+
+            converted = LeetCoder.ZigZagConversion2("PAYPALISHIRING", 3);
+            converted.Should().Be("PAHNAPLSIIGYIR");
+            converted = LeetCoder.ZigZagConversion2("PAYPALISHIRING", 4);
+            converted.Should().Be("PLRAIIYASINPHG");
+            converted = LeetCoder.ZigZagConversion2("PAYPALISHIRING", 5);
+            converted.Should().Be("PINASGYLHIPIAR");
         }
 
         [TestMethod]

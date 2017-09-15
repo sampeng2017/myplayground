@@ -969,6 +969,10 @@ namespace Problems
                 return null;
 
             int delta = (sum1 - sum2) / 2;
+
+            // if the diff is not even number, there is no solution swaping numbers from two arrays.
+            if (delta % 2 != 0)
+                return null;
             var hashSet = new HashSet<int>(a1.Distinct());
             foreach (int i in a2)
             {

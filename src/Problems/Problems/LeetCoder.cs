@@ -483,6 +483,46 @@ namespace Problems
             return builder.ToString();
         }
 
+        public static string ZigZagConversion2(string s, int l)
+        {
+            var builder = new StringBuilder();
+            for (int i = 0; i < l; i++)
+            {
+                if (i != l / 2)
+                {
+                    for (int j = i; j < s.Length; j = j + l + 1)
+                    {
+                        builder.Append(s[j]);
+                    }
+                }
+                else // the middle row
+                {
+                    if (l % 2 == 1)
+                    {
+                        for (int j = i; j < s.Length; j = j + l / 2 + 1)
+                        {
+                            builder.Append(s[j]);
+                        }
+                    }
+                    else
+                    {
+                        int j = i;
+                        int n = 0;
+                        while (j < s.Length)
+                        {
+                            builder.Append(s[j]);
+                            j = j + l / 2;
+                            if (n % 2 == 1)
+                                j = j + 1;
+                            n++;
+                        }
+                    }
+                }
+            }
+
+            return builder.ToString();
+        }
+
         // https://leetcode.com/problems/combination-sum/description/
         public static IList<IList<int>> CombinationSum(int[] numbers, int sum)
         {
@@ -609,21 +649,10 @@ namespace Problems
         //https://leetcode.com/problems/word-break/description/
         public static bool WordBreak(IList<string> dictionary, string word)
         {
-            return WordBreak(dictionary, word, new Dictionary<string, bool>());
-        }
-
-        private static bool WordBreak(IList<string> dictionary, string word, Dictionary<string, bool> memo)
-        {
             if (string.IsNullOrEmpty(word))
                 return false;
 
-            bool found;
-            if (memo.TryGetValue(word, out found))
-            {
-                return found;
-            }
-
-            found = false;
+            bool found = false;
             if (dictionary.Contains(word))
             {
                 found = true;
@@ -642,7 +671,6 @@ namespace Problems
                     }
                 }
             }
-            memo.Add(word, found);
             return found;
         }
 

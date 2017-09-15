@@ -92,6 +92,30 @@ namespace Problems.DataStructures
             }
         }
 
+        public static void InOrderTraverseNoRecusive2(BinaryTreeNode<T> tree, Action<BinaryTreeNode<T>> visit)
+        {
+            var stack = new Stack<BinaryTreeNode<T>>();
+            stack.Push(tree);
+
+            while (stack.Count == 0)
+            {
+                var n = stack.Peek();
+                if (n != null)
+                {
+                    stack.Push(n.Left);
+                }
+                else
+                {
+                    // remove the null node
+                    stack.Pop();
+
+                    n = stack.Pop();
+                    visit(n);
+                    if (stack.Count > 0)
+                        stack.Push(n.Right);
+                }
+            }
+        }
         public static void PreOrderVisitNoRecursion(BinaryTreeNode<T> tree, Action<BinaryTreeNode<T>> visit)
         {
             var stack = new Stack<BinaryTreeNode<T>>();
@@ -272,13 +296,13 @@ namespace Problems.DataStructures
             return isValid;
         }
 
-        public static bool IsValidBsf2<T1>(BinaryTreeNode<T1> root, T1 minExclusive, T1 maxExclusive) where T1: IComparable
+        public static bool IsValidBsf2<T1>(BinaryTreeNode<T1> root, T1 minExclusive, T1 maxExclusive) where T1 : IComparable
         {
             if (root == null)
                 return false;
 
             if (root.IsLeaf)
-                return root.Value.CompareTo(minExclusive) > 0  && root.Value.CompareTo(maxExclusive) < 0;
+                return root.Value.CompareTo(minExclusive) > 0 && root.Value.CompareTo(maxExclusive) < 0;
 
             bool result = true;
             if (root.Left != null)

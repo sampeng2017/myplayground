@@ -46,6 +46,14 @@ namespace Tests
             list[5].Should().BeSameAs(root.Right);
             list[6].Should().BeSameAs(root.Right.Right.Left);
             list[7].Should().BeSameAs(root.Right.Right);
+
+            list.Clear();
+            root = new BinaryTreeNode<int> { Value = 1 };
+            root.Left = new BinaryTreeNode<int> { Value = 2 };
+            root.Right = new BinaryTreeNode<int> { Value = 3 };
+
+            BinaryTreeNode<int>.InOrderTraverseNoRecusive2(root, n => list.Add(n));
+
         }
 
         [TestMethod]

@@ -54,3 +54,14 @@ NextLargerElement
 	   are updated with the greater value. 
 EquilibriumPoint
 	1) sum up from both directions, increase smaller, until left index greater than right. if both sums are same and l == h, return l.
+
+SwappingPairMakeSumEqual:
+	1) there should be no solution if the sum difference is an odd number;
+	2) one solution is to sort both array, and start moving two points from left to right for matching.
+TwoSum:
+	1) can either build a map then iterate through to find match, or iterate and build map in same look, the later should be better.
+WordBreak
+	1) dynamic programming, but memo not useful
+ZigZagConversion:
+	1) Can use a data structure to form the shape
+	2) Can do directly based on index, special logic for the middle row when the level is an even number
