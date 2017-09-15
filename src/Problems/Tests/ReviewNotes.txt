@@ -58,6 +58,10 @@ EquilibriumPoint
 SolveSudoku
 	1) No need to start loops for solving, only need loops to find next 0 in the matrix - if not found, it's solved.
 
+StackWithMin
+	1) a straight forward solution is to use an extra stack;
+	2) use the math method. be careful the actual value to return in Pop method, when popped value is less than current min.
+
 SubArrayWithGivenSum
 	1) build up a dictionary with the "current sum" as key, then iterate through the arry, accumulate a sum,
 	  and look up "currentSum + targetSum" in the dictionary

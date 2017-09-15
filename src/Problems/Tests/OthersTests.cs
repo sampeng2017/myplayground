@@ -260,6 +260,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory("Stack and Queue")]
         public void StackWithMin()
         {
             var stackWithMin = new StackWithMin();
@@ -270,7 +271,7 @@ namespace Tests
             stackWithMin.Push(15);
             stackWithMin.GetMin().Should().Be(15);
 
-            stackWithMin.Pop();
+            stackWithMin.Pop().Should().Be(15);
             stackWithMin.GetMin().Should().Be(20);
         }
 

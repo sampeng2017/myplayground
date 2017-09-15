@@ -300,8 +300,13 @@ namespace Problems.Basics
             {
                 return result;
             }
+            // in case that result is less than min value
+            // the the [result] was pushed using 2 * [realValue] - [old minValue]
+            // the [realValue] was stored in minVal field
+            // so we need to recaculate minVal by:
+            var actualValue = minVal;
             minVal = 2 * minVal - result;
-            return minVal;
+            return actualValue;
         }
 
         public int GetMin()
