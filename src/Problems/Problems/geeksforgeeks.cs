@@ -1583,28 +1583,35 @@ namespace Problems
 
             private static bool Solve(int[,] sudoku)
             {
-                for (int row = 0; row < 9; row++)
+                int nextRow = -1;
+                int nextCol = -1;
+                for (int i = 0; i < 9; i++)
                 {
-                    for (int col = 0; col < 9; col++)
+                    for (int j = 0; j < 9; j++)
                     {
-                        if (sudoku[row, col] == 0)
+                        if (sudoku[i, j] == 0)
                         {
-                            var candidates = FindSolutionCandidates(sudoku, row, col);
-                            foreach (var c in candidates)
-                            {
-                                sudoku[row, col] = c;
-                                if (!Solve(sudoku))
-                                    sudoku[row, col] = 0;
-                                else
-                                    break;
-                            }
-
-                            if (sudoku[row, col] == 0)
-                                return false;
+                            nextRow = i;
+                            nextCol = j;
+                            break;
                         }
                     }
                 }
-                return true;
+                if (nextRow == -1)
+                    return true;
+
+                var candidates = FindSolutionCandidates(sudoku, nextRow, nextCol);
+                foreach (var c in candidates)
+                {
+                    sudoku[nextRow, nextCol] = c;
+                    if (Solve(sudoku))
+                    {
+                        break;
+                    }
+                    sudoku[nextRow, nextCol] = 0;
+                }
+
+                return sudoku[nextRow, nextCol] != 0;
             }
 
             private static IList<int> FindSolutionCandidates(int[,] sudoku, int row, int col)
