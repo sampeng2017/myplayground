@@ -10,5 +10,8 @@ namespace Tests
     {
         public const string LinkedList = "Linked List";
         public const string Reviewed1 = "Reviewed Once";
+        public const string Array = "Array";
+        public const string Tree = "Tree";
+        public const string DP = "Dynamic Programming";
     }
 }

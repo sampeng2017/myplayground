@@ -901,7 +901,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Array")]
+        [TestCategory(Constants.Array)]
         public void SlidingWindowMaxOfAllSubArraysWithSizeK()
         {
             var a = new int[] { 1, 2, 3, 1, 4, 5, 2, 3, 6 };
@@ -918,7 +918,8 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Tree")]
+        [TestCategory(Constants.Tree)]
+        [TestCategory(Constants.Reviewed1)]
         public void ConvertBinaryTreeToDoublyLinkedList()
         {
             // -------------

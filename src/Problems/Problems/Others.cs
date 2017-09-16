@@ -15,6 +15,11 @@ namespace Problems
             return CountThePath(board, 0, 0, memo);
         }
 
+        public static int CountThePath2(bool[,] board)
+        {
+            return CountThePath2(board, board.GetLength(0) - 1, board.GetLength(1) - 1);
+        }
+
         private static int CountThePath(bool[,] board, int row, int col, Dictionary<Tuple<int, int>, int> memo)
         {
             if (row == board.GetLength(0) ||
@@ -29,6 +34,41 @@ namespace Problems
             var result = CountThePath(board, row + 1, col, memo) + CountThePath(board, row, col + 1, memo);
             memo.Add(key, result);
             return result;
+        }
+
+        // start from the exit then backwards...
+        // for somereason, the memo doesn't work
+        private static int CountThePath2(bool[,] a, int r, int c,
+            Dictionary<Tuple<int, int>, int> memo = null)
+        {
+            if (memo == null)
+                memo = new Dictionary<Tuple<int, int>, int>();
+
+            int rowCnt = a.GetLength(0);
+            int colCnt = a.GetLength(1);
+
+            if (r < 0 || c < 0)
+                return 0;
+
+            var key = Tuple.Create(r, c);
+            int cnt;
+            if (memo.TryGetValue(key, out cnt))
+            {
+                return cnt;
+            }
+
+            bool val = a[r, c];
+            if (!val)
+                return 0;
+            if (r == 0 && c == 0)
+                return val ? 1 : 0;
+
+            int pathToUp = CountThePath2(a, r - 1, c, memo);
+            int pathToLeft = CountThePath2(a, r, c - 1, memo);
+
+            cnt = pathToUp + pathToLeft;
+            memo.Add(key, cnt);
+            return cnt;
         }
 
         /*

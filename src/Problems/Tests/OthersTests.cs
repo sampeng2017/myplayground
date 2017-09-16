@@ -14,6 +14,8 @@ namespace Tests
     public class OthersTests
     {
         [TestMethod]
+        [TestCategory(Constants.DP)]
+        [TestCategory(Constants.Reviewed1)]
         public void CountThePath()
         {
             bool[,] board = new bool[,]
@@ -26,6 +28,9 @@ namespace Tests
             };
 
             int paths = Others.CountThePath(board);
+            paths.Should().Be(6);
+
+            paths = Others.CountThePath2(board);
             paths.Should().Be(6);
         }
 
@@ -315,7 +320,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Array")]
+        [TestCategory(Constants.Array)]
         public void CountAllNegativeNumbersInSorted2DArray()
         {
             var a = new int[,]

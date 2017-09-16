@@ -57,6 +57,14 @@ ConnectNodesAtSameLevel
 
 ConvertBinaryTreeToDoublyLinkedList
 	1) In order traverse and returns both head and tail of the sub tree. use head/tail from left and right childern to setup points accordingly.
+
+CountAllNegativeNumbersInSorted2DArray
+	1) start from top-right or bottom-left, count sum based on index it hits
+
+CountThePath
+	1) can start from either the top left (entry) or bottom right (exit)
+	2) memo seems working for both, but number of memo hit is different
+	3) bottom right solution looks more clear
 PathSum1
 	1) recursive...
 
