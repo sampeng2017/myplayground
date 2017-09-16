@@ -50,6 +50,13 @@ CircularTour:
 CombinationSum:
 	1) needs to prepare data set - duplicate those numbers that can be used for sum
 	2) either dynamic programming, or just loop and recursive calls. tricky to remove duplicates
+
+ConnectNodesAtSameLevel
+	1) BFS - it's relatively straightforward to pass level info along with nodes, then track "lastvisited" to decide if last's NextRight should point to current.
+	2) it's more elegant but tricky to use "null" to separate levels in the queue. Use Peek()! and enque new null when null is dequed and queue not empty. 
+
+ConvertBinaryTreeToDoublyLinkedList
+	1) In order traverse and returns both head and tail of the sub tree. use head/tail from left and right childern to setup points accordingly.
 PathSum1
 	1) recursive...
 
