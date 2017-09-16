@@ -381,6 +381,8 @@ namespace Tests
             };
             var result = Geeksforgeeks.CircularTour(pumps);
             result.Should().Be(1);
+            result = Geeksforgeeks.CircularTour2(pumps);
+            result.Should().Be(1);
 
             pumps = new Tuple<int, int>[]
             {
@@ -392,12 +394,16 @@ namespace Tests
             };
             result = Geeksforgeeks.CircularTour(pumps);
             result.Should().Be(3);
+            result = Geeksforgeeks.CircularTour2(pumps);
+            result.Should().Be(3);
 
             pumps = new Tuple<int, int>[]
             {
                 Tuple.Create(4, 4),
             };
             result = Geeksforgeeks.CircularTour(pumps);
+            result.Should().Be(0);
+            result = Geeksforgeeks.CircularTour2(pumps);
             result.Should().Be(0);
 
             // no solution
@@ -409,6 +415,8 @@ namespace Tests
                 Tuple.Create(3, 5),
            };
             result = Geeksforgeeks.CircularTour(pumps);
+            result.Should().Be(-1);
+            result = Geeksforgeeks.CircularTour2(pumps);
             result.Should().Be(-1);
         }
 

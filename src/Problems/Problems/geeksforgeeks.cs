@@ -338,6 +338,50 @@ namespace Problems
             return calQueue.Dequeue().Item2;
         }
 
+        public static int CircularTour2(Tuple<int, int>[] pumpArray)
+        {
+            var pumps = pumpArray.Select(p => new Pump { Gas = p.Item1, DistanceToNext = p.Item2 }).ToArray();
+
+            if (pumps.Select(p => p.GasLeftOnNextPump).Sum() < 0)
+                return -1;
+
+            var queue1 = new Queue<Pump>(pumps);
+            var queue2 = new Queue<Pump>();
+
+            var head = queue1.Peek();
+            int currentSum = 0;
+            while (queue1.Count > 0)
+            {
+                var p = queue1.Dequeue();
+
+                if (p.GasLeftOnNextPump + currentSum < 0)
+                {
+                    while (queue2.Count > 0)
+                    {
+                        queue1.Enqueue(queue2.Dequeue());
+                    }
+                    queue1.Enqueue(p);
+                    currentSum = 0;
+                }
+                else
+                {
+                    currentSum += p.GasLeftOnNextPump;
+                    queue2.Enqueue(p);
+                }
+            }
+
+            if (queue1.Count == 0)
+                return Array.IndexOf(pumps, queue2.Peek());
+            else
+                return -1;
+        }
+
+        class Pump
+        {
+            public int Gas { get; set; }
+            public int DistanceToNext { get; set; }
+            public int GasLeftOnNextPump => Gas - DistanceToNext;
+        }
         // http://www.geeksforgeeks.org/connect-nodes-at-same-level/
         public static void ConnectNodesAtSameLevel(BinaryTreeNodeWithNextRightPointer<string> tree)
         {

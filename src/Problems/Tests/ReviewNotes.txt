@@ -43,6 +43,10 @@ CheckBinaryTreeSubTreeOfAnother
 	1) The solution to combine and compare in-order and pre-order sequence doesn't work in some scenarios. need special handlings for leaves;
 	2) it should work using post-order to build "token" for nodes, then do a substring match.
 
+CircularTour:
+	1) use two queues. There can be tricky to detect the exit condition of loop.
+	2) can caculuate "diff" sum at begining, if negative, there is no solution
+
 PathSum1
 	1) recursive...
 
