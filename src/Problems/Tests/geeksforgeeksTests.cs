@@ -370,6 +370,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Stack and Queue")]
+        [TestCategory(Constants.Reviewed1)]
         public void CircularTour()
         {
             var pumps = new Tuple<int, int>[]

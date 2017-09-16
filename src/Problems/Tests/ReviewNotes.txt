@@ -47,6 +47,9 @@ CircularTour:
 	1) use two queues. There can be tricky to detect the exit condition of loop.
 	2) can caculuate "diff" sum at begining, if negative, there is no solution
 
+CombinationSum:
+	1) needs to prepare data set - duplicate those numbers that can be used for sum
+	2) either dynamic programming, or just loop and recursive calls. tricky to remove duplicates
 PathSum1
 	1) recursive...
 

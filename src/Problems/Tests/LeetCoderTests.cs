@@ -293,6 +293,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory(Constants.Reviewed1)]
         public void CombinationSum()
         {
             var numbers = new int[] { 2, 3, 6, 7, 9 };
@@ -301,8 +302,16 @@ namespace Tests
             result[0].Should().BeEquivalentTo(new List<int> { 2, 2, 3 });
             result[1].Should().BeEquivalentTo(new List<int> { 7 });
 
+            result = LeetCoder.CombinationSum2(numbers, 7);
+            result.Should().HaveCount(2);
+            result[0].Should().BeEquivalentTo(new List<int> { 2, 2, 3 });
+            result[1].Should().BeEquivalentTo(new List<int> { 7 });
+
             numbers = new int[] { 6, 7, 9, 12, 25, 31 };
             result = LeetCoder.CombinationSum(numbers, 48);
+            result.Should().HaveCount(15);
+
+            result = LeetCoder.CombinationSum2(numbers, 48);
             result.Should().HaveCount(15);
         }
 

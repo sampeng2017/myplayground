@@ -531,6 +531,18 @@ namespace Problems
             return comboResults;
         }
 
+        public static IList<IList<int>> CombinationSum2(int[] numbers, int sum)
+        {
+            var preparedNumbers = CombinationSum_PrepareNumbers(numbers, sum);
+            var rawResults = GetCombinationSum2(preparedNumbers, sum);
+            var map = new Dictionary<string, IList<int>>();
+            foreach (var l in rawResults)
+            {
+                map[string.Join(",", l.ToArray())] = l;
+            }
+            return map.Values.ToList();
+        }
+
         //TODO: can it uses memo to improve perf?
         static IList<IList<int>> GetCombinationSum(IList<int> numbers, int sum)
         {
@@ -570,6 +582,34 @@ namespace Problems
                 }
             }
             return result;
+        }
+
+        static IList<IList<int>> GetCombinationSum2(IList<int> a2, int sum)
+        {
+
+            var result = new List<IList<int>>();
+            if (a2.Count == 0 || sum < 0)
+                return result;
+
+            if (a2[0] == sum)
+            {
+                result.Add(new List<int> { a2[0] });
+                return result;
+            }
+
+
+            // a[0] is part of the set
+
+            var r1 = GetCombinationSum2(a2.Skip(1).ToList(), sum - a2[0]);
+            foreach (var list in r1)
+            {
+                list.Insert(0, a2[0]);
+            }
+
+            // a[0] is not part of the set
+            var r2 = GetCombinationSum2(a2.Skip(1).ToList(), sum);
+
+            return r1.Union(r2).ToList();
         }
 
         private static IList<int> CombinationSum_PrepareNumbers(int[] numbers, int sum)
