@@ -13,6 +13,7 @@ namespace Tests
     {
         [TestMethod]
         [TestCategory("Array")]
+        [TestCategory(Constants.Reviewed1)]
         public void TwoSum()
         {
             var testAry1 = new int[] { 2, 7, 11, 15 };
@@ -40,6 +41,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Linked List")]
+        [TestCategory(Constants.Reviewed1)]
         public void AddTowNumbers()
         {
             ListNode<int> l1 = LeetCoder.BuildLinkedListFromValue(342);
@@ -114,6 +116,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory(Constants.Reviewed1)]
         public void ZigZagConversion()
         {
             var converted = LeetCoder.ZigZagConversion("PAYPALISHIRING", 3);
@@ -253,6 +256,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory(Constants.Reviewed1)]
         public void CanPlaceFlower()
         {
             int[] testBed1 = new int[] { 1, 0, 0 };
@@ -393,6 +397,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Dynamic Programming")]
+        [TestCategory(Constants.Reviewed1)]
         public void WordBreak()
         {
             var dictionary = new List<string> { "leet", "code" };

@@ -83,6 +83,7 @@ namespace Tests
         [TestMethod]
         [TestCategory("Array")]
         [TestCategory("Divide and Conquer")]
+        [TestCategory(Constants.Reviewed1)]
         public void BinarySearch()
         {
             var a1 = new int[] { 11, 1, 13, 21, 3, 7 };

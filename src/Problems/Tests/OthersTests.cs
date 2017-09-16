@@ -228,6 +228,7 @@ namespace Tests
         [TestMethod]
         [TestCategory("Array")]
         [TestCategory("Divide and Conquer")]
+        [TestCategory(Constants.Reviewed1)]
         public void AlternateArrayItems()
         {
             var a = new int[] { 1, 2, 11, 12 };
@@ -261,6 +262,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Stack and Queue")]
+        [TestCategory(Constants.Reviewed1)]
         public void StackWithMin()
         {
             var stackWithMin = new StackWithMin();

@@ -36,6 +36,13 @@ BuildFromSortedArray:
 BuildTreeFromInOrderAndPreOrderTraverse
 	1) use List is a lot simpler
 
+CanPlaceFlower
+	1) Check for consecutive 0s, be carefull with the edge cases (start/end)
+
+CheckBinaryTreeSubTreeOfAnother
+	1) The solution to combine and compare in-order and pre-order sequence doesn't work in some scenarios. need special handlings for leaves;
+	2) it should work using post-order to build "token" for nodes, then do a substring match.
+
 PathSum1
 	1) recursive...
 

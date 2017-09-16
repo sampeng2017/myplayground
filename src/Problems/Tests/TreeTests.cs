@@ -95,6 +95,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Tree")]
+        [TestCategory(Constants.Reviewed1)]
         public void BinarySearchTree()
         {
             var tmpNode1 = new BinaryTreeNode<int> { Value = 5 };
@@ -132,6 +133,7 @@ namespace Tests
         [TestMethod]
         [TestCategory("Tree")]
         [TestCategory("Recursive")]
+        [TestCategory(Constants.Reviewed1)]
         public void BuildTreeFromInOrderAndPreOrderTraverse()
         {
             char[] preOrder = new char[] { 'A', 'B', 'D', 'H', 'E', 'C', 'F', 'G' };
@@ -216,6 +218,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Tree")]
+        [TestCategory(Constants.Reviewed1)]
         public void BuildFromSortedArray()
         {
             var ary = new int[] { 1 };

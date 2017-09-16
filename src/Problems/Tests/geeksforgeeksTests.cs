@@ -32,6 +32,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Array")]
+        [TestCategory(Constants.Reviewed1)]
         public void SubArrayWithGivenSum()
         {
             var a = new int[] { 1, 2, 3, 7, 5 };
@@ -264,6 +265,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Tree")]
+        [TestCategory(Constants.Reviewed1)]
         public void BottomViewOfBinaryTree()
         {
             //        20
@@ -452,6 +454,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Recursive")]
+        [TestCategory(Constants.Reviewed1)]
         public void SpecialKeyboard()
         {
             Geeksforgeeks.SpecialKeyboard(3).Should().Be(3);
@@ -493,6 +496,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Hashing")]
+        [TestCategory(Constants.Reviewed1)]
         public void SwappingPairMakeSumEqual()
         {
             var a1 = new int[] { 4, 1, 2, 1, 1, 2 };
@@ -518,6 +522,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Hashing")]
+        [TestCategory(Constants.Reviewed1)]
         public void ArrayIsSubSequenceOfAnother()
         {
             var a = new int[] { 11, 3, 7, 1 };
@@ -534,6 +539,7 @@ namespace Tests
         [TestMethod]
         [TestCategory("Greedy")]
         [TestCategory("Recursive")]
+        [TestCategory(Constants.Reviewed1)]
         public void ActivitySelection()
         {
             var activities = new List<Tuple<int, int>>
@@ -738,6 +744,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Tree")]
+        [TestCategory(Constants.Reviewed1)]
         public void CheckBinaryTreeSubTreeOfAnother()
         {
             //  10
@@ -966,6 +973,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Array")]
+        [TestCategory(Constants.Reviewed1)]
         public void BirdAndMaxFruitGathering()
         {
             var trees = new int[] { 2, 1, 3, 5, 0, 1, 4 };
