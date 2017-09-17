@@ -522,5 +522,42 @@ namespace Problems
             memo[al - 1, bl - 1] = result;
             return result;
         }
+
+        // given a list of "bars", calculate the volum that that container(s) made of from the bars
+        // assume array values are non negative
+        // build to arrays, one contains the hightest bar on left, and another highest on right...
+        public static int WaterInBarGraph(int[] bars)
+        {
+            if (bars == null || bars.Length < 3) //to make a container, at leasr 3 is needed
+                return 0;
+
+            var highestOnLeft = new int[bars.Length];
+            int highest = -1;
+            for (int i = 0; i < bars.Length; i++)
+            {
+                highestOnLeft[i] = highest;
+                if (bars[i] > highest)
+                    highest = bars[i];
+            }
+
+            var highestOnRight = new int[bars.Length];
+            highest = -1;
+            for (int i = bars.Length -1; i >= 0; i--)
+            {
+                highestOnRight[i] = highest;
+                if (bars[i] > highest)
+                    highest = bars[i];
+            }
+
+            int sum = 0;
+            // exclude two items on left and right ends
+            for (int i = 1; i < bars.Length -1; i++)
+            {
+                int effectiveHight = Math.Min(highestOnLeft[i], highestOnRight[i]);
+                var v = effectiveHight - bars[i];
+                sum += v < 0 ? 0 : v;
+            }
+            return sum;
+        }
     }
 }

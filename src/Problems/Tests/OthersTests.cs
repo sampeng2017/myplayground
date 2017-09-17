@@ -347,5 +347,17 @@ namespace Tests
             result.Should().Be(0);
 
         }
+
+        [TestMethod]
+        public void WaterInBarGraph()
+        {
+            var bars = new int[] { 5, 1, 3, 4 };
+            var result = Others.WaterInBarGraph(bars);
+            result.Should().Be(4);
+
+            bars = new int[] { 1, 5, 1, 2, 3, 1, 2 };
+            result = Others.WaterInBarGraph(bars);
+            result.Should().Be(4);
+        }
     }
 }
