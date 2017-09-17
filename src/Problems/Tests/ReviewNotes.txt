@@ -65,6 +65,11 @@ CountThePath
 	1) can start from either the top left (entry) or bottom right (exit)
 	2) memo seems working for both, but number of memo hit is different
 	3) bottom right solution looks more clear
+
+EditDistance
+	1) DP, memo works.
+	2) pass scanning char index is better than pass substings.
+
 PathSum1
 	1) recursive...
 

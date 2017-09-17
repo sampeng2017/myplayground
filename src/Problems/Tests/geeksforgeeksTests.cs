@@ -791,7 +791,8 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Dynamic Programming")]
+        [TestCategory(Constants.DP)]
+        [TestCategory(Constants.Reviewed1)]
         public void EditDistance()
         {
             string s1 = "str1";
