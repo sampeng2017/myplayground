@@ -1095,5 +1095,35 @@ namespace Tests
             result = Geeksforgeeks.MultiplyTwoStrings(s1, s2);
             result.Should().Be("82529092");
         }
+
+        [TestMethod]
+        [TestCategory(Constants.DP)]
+        public void AreInterleaved()
+        {
+            var a = "aabcc";
+            var b = "dbbca";
+            var c = "aadbbcbcac";
+            var r = Geeksforgeeks.AreInterleaved(a, b, c);
+            r.Should().BeTrue();
+            r = Geeksforgeeks.AreInterleaved2(a, b, c);
+            r.Should().BeTrue();
+
+            a = "aabcc";
+            b = "dbbca";
+            c = "aadbbbaccc";
+            r = Geeksforgeeks.AreInterleaved(a, b, c);
+            r.Should().BeFalse();
+            r = Geeksforgeeks.AreInterleaved2(a, b, c);
+            r.Should().BeFalse();
+
+            a = "XXY";
+            b = "XXZ";
+            c = "XXXYXZ";
+            r = Geeksforgeeks.AreInterleaved(a, b, c);
+            r.Should().BeTrue();
+            r = Geeksforgeeks.AreInterleaved2(a, b, c);
+            r.Should().BeTrue();
+
+        }
     }
 }

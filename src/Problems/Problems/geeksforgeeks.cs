@@ -1270,6 +1270,93 @@ namespace Problems
             return Tuple.Create(head, tail);
         }
 
+        // https://github.com/sampeng2017/myplayground/blob/master/src/Problems/Problems/geeksforgeeks.cs
+        public static bool AreInterleaved(string a, string b, string c)
+        {
+            Helpers.Ensure(a);
+            Helpers.Ensure(b);
+            Helpers.Ensure(c);
+
+            if (a.Length + b.Length != c.Length)
+                return false;
+            return AreInterleaved(a, b, c, 0, 0, 0);
+
+            // this is a simple solution as well
+            //if (a.Length == 0)
+            //    return string.Equals(b, c);
+            //if (b.Length == 0)
+            //    return string.Equals(a, c);
+
+            //return (a[0] == c[0] && AreInterleaved(a.Substring(1), b, c.Substring(1)))
+            //    || (b[0] == c[0] && AreInterleaved(a, b.Substring(1), c.Substring(1)));
+        }
+
+        // add a memo here may help but not too much
+        private static bool AreInterleaved(string a, string b, string c,
+            int aStart, int bStart, int cStart)
+        {
+            if (aStart == a.Length)
+                return string.Equals(b.Substring(bStart + 1), c.Substring(cStart + 1));
+
+            if (bStart == a.Length)
+                return string.Equals(a.Substring(aStart + 1), c.Substring(cStart + 1));
+
+            return (a[aStart] == c[cStart] && AreInterleaved(a, b, c, aStart + 1, bStart, cStart + 1))
+                || (b[bStart] == c[cStart] && AreInterleaved(a, b, c, aStart, bStart + 1, cStart + 1));
+        }
+
+        public static bool AreInterleaved2(string a, string b, string c)
+        {
+            Helpers.Ensure(a);
+            Helpers.Ensure(b);
+            Helpers.Ensure(c);
+
+            if (a.Length + b.Length != c.Length)
+                return false;
+
+            var dpTable = new bool[a.Length + 1, b.Length + 1];
+
+            for (int i = 0; i <= a.Length; i++)
+            {
+                for (int j = 0; j <= b.Length; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        dpTable[i, j] = true;
+                    }
+                    else if (i == 0) //a is empty
+                    {
+                        dpTable[i, j] = b[j - 1] == c[j - 1] && dpTable[i, j - 1];
+                    }
+                    else if (j == 0) //b is empty
+                    {
+                        dpTable[i, j] = a[i - 1] == c[i - 1] && dpTable[i - 1, j];
+                    }
+                    // Current character of c matches with current character of a,
+                    // but doesn't match with current character of b
+                    else if (a[i - 1] == c[i + j - 1] && b[j - 1] != c[i + j - 1])
+                    {
+                        dpTable[i, j] = dpTable[i - 1, j];
+                    }
+                    // Current character of C matches with current character of B,
+                    // but doesn't match with current character of A
+                    else if (a[i - 1] != c[i + j - 1] && b[j - 1] == c[i + j - 1])
+                    {
+                        dpTable[i, j] = dpTable[i, j - 1];
+                    }
+                    // Current character of C matches with that of both A and B
+                    else if (a[i - 1] == c[i + j - 1] && b[j - 1] == c[i + j - 1])
+                    {
+                        dpTable[i, j] = (dpTable[i - 1, j] || dpTable[i, j - 1]);
+                    }
+                    else
+                        dpTable[i, j] = false; // not really needed,just for clarity
+
+                }
+            }
+            return dpTable[a.Length, b.Length];
+        }
+
         #region facebook
         // http://practice.geeksforgeeks.org/problems/maximum-integer-value/0
         public static long MaxIntegerValue(string s)
@@ -1602,6 +1689,7 @@ namespace Problems
             }
             return result;
         }
+
 
         #endregion
         private class Sudoku
