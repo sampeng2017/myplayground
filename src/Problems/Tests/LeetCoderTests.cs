@@ -494,6 +494,7 @@ namespace Tests
 
         [TestMethod]
         [TestCategory("Tree")]
+        [TestCategory(Constants.Reviewed1)]
         public void FindDuplicateSubTrees()
         {
             //    1

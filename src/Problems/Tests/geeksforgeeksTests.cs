@@ -642,7 +642,8 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Divide and Conquer")]
+        [TestCategory(Constants.DivideConquer)]
+        [TestCategory(Constants.Reviewed1)]
         public void FindElementAppearsOnceInSortedArray()
         {
             var funcs = new List<Func<int[], int>>

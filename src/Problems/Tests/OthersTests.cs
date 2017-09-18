@@ -193,27 +193,27 @@ namespace Tests
         {
             int[] arriveAts = new int[] { 10 };
             List<int[]> trace = new List<int[]>();
-            int minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, 0, trace);
+            int minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, trace);
             minTime.Should().Be(20);
 
             arriveAts = new int[] { 10, 20 };
             trace.Clear();
-            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, 0, trace);
+            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, trace);
             minTime.Should().Be(30);
 
             arriveAts = new int[] { 10, 30, 40 };
             trace.Clear();
-            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, 0, trace);
+            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, trace);
             minTime.Should().Be(50);
 
             arriveAts = new int[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
             trace.Clear();
-            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, 0, trace);
+            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, trace);
             minTime.Should().Be(100);
 
             arriveAts = new int[] { 5, 15, 35, 40, 40, 70, 75 };
             trace.Clear();
-            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, 0, trace);
+            minTime = Others.FerryQuestion_MinTime(2, 10, arriveAts, trace);
             minTime.Should().Be(85);
         }
 

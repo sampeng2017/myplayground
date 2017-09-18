@@ -354,9 +354,9 @@ namespace Problems
             50 2
          * */
 
-        public static int FerryQuestion_MinTime(int n, int t, IList<int> arriveAts, int ferryReadyAt = 0, List<int[]> trace = null)
+        public static int FerryQuestion_MinTime(int n, int t, IList<int> arriveAts, List<int[]> trace = null)
         {
-            return FerryQuestion_MinTimeImpl(n, t, arriveAts, ferryReadyAt, trace ?? new List<int[]>());
+            return FerryQuestion_MinTimeImpl(n, t, arriveAts, 0, trace ?? new List<int[]>());
         }
 
         private static int FerryQuestion_MinTimeImpl(int n, int t, IList<int> arriveAts, int ferryReadyAt, List<int[]> trace)
@@ -371,19 +371,22 @@ namespace Problems
             {
                 int choice = 0;
                 int innerStart = i;
+
+                // when the ferry's capacity is n, there can be multiple choices made:
+                // leve when the 1st arrives, 2nd arrives. etc. Then find the min value
                 for (int j = 0; j < n && i < arriveAts.Count; j++)
                 {
                     int arriveAt = arriveAts[i];
 
                     // deal with the one-way case for the last arrival
                     int ferryTime = (i == arriveAts.Count - 1) ? t : 2 * t;
-                    int tmpTime = Math.Max(arriveAt, ferryReadyAt) + ferryTime;
+                    int timeForTrip = Math.Max(arriveAt, ferryReadyAt) + ferryTime;
 
                     arriveAtsCopy.Remove(arriveAt);
-                    tmpTime = FerryQuestion_MinTimeImpl(n, t, arriveAtsCopy, tmpTime, null);
-                    if (tmpTime < minTime)
+                    int minTimeBasedOnChoice = FerryQuestion_MinTimeImpl(n, t, arriveAtsCopy, timeForTrip, trace);
+                    if (minTimeBasedOnChoice < minTime)
                     {
-                        minTime = tmpTime;
+                        minTime = minTimeBasedOnChoice;
                         choice = j;
                     }
                     i++;

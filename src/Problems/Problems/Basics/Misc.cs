@@ -47,20 +47,17 @@ namespace Problems.Basics
             if (n == 0) return 0;
             if (n == 1 || n == 2) return 1;
 
-            int[] twoItems = new int[] { 0, 1 };
-            int cnt = 1;
-            while (true)
+            int a1 = 1;
+            int a2 = 1;
+            int cnt = 2;
+            while (cnt < n)
             {
-                twoItems[0] = twoItems[0] + twoItems[1];
+                int sum = a1 + a2;
+                a1 = a2;
+                a2 = sum;
                 cnt++;
-                if (cnt == n)
-                    break;
-                twoItems[1] = twoItems[0] + twoItems[1];
-                cnt++;
-                if (cnt == n)
-                    break;
             }
-            return twoItems[1] > twoItems[0] ? twoItems[1] : twoItems[0];
+            return a2;
         }
 
         public static Tuple<int, int, int> FindMaxSubArray(int[] ary, int low, int high)

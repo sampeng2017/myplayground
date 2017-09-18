@@ -73,6 +73,18 @@ EditDistance
 EquilibriumPoint
 	1) add up sum from left and right in same loop. check left sum and right sum equals or not, be careful with [1,1] scenario.
 
+Fibonacci
+	1) Recurisve + memo,  or bottom-up DP (use a dictionary). 
+	2) simple loop is most cost effective
+
+FindDuplicateSubTrees
+	1) use post order travere to build "string token" for nodes. The match the tokens for duplicate sub trees.
+
+FindElementAppearsOnceInSortedArray
+	1) XOR - simple but just a trick, and O(n)
+	2) Scan - simple, O(n)
+	3) Binary search. Be careful with then even/odd lengh of divided sub arrays.
+
 PathSum1
 	1) recursive...
 

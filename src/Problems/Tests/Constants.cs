@@ -13,5 +13,6 @@ namespace Tests
         public const string Array = "Array";
         public const string Tree = "Tree";
         public const string DP = "Dynamic Programming";
+        public const string DivideConquer = "Divide and Conquer";
     }
 }
