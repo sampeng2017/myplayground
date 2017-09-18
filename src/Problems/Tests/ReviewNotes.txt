@@ -85,6 +85,20 @@ FindElementAppearsOnceInSortedArray
 	2) Scan - simple, O(n)
 	3) Binary search. Be careful with then even/odd lengh of divided sub arrays.
 
+FindFirstSetBit
+	1) number modulu 2 - if 1, the bit is one. So modulu results 0, divide the number by 2 and repeat (count the loop).
+
+FindInSorted2DArray
+	1) Start search from either top-right or bottom-left, compare values and move to coresponcing directions.
+
+FindLowestCommonAncestor
+	1) best way is to seach both and return stacks.then pop each stacks together until see differences.
+
+FindMaxSubArray
+	1) Divide & conquer is do-able and a n*lgn solution (T(n) = 2 * T(n/2) + f(n)).
+	2) O(n) solution - scan from left to right, remember last sum/indexes seen. when hit a negative local sum, reset local sum and pointers.
+	   It seems working but not sure if it can cover all the scenarios.
+
 PathSum1
 	1) recursive...
 

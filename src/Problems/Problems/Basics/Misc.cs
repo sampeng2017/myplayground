@@ -80,7 +80,39 @@ namespace Problems.Basics
             return crossingResult;
         }
 
-        // doesn't work with all negative case
+        private static Tuple<int, int, int> FindMaxCrossingSubArray(int[] ary, int low, int mid, int high)
+        {
+            int leftSum = int.MinValue;
+            int rightSum = int.MinValue;
+            int leftIndex = low;
+            int rightIndex = high;
+
+            int tmpSum = 0;
+            for (int i = mid; i >= low; i--)
+            {
+                tmpSum += ary[i];
+                if (tmpSum > leftSum)
+                {
+                    leftSum = tmpSum;
+                    leftIndex = i;
+                }
+            }
+
+            tmpSum = 0;
+            for (int i = mid + 1; i <= high; i++)
+            {
+                tmpSum += ary[i];
+                if (tmpSum > rightSum)
+                {
+                    rightSum = tmpSum;
+                    rightIndex = i;
+                }
+            }
+
+            return Tuple.Create(leftIndex, rightIndex, leftSum + rightSum);
+        }
+
+
         public static Tuple<int, int, int> FindMaxSubArray_Liner(int[] a)
         {
             int maxsum = int.MinValue;
@@ -89,29 +121,25 @@ namespace Problems.Basics
             int maxEnd = 0;
             int currentStart = 0;
             int currentEnd = 0;
+
             for (int i = 0; i < a.Length; i++)
             {
                 sum += a[i];
+                currentEnd = i;
+
                 if (maxsum < sum)
                 {
                     maxsum = sum;
-                    currentEnd = i;
                     maxStart = currentStart;
                     maxEnd = currentEnd;
                 }
-                else if (sum < 0)
+
+                if (sum < 0)
                 {
                     currentStart = i + 1;
-                    currentEnd = i + 1;
                     sum = 0;
                 }
             }
-            if (maxsum == sum)
-            {
-                maxStart = currentStart;
-                maxEnd = currentEnd;
-            }
-
             return Tuple.Create(maxStart, maxEnd, maxsum);
         }
 
@@ -217,38 +245,6 @@ namespace Problems.Basics
                     l = q + 1;
             }
             return ary[i];
-        }
-
-        private static Tuple<int, int, int> FindMaxCrossingSubArray(int[] ary, int low, int mid, int high)
-        {
-            int leftSum = int.MinValue;
-            int rightSum = int.MinValue;
-            int leftIndex = low;
-            int rightIndex = high;
-
-            int tmpSum = 0;
-            for (int i = mid; i >= low; i--)
-            {
-                tmpSum += ary[i];
-                if (tmpSum > leftSum)
-                {
-                    leftSum = tmpSum;
-                    leftIndex = i;
-                }
-            }
-
-            tmpSum = 0;
-            for (int i = mid + 1; i <= high; i++)
-            {
-                tmpSum += ary[i];
-                if (tmpSum > rightSum)
-                {
-                    rightSum = tmpSum;
-                    rightIndex = i;
-                }
-            }
-
-            return Tuple.Create(leftIndex, rightIndex, leftSum + rightSum);
         }
 
         // Euclid’s algorithm
