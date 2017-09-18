@@ -70,6 +70,9 @@ EditDistance
 	1) DP, memo works.
 	2) pass scanning char index is better than pass substings.
 
+EquilibriumPoint
+	1) add up sum from left and right in same loop. check left sum and right sum equals or not, be careful with [1,1] scenario.
+
 PathSum1
 	1) recursive...
 

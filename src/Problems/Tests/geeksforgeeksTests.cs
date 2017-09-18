@@ -70,7 +70,8 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Array")]
+        [TestCategory(Constants.Array)]
+        [TestCategory(Constants.Reviewed1)]
         public void EquilibriumPoint()
         {
             var a = new int[] { 1, 3, 5, 2, 2 };

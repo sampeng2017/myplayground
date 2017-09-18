@@ -559,5 +559,44 @@ namespace Problems
             }
             return sum;
         }
+
+        public static NodeWithRandomPointer CopyLinkedListWithRandomPointer(NodeWithRandomPointer node)
+        {
+            if (node == null)
+                return null;
+
+            var tmp = node;
+            while (tmp != null)
+            {
+                var newNode = new NodeWithRandomPointer { Value = tmp.Value };
+                newNode.Next = tmp.Next;
+                tmp.Next = newNode;
+
+                tmp = newNode.Next;
+            }
+
+            tmp = node;
+            var newHead = node.Next;
+
+            while (tmp != null)
+            {
+                var copiedNode = tmp.Next;
+                if (tmp.Random != null)
+                    copiedNode.Random = tmp.Random.Next;
+
+                tmp.Next = copiedNode.Next;
+                tmp = tmp.Next;
+            }
+
+
+            return newHead;
+        }
+
+        public class NodeWithRandomPointer
+        {
+            public int Value { get; set; }
+            public NodeWithRandomPointer Next { get; set; }
+            public NodeWithRandomPointer Random { get; set; }
+        }
     }
 }

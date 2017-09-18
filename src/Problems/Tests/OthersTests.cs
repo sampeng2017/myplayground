@@ -359,5 +359,29 @@ namespace Tests
             result = Others.WaterInBarGraph(bars);
             result.Should().Be(4);
         }
+
+        [TestMethod]
+        [TestCategory(Constants.LinkedList)]
+        public void CopyLinkedListWithRandomPointer()
+        {
+            var node1 = new NodeWithRandomPointer { Value = 1 };
+            var node2 = new NodeWithRandomPointer { Value = 2 };
+            var node3 = new NodeWithRandomPointer { Value = 3 };
+            node1.Next = node2;
+            node2.Next = node3;
+            node1.Random = node3;
+            node2.Random = node1;
+            node3.Random = node2;
+
+            var newNode = Others.CopyLinkedListWithRandomPointer(node1);
+
+            var tmp1 = node1;
+            var tmpN1 = newNode;
+            while (tmp1 != null && tmpN1 != null)
+            {
+                tmp1.Value.Should().Be(tmpN1.Value);
+                tmp1.Random.Value.Should().Be(tmpN1.Random.Value);
+            }
+        }
     }
 }
