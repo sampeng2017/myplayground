@@ -99,6 +99,10 @@ FindMaxSubArray
 	2) O(n) solution - scan from left to right, remember last sum/indexes seen. when hit a negative local sum, reset local sum and pointers.
 	   It seems working but not sure if it can cover all the scenarios.
 
+FindMedianInStream
+	1) two heaps - max heap for the lower portion and min heap for the higher portion.
+	2) Insert depends on the value of min/max heap. Need re-balance if the count of heaps are more than 2.
+	3) caculate - if heaps have same count, peek both and return average; otherwise peek the bigger one.
 PathSum1
 	1) recursive...
 
