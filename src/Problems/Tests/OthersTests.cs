@@ -381,6 +381,8 @@ namespace Tests
             {
                 tmp1.Value.Should().Be(tmpN1.Value);
                 tmp1.Random.Value.Should().Be(tmpN1.Random.Value);
+                tmp1 = tmp1.Next;
+                tmpN1 = tmpN1.Next;
             }
         }
     }
