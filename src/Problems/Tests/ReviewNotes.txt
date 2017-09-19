@@ -103,6 +103,16 @@ FindMedianInStream
 	1) two heaps - max heap for the lower portion and min heap for the higher portion.
 	2) Insert depends on the value of min/max heap. Need re-balance if the count of heaps are more than 2.
 	3) caculate - if heaps have same count, peek both and return average; otherwise peek the bigger one.
+
+FindMerge
+	1) traverse both and count. If the tail is same, then there is a merge. Based on count diff addjust the starting nodes, travel together.
+
+FindMidNode
+	1) trivial. be careful with null pointer
+
+FindMinAndMax
+	1) Just scan, compare and remember.
+
 PathSum1
 	1) recursive...
 

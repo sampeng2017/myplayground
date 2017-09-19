@@ -14,5 +14,6 @@ namespace Tests
         public const string Tree = "Tree";
         public const string DP = "Dynamic Programming";
         public const string DivideConquer = "Divide and Conquer";
+        public const string Heap = "Heap";
     }
 }

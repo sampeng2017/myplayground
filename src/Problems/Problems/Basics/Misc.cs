@@ -168,45 +168,16 @@ namespace Problems.Basics
             if (ary.Length == 1)
                 return Tuple.Create(ary[0], ary[0]);
 
-            int min = ary[0];
-            int max = min;
-
-            bool isEven = ary.Length % 2 == 0;
-            if (isEven)
+            int min = int.MaxValue;
+            int max = int.MinValue;
+            for (int i = 0; i < ary.Length; i++)
             {
-                if (ary[0] < ary[1])
-                {
-                    max = ary[1];
-                }
-                else
-                {
-                    max = ary[0];
-                    min = ary[1];
-                }
+                int val = ary[i];
+                if (val > max)
+                    max = val;
+                else if (val < min)
+                    min = val;
             }
-
-            int i = isEven ? 2 : 1;
-            for (; i < ary.Length; i = i + 2)
-            {
-                int bigger;
-                int smaller;
-                if (ary[i] < ary[i + 1])
-                {
-                    bigger = ary[i + 1];
-                    smaller = ary[i];
-                }
-                else
-                {
-                    smaller = ary[i + 1];
-                    bigger = ary[i];
-                }
-
-                if (smaller < min)
-                    min = smaller;
-                if (bigger > max)
-                    max = bigger;
-            }
-
             return Tuple.Create(min, max);
         }
 

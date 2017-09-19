@@ -159,6 +159,8 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory(Constants.Array)]
+        [TestCategory(Constants.Reviewed1)]
         public void FindMinAndMax()
         {
             int[] a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11 };

@@ -10,7 +10,8 @@ namespace Tests
     public class LinkedListTests
     {
         [TestMethod]
-        [TestCategory("Linked List")]
+        [TestCategory(Constants.LinkedList)]
+        [TestCategory(Constants.Reviewed1)]
         public void FindMidNode()
         {
             var linkedList = new ListNode<int> { Value = 1 };
@@ -29,7 +30,8 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Linked List")]
+        [TestCategory(Constants.LinkedList)]
+        [TestCategory(Constants.Reviewed1)]
         public void FindMerge()
         {
             var node1 = new ListNode<int> { Value = 1 };
@@ -56,7 +58,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Linked List")]
+        [TestCategory(Constants.LinkedList)]
         public void ReverseLinkedList()
         {
             var linkedList = new ListNode<int> { Value = 1 };

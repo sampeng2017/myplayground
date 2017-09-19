@@ -46,23 +46,18 @@ namespace Problems.Basics
             if (p1 != p2)
                 return null;
 
-            p1 = list1;
-            p2 = list2;
-            int n = Math.Abs(len1 - len2);
-            for (int i = 0; i < n; i++)
+            var longList = len1 > len2 ? list1 : list2;
+            var shortList = longList == list1 ? list2 : list1;
+            for (int i = 0; i < Math.Abs(len1 - len2); i++)
             {
-                if (len1 > len2)
-                    p1 = p1.Next;
-                else
-                    p2 = p2.Next;
+                longList = longList.Next;
             }
-
-            while (p1 != p2)
+            while (longList != shortList)
             {
-                p1 = p1.Next;
-                p2 = p2.Next;
+                longList = longList.Next;
+                shortList = shortList.Next;
             }
-            return p1;
+            return longList;
         }
 
         public static ListNode<T> Reverse_Recursive<T>(ListNode<T> linkedList)
