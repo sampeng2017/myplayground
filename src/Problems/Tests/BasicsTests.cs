@@ -180,6 +180,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory(Constants.DivideConquer)]
         public void RandomSelectNth()
         {
             int[] a = new int[] { 34, 2, 9, 45, 8, 27, 5, 11 };

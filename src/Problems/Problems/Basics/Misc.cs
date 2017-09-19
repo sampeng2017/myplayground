@@ -184,6 +184,9 @@ namespace Problems.Basics
         // select the value of the i'th samllest element in the ary[p .. r];
         public static int RandomSelectNth(int[] ary, int p, int r, int i)
         {
+            if (r - p + 1 < i)
+                return -1;
+
             int q = Helpers.RandomPartition(ary, p, r);
 
             // if the pivot mathes, return
@@ -193,7 +196,7 @@ namespace Problems.Basics
             if (i < k)
                 return RandomSelectNth(ary, p, q - 1, i);
             else
-                return RandomSelectNth(ary, q + 1, r, i - k);
+                return RandomSelectNth(ary, q + 1, r, i - k); // i - k !!
         }
 
         public static int RandomSelectNthNoRecurisive(int[] ary, int i)

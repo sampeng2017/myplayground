@@ -715,29 +715,30 @@ namespace Problems
         }
 
         // https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
-        public static void FlattenBinaryTreeToLinkedList<T>(BinaryTreeNode<T> tree) where T : IComparable
+        public static BinaryTreeNode<T> FlattenBinaryTreeToLinkedList<T>(BinaryTreeNode<T> root) where T : IComparable
         {
-            if (tree == null)
-                return;
-            var tmp = tree;
-            var tmpRightChild = tree.Right;
-            if (tree.Left != null)
+            if (root == null)
+                return null;
+
+            var left = root.Left;
+            var right = root.Right;
+            root.Left = null;
+            root.Right = left;
+
+            BinaryTreeNode<T> leftTail = root;
+            BinaryTreeNode<T> rightTail = root;
+            if (left != null)
             {
-                FlattenBinaryTreeToLinkedList(tree.Left);
-                tree.Right = tree.Left;
-                tmp = tree.Left;
-                while (tmp.Right != null)
-                {
-                    tmp = tmp.Right;
-                }
-                tree.Left = null;
+                leftTail = FlattenBinaryTreeToLinkedList(left);
             }
 
-            if (tmpRightChild != null)
+            if (right != null)
             {
-                FlattenBinaryTreeToLinkedList(tmpRightChild);
-                tmp.Right = tmpRightChild;
+                rightTail = FlattenBinaryTreeToLinkedList(right);
+                leftTail.Right = right;
             }
+
+            return rightTail;
         }
 
         // https://leetcode.com/problems/product-of-array-except-self/description/

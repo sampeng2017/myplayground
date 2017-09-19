@@ -113,6 +113,23 @@ FindMidNode
 FindMinAndMax
 	1) Just scan, compare and remember.
 
+FindNthSmallestInArray
+	1) this is same test as Misc.RandomSelectNth. Use heap works but it's n + k*lgn
+	2) use the partition method, should be lgn.
+	3) Partition - scan from left and right, find first pair that low > piviot and high < piviot, exchange. Be careful with exit conditions;
+	4) RandomSelectNth - when move to right portion, be sure the "nth" is passed correctly
+
+FindNthToLastNode
+	1) Trivial. move pointer 1 n steps. then move p1 and p2 together until p1 hit last.
+	2) be careful with counting when moving the pointer to nth node
+
+FindStartingNodeOfLoop
+	1) slow/fase pointers, count the steps of slow p. Once match, count the steps from the matching node looping back again. Based on two cnts, adjust starting nodes. then move together.
+	2) be careful of number of steps of counting. 
+
+FlattenBinaryTreeToLinkedList
+	1) Pre-order traverse, returns the "tail". root node need to set its right to the left head, and have left tail (or self if left null)'s right pointing to the right head.
+
 PathSum1
 	1) recursive...
 

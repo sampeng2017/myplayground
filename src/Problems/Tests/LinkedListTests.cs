@@ -133,7 +133,8 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Linked List")]
+        [TestCategory(Constants.LinkedList)]
+        [TestCategory(Constants.Reviewed1)]
         public void FindStartingNodeOfLoop()
         {
             var node1 = new ListNode<int> { Value = 1 };

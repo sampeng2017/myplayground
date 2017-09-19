@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems.DataStructures;
 using Problems;
@@ -53,19 +54,26 @@ namespace Tests
 
         [TestMethod]
         [TestCategory(Constants.Heap)]
+        // See same as Misc.RandomSelectNth
         public void FindNthSmallestInArray()
         {
             int[] ary = new int[] { 201, 45, 55, 9, 43, 22, 76, 103, 201, 2, 101, 212, 400, 59, 432, 212, 78, 561, 277, 53 };
             var result = OldProblems.FindNthSmallestInArray(ary, 5);
             result.Should().Be(45);
 
+            result = OldProblems.FindNthSmallestInArray_DivideConquer(ary, 5, 0, ary.Length - 1);
+            result.Should().Be(45);
+
             ary = new int[] { 201, 45 };
             result = OldProblems.FindNthSmallestInArray(ary, 4);
+            result.Should().Be(-1);
+            result = OldProblems.FindNthSmallestInArray_DivideConquer(ary, 4, 0, ary.Length - 1);
             result.Should().Be(-1);
         }
 
         [TestMethod]
-        [TestCategory("Linked List")]
+        [TestCategory(Constants.LinkedList)]
+        [TestCategory(Constants.Reviewed1)]
         public void FindNthToLastNode()
         {
             var list = new ListNode<int> { Value = 0 };
@@ -89,6 +97,19 @@ namespace Tests
             var a1 = new int[] { 11, 1, 13, 21, 3, 7 };
             OldProblems.BinarySearch(21, a1, 0, a1.Length - 1).Should().Be(3);
             OldProblems.BinarySearch(23, a1, 0, a1.Length - 1).Should().Be(-1);
+        }
+
+        [TestMethod]
+        public void Partition()
+        {
+            var a  = new int[] { 11, 7, 3, 12, 5, 9, 21, 14 };
+            var r= OldProblems.Partition(a, 0, a.Length - 1);
+            a.Take(r).All(i => i < a[r]).Should().BeTrue();
+            a.Skip(r + 1).All(i => i > a[r]).Should().BeTrue();
+
+            a = new int[] { 11, 7};
+            r = OldProblems.Partition(a, 0, a.Length - 1);
+
         }
     }
 }

@@ -81,14 +81,14 @@ namespace Problems
             if (path2 == null)
                 return null;
 
-            BinaryTreeNode<int> result = null; 
+            BinaryTreeNode<int> result = null;
             while (path1.Count > 0 && path2.Count > 0)
             {
                 var p1 = path1.Pop();
                 var p2 = path2.Pop();
                 if (!ReferenceEquals(p1, p2))
                 {
-                    break ;
+                    break;
                 }
                 result = p1;
             }
@@ -101,25 +101,56 @@ namespace Problems
             {
                 throw new ArgumentException();
             }
-
-            var maxHeap = new Heap<int>(maxHeap: true);
-            int i = 0;
-            for (; i < n && i < array.Length; i++)
-            {
-                maxHeap.Insert(array[i]);
-            }
-
-            if (i < n)
+            if (array.Length < n)
                 return -1;
-            for (; i < array.Length; i++)
+
+            var minHeap = new Heap<int>(array, maxHeap: false);
+            for (int i = 0; i < n - 1; i++)
             {
-                if (array[i] < maxHeap.PeekNext())
-                {
-                    maxHeap.TakeNext();
-                    maxHeap.Insert(array[i]);
-                }
+                minHeap.TakeNext();
             }
-            return maxHeap.PeekNext();
+            return minHeap.TakeNext();
+        }
+
+        public static int FindNthSmallestInArray_DivideConquer(int[] array, int n, int p, int q)
+        {
+            return Misc.RandomSelectNth(array, p, q, n);
+        }
+
+        public static int Partition(int[] a, int p, int q)
+        {
+            if (p == q)
+                return p;
+
+            var rand = new Random();
+            var r = rand.Next(0, a.Length);
+            Helpers.Exchange(a, r, a.Length - 1);
+            int pivot = a[q];
+            int i = p;
+            int j = q - 1;
+
+            while (true)
+            {
+                while (a[i] < pivot)
+                {
+                    i++;
+                    if (i >= q)
+                        break;
+                }
+
+                while (a[j] > pivot)
+                {
+                    j--;
+                    if (j <= p)
+                        break;
+                }
+                if (i >= j)
+                    break;
+
+                Helpers.Exchange(a, i, j);
+            }
+            Helpers.Exchange(a, i, q);
+            return i;
         }
 
         /*
@@ -164,7 +195,8 @@ namespace Problems
 
             var p1 = head;
             var p2 = head;
-            for (int i = 0; i < n - 1; i++)
+
+            for (int i = 1; i < n; i++)
             {
                 if (p2 == null)
                     return null;
