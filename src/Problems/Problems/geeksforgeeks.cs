@@ -26,6 +26,18 @@ namespace Problems
                 int x = a[i];
                 maxEnd = Math.Max(x, maxEnd + x);
                 maxSoFar = Math.Max(maxEnd, maxSoFar);
+                // equivent code:
+                //if (maxEnd + x > x)
+                //{
+                //    maxEnd = maxEnd + x;
+                //}
+                //else
+                //{
+                //    maxEnd = x; 
+                //}
+
+                //if (maxEnd > maxSoFar)
+                //    maxSoFar = maxEnd;
             }
             return maxSoFar;
         }
@@ -1180,15 +1192,8 @@ namespace Problems
             if (n == 0)
                 return false;
 
-            var key = Tuple.Create(n, sum);
-            bool result;
-
-            result = IsSubsetSum(a, n - 1, sum);
-            if (!result)
-            {
-                result = IsSubsetSum(a, n - 1, sum - a[n - 1]);
-            }
-            return result;
+            return IsSubsetSum(a, n - 1, sum) ||
+                IsSubsetSum(a, n - 1, sum - a[n - 1]);
         }
 
         // TODO: understand this
@@ -1555,21 +1560,23 @@ namespace Problems
             int j = s.Length - 1;
             while (i < j)
             {
-                if (char.IsWhiteSpace(s[i]))
+                while (char.IsWhiteSpace(s[i]))
                 {
                     i++;
+                    if (i == j)
+                        break;
                 }
-                else if (char.IsWhiteSpace(s[j]))
+
+                while (char.IsWhiteSpace(s[j]))
                 {
                     j--;
+                    if (i == j)
+                        break;
                 }
-                else
-                {
-                    if (s[i] != s[j])
-                        return false;
-                    i++;
-                    j--;
-                }
+                if (s[i] != s[j])
+                    return false;
+                i++;
+                j--;
             }
             return true;
         }

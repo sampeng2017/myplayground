@@ -13,7 +13,7 @@ namespace Tests
     public class GeeksforgeeksTests
     {
         [TestMethod]
-        [TestCategory("Array")]
+        [TestCategory(Constants.Array)]
         public void KadanesAlgorithm()
         {
             int[] a = new int[] { -1, -2, -3 };
@@ -305,7 +305,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Tree")]
+        [TestCategory(Constants.Tree)]
         public void GetLeafCount()
         {
             //        20
@@ -433,7 +433,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Recursive")]
+        [TestCategory(Constants.Recursive)]
         public void FloodFillAlgorithm()
         {
             int[,] screen = new int[,]
@@ -626,7 +626,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Dynamic Programming")]
+        [TestCategory(Constants.DP)]
         public void IsSubsetSum()
         {
             var set = new int[] { 3, 34, 4, 12, 5, 2 };
