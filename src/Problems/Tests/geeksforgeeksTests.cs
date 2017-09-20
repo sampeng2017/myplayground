@@ -57,16 +57,17 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Array")]
+        [TestCategory(Constants.Array)]
+        [TestCategory(Constants.Reviewed1)]
         public void SortArrayWithOnlyZeroOneAndTwo()
         {
             int[] a = new int[] { 0, 2, 1, 2, 0 };
-            Geeksforgeeks.SortArrayWithOnlyZeroOneAndTwo(a);
-            a.Should().BeEquivalentTo(new int[] { 0, 0, 1, 2, 2 });
+            var sorted = Geeksforgeeks.SortArrayWithOnlyZeroOneAndTwo(a);
+            sorted.Should().BeEquivalentTo(new int[] { 0, 0, 1, 2, 2 });
 
             a = new int[] { 0, 1, 0 };
-            Geeksforgeeks.SortArrayWithOnlyZeroOneAndTwo(a);
-            a.Should().BeEquivalentTo(new int[] { 0, 0, 1 });
+            sorted = Geeksforgeeks.SortArrayWithOnlyZeroOneAndTwo(a);
+            sorted.Should().BeEquivalentTo(new int[] { 0, 0, 1 });
         }
 
         [TestMethod]
@@ -236,7 +237,8 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Tree")]
+        [TestCategory(Constants.Tree)]
+        [TestCategory(Constants.Reviewed1)]
         public void LeftViewOfBinaryTree()
         {
 
