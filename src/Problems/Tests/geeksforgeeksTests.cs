@@ -481,7 +481,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Hashing")]
+        [TestCategory(Constants.Hashing)]
         public void LargestSubarrayLenWithZeroSum()
         {
             var a = new int[] { 15, -2, 2, -8, 1, 7, 10, 23 };
@@ -601,7 +601,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Dynamic Programming")]
+        [TestCategory(Constants.DP)]
         public void LongestIncreasingSubsequence()
         {
             var a = new int[] { 10 };
@@ -830,7 +830,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Heap")]
+        [TestCategory(Constants.Heap)]
         public void KthLargestElementInStream()
         {
             var stream = new int[] { 10, 20, 11, 70, 50, 40, 100, 5 };

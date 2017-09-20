@@ -16,5 +16,6 @@ namespace Tests
         public const string DivideConquer = "Divide and Conquer";
         public const string Heap = "Heap";
         public const string Recursive = "Recursive";
+        public const string Hashing = "Hashing";
     }
 }

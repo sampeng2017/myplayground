@@ -333,7 +333,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Dynamic Programming")]
+        [TestCategory(Constants.DP)]
         public void LongestCommonSequenceCount()
         {
             var a = "BATD";
