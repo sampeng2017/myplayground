@@ -72,6 +72,7 @@ EditDistance
 
 EquilibriumPoint
 	1) add up sum from left and right in same loop. check left sum and right sum equals or not, be careful with [1,1] scenario.
+	2) sum up from both directions, increase smaller, until left index greater than right. if both sums are same and l == h, return l.
 
 Fibonacci
 	1) Recurisve + memo,  or bottom-up DP (use a dictionary). 
@@ -130,6 +131,9 @@ FindStartingNodeOfLoop
 FlattenBinaryTreeToLinkedList
 	1) Pre-order traverse, returns the "tail". root node need to set its right to the left head, and have left tail (or self if left null)'s right pointing to the right head.
 
+LeftViewOfBinaryTree:
+	1) Pre-Order, but Visit Right only if Left is empty.
+
 PathSum1
 	1) recursive...
 
@@ -139,15 +143,23 @@ ReverseInteger
 	1) can use a stack to store reversed digits; can without stack, code is a little tricky
 	3) need to deal with overflow
 
+
 ParenthesisChecker
 	1) Stack, of course
+
 NextLargerElement
 	1) O(N square) is simple;
 	2) So called O(N), use a stack to store items (value and index) of desending sequence, once it
 	   hits a greater one, all smaller items are poped, their coresponding location in result array
 	   are updated with the greater value. 
-EquilibriumPoint
-	1) sum up from both directions, increase smaller, until left index greater than right. if both sums are same and l == h, return l.
+
+SlidingWindowMaxOfAllSubArraysWithSizeK:
+	1) use a DeQueue (double linked list) to tract "meaningful" items in previous window.
+	2) be careful of the "last window", it needs to be handled outside of loop
+
+SortArrayWithOnlyZeroOneAndTwo:
+	1) Count sort. Naive solution isn't stable, but save N space.
+	2) Standard solution is to sum up the count array to reflect the end location of each key in output array. Then decrese the coresponding value when populating the output array.
 
 SpecialKeyboard:
 	1) Dynamic programming - can use memorization, speical case optimization
@@ -167,7 +179,7 @@ SwappingPairMakeSumEqual:
 	1) there should be no solution if the sum difference is an odd number;
 	2) one solution is to sort both array, and start moving two points from left to right for matching.
 TwoSum:
-	1) can either build a map then iterate through to find match, or iterate and build map in same look, the later should be better.
+	1) can either build a map then iterate through to find match, or iterate and build map in same loop, the later should be better.
 WordBreak
 	1) dynamic programming, but memo not useful
 ZigZagConversion:

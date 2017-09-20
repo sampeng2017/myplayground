@@ -92,25 +92,44 @@ namespace Problems
         }
 
         // http://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/0
-        public static void SortArrayWithOnlyZeroOneAndTwo(int[] a)
+        public static int[] SortArrayWithOnlyZeroOneAndTwo(int[] a)
         {
             // use count sort
             int[] cntAry = new int[3];
+
+            // count
             foreach (var v in a)
             {
                 cntAry[v]++;
             }
 
-            int cpyStart = 0;
-            for (int i = 0; i < cntAry.Length; i++)
+            // sum right so cntAry[i] contains actual position of the char in output array
+            for (int i = 1; i < cntAry.Length; i++)
             {
-                int cnt = cntAry[i];
-                for (int j = cpyStart; j < cpyStart + cnt; j++)
-                {
-                    a[j] = i;
-                }
-                cpyStart += cnt;
+                cntAry[i] += cntAry[i - 1];
             }
+
+            var output = new int[a.Length];
+            for (int i = 0; i < a.Length; i++)
+            {
+                var key = a[i];
+                int loc = cntAry[key] - 1;
+                output[loc] = key;
+                cntAry[key]--;
+            }
+
+            return output;
+            // the naive implementation - not stable
+            //int cpyStart = 0;
+            //for (int i = 0; i < cntAry.Length; i++)
+            //{
+            //    int cnt = cntAry[i];
+            //    for (int j = cpyStart; j < cpyStart + cnt; j++)
+            //    {
+            //        a[j] = i;
+            //    }
+            //    cpyStart += cnt;
+            //}
         }
 
         // http://practice.geeksforgeeks.org/problems/equilibrium-point/0
@@ -484,19 +503,22 @@ namespace Problems
             if (root == null)
                 return null;
 
-            var result = new List<BinaryTreeNode<int>> { root };
-            if (root.Left != null)
-            {
-                var leftNodes = LeftViewOfBinaryTree(root.Left);
-                result.AddRange(leftNodes);
-            }
-            else if (root.Right != null)
-            {
-                var rightNodes = LeftViewOfBinaryTree(root.Right);
-                result.AddRange(rightNodes);
-            }
+            var container = new List<BinaryTreeNode<int>>();
+            VisitLeftViewNodes(root, container);
+            return container;
+        }
 
-            return result;
+        private static void VisitLeftViewNodes(BinaryTreeNode<int> node, IList<BinaryTreeNode<int>> container)
+        {
+            container.Add(node);
+            if (node.Left != null)
+            {
+                VisitLeftViewNodes(node.Left, container);
+            }
+            else if (node.Right != null)
+            {
+                VisitLeftViewNodes(node.Right, container);
+            }
         }
 
         // http://practice.geeksforgeeks.org/problems/find-median-in-a-stream/0
@@ -1196,7 +1218,6 @@ namespace Problems
                 IsSubsetSum(a, n - 1, sum - a[n - 1]);
         }
 
-        // TODO: understand this
         //http://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/
         public static int[] SlidingWindowMaxOfAllSubArraysWithSizeK(int[] a, int k)
         {
@@ -1204,24 +1225,18 @@ namespace Problems
                 throw new ArgumentException();
 
             var dequeue = new LinkedList<int>();
-            var result = new List<int>();
-
-            int i = 0;
-            for (; i < k; i++)
+            for (int i = 0; i < k; i++)
             {
-                while (dequeue.Count > 0 && a[i] > a[dequeue.Last.Value])
-                {
-                    dequeue.RemoveLast();
-                }
-                dequeue.AddLast(i);
+                AddMeaningfulValueToDeQueue(dequeue, a, i);
             }
 
+            var result = new int[a.Length - k + 1];
             // Process rest of the elements, i.e., from arr[k] to arr[n-1]
-            for (; i < a.Length; i++)
+            for (int i = k; i < a.Length; i++)
             {
                 // The element at the front of the queue is the largest element of
                 // previous window
-                result.Add(a[dequeue.First.Value]);
+                result[i - k] = a[dequeue.First.Value];
 
                 // Remove the elements which are out of this window
                 while ((dequeue.Count > 0) && dequeue.First.Value <= i - k)
@@ -1229,15 +1244,31 @@ namespace Problems
 
                 // Remove all elements smaller than the currently
                 // being added element (remove useless elements)
-                while ((dequeue.Count > 0) && a[i] >= a[dequeue.Last.Value])
-                    dequeue.RemoveLast();
-
-                dequeue.AddLast(i);
+                AddMeaningfulValueToDeQueue(dequeue, a, i);
             }
-            result.Add(a[dequeue.First.Value]);
-            return result.ToArray();
+
+            //// Print the maximum element of last window
+            result[a.Length - k] = a[dequeue.First.Value];
+            return result;
         }
 
+        private static void AddMeaningfulValueToDeQueue(LinkedList<int> dequeue, int[] a, int i)
+        {
+            while (dequeue.Count > 0 && a[i] > a[dequeue.Last.Value])
+            {
+                dequeue.RemoveLast();
+            }
+            dequeue.AddLast(i);
+        }
+
+        private static void AddMeaningfulNumberToQueue(LinkedList<int> queue, int[] a, int itemIndex)
+        {
+            while (queue.Count > 0 && a[queue.Last.Value] < a[itemIndex])
+            {
+                queue.RemoveLast();
+            }
+            queue.AddLast(itemIndex);
+        }
         // http://www.geeksforgeeks.org/convert-a-given-binary-tree-to-doubly-linked-list-set-4/
         public static Tuple<BinaryTreeNode<T>, BinaryTreeNode<T>> ConvertBinaryTreeToDoublyLinkedList<T>(BinaryTreeNode<T> treeNode) where T : IComparable
         {
