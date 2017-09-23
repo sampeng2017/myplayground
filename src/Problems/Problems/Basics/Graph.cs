@@ -6,38 +6,57 @@ using System.Threading.Tasks;
 
 namespace Problems.Basics
 {
-    public class GraphVertice<T>
+    public class Graph
     {
-        public GraphVertice()
+        // number of vertices
+        private readonly int v;
+        // number of edges
+        private int e;
+        // adjacency lists
+        private List<int>[] adj; // adjacency lists
+
+        public Graph(int v)
         {
-            AdjacentVertices = new List<GraphVertice<T>>();
+            this.v = v;
+            this.e = 0;
+            this.adj = new List<int>[v];
+            for (int i = 0; i < v; i++) 
+                adj[i] = new List<int>();
         }
 
-        public T Value { get; set; }
-        public IList<GraphVertice<T>> AdjacentVertices { get; }
-
-        public static void DFS(GraphVertice<T> vertice, Action<GraphVertice<T>> visit)
+        public int V() { return v; }
+        public int E() { return e; }
+        public void AddEdge(int v, int w)
         {
-            visit(vertice);
-            foreach (var v in vertice.AdjacentVertices)
-            {
-                DFS(v, visit);
-            }
+            adj[v].Add(w); // Add w to v’s list.
+            adj[w].Add(v); // Add v to w’s list.
+            e++;
+        }
+        public IEnumerable<int> GetAdjacencents(int v)
+        {
+            return adj[v];
         }
 
-        public static void BFS(GraphVertice<T> vertice, Action<GraphVertice<T>> visit)
+        public static int Degree(Graph g, int v)
         {
-            var queue = new Queue<GraphVertice<T>>();
-            queue.Enqueue(vertice);
-            while (queue.Count >0 )
+            int degree = 0;
+            foreach (int w in g.GetAdjacencents(v))
             {
-                var v = queue.Dequeue();
-                visit(v);
-                foreach (var a in v.AdjacentVertices)
-                {
-                    queue.Enqueue(a);
-                }
+                degree++;
             }
+            return degree;
+        }
+
+        public static int MaxDegree(Graph G)
+        {
+            int max = 0;
+            for (int v = 0; v < G.V(); v++)
+            {
+                var d = Degree(G, v);
+                if (d > max)
+                    max = d;
+            }
+            return max;
         }
     }
 }

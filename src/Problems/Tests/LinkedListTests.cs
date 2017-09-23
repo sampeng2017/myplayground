@@ -217,7 +217,7 @@ namespace Tests
         }
 
         [TestMethod]
-        [TestCategory("Linked List")]
+        [TestCategory(Constants.LinkedList)]
         public void MergeSortLinkedList()
         {
             var node11 = new ListNode<int> { Value = 9 };
