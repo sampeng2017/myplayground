@@ -60,15 +60,15 @@ namespace Problems.Basics
             return a2;
         }
 
-        public static Tuple<int, int, int> FindMaxSubArray(int[] ary, int low, int high)
+        public static Tuple<int, int, int> FindMaxSubArray(int[] a, int l, int h)
         {
-            if (low == high)
-                return Tuple.Create(low, high, ary[low]);
+            if (l == h)
+                return Tuple.Create(l, h, a[l]);
 
-            int mid = (low + high) / 2;
-            var leftResult = FindMaxSubArray(ary, low, mid);
-            var rightResult = FindMaxSubArray(ary, mid + 1, high);
-            var crossingResult = FindMaxCrossingSubArray(ary, low, mid, high);
+            int mid = (l + h) / 2;
+            var leftResult = FindMaxSubArray(a, l, mid);
+            var rightResult = FindMaxSubArray(a, mid + 1, h);
+            var crossingResult = FindMaxCrossingSubArray(a, l, mid, h);
             if (leftResult.Item3 >= rightResult.Item3 && leftResult.Item3 >= crossingResult.Item3)
             {
                 return leftResult;
@@ -80,17 +80,17 @@ namespace Problems.Basics
             return crossingResult;
         }
 
-        private static Tuple<int, int, int> FindMaxCrossingSubArray(int[] ary, int low, int mid, int high)
+        private static Tuple<int, int, int> FindMaxCrossingSubArray(int[] a, int l, int m, int h)
         {
             int leftSum = int.MinValue;
             int rightSum = int.MinValue;
-            int leftIndex = low;
-            int rightIndex = high;
+            int leftIndex = l;
+            int rightIndex = h;
 
             int tmpSum = 0;
-            for (int i = mid; i >= low; i--)
+            for (int i = m; i >= l; i--)
             {
-                tmpSum += ary[i];
+                tmpSum += a[i];
                 if (tmpSum > leftSum)
                 {
                     leftSum = tmpSum;
@@ -99,9 +99,9 @@ namespace Problems.Basics
             }
 
             tmpSum = 0;
-            for (int i = mid + 1; i <= high; i++)
+            for (int i = m + 1; i <= h; i++)
             {
-                tmpSum += ary[i];
+                tmpSum += a[i];
                 if (tmpSum > rightSum)
                 {
                     rightSum = tmpSum;

@@ -27,6 +27,18 @@ namespace Problems.DataStructures
             return tmp;
         }
 
+        public int GetLength()
+        {
+            int len = 0;
+            var p = this;
+            while (p != null)
+            {
+                len++;
+                p = p.Next;
+            }
+            return len;
+        }
+
         public override string ToString()
         {
             string valStr = string.Empty;

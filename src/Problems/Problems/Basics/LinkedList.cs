@@ -10,18 +10,18 @@ namespace Problems.Basics
             if (list == null)
                 return null;
 
-            var fastPointer = list;
-            var slowPointer = list;
-            while (fastPointer != null)
+            var pFast = list;
+            var pSlow = list;
+            while (pFast != null)
             {
-                if (fastPointer.Next == null || fastPointer.Next.Next == null)
+                if (pFast.Next == null || pFast.Next.Next == null)
                 {
                     break;
                 }
-                fastPointer = fastPointer.Next.Next;
-                slowPointer = slowPointer.Next;
+                pFast = pFast.Next.Next;
+                pSlow = pSlow.Next;
             }
-            return slowPointer;
+            return pSlow;
         }
 
         public static ListNode<T> FindMerge<T>(ListNode<T> list1, ListNode<T> list2)

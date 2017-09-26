@@ -72,7 +72,7 @@ namespace Problems.Basics
         {
             if (ary == null || ary.Length <= 1)
                 return;
-            var rand = new Random(DateTime.Now.Millisecond);
+            var rand = new Random();
             for (int i = 1; i < ary.Length; i++)
             {
                 int tmp = rand.Next(i, ary.Length - 1);

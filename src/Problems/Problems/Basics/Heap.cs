@@ -33,7 +33,7 @@ namespace Problems.Basics
             heap.AddRange(elements);
             for (int i = elements.Length /2; i >= 1; i--)
             {
-                MaxHeapify(i);
+                Sink(i);
             }
         }
 
@@ -61,9 +61,8 @@ namespace Problems.Basics
             return heap[1];
         }
 
-        private void Sink()
+        private void Sink(int parent = 1)
         {
-            int parent = 1;
             int leftChild = parent * 2;
             while (leftChild < heap.Count)
             {
@@ -81,32 +80,6 @@ namespace Problems.Basics
                 Exchange(parent, childToCompare);
                 parent = childToCompare;
                 leftChild = childToCompare * 2;
-            }
-        }
-
-        private void MaxHeapify(int parent)
-        {
-            int leftChild = parent * 2;
-            if (leftChild >= heap.Count)
-                return;
-
-            int rightChild = leftChild + 1;
-            int swimmer = parent;
-
-            if (compare(heap, parent, leftChild))
-            {
-                swimmer = leftChild;
-            }
-
-            if (rightChild < heap.Count && compare(heap, swimmer, rightChild))
-            {
-                swimmer = rightChild;
-            }
-
-            if (swimmer != parent)
-            {
-                Exchange(swimmer, parent);
-                MaxHeapify(swimmer);
             }
         }
 
