@@ -1153,11 +1153,6 @@ namespace Problems
             return result;
         }
 
-        private static string EditDistance_MakeKeys(string s1, string s2)
-        {
-            // assuming ~ not in text, otherwise find a non print-able char
-            return $"{s1}~{s2}";
-        }
 
         //http://practice.geeksforgeeks.org/problems/solve-the-sudoku/0
         public static int[,] SolveSudoku(int[,] sudoku)

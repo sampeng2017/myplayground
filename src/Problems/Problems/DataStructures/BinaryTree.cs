@@ -128,7 +128,6 @@ namespace Problems.DataStructures
                     visit(current);
                     stack.Push(current.Right);
                     stack.Push(current.Left);
-                    current = current.Left;
                 }
             }
         }

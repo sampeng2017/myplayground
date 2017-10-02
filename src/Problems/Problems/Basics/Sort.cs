@@ -95,12 +95,12 @@ namespace Problems.Basics
 
         public static void MergeSort_BottomUp(int[] ary)
         {
-            int aryLength = ary.Length;
-            for (int subArySize = 1; subArySize < aryLength; subArySize = subArySize * 2)
+            int n = ary.Length;
+            for (int j = 1; j < n; j = j * 2)
             {
-                for (int i = 0; i < aryLength - subArySize; i += subArySize * 2)
+                for (int i = 0; i < n - j; i += j * 2)
                 {
-                    Merge(ary, i, i + subArySize - 1, Math.Min(i + subArySize * 2 - 1, aryLength - 1));
+                    Merge(ary, i, i + j - 1, Math.Min(i + j * 2 - 1, n - 1));
                 }
             }
         }
