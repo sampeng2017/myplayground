@@ -5,6 +5,8 @@
  */
 package problemsinjava;
 
+import problemsinjava.DataStructures.LinkedListNode;
+
 /**
  *
  * @author shepeng
@@ -16,6 +18,10 @@ public class ProblemsInJava {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        LinkedListNode<Integer> node = new LinkedListNode<Integer>();
+        node.setValue(100);
+        System.out.println(node.getValue());
+        System.out.println("Done");
     }
     
 }
