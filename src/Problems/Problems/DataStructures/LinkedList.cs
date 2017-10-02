@@ -10,6 +10,7 @@ namespace Problems.DataStructures
     {
         public T Value { get; set; }
         public ListNode<T> Next { get; set; }
+        public ListNode<T> Previous { get; set; }
 
         public ListNode<T> GetNthNode(int n)
         {

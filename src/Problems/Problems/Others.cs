@@ -1,4 +1,5 @@
 ﻿using Problems.Basics;
+using Problems.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -545,7 +546,7 @@ namespace Problems
 
             var highestOnRight = new int[bars.Length];
             highest = -1;
-            for (int i = bars.Length -1; i >= 0; i--)
+            for (int i = bars.Length - 1; i >= 0; i--)
             {
                 highestOnRight[i] = highest;
                 if (bars[i] > highest)
@@ -554,7 +555,7 @@ namespace Problems
 
             int sum = 0;
             // exclude two items on left and right ends
-            for (int i = 1; i < bars.Length -1; i++)
+            for (int i = 1; i < bars.Length - 1; i++)
             {
                 int effectiveHight = Math.Min(highestOnLeft[i], highestOnRight[i]);
                 var v = effectiveHight - bars[i];
@@ -601,5 +602,78 @@ namespace Problems
             public NodeWithRandomPointer Next { get; set; }
             public NodeWithRandomPointer Random { get; set; }
         }
+
+
+        public class LruCache
+        {
+            private readonly Dictionary<string, ListNode<object>> cache = new Dictionary<string, ListNode<object>>();
+            private ListNode<object> lruHead;
+            private ListNode<object> lruTail;
+            private int size;
+
+            public LruCache(int size)
+            {
+                if (size <= 1) // make the size greater than 1 to avoid dealing with some edge cases
+                    throw new ArgumentException();
+                this.size = size;
+            }
+
+            public void Put(string key, object val)
+            {
+                ListNode<object> item;
+                if (this.cache.TryGetValue(key, out item))
+                {
+                    item.Value = val;
+                    MoveNodeToFront(item);
+                }
+                else
+                {
+                    var node = new ListNode<object> { Value = val };
+                    if (lruHead == null)
+                    {
+                        lruHead = lruTail = node;
+                    }
+                    else
+                    {
+                        if (this.cache.Count >= size)
+                        {
+                            var tmp = lruTail.Previous;
+                            lruTail.Previous = null;
+                            lruTail = tmp;
+                        }
+
+                        lruTail.Next = node;
+                        node.Previous = lruTail;
+                        lruTail = node;
+                    }
+                    this.cache.Add(key, node);
+                }
+            }
+
+            public object Get(string key)
+            {
+                ListNode<object> item;
+                if (this.cache.TryGetValue(key, out item))
+                {
+                    MoveNodeToFront(item);
+                    return item.Value;
+                }
+                return null;
+            }
+
+            private void MoveNodeToFront(ListNode<object> node)
+            {
+                if (node == lruHead)
+                    return;
+
+                node.Previous.Next = node.Next;
+                if (node.Next != null)
+                    node.Next.Previous = node.Previous;
+                node.Previous = null;
+                node.Next = lruHead;
+                lruHead.Previous = node;
+            }
+        }
+
     }
 }
