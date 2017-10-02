@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Basics.ArrayProblems;
 import Basics.LinkedListProblems;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,12 +46,11 @@ public class BasicsTests {
     public void linkedList_reverse() {
         LinkedListNode<Integer> l = new LinkedListNode<> ();
         l.setValue(1);
-        
         LinkedListNode<Integer> l2 = new LinkedListNode<> ();
         l2.setValue(2);
-
         LinkedListNode<Integer> l3 = new LinkedListNode<> ();
         l3.setValue(3);
+
         l.setNext(l2);
         l2.setNext(l3);
         
@@ -63,4 +63,13 @@ public class BasicsTests {
         LinkedListNode<Integer> r3 = r2.getNext();
         assertEquals(1, (int)r3.getValue());
     }
+    
+    @Test
+    public void array_findMinAndMax() {
+        int a[] = {4, 32, 2, 27, 15};
+        int r[] = ArrayProblems.findMinAndMax(a);
+        assertEquals(2, r[0]);
+        assertEquals(32, r[1]);
+    }
+            
 }
