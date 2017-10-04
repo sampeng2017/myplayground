@@ -13,7 +13,7 @@ public class ArrayProblems {
     public static int[] findMinAndMax(int[] a) {
         if (a == null || a.length == 0)
             return a;
-        int r[] = new int[2];
+        int[] r = new int[2];
         if (a.length == 1) {
             r[0] = r[1] = a[0];
             return r;
