@@ -675,5 +675,51 @@ namespace Problems
             }
         }
 
+        // given a list of "{Module, {Modules}}", detertmine build order
+        // if circular depencencies detected, return null
+        public static IList<string> BuildOrder(IList<KeyValuePair<string, IList<string>>> moduleDepencencies)
+        {
+            if (moduleDepencencies == null)
+                return null;
+
+            var nodeMap = new Dictionary<string, GraphNode<string>>();
+            foreach (var kvp in moduleDepencencies)
+            {
+                GraphNode<string> node;
+                if (!nodeMap.TryGetValue(kvp.Key, out node))
+                {
+                    node = new GraphNode<string> { Value = kvp.Key };
+                    nodeMap.Add(kvp.Key, node);
+                }
+                foreach (var d in kvp.Value)
+                {
+                    GraphNode<string> node2;
+                    if (!nodeMap.TryGetValue(d, out node2))
+                    {
+                        node2 = new GraphNode<string> { Value = d };
+                        nodeMap.Add(d, node2);
+                    }
+                    node.Adjacencents.Add(node2);
+                }
+            }
+
+            var allModules = new HashSet<string>(nodeMap.Keys.ToList());
+            var result = new List<string>();
+            while (allModules.Count > 0)
+            {
+                var node = nodeMap[allModules.First()];
+                var topologicalSorted = node.TopologicalSort().ToList();
+                foreach (var n in topologicalSorted)
+                {
+                    if (allModules.Remove(n.Value))
+                    {
+                        result.Add(n.Value);
+                    }
+                }
+            }
+            return result;
+        }
+
+
     }
 }

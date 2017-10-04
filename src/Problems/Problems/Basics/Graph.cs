@@ -59,4 +59,42 @@ namespace Problems.Basics
             return max;
         }
     }
+
+    public class GraphNode<T>
+    {
+        public GraphNode()
+        {
+            Adjacencents = new List<GraphNode<T>>();
+        }
+        public T Value { get; set; }
+        public IList<GraphNode<T>> Adjacencents { get; }
+
+        public IEnumerable<GraphNode<T>> TopologicalSort()
+        {
+            var visited = new HashSet<GraphNode<T>>();
+            var stack = new Stack<GraphNode<T>>();
+            var recursionStack = new Stack<GraphNode<T>>();
+            TopologicalSort(visited, stack, recursionStack);
+
+            return stack.ToList();
+        }
+
+        private void TopologicalSort(HashSet<GraphNode<T>> visited, Stack<GraphNode<T>> sortStack, Stack<GraphNode<T>> recursionStack)
+        {
+            if (recursionStack.Contains(this))
+                throw new InvalidOperationException($"Circular path detected: {this.Value}");
+
+            if (visited.Contains(this))
+                return;
+
+            recursionStack.Push(this);
+            sortStack.Push(this);
+            visited.Add(this);
+            foreach (var a in Adjacencents)
+            {
+                a.TopologicalSort(visited, sortStack, recursionStack);
+            }
+            recursionStack.Pop();
+        }
+    }
 }

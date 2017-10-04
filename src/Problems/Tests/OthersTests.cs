@@ -385,5 +385,25 @@ namespace Tests
                 tmpN1 = tmpN1.Next;
             }
         }
+
+        [TestMethod]
+        public void BuildOrder()
+        {
+            var moduleDependeicies = new List<KeyValuePair<string, IList<string>>>
+            {
+                new KeyValuePair<string, IList<string>>("c", new List<string>()),
+                new KeyValuePair<string, IList<string>>("f", new List<string> { "g"}),
+                new KeyValuePair<string, IList<string>>("a", new List<string> { "b", "c"}),
+                new KeyValuePair<string, IList<string>>("b", new List<string> { "c", "d"}),
+                new KeyValuePair<string, IList<string>>("d", new List<string> { "e"}),
+            };
+            var result = Others.BuildOrder(moduleDependeicies);
+            result.Should().BeEquivalentTo(new List<string> { "c", "g", "f", "e", "d", "b", "a" });
+
+            // circular dependency:
+            moduleDependeicies.Add(new KeyValuePair<string, IList<string>>("e", new List<string> { "b" }));
+            Action a = () => Others.BuildOrder(moduleDependeicies);
+            a.ShouldThrow<InvalidOperationException>().WithMessage("Circular path detected: b");
+        }
     }
 }
