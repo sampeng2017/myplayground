@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Others;
 
 import java.util.*;
@@ -28,8 +23,9 @@ public class BuildResolver {
             ModuleNode module = allModules.get(0); //can start from any item
             Iterable<ModuleNode> sorted = topologicalSort(module);
             for (ModuleNode m : sorted) {
-                allModules.remove(m);
-                result.add(m.getName());
+                if (allModules.remove(m)) {
+                    result.add(m.getName());
+                }
             }
         }
 
@@ -103,11 +99,11 @@ class ModuleNode {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public Iterable<ModuleNode> getDependencies() {
-        return dependencies;
+        return this.dependencies;
     }
 
     public void AddDependency(ModuleNode m) {
