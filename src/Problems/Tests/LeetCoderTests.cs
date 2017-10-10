@@ -551,5 +551,37 @@ namespace Tests
             result = LeetCoder.ProductOfArrayExceptSelf2(a);
             result.Should().BeEquivalentTo(new int[] { 24, 12, 8, 6 });
         }
+
+        [TestMethod]
+        public void HouseRobber()
+        {
+            var houses = new int[] { };
+            int r = LeetCoder.HouseRobber(houses);
+            r.Should().Be(0);
+
+            houses = new int[] { 3 };
+            r = LeetCoder.HouseRobber(houses);
+            r.Should().Be(3);
+
+            houses = new int[] { 3, 7 };
+            r = LeetCoder.HouseRobber(houses);
+            r.Should().Be(7);
+
+            houses = new int[] { 3, 7, 21 };
+            r = LeetCoder.HouseRobber(houses);
+            r.Should().Be(24);
+
+            houses = new int[] { 3, 7, 21, 1 };
+            r = LeetCoder.HouseRobber(houses);
+            r.Should().Be(24);
+
+            houses = new int[] { 3, 7, 21, 1, 1 };
+            r = LeetCoder.HouseRobber(houses);
+            r.Should().Be(25);
+
+            houses = new int[] { 3, 7, 21, 1, 1, 12 };
+            r = LeetCoder.HouseRobber(houses);
+            r.Should().Be(36);
+        }
     }
 }

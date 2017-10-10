@@ -829,5 +829,18 @@ namespace Problems
                 memo.Add(n, token);
             });
         }
+
+        //https://leetcode.com/problems/house-robber/description/
+        public static int HouseRobber(IList<int> houseValues)
+        {
+            if (houseValues == null || houseValues.Count == 0)
+                return 0;
+            if (houseValues.Count == 1)
+                return houseValues[0];
+
+            int sum1 = houseValues[0] + HouseRobber(houseValues.Skip(2).ToList());
+            int sum2 = houseValues[1] + HouseRobber(houseValues.Skip(3).ToList());
+            return Math.Max(sum1, sum2);
+        }
     }
 }
