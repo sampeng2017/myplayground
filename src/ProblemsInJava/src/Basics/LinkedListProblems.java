@@ -11,7 +11,7 @@ import problemsinjava.DataStructures.LinkedListNode;
  *
  * @author shepeng
  */
-public class LinkedListProblems {
+public final class LinkedListProblems {
 
     public static <T> LinkedListNode<T> reverse(LinkedListNode<T> list) {
         return reverse(list, null);

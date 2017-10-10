@@ -1,4 +1,6 @@
+
 import Others.BuildResolver;
+import Others.OldProblems;
 import java.util.*;
 import static java.util.Arrays.asList;
 import javafx.util.Pair;
@@ -8,7 +10,7 @@ import static org.junit.Assert.*;
 public class OthersTests {
 
     @Test
-    public void BuildOrderTest() throws Exception {
+    public void buildOrderTest() throws Exception {
 
         Iterable<String> buildOrder = null;
         List<String> list = new ArrayList<String>();
@@ -49,5 +51,21 @@ public class OthersTests {
         } catch (Exception ex) {
             assertEquals(ex.getMessage(), "Circular path detected: e -> b");
         }
+    }
+
+    @Test
+    public void findInSorted2DArrayTest() {
+        int[][] sorted2dArray = {
+            {1, 2, 4, 5, 6},
+            {3, 7, 8, 9, 11},
+            {13, 15, 16, 20, 28},
+            {14, 17, 18, 21, 32}
+        };
+        int[] r = OldProblems.findInSorted2DArray(sorted2dArray, 9);
+        assertEquals(1, r[0]);
+        assertEquals(3, r[1]);
+
+        r = OldProblems.findInSorted2DArray(sorted2dArray, 10);
+        assertEquals(null, r);
     }
 }
