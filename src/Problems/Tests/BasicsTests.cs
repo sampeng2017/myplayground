@@ -199,7 +199,7 @@ namespace Tests
         private int[] GetRandomArray(int cnt)
         {
             var ary = new int[cnt];
-            var rand = new Random(DateTime.Now.Millisecond);
+            var rand = new Random();
             for (int i = 0; i < cnt; i++)
             {
                 ary[i] = rand.Next();

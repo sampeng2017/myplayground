@@ -6,7 +6,10 @@
 
 import Basics.ArrayProblems;
 import Basics.LinkedListProblems;
+import Basics.SortUtilities;
 import Basics.TreeProblems;
+import Basics.Utilities;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -81,5 +84,18 @@ public class BasicsTests {
 
         TreeNode<Integer> r = TreeProblems.findLowestCommonAncestor(t1, t6, t8);
         assertEquals(t3, r);
+    }
+    
+    @Test
+    public void sortTests() {
+        
+        ArrayList<SortUtilities.Sorter<Integer>> sorters = new ArrayList<SortUtilities.Sorter<Integer>>();
+        sorters.add(SortUtilities::insertionSort);
+        
+        Integer[] ary = Basics.Utilities.getRandomArray(100);
+        for (SortUtilities.Sorter<Integer> s : sorters) {
+            s.Sort(ary);
+            assertTrue(Utilities.isSorted(ary));
+        }
     }
 }
