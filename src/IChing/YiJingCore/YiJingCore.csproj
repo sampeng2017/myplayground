@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53F2BCFA-8A97-4812-820E-11A5E95ECC09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YiJingCore</RootNamespace>
+    <AssemblyName>YiJingCore</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bagua\FivePhasesAttribute.cs" />
+    <Compile Include="Bagua\FivePhasesPairs.cs" />
+    <Compile Include="Bagua\FivePhasesRelation.cs" />
+    <Compile Include="Bagua\Hexagram.cs" />
+    <Compile Include="Bagua\HexagramInfo.cs" />
+    <Compile Include="Bagua\InternalExternalRelation.cs" />
+    <Compile Include="Bagua\Trigram.cs" />
+    <Compile Include="Bagua\TrigramInfo.cs" />
+    <Compile Include="ChineseCalendar\ChineseCalendarDate.cs" />
+    <Compile Include="ChineseCalendar\ChineseCalendarInfo.cs" />
+    <Compile Include="Divination.cs" />
+    <Compile Include="HexgramResourcesHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\IChing1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IChing.Resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Main1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Main.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\IChing.Resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IChing1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Main.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Main1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\180.jpg" />
+    <EmbeddedResource Include="Resources\background.jpg" />
+    <EmbeddedResource Include="Resources\h1.png" />
+    <EmbeddedResource Include="Resources\h10.png" />
+    <EmbeddedResource Include="Resources\h11.png" />
+    <EmbeddedResource Include="Resources\h12.png" />
+    <EmbeddedResource Include="Resources\h13.png" />
+    <EmbeddedResource Include="Resources\h14.png" />
+    <EmbeddedResource Include="Resources\h15.png" />
+    <EmbeddedResource Include="Resources\h16.png" />
+    <EmbeddedResource Include="Resources\h17.png" />
+    <EmbeddedResource Include="Resources\h18.png" />
+    <EmbeddedResource Include="Resources\h19.png" />
+    <EmbeddedResource Include="Resources\h2.png" />
+    <EmbeddedResource Include="Resources\h20.png" />
+    <EmbeddedResource Include="Resources\h21.png" />
+    <EmbeddedResource Include="Resources\h22.png" />
+    <EmbeddedResource Include="Resources\h23.png" />
+    <EmbeddedResource Include="Resources\h24.png" />
+    <EmbeddedResource Include="Resources\h25.png" />
+    <EmbeddedResource Include="Resources\h26.png" />
+    <EmbeddedResource Include="Resources\h27.png" />
+    <EmbeddedResource Include="Resources\h28.png" />
+    <EmbeddedResource Include="Resources\h29.png" />
+    <EmbeddedResource Include="Resources\h3.png" />
+    <EmbeddedResource Include="Resources\h30.png" />
+    <EmbeddedResource Include="Resources\h31.png" />
+    <EmbeddedResource Include="Resources\h32.png" />
+    <EmbeddedResource Include="Resources\h33.png" />
+    <EmbeddedResource Include="Resources\h34.png" />
+    <EmbeddedResource Include="Resources\h35.png" />
+    <EmbeddedResource Include="Resources\h36.png" />
+    <EmbeddedResource Include="Resources\h37.png" />
+    <EmbeddedResource Include="Resources\h38.png" />
+    <EmbeddedResource Include="Resources\h39.png" />
+    <EmbeddedResource Include="Resources\h4.png" />
+    <EmbeddedResource Include="Resources\h40.png" />
+    <EmbeddedResource Include="Resources\h41.png" />
+    <EmbeddedResource Include="Resources\h42.png" />
+    <EmbeddedResource Include="Resources\h43.png" />
+    <EmbeddedResource Include="Resources\h44.png" />
+    <EmbeddedResource Include="Resources\h45.png" />
+    <EmbeddedResource Include="Resources\h46.png" />
+    <EmbeddedResource Include="Resources\h47.png" />
+    <EmbeddedResource Include="Resources\h48.png" />
+    <EmbeddedResource Include="Resources\h49.png" />
+    <EmbeddedResource Include="Resources\h5.png" />
+    <EmbeddedResource Include="Resources\h50.png" />
+    <EmbeddedResource Include="Resources\h51.png" />
+    <EmbeddedResource Include="Resources\h52.png" />
+    <EmbeddedResource Include="Resources\h53.png" />
+    <EmbeddedResource Include="Resources\h54.png" />
+    <EmbeddedResource Include="Resources\h55.png" />
+    <EmbeddedResource Include="Resources\h56.png" />
+    <EmbeddedResource Include="Resources\h57.png" />
+    <EmbeddedResource Include="Resources\h58.png" />
+    <EmbeddedResource Include="Resources\h59.png" />
+    <EmbeddedResource Include="Resources\h6.png" />
+    <EmbeddedResource Include="Resources\h60.png" />
+    <EmbeddedResource Include="Resources\h61.png" />
+    <EmbeddedResource Include="Resources\h62.png" />
+    <EmbeddedResource Include="Resources\h63.png" />
+    <EmbeddedResource Include="Resources\h64.png" />
+    <EmbeddedResource Include="Resources\h7.png" />
+    <EmbeddedResource Include="Resources\h8.png" />
+    <EmbeddedResource Include="Resources\h9.png" />
+    <EmbeddedResource Include="Resources\yijing.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
