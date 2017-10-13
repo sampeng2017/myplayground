@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using SamPeng.IChing.BaGua;
+using System.Reflection;
+using System.IO;
 
 namespace SamPeng.IChing
 {
@@ -22,6 +25,12 @@ namespace SamPeng.IChing
         const string poem2DescKeyTmpl = @"H_{0}_Poem2";
 
         const string imageFolder = "Images";
+
+        private static Lazy<string[]> resourceNames = new Lazy<string[]>(() =>
+        {
+            return Assembly.GetExecutingAssembly().GetManifestResourceNames();
+        });
+
         public static string GetChangeDesc(this Hexagram hexaGram)
         {
             string key = string.Format(CultureInfo.InvariantCulture,
@@ -34,6 +43,13 @@ namespace SamPeng.IChing
             return new Uri(string.Format(CultureInfo.InvariantCulture,
                 "{0}/h{1}.png", imageFolder, hexaGram.StoreSequence),
                 UriKind.RelativeOrAbsolute);
+        }
+
+        public static Stream GetImageBinary(this Hexagram hexaGram)
+        {
+            string fileName = $"h{hexaGram.StoreSequence}.png";
+            var resourceName = resourceNames.Value.First(r => r.EndsWith(fileName));
+            return Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
         }
 
         public static string GetJudgementClassifiedDesc(this Hexagram hexaGram)

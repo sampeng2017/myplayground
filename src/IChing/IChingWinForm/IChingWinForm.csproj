@@ -88,5 +88,8 @@
   <ItemGroup>
     <None Include="applicationiconIicon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="yijing.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
