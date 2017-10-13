@@ -842,5 +842,30 @@ namespace Problems
             int sum2 = houseValues[1] + HouseRobber(houseValues.Skip(3).ToList());
             return Math.Max(sum1, sum2);
         }
+
+        //https://leetcode.com/problems/move-zeroes/description/
+        public static void MoveZeros(int[] a)
+        {
+            if (a == null || a.Length == 0)
+                return;
+
+            // Shift non-zero values as far forward as possible
+            // Fill remaining space with zeros
+            int insertPos = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                int n = a[i];
+                if (n != 0)
+                {
+                    a[insertPos] = n;
+                    insertPos++;
+                }
+            }
+
+            while (insertPos < a.Length)
+            {
+                a[insertPos++] = 0;
+            }
+        }
     }
 }

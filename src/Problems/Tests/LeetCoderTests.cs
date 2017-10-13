@@ -583,5 +583,14 @@ namespace Tests
             r = LeetCoder.HouseRobber(houses);
             r.Should().Be(36);
         }
+
+        [TestMethod]
+        [TestCategory(Constants.Array)]
+        public void MoveZeros()
+        {
+            int[] a = { 0, 1, 0, 3, 12 };
+            LeetCoder.MoveZeros(a);
+            a.Should().BeEquivalentTo(new int[] { 1, 3, 12, 0, 0 });
+        }
     }
 }
