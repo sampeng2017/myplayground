@@ -50,7 +50,7 @@
             this.textBoxContent.Name = "textBoxContent";
             this.textBoxContent.ReadOnly = true;
             this.textBoxContent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxContent.Size = new System.Drawing.Size(1363, 704);
+            this.textBoxContent.Size = new System.Drawing.Size(1312, 704);
             this.textBoxContent.TabIndex = 0;
             // 
             // labelName
