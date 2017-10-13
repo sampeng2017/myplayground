@@ -45,12 +45,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxContent.BackColor = System.Drawing.SystemColors.Info;
             this.textBoxContent.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxContent.Location = new System.Drawing.Point(36, 131);
+            this.textBoxContent.Location = new System.Drawing.Point(12, 131);
             this.textBoxContent.Multiline = true;
             this.textBoxContent.Name = "textBoxContent";
             this.textBoxContent.ReadOnly = true;
             this.textBoxContent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxContent.Size = new System.Drawing.Size(1351, 704);
+            this.textBoxContent.Size = new System.Drawing.Size(1363, 704);
             this.textBoxContent.TabIndex = 0;
             // 
             // labelName
