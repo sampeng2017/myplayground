@@ -91,6 +91,7 @@ public class BasicsTests {
         
         ArrayList<SortUtilities.Sorter<Integer>> sorters = new ArrayList<SortUtilities.Sorter<Integer>>();
         sorters.add(SortUtilities::insertionSort);
+        sorters.add(SortUtilities::mergeSort);
         
         Integer[] ary = Basics.Utilities.getRandomArray(100);
         for (SortUtilities.Sorter<Integer> s : sorters) {
