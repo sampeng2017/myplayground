@@ -1163,6 +1163,9 @@ namespace Tests
 
             int r = Geeksforgeeks.SumNumbersFormedRootLeafPaths(node1);
             r.Should().Be(13997);
+
+            r = Geeksforgeeks.SumNumbersFormedRootLeafPaths2(node1);
+            r.Should().Be(13997);
         }
     }
 }

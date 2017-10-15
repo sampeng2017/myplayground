@@ -1416,12 +1416,12 @@ namespace Problems
                 return new List<Stack<BinaryTreeNode<int>>> { stack };
             }
 
-            IList<Stack<BinaryTreeNode<int>>> result = null; 
+            IList<Stack<BinaryTreeNode<int>>> result = null;
             if (tree.Left != null)
             {
                 result = FindAllLeafPaths(tree.Left);
             }
-            
+
             if (tree.Right != null)
             {
                 var rightResults = FindAllLeafPaths(tree.Right);
@@ -1445,6 +1445,19 @@ namespace Problems
 
             return result;
         }
+
+        public static int SumNumbersFormedRootLeafPaths2(BinaryTreeNode<int> tree, int parentValue = 0)
+        {
+            if (tree == null)
+                return 0;
+
+            int sum = parentValue * 10 + tree.Value;
+            if (tree.IsLeaf)
+                return sum;
+
+            return SumNumbersFormedRootLeafPaths2(tree.Left, sum) + SumNumbersFormedRootLeafPaths2(tree.Right, sum);
+        }
+
 
         #region facebook
         // http://practice.geeksforgeeks.org/problems/maximum-integer-value/0
