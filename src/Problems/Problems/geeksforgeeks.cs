@@ -1388,6 +1388,64 @@ namespace Problems
             return dpTable[a.Length, b.Length];
         }
 
+        // http://www.geeksforgeeks.org/sum-numbers-formed-root-leaf-paths/
+        public static int SumNumbersFormedRootLeafPaths(BinaryTreeNode<int> tree)
+        {
+            var paths = FindAllLeafPaths(tree);
+            int sum = 0;
+            foreach (var p in paths)
+            {
+                while (p.Count > 0)
+                {
+                    int pow = p.Count - 1;
+                    int i = p.Pop().Value * (int)Math.Pow(10, pow);
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+
+        private static IList<Stack<BinaryTreeNode<int>>> FindAllLeafPaths(BinaryTreeNode<int> tree)
+        {
+            if (tree == null)
+                return null;
+            if (tree.IsLeaf)
+            {
+                var stack = new Stack<BinaryTreeNode<int>>();
+                stack.Push(tree);
+                return new List<Stack<BinaryTreeNode<int>>> { stack };
+            }
+
+            IList<Stack<BinaryTreeNode<int>>> result = null; 
+            if (tree.Left != null)
+            {
+                result = FindAllLeafPaths(tree.Left);
+            }
+            
+            if (tree.Right != null)
+            {
+                var rightResults = FindAllLeafPaths(tree.Right);
+                if (result == null)
+                {
+                    result = rightResults;
+                }
+                else
+                {
+                    foreach (var r in rightResults)
+                    {
+                        result.Add(r);
+                    }
+                }
+            }
+
+            foreach (var r in result)
+            {
+                r.Push(tree);
+            }
+
+            return result;
+        }
+
         #region facebook
         // http://practice.geeksforgeeks.org/problems/maximum-integer-value/0
         public static long MaxIntegerValue(string s)

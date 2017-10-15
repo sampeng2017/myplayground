@@ -1130,5 +1130,39 @@ namespace Tests
             r.Should().BeTrue();
 
         }
+
+        [TestMethod]
+        [TestCategory(Constants.Tree)]
+        public void SumNumbersFormedRootLeafPaths()
+        {
+            /*
+                       6
+                    /      \
+                  3          5
+                /   \          \
+               2     5          4  
+                   /   \
+                  7     4             
+             * */
+            var node1 = new BinaryTreeNode<int> { Value = 6 };
+            var node2 = new BinaryTreeNode<int> { Value = 3 };
+            var node3 = new BinaryTreeNode<int> { Value = 5 };
+            var node4 = new BinaryTreeNode<int> { Value = 2 };
+            var node5 = new BinaryTreeNode<int> { Value = 5 };
+            var node6 = new BinaryTreeNode<int> { Value = 4 };
+            var node7 = new BinaryTreeNode<int> { Value = 7 };
+            var node8 = new BinaryTreeNode<int> { Value = 4 };
+
+            node1.Left = node2;
+            node1.Right = node3;
+            node2.Left = node4;
+            node2.Right = node5;
+            node3.Right = node6;
+            node5.Left = node7;
+            node5.Right = node8;
+
+            int r = Geeksforgeeks.SumNumbersFormedRootLeafPaths(node1);
+            r.Should().Be(13997);
+        }
     }
 }
