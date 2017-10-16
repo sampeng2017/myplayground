@@ -592,5 +592,16 @@ namespace Tests
             LeetCoder.MoveZeros(a);
             a.Should().BeEquivalentTo(new int[] { 1, 3, 12, 0, 0 });
         }
+
+        [TestMethod]
+        public void GroupAnagrams()
+        {
+            string[] a = { "eat", "tea", "tan", "ate", "nat", "bat" };
+            var r = LeetCoder.GroupAnagrams(a);
+            r.Should().HaveCount(3);
+            r.First(l => l.Count == 3).Should().BeEquivalentTo(new string[] { "eat", "tea", "ate" });
+            r.First(l => l.Count == 2).Should().BeEquivalentTo(new string[] { "tan", "nat" });
+            r.First(l => l.Count == 1).Should().BeEquivalentTo(new string[] { "bat" });
+        }
     }
 }
