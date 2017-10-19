@@ -867,5 +867,33 @@ namespace Problems
                 a[insertPos++] = 0;
             }
         }
+
+        // https://leetcode.com/problems/group-anagrams/description/
+        public static IList<IList<string>> GroupAnagrams(string[] strs)
+        {
+            if (strs == null)
+                return null;
+            var result = new List<IList<string>>();
+            var map = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+            foreach (var str in strs)
+            {
+                char[] charAry = str.ToCharArray();
+                Array.Sort(charAry);
+                string key = new string(charAry);
+                List<string> group = null;
+                if (!map.TryGetValue(key, out group))
+                {
+                    group = new List<string>();
+                    map.Add(key, group);
+                }
+                group.Add(str);
+            }
+            foreach (var kvp in map)
+            {
+                result.Add(kvp.Value);
+            }
+
+            return result;
+        }
     }
 }

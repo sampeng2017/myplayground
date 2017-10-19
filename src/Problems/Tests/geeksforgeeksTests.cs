@@ -1055,6 +1055,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [Ignore]
         [TestCategory("Stack and Queue")]
         public void ConvertTernaryExpressionToBinaryTree()
         {
