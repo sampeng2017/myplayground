@@ -48,6 +48,7 @@
     <Compile Include="Basics\Misc.cs" />
     <Compile Include="Basics\Sort.cs" />
     <Compile Include="DataStructures\LinkedList.cs" />
+    <Compile Include="DataStructures\TriesNode.cs" />
     <Compile Include="Geeksforgeeks.cs" />
     <Compile Include="LeetCoder.cs" />
     <Compile Include="OldProblems.cs" />

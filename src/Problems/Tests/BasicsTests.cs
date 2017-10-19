@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Problems.Basics;
+using Problems.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -213,6 +214,36 @@ namespace Tests
             Misc.Gcd(21, 14).Should().Be(7);
             Misc.Gcd(3, 0).Should().Be(3);
             Misc.Gcd(7, 13).Should().Be(1);
+        }
+
+        [TestMethod]
+        public void TriesNodeTest()
+        {
+            TriesNode tries = TriesNode.CreateRootNode();
+            tries.AddWord("this".ToCharArray());
+            tries.AddWord("is".ToCharArray());
+            tries.AddWord("a".ToCharArray());
+            tries.AddWord("dog".ToCharArray());
+            tries.AddWord("as".ToCharArray());
+
+            tries.Match("this").Should().BeTrue();
+            tries.Match("that").Should().BeFalse();
+
+            tries.Match("is").Should().BeTrue();
+            tries.Match("a").Should().BeTrue();
+            tries.Match("as").Should().BeTrue();
+            tries.Match("dog").Should().BeTrue();
+
+            var t2 = tries.FindNextChar('d');
+            t2.Should().NotBeNull();
+            t2.ValidWordAtHere.Should().BeFalse();
+            var t3 = t2.FindNextChar('o');
+            t3.Should().NotBeNull();
+            t3.ValidWordAtHere.Should().BeFalse();
+            var t4 = t3.FindNextChar('g');
+            t4.Should().NotBeNull();
+            t4.ValidWordAtHere.Should().BeTrue();
+            t4.FindNextChar('a').Should().BeNull();
         }
     }
 }

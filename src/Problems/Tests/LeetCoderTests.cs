@@ -602,6 +602,12 @@ namespace Tests
             r.First(l => l.Count == 3).Should().BeEquivalentTo(new string[] { "eat", "tea", "ate" });
             r.First(l => l.Count == 2).Should().BeEquivalentTo(new string[] { "tan", "nat" });
             r.First(l => l.Count == 1).Should().BeEquivalentTo(new string[] { "bat" });
+
+            r = LeetCoder.GroupAnagrams2(a);
+            r.Should().HaveCount(3);
+            r.First(l => l.Count == 3).Should().BeEquivalentTo(new string[] { "eat", "tea", "ate" });
+            r.First(l => l.Count == 2).Should().BeEquivalentTo(new string[] { "tan", "nat" });
+            r.First(l => l.Count == 1).Should().BeEquivalentTo(new string[] { "bat" });
         }
     }
 }

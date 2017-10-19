@@ -895,5 +895,51 @@ namespace Problems
 
             return result;
         }
+
+        public static IList<IList<string>> GroupAnagrams2(string[] strs)
+        {
+            if (strs == null)
+                return null;
+            var result = new List<IList<string>>();
+            var map = new Dictionary<string, List<string>>();
+            foreach (var str in strs)
+            {
+                string key = BuildAnagramKey(str);
+                List<string> group = null;
+                if (!map.TryGetValue(key, out group))
+                {
+                    group = new List<string>();
+                    map.Add(key, group);
+                }
+                group.Add(str);
+            }
+            foreach (var kvp in map)
+            {
+                result.Add(kvp.Value);
+            }
+
+            return result;
+        }
+
+        private static string BuildAnagramKey(string s)
+        {
+            int[] charCounts = new int[26];
+            foreach (var c in s.ToLowerInvariant())
+            {
+                int idx = c - 'a';
+                charCounts[idx]++;
+            }
+            var keyBuilder = new StringBuilder();
+            for (int i = 0; i < charCounts.Length; i++)
+            {
+                if (charCounts[i] != 0)
+                {
+                    keyBuilder.Append((char)i);
+                    keyBuilder.Append(charCounts[i]);
+                    keyBuilder.Append('_');
+                }
+            }
+            return keyBuilder.ToString();
+        }
     }
 }
