@@ -941,5 +941,90 @@ namespace Problems
             }
             return keyBuilder.ToString();
         }
+
+        //https://leetcode.com/problems/word-search-ii/description/
+        public static string[] WordSearch2(char[,] a, IList<string> dictionary)
+        {
+            var triedNode = TriesNode.CreateRootNode();
+            foreach (var w in dictionary)
+            {
+                triedNode.AddWord(w.ToArray());
+            }
+
+            var result = new List<string>();
+            int[,] memo = new int[a.GetLength(0), a.GetLength(1)];
+
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                for (int j = 0; j < a.GetLength(1); j++)
+                {
+                    TriesNode found = WordSearch2(i, j, triedNode, a, memo);
+                    if (found != null)
+                    {
+                        result.Add(LeafTriedNodeToString(found));
+                    }
+                }
+            }
+            return result.ToArray();
+        }
+
+        private static TriesNode WordSearch2(int startRow, int startCol, TriesNode trie, char[,] a, int[,] memo)
+        {
+            char c = a[startRow, startCol];
+            TriesNode next = trie.FindNextChar(c);
+            if (next == null)
+                return null;
+            memo[startRow, startCol] = 1;
+            if (next.ValidWordAtHere)
+            {
+                return next;
+            }
+
+            TriesNode found = null;
+            if (startCol > 0 && memo[startRow, startCol - 1] == 0)
+            {
+                found = WordSearch2(startRow, startCol - 1, next, a, memo);
+                if (found != null)
+                    return found;
+            }
+            if (startRow > 0 && memo[startRow -1, startCol] == 0)
+            {
+                found = WordSearch2(startRow -1, startCol, next, a, memo);
+                if (found != null)
+                    return found;
+            }
+            if (startCol < a.GetLength(1) - 1 && memo[startRow, startCol + 1] == 0)
+            {
+                found = WordSearch2(startRow, startCol + 1, next, a, memo);
+                if (found != null)
+                    return found;
+            }
+            if (startRow < a.GetLength(0) - 1 && memo[startRow + 1, startCol] == 0)
+            {
+                found = WordSearch2(startRow + 1, startCol, next, a, memo);
+                if (found != null)
+                    return found;
+            }
+
+            memo[startRow, startCol] = 0;
+            return null;
+        }
+
+        private static string LeafTriedNodeToString(TriesNode node)
+        {
+            var builder = new StringBuilder();
+            var stack = new Stack<char>();
+            var tmp = node;
+            while (!TriesNode.IsRoot(tmp))
+            {
+                stack.Push(tmp.Value);
+                tmp = tmp.Parent;
+            }
+            while (stack.Count > 0)
+            {
+                builder.Append(stack.Pop());
+            }
+            return builder.ToString();
+        }
     }
 }

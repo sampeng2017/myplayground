@@ -609,5 +609,35 @@ namespace Tests
             r.First(l => l.Count == 2).Should().BeEquivalentTo(new string[] { "tan", "nat" });
             r.First(l => l.Count == 1).Should().BeEquivalentTo(new string[] { "bat" });
         }
+
+        [TestMethod]
+        public void WordSearch2()
+        {
+            var words = new List<string> { "oath", "pea", "eat", "rain" };
+            var a = new char[,]
+            {
+                {'o','a','a','n' },
+                {'e','t','a','e' },
+                {'i','h','k','r'},
+                {'i','f','l','v'}
+            };
+            var r = LeetCoder.WordSearch2(a, words);
+            r.Should().HaveCount(1);
+            r[0].Should().Be("oath");
+
+            a = new char[,]
+            {
+                {'o','a','a','n' },
+                {'e','t','a','e' },
+                {'i','h','t','r'},// change [2,2] from k tp t
+                {'i','f','l','v'}
+            };
+
+            r = LeetCoder.WordSearch2(a, words);
+            r.Should().HaveCount(2);
+            r[0].Should().Be("oath");
+            r[1].Should().Be("eat");
+
+        }
     }
 }

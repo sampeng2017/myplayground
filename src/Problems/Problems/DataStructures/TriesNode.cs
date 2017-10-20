@@ -28,6 +28,7 @@ namespace Problems.DataStructures
         public char Value { get; }
         public bool ValidWordAtHere => this.validWordAtHere;
         public List<TriesNode> Children { get; }
+        public TriesNode Parent { get; private set; }
 
         public void AddWord(IList<char> wordChars)
         {
@@ -43,6 +44,7 @@ namespace Problems.DataStructures
             {
                 child = new TriesNode(wordChars[0]);
                 Children.Add(child);
+                child.Parent = this;
             }
             child.AddWord(wordChars.Skip(1).ToList());
         }
