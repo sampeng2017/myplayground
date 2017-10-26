@@ -1026,5 +1026,79 @@ namespace Problems
             }
             return builder.ToString();
         }
+
+        // TODO
+        //https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/
+        public static bool CanPartitionKSubsets(int[] nums, int k)
+        {
+
+
+            return false;
+        }
+
+        // https://leetcode.com/problems/next-closest-time/description/
+        public static string NextClosestTime(string time)
+        {
+            if (string.IsNullOrWhiteSpace(time) || time.Length != 5)
+                throw new ArgumentException(nameof(time));
+
+            int[] digits = new int[4]
+            {
+                int.Parse(time[0].ToString()),
+                int.Parse(time[1].ToString()),
+                int.Parse(time[3].ToString()),
+                int.Parse(time[4].ToString()),
+            };
+            int inputHour = digits[0] * 10 + digits[1];
+            int inputMin = digits[2] * 10 + digits[3];
+            DateTime input = new DateTime(1900, 1, 1, inputHour, inputMin, 0);
+
+            Func<int, int, bool> validHour = (i1, i2) => i1 * 10 + i2 <= 23;
+            Func<int, int, bool> validMinute = (i1, i2) => i1 * 10 + i2 <= 59;
+
+            int[] r = new int[4];
+            var closestTime = DateTime.MaxValue;
+            for (int i = 0; i < digits.Length; i++)
+            {
+                for (int j = 0; j < digits.Length; j++)
+                {
+                    if (!validHour(digits[i], digits[j]))
+                        continue;
+
+                    int newHour = digits[i] * 10 + digits[j];
+
+                    for (int i1 = 0; i1 < digits.Length; i1++)
+                    {
+                        for (int j1 = 0; j1 < digits.Length; j1++)
+                        {
+                            if (!validMinute(digits[i1], digits[j1]))
+                                continue;
+                            int newMin = digits[i1] * 10 + digits[j1];
+
+                            var newDt = new DateTime(1900, 1, 1, newHour, newMin, 0);
+                            if (newDt == input)
+                                continue;
+                            if (newDt < input)
+                            {
+                                newDt = newDt.AddDays(1);
+                            }
+                            if (closestTime > newDt)
+                            {
+                                closestTime = newDt;
+                                r[0] = digits[i];
+                                r[1] = digits[j];
+                                r[2] = digits[i1];
+                                r[3] = digits[j1];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return $"{r[0]}{r[1]}:{r[2]}{r[3]}";
+
+            return null;
+        }
+
     }
 }

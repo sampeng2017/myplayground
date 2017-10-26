@@ -637,7 +637,16 @@ namespace Tests
             r.Should().HaveCount(2);
             r[0].Should().Be("oath");
             r[1].Should().Be("eat");
+        }
 
+        [TestMethod]
+        public void NextClosestTime()
+        {
+            var r = LeetCoder.NextClosestTime("19:34");
+            r.Should().Be("19:39");
+
+            r = LeetCoder.NextClosestTime("23:59");
+            r.Should().Be("22:22");
         }
     }
 }
