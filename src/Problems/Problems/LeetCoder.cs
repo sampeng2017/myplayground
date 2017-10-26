@@ -1071,13 +1071,15 @@ namespace Problems
                     {
                         for (int j1 = 0; j1 < digits.Length; j1++)
                         {
+                            // skip the input order
+                            if (i == 0 && j == 1 && i1 == 2 && j1 == 3)
+                                continue;
+
                             if (!validMinute(digits[i1], digits[j1]))
                                 continue;
                             int newMin = digits[i1] * 10 + digits[j1];
 
                             var newDt = new DateTime(1900, 1, 1, newHour, newMin, 0);
-                            if (newDt == input)
-                                continue;
                             if (newDt < input)
                             {
                                 newDt = newDt.AddDays(1);
