@@ -648,5 +648,21 @@ namespace Tests
             r = LeetCoder.NextClosestTime("23:59");
             r.Should().Be("22:22");
         }
+
+        [TestMethod]
+        public void SwapPairs()
+        {
+            var list = new ListNode<int> { Value = 1 };
+            list.Next = new ListNode<int> { Value = 2 };
+            list.Next.Next = new ListNode<int> { Value = 3 };
+            list.Next.Next.Next = new ListNode<int> { Value = 4 };
+
+            var r = LeetCoder.SwapPairs(list);
+            r.Value.Should().Be(2);
+            r.Next.Value.Should().Be(1);
+            r.Next.Next.Value.Should().Be(4);
+            r.Next.Next.Next.Value.Should().Be(3);
+            r.Next.Next.Next.Next.Should().BeNull();
+        }
     }
 }

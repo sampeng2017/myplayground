@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Problems.DataStructures;
+using Problems.Basics;
 
 namespace Problems
 {
@@ -1102,5 +1103,19 @@ namespace Problems
             return null;
         }
 
+        // https://leetcode.com/problems/swap-nodes-in-pairs/description/
+        public static ListNode<int> SwapPairs(ListNode<int> list)
+        {
+            if (list == null)
+                return null;
+            if (list.Next == null)
+                return list;
+            var next = list.Next;
+            var nextNext = list.Next.Next;
+
+            next.Next = list;
+            list.Next = SwapPairs(nextNext);
+            return next;
+        }
     }
 }
