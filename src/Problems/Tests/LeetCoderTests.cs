@@ -650,6 +650,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [TestCategory(Constants.LinkedList)]
         public void SwapPairs()
         {
             var list = new ListNode<int> { Value = 1 };
