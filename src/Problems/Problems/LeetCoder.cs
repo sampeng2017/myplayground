@@ -1117,5 +1117,39 @@ namespace Problems
             list.Next = SwapPairs(nextNext);
             return next;
         }
+
+        // https://leetcode.com/problems/number-of-islands/description/
+        public static int NumIslands(char[,] grid)
+        {
+            var n = grid.GetLength(0);
+            var m = grid.GetLength(1);
+            var memo = new bool[n, m];
+            int cnt = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    bool b = NumIslands_Traverse(grid, memo, i, j);
+                    if (b)
+                        cnt++;
+                }
+            }
+            return cnt;
+        }
+
+        private static bool NumIslands_Traverse(char[,] grid, bool[,] memo, int i, int j)
+        {
+            if (i >= grid.GetLength(0) || j < 0 || j >= grid.GetLength(1))
+                return false;
+
+            if (grid[i, j] != '1' || memo[i, j])
+                return false;
+
+            memo[i, j] = true;
+            NumIslands_Traverse(grid, memo, i, j - 1);
+            NumIslands_Traverse(grid, memo, i, j + 1);
+            NumIslands_Traverse(grid, memo, i + 1, j);
+            return true;
+        }
     }
 }

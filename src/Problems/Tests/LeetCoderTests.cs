@@ -665,5 +665,29 @@ namespace Tests
             r.Next.Next.Next.Value.Should().Be(3);
             r.Next.Next.Next.Next.Should().BeNull();
         }
+
+        [TestMethod]
+        public void NumIslands()
+        {
+            var grid = new char[,]
+            {
+             { '1', '1', '1', '1', '0' },
+             { '1', '1', '0', '1', '0' },
+             { '1', '1', '0', '0', '0' },
+             { '0', '0', '0', '0', '0' },
+            };
+            var r = LeetCoder.NumIslands(grid);
+            r.Should().Be(1);
+
+            grid = new char[,]
+            {
+             { '1', '1', '0', '0', '0' },
+             { '1', '1', '0', '0', '0' },
+             { '0', '0', '1', '0', '0' },
+             { '0', '0', '0', '1', '1' },
+            };
+            r = LeetCoder.NumIslands(grid);
+            r.Should().Be(3);
+        }
     }
 }
