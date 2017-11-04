@@ -988,9 +988,9 @@ namespace Problems
                 if (found != null)
                     return found;
             }
-            if (startRow > 0 && memo[startRow -1, startCol] == 0)
+            if (startRow > 0 && memo[startRow - 1, startCol] == 0)
             {
-                found = WordSearch2(startRow -1, startCol, next, a, memo);
+                found = WordSearch2(startRow - 1, startCol, next, a, memo);
                 if (found != null)
                     return found;
             }
@@ -1150,6 +1150,70 @@ namespace Problems
             NumIslands_Traverse(grid, memo, i, j + 1);
             NumIslands_Traverse(grid, memo, i + 1, j);
             return true;
+        }
+
+        // https://leetcode.com/problems/ugly-number-ii/description/
+        public static IEnumerable<int> NthUglyNumber(int n)
+        {
+            var vals = new List<int>() { };
+
+            int iMax = (int)(Math.Log(n, 2)) + 1;
+            int jMax = (int)(Math.Log(n, 3)) + 1;
+            int kMax = (int)(Math.Log(n, 5)) + 1;
+            for (int k = 0; k <= kMax; k++)
+            {
+                for (int j = 0; j <= jMax; j++)
+                {
+                    for (int i = 0; i <= iMax; i++)
+                    {
+                        int v = (int)(Math.Pow(5, k) * Math.Pow(3, j) * Math.Pow(2, i));
+                        vals.Add(v);
+                    }
+                }
+            }
+            vals.Sort();
+            return vals.Take(n);
+        }
+
+        public static IEnumerable<int> NthUglyNumber2(int n)
+        {
+            if (n == 1)
+                yield return 1;
+            yield return 1;
+            int num = 2;
+            int cnt = 1;
+            while (cnt < n)
+            {
+                int tmp = num;
+                num++;
+
+                while (tmp % 5 == 0)
+                {
+                    tmp = tmp / 5;
+                }
+                if (tmp != 1)
+                {
+                    while (tmp % 3 == 0)
+                    {
+                        tmp = tmp / 3;
+                    }
+                    if (tmp != 1)
+                    {
+                        while (tmp % 2 == 0)
+                        {
+                            tmp = tmp / 2;
+                        }
+                        if (tmp != 1)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                yield return num - 1;
+                cnt++;
+            }
+
+            yield break;
         }
     }
 }

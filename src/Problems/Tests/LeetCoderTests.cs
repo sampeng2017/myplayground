@@ -689,5 +689,14 @@ namespace Tests
             r = LeetCoder.NumIslands(grid);
             r.Should().Be(3);
         }
+
+        [TestMethod]
+        public void NthUglyNumber()
+        {
+            var r = LeetCoder.NthUglyNumber(20).ToArray();
+            r.Should().BeEquivalentTo(new int[] { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36 });
+            r = LeetCoder.NthUglyNumber2(20).ToArray();
+            r.Should().BeEquivalentTo(new int[] { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36 });
+        }
     }
 }
